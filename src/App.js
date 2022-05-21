@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="App">
 
-<Button variant='outlined' color='primary'>Oscar es pato</Button> 
+<Button variant='outlined' color='primary'>Oscar es pato Update</Button> 
  
      </div>
   );
