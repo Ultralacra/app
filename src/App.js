@@ -7,6 +7,9 @@ function App() {
     <div className="App">
 
 <Button variant='outlined' color='primary'>Oscar es pato Update</Button> 
+<Button variant='outlined' color='primary'>Oscar es pato Update</Button> 
+<Button variant='outlined' color='primary'>Oscar es pato Update</Button> 
+
  
      </div>
   );
