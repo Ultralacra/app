@@ -1,16 +1,14 @@
-import logo from './logo.svg';
 import './App.css';
-import { Button } from '@mui/material';
+import { Typography } from '@mui/material';
+import AppBar from './components/AppBar';
 
 function App() {
   return (
+
     <div className="App">
+         
+ <AppBar />
 
-<Button variant='outlined' color='primary'>Oscar es pato Update</Button> 
-<Button variant='outlined' color='primary'>Oscar es pato Update</Button> 
-<Button variant='outlined' color='primary'>Oscar es pato Update</Button> 
-
- 
      </div>
   );
 }
