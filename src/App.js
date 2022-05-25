@@ -1,13 +1,18 @@
 import './App.css';
-import { Typography } from '@mui/material';
-import AppBar from './components/AppBar';
+//import Login  from '';
+//import { Typography } from '@mui/material';
+//import Boton from './components/Boton';
+import Login from './components/Login';
+import Footer from  './components/Footer';
+
 
 function App() {
   return (
 
     <div className="App">
          
- <AppBar />
+      <Login />
+      <Footer />
 
      </div>
   );
