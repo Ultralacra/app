@@ -72,12 +72,10 @@ export default function SignInSide() {
           >
 
 
-<Avatar alt="Remy Sharp" src="/src/imagenes/Tesla-logo.png" />
+<Avatar alt="Remy Sharp" variant="auto" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Tesla_T_symbol.svg/1200px-Tesla_T_symbol.svg.png" />
 
             
-            <Avatar sx={{ m: 1, bgcolor: 'black' }}>
-              <LockOutlinedIcon />
-            </Avatar>
+           
             <Typography component="h1" variant="h5">
               Iniciar Sesión 
             </Typography>
