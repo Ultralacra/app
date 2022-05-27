@@ -12,12 +12,22 @@ code {
     monospace;
 }
 
-
-.test{
-  color: white;
+.facebook-background {
+  background-color: #4267B2
+  !important;
 }
+.google-background {
+  background-color: white
+  !important;
+  color:black !important;
+}
+.mail-background {
+  background-color: white
+  !important;
+  color:black !important;
+}
+.twitter-background {
+  background-color: #0093d3
+  !important;
 
-
-.color-nav {
-background-color: #81cfda !important;
 }

@@ -12,6 +12,10 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import GoogleIcon from '@mui/icons-material/Google';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import EmailIcon from '@mui/icons-material/Email';
+import TwitterIcon from '@mui/icons-material/Twitter';
 
 function Copyright(props) {
   return (
@@ -48,11 +52,11 @@ export default function SignInSide() {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: 'url(https://indrasolutions.cl/wp-content/uploads/2022/05/logo.png)',
+            backgroundImage: 'url(https://fondosmil.com/fondo/88876.jpg)',
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
-            backgroundSize: 'countain',
+            backgroundSize: 'auto',
             backgroundPosition: 'center',
           }}
         />
@@ -66,7 +70,12 @@ export default function SignInSide() {
               alignItems: 'center',
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+
+
+<Avatar alt="Remy Sharp" src="/src/imagenes/Tesla-logo.png" />
+
+            
+            <Avatar sx={{ m: 1, bgcolor: 'black' }}>
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
@@ -97,14 +106,48 @@ export default function SignInSide() {
                 control={<Checkbox value="remember" color="primary" />}
                 label="Recordar contraseña"
               />
-              <Button
+              <Button 
+
+                className='mail-background'
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
+                sx={{ mt: 1, mb: 1 }}
+                startIcon={<EmailIcon />}
               >
-                Entrar
+                Entrar con email
               </Button>
+            
+              <Button className='google-background'
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 1, mb: 1 }}
+                startIcon={<GoogleIcon />}
+              >
+                Acceder con Google
+              </Button  >
+              <Button className='facebook-background'
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 1, mb: 1 }}
+                startIcon={<FacebookIcon />}
+              >
+                Acceder con Facebook
+              </Button>
+              
+              <Button className='twitter-background'
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 1, mb: 1 }}
+                startIcon={<TwitterIcon />}
+              >
+                Acceder con Twitter
+              </Button>
+
+
               <Grid container>
                 <Grid item xs>
                   <Link href="#" variant="body2">
