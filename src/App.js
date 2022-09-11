@@ -3,8 +3,7 @@ import './App.css';
 //import { Typography } from '@mui/material';
 //import Boton from './components/Boton';
 import Login from './components/Login';
-import Footer from  './components/Footer';
-import Navbar from  './components/Navbar';
+
 
 function App() {
   return (
@@ -14,7 +13,6 @@ function App() {
 
       
       <Login />
-      <Footer />
 
      </div>
   );
