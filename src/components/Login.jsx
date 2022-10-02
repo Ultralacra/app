@@ -14,7 +14,7 @@ import GoogleIcon from "@mui/icons-material/Google";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import EmailIcon from "@mui/icons-material/Email";
 import TwitterIcon from "@mui/icons-material/Twitter";
-import HomePage from './components/HomePage';
+import HomePage from '../components/HomePage';
 import Axios from 'axios';
 const theme = createTheme();
 
