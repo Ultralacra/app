@@ -37,7 +37,7 @@ export default function SignInSide() {
     });    
   };
 
-  const valdiarConexion = (data) => {
+  const validarConexion = (data) => {
     if(!data[0].success) return alert(data[0].msg)
     return <HomePage user = {data[0].user}/>;
   };
