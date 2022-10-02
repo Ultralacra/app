@@ -14,6 +14,7 @@ import GoogleIcon from "@mui/icons-material/Google";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import EmailIcon from "@mui/icons-material/Email";
 import TwitterIcon from "@mui/icons-material/Twitter";
+import HomePage from './components/HomePage';
 const theme = createTheme();
 
 export default function SignInSide() {
@@ -24,7 +25,7 @@ export default function SignInSide() {
     fetch('https://valink-pay-api.vercel.app/login', {
       method: 'POST',
       body: JSON.stringify({
-        username: data.get("usuario"),
+        username: data.get("username"),
         password: data.get("password")
       }),
       headers: {
@@ -32,7 +33,12 @@ export default function SignInSide() {
       },
     })
     .then((response) => response.json())
-    .then((json) => console.log(json));
+    .then((json) => validarConexion(json));    
+  };
+
+  const valdiarConexion = (data) => {
+    if(!data[0].success) return alert(data[0].msg)
+    return <HomePage user = {data[0].user}/>;
   };
 
   return (
