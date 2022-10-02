@@ -24,8 +24,8 @@ export default function SignInSide() {
     fetch('https://valink-pay-api.vercel.app/login', {
       method: 'POST',
       body: JSON.stringify({
-        username: data.get("email"),
-        password: data.get("contraseña")
+        username: data.get("usuario"),
+        password: data.get("password")
       }),
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
@@ -88,7 +88,7 @@ export default function SignInSide() {
                 required
                 fullWidth
                 name="password"
-                label="contraseña"
+                label="Contraseña"
                 type="password"
                 id="password"
                 autoComplete="current-password"
