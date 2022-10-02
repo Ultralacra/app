@@ -28,8 +28,7 @@ export default function SignInSide() {
         password: data.get("password")
     })
     .then(function (response) {
-      validarConexion(response)
-      console.log(response)
+      validarConexion(response.data)
     })
     .catch(function (error) {
         console.log(error);
