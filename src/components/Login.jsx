@@ -14,7 +14,6 @@ import GoogleIcon from "@mui/icons-material/Google";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import EmailIcon from "@mui/icons-material/Email";
 import TwitterIcon from "@mui/icons-material/Twitter";
-import HomePage from '../components/HomePage';
 import Axios from 'axios';
 const theme = createTheme();
 
@@ -28,19 +27,13 @@ export default function SignInSide() {
         password: data.get("password")
     })
     .then(function (response) {
-      validarConexion(response.data)
-      console.log('ffffffff')
-      console.log(response.data)
+      if(!response.data[0].success) return alert(response.data[0].msg);
+      alert(response.data[0].msg);
     })
     .catch(function (error) {
         console.log(error);
     });    
-  };
-
-  const validarConexion = (data) => {
-    if(!data[0].success) return alert(data[0].msg)
-    return <HomePage user = {data[0].user}/>;
-  };
+  }; 
 
   return (
     <ThemeProvider theme={theme}>
