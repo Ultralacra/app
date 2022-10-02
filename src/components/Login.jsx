@@ -14,18 +14,25 @@ import GoogleIcon from "@mui/icons-material/Google";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import EmailIcon from "@mui/icons-material/Email";
 import TwitterIcon from "@mui/icons-material/Twitter";
-
-
 const theme = createTheme();
 
 export default function SignInSide() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+
+    fetch('https://valink-pay-api.vercel.app/login', {
+      method: 'POST',
+      body: JSON.stringify({
+        username: data.get("email"),
+        password: data.get("contraseña")
+      }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    })
+    .then((response) => response.json())
+    .then((json) => console.log(json));
   };
 
   return (
@@ -70,39 +77,34 @@ export default function SignInSide() {
                 margin="normal"
                 required
                 fullWidth
-                id="email"
-                label="Email"
-                name="email"
-                autoComplete="email"
+                id="username"
+                label="Usuario"
+                name="username"
+                autoComplete="username"
                 autoFocus
               />
               <TextField
                 margin="normal"
                 required
                 fullWidth
-                name="contraseña"
+                name="password"
                 label="contraseña"
-                type="contraseña"
-                id="contraseña"
+                type="password"
+                id="password"
                 autoComplete="current-password"
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Recordar contraseña"
               />
-
-
               <Button
                 className="twitter-background"
                 type="submit"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 1, mb: 1 }}
-
-              >
-                Acceder
+              >Acceder
               </Button>
-
               <Grid container>
                 <Grid item xs>
                   <Link href="#" variant="body2">
