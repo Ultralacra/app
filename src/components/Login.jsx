@@ -29,6 +29,8 @@ export default function SignInSide() {
     })
     .then(function (response) {
       validarConexion(response.data)
+      console.log('ffffffff')
+      console.log(response.data)
     })
     .catch(function (error) {
         console.log(error);
