@@ -15,6 +15,7 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import EmailIcon from "@mui/icons-material/Email";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import HomePage from './components/HomePage';
+import Axios from 'axios';
 const theme = createTheme();
 
 export default function SignInSide() {
@@ -22,7 +23,7 @@ export default function SignInSide() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
-    axios.post('https://valink-pay-api.vercel.app/login', {
+    Axios.post('https://valink-pay-api.vercel.app/login', {
         username: data.get("username"),
         password: data.get("password")
     })
