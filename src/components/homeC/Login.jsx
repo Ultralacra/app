@@ -1,5 +1,6 @@
 import * as React from "react";
 import Button from "@mui/material/Button";
+import { BrowserRouter, Route, Routes, } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -9,10 +10,8 @@ import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
-
-
 import Axios from 'axios';
+
 const theme = createTheme();
 
 export default function SignInSide() {
@@ -23,11 +22,12 @@ export default function SignInSide() {
     Axios.post('https://valink-pay-api.vercel.app/login', {
         username: data.get("username"),
         password: data.get("password")
+      
     })
     .then(function (response) {
       if(!response.data[0].success) return alert(response.data[0].msg);
-      alert(response.data[0].msg);
-      console.log(response.data);
+      localStorage.setItem("auth", JSON.stringify("yes"));
+      window.location.href = "/dashboard-users";
     })
     .catch(function (error) {
         console.log(error);

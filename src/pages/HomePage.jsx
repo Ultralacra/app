@@ -1,13 +1,11 @@
-/* eslint-disable no-unused-vars */
+// eslint-disable-next-line no-unused-vars
 import React from 'react'
-import Login from '../components/Login';
+import Login from '..//components/homeC/Login'
 
-
-// eslint-disable-next-line import/no-anonymous-default-export
-export default function ()  {
-  return (
-    <div>
-      <Login/>
-    </div>
-  )
+export default function HomePage() {
+    return (
+        <>
+            <Login/>
+        </>
+    )
 }
