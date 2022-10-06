@@ -20,7 +20,7 @@ export default function SignInSide() {
     const data = new FormData(event.currentTarget);
 
     Axios.post('https://valink-pay-api.vercel.app/login', {
-        username: data.get("username"),
+        login: data.get("username"),
         password: data.get("password")
       
     })
