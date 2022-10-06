@@ -78,7 +78,7 @@ export default function SignInSide() {
                 required
                 fullWidth
                 id="username"
-                label="Usuario"
+                label="Email"
                 name="username"
                 autoComplete="username"
                 autoFocus
