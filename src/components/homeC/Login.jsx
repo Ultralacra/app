@@ -26,19 +26,20 @@ export default function SignInSide() {
     })
     .then(function (response) {
       console.warn(response);
-      if (response.data.status === "success") {
-        alert("Login Success");
+      if(response.data.status !== 'success') return alert(response.data.message.message);
+
         localStorage.setItem("auth", JSON.stringify("yes"));
         window.location.href = "/dashboard-users";
-      }
-    })
 
+
+    })
     .catch(function (error) {
-      alert("Login Failed");
-        console.log(error);
-        
-    });    
-  }; 
+      console.warn(error);
+    }
+    );
+
+  };
+
 
   return (
     <ThemeProvider theme={theme}>
