@@ -25,11 +25,19 @@ export default function SignInSide() {
       
     })
     .then(function (response) {
+<<<<<<< HEAD
       console.warn(response);
       if (response.data.status === "success") {
         alert("Login Success");
+        localStorage.setItem("auth", JSON.stringify("yes"));
         window.location.href = "/dashboard-users";
       }
+=======
+      console.log(response)
+      if(!response.data[0].success) return alert(response.data[0].msg);
+      localStorage.setItem("auth", JSON.stringify("yes"));
+      window.location.href = "/dashboard-users";
+>>>>>>> 1e7514c3556322edb1f6a30e819be085ce080f98
     })
 
     .catch(function (error) {
