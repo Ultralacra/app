@@ -25,11 +25,15 @@ export default function SignInSide() {
       
     })
     .then(function (response) {
-      if(!response.data[0].success) return alert(response.data[0].msg);
-      localStorage.setItem("auth", JSON.stringify("yes"));
-      window.location.href = "/dashboard-users";
+      console.warn(response);
+      if (response.data.status === "success") {
+        alert("Login Success");
+        window.location.href = "/dashboard-users";
+      }
     })
+
     .catch(function (error) {
+      alert("Login Failed");
         console.log(error);
         
     });    
