@@ -25,6 +25,7 @@ export default function SignInSide() {
       
     })
     .then(function (response) {
+      console.log(response)
       if(!response.data[0].success) return alert(response.data[0].msg);
       localStorage.setItem("auth", JSON.stringify("yes"));
       window.location.href = "/dashboard-users";
