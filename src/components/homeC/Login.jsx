@@ -1,6 +1,5 @@
-import * as React from "react";
-import Button from "@mui/material/Button";
-import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -8,31 +7,39 @@ import Checkbox from "@mui/material/Checkbox";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Stack from "@mui/material/Stack";
+import Item from "@mui/material/Stack";import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { LoadingButton } from '@mui/lab';
 import Axios from 'axios';
+import LoginIcon from '@mui/icons-material/Login';
+import { Typography } from "@mui/material";
 
-const theme = createTheme();
 
 export default function SignInSide() {
+  
+  const theme = createTheme();
+  const [loading, setLoading] = useState(false);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
     Axios.post('https://valink-pay-api.vercel.app/login', {
+        
         login: data.get("username"),
-        password: data.get("password")
-      
+        password: data.get("password"),
     })
     .then(function (response) {
       console.warn(response);
-      if(response.data.status !== 'success') return alert(response.data.message.message);
-
+      if(response.data.status !== 'success') 
+      setLoading(true);
+      alert('Invalid login or password');
         localStorage.setItem("auth", JSON.stringify("yes"));
         window.location.href = "/dashboard-users";
-
-
     })
+
     .catch(function (error) {
+      alert('Login Failed');
       console.warn(error);
     }
     );
@@ -63,61 +70,91 @@ export default function SignInSide() {
             sx={{
               my: 8,
               mx: 4,
-
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
             }}
           >
-            <img width="50%" src="http://valinkgroup.com/wp-content/uploads/2022/05/Gris.png" />
-
-
+            <img width="50%" src="http://valinkgroup.com/wp-content/uploads/2022/05/Gris.png"
+            alt="logo"
+            />
+            <br />
+            <Typography component="h1" variant="h5"
+            className="text-login">
+              Completa los datos para iniciar sesión
+            </Typography>
             <Box
               component="form"
               noValidate
               onSubmit={handleSubmit}
               sx={{ mt: 2 }}
             >
+              <Stack spacing={2}
+              className="box-login-form"
+              >
+              <Item>
               <TextField
+              className="input-forms"
                 margin="normal"
+                size="small"
                 required
-                fullWidth
                 id="username"
                 label="Email"
                 name="username"
                 autoComplete="username"
                 autoFocus
               />
+              </Item>
+              <Item>
               <TextField
+              className="input-forms"
                 margin="normal"
+                size="small"
                 required
-                fullWidth
                 name="password"
                 label="Contraseña"
                 type="password"
                 id="password"
                 autoComplete="current-password"
               />
+              </Item>
+              <Item>
+              <LoadingButton
+                className="btn-login"
+                endIcon={<LoginIcon />}
+                loading={loading}
+                type="submit"
+                fullWidth
+                size="small"
+                variant="contained"
+                sx={{ mt: 1, mb: 1 }}
+              >Iniciar Sesión
+              </LoadingButton>
+              </Item>
+              </Stack>
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Recordar contraseña"
               />
-              <Button
+              <Link to="/"
+              className="text-lost-password">
+                    ¿Olvidaste tu contraseña?
+                  </Link>
+              <hr />
+            <Stack>
+              <Item>
+              <Link
+              className="btn-register"
                 type="submit"
                 fullWidth
+                size="small"
                 variant="contained"
                 sx={{ mt: 1, mb: 1 }}
-              >Acceder
-              </Button>
-              <Grid container>
-                <Grid item xs>
-                </Grid>
-                <Grid item justifyContent={"center"} >     
-                  <Link to="/register-page">
-            registro
-                  </Link>
-                </Grid>
-              </Grid>
+              to="/register-page"
+              >REGISTRARME
+              </Link>
+              </Item>
+              </Stack>
             </Box>
           </Box>
         </Grid>
