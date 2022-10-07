@@ -33,7 +33,7 @@ export default function SignInSide() {
       console.warn(response);
       if(response.data.status !== 'success') 
       setLoading(true);
-      alert('Invalid login or password');
+      alert('Datos Correctos');
         localStorage.setItem("auth", JSON.stringify("yes"));
         window.location.href = "/dashboard-users";
     })
