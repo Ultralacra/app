@@ -20,7 +20,7 @@ const RouteController = props => {
     }
     useEffect(init, [])
 
-    return isAuth ? <Component {...rest} /> : <Navigate to="/register"/>
+    return isAuth ? <Component {...rest} /> : <Navigate to="/register-page"/>
 }
 
 export default RouteController;

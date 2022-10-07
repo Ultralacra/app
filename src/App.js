@@ -4,6 +4,9 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import RouteController from './components/RouteController/RouteController';
 import HomePage from './pages/HomePage';
 import { DashboardUsers } from './pages/DashboardUsers';
+import RegisterPage from './pages/RegisterPage';
+
+import NotFoundPage from './pages/NotFoundPage';
 
 
 function App() {
@@ -16,13 +19,10 @@ function App() {
  <BrowserRouter>
        <Routes>
             <Route path="/" element={<HomePage/>} /> 
-            <Route path="/recovery-password" element={""}/>
-            <Route path="/register" element={""}/>
-            <Route path="*" element={""}/> 
+            <Route path="/register-page" element={<RegisterPage/>}/>
+            <Route path="*" element={<NotFoundPage/>}/> 
         </Routes> 
     </BrowserRouter>  
-
-
 
   {/* rutas privadas  */}
           

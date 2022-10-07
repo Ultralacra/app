@@ -1,11 +1,10 @@
 import * as React from "react";
 import Button from "@mui/material/Button";
-import { BrowserRouter, Route, Routes, } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -104,7 +103,6 @@ export default function SignInSide() {
                 label="Recordar contraseña"
               />
               <Button
-                className="twitter-background"
                 type="submit"
                 fullWidth
                 variant="contained"
@@ -113,13 +111,10 @@ export default function SignInSide() {
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Olvidaste tu contraseña?
-                  </Link>
                 </Grid>
-                <Grid item>
-                  <Link href="#" variant="body2">
-                    {"¿No tienes una cuenta? Registrate"}
+                <Grid item justifyContent={"center"} >     
+                  <Link to="/register-page">
+            registro
                   </Link>
                 </Grid>
               </Grid>
