@@ -31,7 +31,7 @@ export default function SignInSide() {
     })
     .then(function (response) {
       console.warn(response);
-      if(response.data.status !== 'success') 
+      if(response.data.status !== 'success') return
       setLoading(true);
       alert('Datos Correctos');
         localStorage.setItem("auth", JSON.stringify("yes"));
