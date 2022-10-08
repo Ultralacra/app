@@ -90,10 +90,10 @@ export default function SignInSide() {
               >
               <Item>
               <Typography component="p" variant="p"
-              align="left"
+              align="center"
               fontWeight="bold"
               color="#006D8E">
-              Iniciar Sesión
+              INGRESAR
             </Typography>
               <TextField
               className="input-forms"
