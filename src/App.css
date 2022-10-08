@@ -44,8 +44,8 @@
 /***** LOGIN FORM *****/
 
 .box-login-form {
-  margin-top: 10%;
-  margin-bottom: 10%;
+  margin-top: 5%;
+  margin-bottom: 5%;
   border: 1px solid transparent; 
   padding: 25px;
   box-shadow: 0 0 10px #ccc;
@@ -57,8 +57,8 @@
   color: #ccc !important;
 }
 .btn-register{
-  background-color: #FFB200;
-  color:#006D8E  !important;
+  background-color: #006D8E !important;
+  color:white  !important;
   border-radius: 10px;
   padding: 10px;
   margin-top: 10px;
@@ -67,7 +67,7 @@
   font-weight: 500;
 }	
 .btn-register:hover{
-  background-color: #006D8E;
+  background-color: black !important;
   color: white  !important;
   border-radius: 10px;
   padding: 10px;
@@ -82,10 +82,17 @@
 .btn-login{
   background-color: #006D8E !important;
 }
+.btn-login:hover{
+  background-color: #FFB201 !important;
+  color: black !important;
+}
 .text-login{
   color: #006D8E  !important;
   font-weight: 500 !important;
   font-family: 'Roboto', sans-serif !important;
+}
+.css-1p5q5e5-MuiStack-root>:not(style)+:not(style){
+  margin-top: 0px !important;
 }
 
 /***** REGISTER FORM *****/

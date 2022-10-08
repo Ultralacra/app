@@ -70,30 +70,31 @@ export default function SignInSide() {
           <Box
             sx={{
               my: 8,
-              mx: 4,
+              mx: 10,
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
             }}
           >
-            <img width="50%" src="http://valinkgroup.com/wp-content/uploads/2022/05/Gris.png"
+            <img width="45%" src="http://valinkgroup.com/wp-content/uploads/2022/05/Gris.png"
             alt="logo"
             />
-            <br />
-            <Typography component="h1" variant="h5"
-            className="text-login">
-              Completa los datos para iniciar sesión
-            </Typography>
+        
             <Box
               component="form"
               noValidate
               onSubmit={handleSubmit}
-              sx={{ mt: 2 }}
             >
               <Stack spacing={2}
               className="box-login-form"
               >
               <Item>
+              <Typography component="p" variant="p"
+              align="left"
+              fontWeight="bold"
+              color="#006D8E">
+              Iniciar Sesión
+            </Typography>
               <TextField
               className="input-forms"
                 margin="normal"

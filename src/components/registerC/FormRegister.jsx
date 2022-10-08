@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
-import Button from "@mui/material/Button";
+import { Link } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import Paper from "@mui/material/Paper";
@@ -17,23 +16,24 @@ import MarkEmailReadOutlinedIcon from "@mui/icons-material/MarkEmailReadOutlined
 import CreditScoreOutlinedIcon from "@mui/icons-material/CreditScoreOutlined";
 import Stack from "@mui/material/Stack";
 import Item from "@mui/material/Stack";
+import { LoadingButton } from '@mui/lab';
 import axios from "axios";
 
 const theme = createTheme();
 
 function Registro() {
-  const [sRUT, setsRUT] = useState("");
   const [sFirstName, setsFirstname] = useState("");
-  const [sEmail, setsEmail] = useState("");
   const [sLastName, setsLastname] = useState("");
+  const [sEmail, setsEmail] = useState("");
   const [sPhone, setsPhone] = useState("");
-  const [sLogin, setsLogin] = useState("");
   const [sPassword, setsPassword] = useState("");
-  const [sComments, setsComments] = useState("");
+  const [sLogin, setsLogin] = useState("");
   const [iProfileID] = useState("0");
-  const [modal, setModal] = useState(false);
+  const [loading, setLoading] = useState(false);
+
 
   async function registrar() {
+    setLoading(true);
     let items = {
       sFirstName,
       sEmail,
@@ -41,7 +41,7 @@ function Registro() {
       sPhone,
       sLogin,
       sPassword,
-
+      iProfileID,
     };
     console.warn(items);
     axios
@@ -52,22 +52,21 @@ function Registro() {
     sLastName: sLastName,
     sPhone: sPhone,
     sLogin: sLogin,
-    sPassword:sPassword
-
+    sPassword: sPassword,
+    iProfileID: iProfileID,
       })
-      .then((result) => {
-        console.warn(result);
-        if (result.data === "success") {
-  
-         alert ("Usuario Registrado Correctamente");
-  
+      .then((response) => {
+        console.log(response.data.status);
+        if (response.data.status === "success") {
+          alert("Usuario registrado");
+          setLoading(false);
         } else {
+          setLoading(false);
           alert("Error al registrar usuario");
         }
+
       });
-
   }
-
   return (
     <ThemeProvider theme={theme}>
       {/* {modal && <ModalRegistroExitoso/>} */}
@@ -119,8 +118,8 @@ function Registro() {
                 <Stack direction="row" spacing={2}>
                   <Item>
                     <TextField
+                    required
                       onChange={(e) => setsFirstname(e.target.value)}
-                      required
                       size="small"
                       fullWidth
                       className="input-izquierdo inputs-form-register "
@@ -143,8 +142,8 @@ function Registro() {
                   </Item>
                   <Item>
                     <TextField
+                    required
                       onChange={(e) => setsLastname(e.target.value)}
-                      required
                       size="small"
                       fullWidth
                       className="inputs-form-register"
@@ -169,8 +168,8 @@ function Registro() {
                 <Stack direction="row" spacing={2}>
                   <Item>
                     <TextField
+                    required
                       onChange={(e) => setsPhone(e.target.value)}
-                      required
                       size="small"
                       fullWidth
                       className="input-izquierdo  inputs-form-register"
@@ -193,8 +192,8 @@ function Registro() {
                   </Item>
                   <Item>
                   <TextField
-                  onChange={(e) => setsEmail(e.target.value)}
                   required
+                  onChange={(e) => setsEmail(e.target.value)}
                   size="small"
                   fullWidth
                   className="inputs-form-register"
@@ -219,8 +218,8 @@ function Registro() {
                 <Stack direction="row" spacing={2}>
                     <Item>
                     <TextField
+                    required
                   onChange={(e) => setsPassword(e.target.value)}
-                  required
                   fullWidth
                   size="small"
                   className="input-izquierdo inputs-form-register"
@@ -243,8 +242,8 @@ function Registro() {
                     </Item>
                     <Item>
                     <TextField
-                  onChange={(e) => setsRUT(e.target.value)}
-                  required 
+                    required
+                  onChange={(e) => setsLogin(e.target.value)}
                   size="small"
                   fullWidth
                   className="inputs-form-register"
@@ -267,15 +266,16 @@ function Registro() {
                     </Item>
                 </Stack>
                 
-                <Button
+                <LoadingButton
                   onClick={registrar}
                   className=""
                   fullWidth
+                  loading={loading}
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
                 >
                   Crear cuenta
-                </Button>
+                </LoadingButton>
                 <Typography
                   variant="body2"
                   color="textSecondary"
