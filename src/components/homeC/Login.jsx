@@ -23,7 +23,8 @@ export default function SignInSide() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-
+    setLoading(true);
+    
     Axios.post('https://valink-pay-api.vercel.app/login', {
         
         login: data.get("username"),
@@ -32,14 +33,12 @@ export default function SignInSide() {
     .then(function (response) {
       console.warn(response);
       if(response.data.status !== 'success') return alert(response.data.message.message);
-      setLoading(true);
       alert('Datos Correctos');
         localStorage.setItem("auth", JSON.stringify("yes"));
         window.location.href = "/dashboard-users";
     })
-
     .catch(function (error) {
-      alert('Login Failed');
+      alert('Datos Incorrectos');
       console.warn(error);
     }
     );

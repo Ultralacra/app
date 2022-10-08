@@ -35,29 +35,37 @@ function Registro() {
 
   async function registrar() {
     let items = {
-      sRUT,
       sFirstName,
       sEmail,
       sLastName,
       sPhone,
       sLogin,
       sPassword,
-      sComments,
-      iProfileID,
+
     };
     console.warn(items);
     axios
-      .post("https://valink-pay-api.vercel.app/userapp", {
-        sRUT: sRUT,
+      .post("https://valink-pay-api.vercel.app/users", {
+
+    sFirstName: sFirstName,
+    sEmail : sEmail,
+    sLastName: sLastName,
+    sPhone: sPhone,
+    sLogin: sLogin,
+    sPassword:sPassword
+
       })
       .then((result) => {
-        console.warn(result.data.message.error);
-        if (result.data.message.error === true) {
-          alert("Error al registrar usuario");
+        console.warn(result);
+        if (result.data === "success") {
+  
+         alert ("Usuario Registrado Correctamente");
+  
         } else {
-          setModal(true);
+          alert("Error al registrar usuario");
         }
       });
+
   }
 
   return (
@@ -113,6 +121,7 @@ function Registro() {
                     <TextField
                       onChange={(e) => setsFirstname(e.target.value)}
                       required
+                      size="small"
                       fullWidth
                       className="input-izquierdo inputs-form-register "
                       name="sFirstName"
@@ -136,6 +145,7 @@ function Registro() {
                     <TextField
                       onChange={(e) => setsLastname(e.target.value)}
                       required
+                      size="small"
                       fullWidth
                       className="inputs-form-register"
                       name="sLastName"
@@ -161,6 +171,7 @@ function Registro() {
                     <TextField
                       onChange={(e) => setsPhone(e.target.value)}
                       required
+                      size="small"
                       fullWidth
                       className="input-izquierdo  inputs-form-register"
                       name="sPhone"
@@ -184,6 +195,7 @@ function Registro() {
                   <TextField
                   onChange={(e) => setsEmail(e.target.value)}
                   required
+                  size="small"
                   fullWidth
                   className="inputs-form-register"
                   type="email"
@@ -210,6 +222,7 @@ function Registro() {
                   onChange={(e) => setsPassword(e.target.value)}
                   required
                   fullWidth
+                  size="small"
                   className="input-izquierdo inputs-form-register"
                   name="sPassword"
                   label="Contraseña"
@@ -231,14 +244,15 @@ function Registro() {
                     <Item>
                     <TextField
                   onChange={(e) => setsRUT(e.target.value)}
-                  required
+                  required 
+                  size="small"
                   fullWidth
                   className="inputs-form-register"
-                  name=""
-                  label="Cedula"
+                  name="sLogin"
+                  label="Usuario"
                   type="text"
                   margin="normal"
-                  placeholder="Cedula de identidad"
+                  placeholder="Nombre de usuario"
                   InputProps={{
                     startAdornment: (
                       <InputAdornment
