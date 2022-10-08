@@ -35,15 +35,17 @@ export default function SignInSide() {
       if(response.data.status !== 'success') return alert(response.data.message.message);
       alert('Datos Correctos');
         localStorage.setItem("auth", JSON.stringify("yes"));
-        window.location.href = "/dashboard-users";
+        window.location.href = "/dashboard-users";  
     })
     .catch(function (error) {
-      alert('Datos Incorrectos');
       console.warn(error);
-    }
-    );
-
+    })
+    .then(function () { 
+      setLoading(false);
+    });
   };
+  
+
 
 
   return (
