@@ -46,7 +46,12 @@ function Registro() {
     
     setIsEmpty(Object.values(items).map(x => x === '')); 
 
-    if(Object.values(items).filter(x => x === '').length > 0) return alert('Debe llenar los campos requeridos');
+    if(Object.values(items).filter(x => x === '').length > 0) 
+    {
+      setLoading(false);
+      alert('Debe llenar los campos requeridos');
+      return;
+    }
     
     axios
       .post("https://valink-pay-api.vercel.app/users", {
