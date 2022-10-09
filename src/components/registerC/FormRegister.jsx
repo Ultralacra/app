@@ -44,7 +44,8 @@ function Registro() {
       iProfileID,
     };
 
-    setIsEmpty(Object.values(items).map(x => x === ''));
+    const empty = Object.values(items).map(x => x === '');
+    setIsEmpty(empty);
 
     console.log(Object.values(items))
 
