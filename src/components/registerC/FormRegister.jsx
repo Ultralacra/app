@@ -128,6 +128,7 @@ function Registro() {
                       type="text"
                       margin="normal"
                       placeholder="Nombresss"
+                      error ={() => validarFormulario(this)}
                       InputProps={{
                         startAdornment: (
                           <InputAdornment
