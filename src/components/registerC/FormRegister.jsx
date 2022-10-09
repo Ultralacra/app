@@ -44,7 +44,7 @@ function Registro() {
       iProfileID,
     };
 
-    const isEmpty = Object.values(items).map(x => x === '');
+    const isEmpty = Object.values(items).map(x => x);
 
     console.log(isEmpty)
 
@@ -52,13 +52,13 @@ function Registro() {
     axios
       .post("https://valink-pay-api.vercel.app/users", {
 
-    sFirstName: sFirstName,
-    sEmail : sEmail,
-    sLastName: sLastName,
-    sPhone: sPhone,
-    sLogin: sLogin,
-    sPassword: sPassword,
-    iProfileID: iProfileID,
+        sFirstName: sFirstName,
+        sEmail : sEmail,
+        sLastName: sLastName,
+        sPhone: sPhone,
+        sLogin: sLogin,
+        sPassword: sPassword,
+        iProfileID: iProfileID,
       })
       .then((response) => {
         console.log(response.data.status);
