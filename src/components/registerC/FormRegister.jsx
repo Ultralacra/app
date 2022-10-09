@@ -16,8 +16,13 @@ import MarkEmailReadOutlinedIcon from "@mui/icons-material/MarkEmailReadOutlined
 import CreditScoreOutlinedIcon from "@mui/icons-material/CreditScoreOutlined";
 import Stack from "@mui/material/Stack";
 import Item from "@mui/material/Stack";
+import SendIcon from "@mui/icons-material/Send";
 import { LoadingButton } from '@mui/lab';
+import ModalRegistroExitoso from "../modals/ModalRegistroExitoso";
+import ModalEmptyFields from "../modals/ModalEmptyFields";
 import axios from "axios";
+
+
 
 const theme = createTheme();
 
@@ -31,9 +36,12 @@ function Registro() {
   const [iProfileID] = useState("0");
   const [loading, setLoading] = useState(false);
   const [isEmpty, setIsEmpty] = useState([]);
+  const [modal , setModal] = useState(false);
+  const [modalEmpty , setModalEmpty] = useState(false);
+
+
 
   async function registrar() {
-    setLoading(true);
     let items = {
       sFirstName,
       sEmail,
@@ -43,16 +51,16 @@ function Registro() {
       sPassword,
       iProfileID,
     };
-    
-    setIsEmpty(Object.values(items).map(x => x === '')); 
+
+   setIsEmpty(Object.values(items).map(x => x === '')); 
 
     if(Object.values(items).filter(x => x === '').length > 0) 
     {
-      setLoading(false);
-      alert('Debe llenar los campos requeridos');
+      setModalEmpty(true);
+     /*  alert('Uno o mas campos del formulario estan vacios, por favor llenarlos'); */
       return;
     }
-    
+
     axios
       .post("https://valink-pay-api.vercel.app/users", {
 
@@ -68,9 +76,11 @@ function Registro() {
         console.log(response.data.status);
         if (response.data.status === "success") {
           alert("Usuario registrado");
-          setLoading(false);
+          setModal(true);
+
+
         } else {
-          setLoading(false);
+
           alert("Error al registrar usuario");
         }
 
@@ -78,7 +88,8 @@ function Registro() {
   }
   return (
     <ThemeProvider theme={theme}>
-      {/* {modal && <ModalRegistroExitoso/>} */}
+     {modal && <ModalRegistroExitoso/>} 
+     {modalEmpty && <ModalEmptyFields/>} 
       <Box sx={{ display: "flex" }}>
         <Grid container component="main" sx={{ height: "100vh" }}>
           <CssBaseline />
@@ -282,6 +293,7 @@ function Registro() {
                     </Item>
                 </Stack>                
                 <LoadingButton
+                endIcon={<SendIcon />}
                   onClick={registrar}
                   className=""
                   fullWidth
