@@ -31,10 +31,6 @@ function Registro() {
   const [iProfileID] = useState("0");
   const [loading, setLoading] = useState(false);
 
-  const validarFormulario = (val) => {
-    console.log(val)
-  };
-
 
   async function registrar() {
     setLoading(true);
@@ -128,12 +124,10 @@ function Registro() {
                       fullWidth
                       className="input-izquierdo inputs-form-register "
                       name="sFirstName"
-                      label="Nombres"
+                      label="Nombre"
                       type="text"
                       margin="normal"
-                      placeholder="Nombre"
-                      error ={() => validarFormulario(this)}
-                      // helperText={this.st}
+                      placeholder="Nombresss"
                       InputProps={{
                         startAdornment: (
                           <InputAdornment
