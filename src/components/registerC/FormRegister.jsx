@@ -44,34 +44,30 @@ function Registro() {
       iProfileID,
     };
 
-    setIsEmpty(Object.values(items).map(x => x === ''));
-
-    console.log(Object.values(items))
-    console.log(Object.values(items).map(x => x === ''))
-    console.log(isEmpty[0])
+    setIsEmpty(Object.values(items).map(x => x === '')); 
     
-    // axios
-    //   .post("https://valink-pay-api.vercel.app/users", {
+    axios
+      .post("https://valink-pay-api.vercel.app/users", {
 
-    //     sFirstName: sFirstName,
-    //     sEmail : sEmail,
-    //     sLastName: sLastName,
-    //     sPhone: sPhone,
-    //     sLogin: sLogin,
-    //     sPassword: sPassword,
-    //     iProfileID: iProfileID,
-    //   })
-    //   .then((response) => {
-    //     console.log(response.data.status);
-    //     if (response.data.status === "success") {
-    //       alert("Usuario registrado");
-    //       setLoading(false);
-    //     } else {
-    //       setLoading(false);
-    //       alert("Error al registrar usuario");
-    //     }
+        sFirstName: sFirstName,
+        sEmail : sEmail,
+        sLastName: sLastName,
+        sPhone: sPhone,
+        sLogin: sLogin,
+        sPassword: sPassword,
+        iProfileID: iProfileID,
+      })
+      .then((response) => {
+        console.log(response.data.status);
+        if (response.data.status === "success") {
+          alert("Usuario registrado");
+          setLoading(false);
+        } else {
+          setLoading(false);
+          alert("Error al registrar usuario");
+        }
 
-    //   });
+    });
   }
   return (
     <ThemeProvider theme={theme}>
@@ -150,7 +146,8 @@ function Registro() {
                   </Item>
                   <Item>
                     <TextField
-                    required
+                      required
+                      error={isEmpty[2] === true}
                       onChange={(e) => setsLastname(e.target.value)}
                       size="small"
                       fullWidth
@@ -176,7 +173,8 @@ function Registro() {
                 <Stack direction="row" spacing={2}>
                   <Item>
                     <TextField
-                    required
+                      required
+                      error={isEmpty[3] === true}
                       onChange={(e) => setsPhone(e.target.value)}
                       size="small"
                       fullWidth
@@ -200,80 +198,82 @@ function Registro() {
                   </Item>
                   <Item>
                   <TextField
-                  required
-                  onChange={(e) => setsEmail(e.target.value)}
-                  size="small"
-                  fullWidth
-                  className="inputs-form-register"
-                  type="email"
-                  label="Correo electrónico"
-                  name="sEmail"
-                  margin="normal"
-                  placeholder="Correo electrónico"
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment
-                        className="iconos-labels"
-                        position="start"
-                      >
-                        <MarkEmailReadOutlinedIcon />
-                      </InputAdornment>
-                    ),
-                  }}
-                />
+                    required
+                    error={isEmpty[4] === true}
+                    onChange={(e) => setsEmail(e.target.value)}
+                    size="small"
+                    fullWidth
+                    className="inputs-form-register"
+                    type="email"
+                    label="Correo electrónico"
+                    name="sEmail"
+                    margin="normal"
+                    placeholder="Correo electrónico"
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment
+                          className="iconos-labels"
+                          position="start"
+                        >
+                          <MarkEmailReadOutlinedIcon />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
                   </Item>
                 </Stack>
                 <Stack direction="row" spacing={2}>
                     <Item>
                     <TextField
-                    required
-                  onChange={(e) => setsPassword(e.target.value)}
-                  fullWidth
-                  size="small"
-                  className="input-izquierdo inputs-form-register"
-                  name="sPassword"
-                  label="Contraseña"
-                  type="password"
-                  margin="normal"
-                  placeholder="Contraseña"
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment
-                        className="iconos-labels"
-                        position="start"
-                      >
-                        <LockIcon />
-                      </InputAdornment>
-                    ),
-                  }}
-                />
+                      required
+                      error={isEmpty[5] === true}
+                      onChange={(e) => setsPassword(e.target.value)}
+                      fullWidth
+                      size="small"
+                      className="input-izquierdo inputs-form-register"
+                      name="sPassword"
+                      label="Contraseña"
+                      type="password"
+                      margin="normal"
+                      placeholder="Contraseña"
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment
+                            className="iconos-labels"
+                            position="start"
+                          >
+                            <LockIcon />
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
                     </Item>
                     <Item>
-                    <TextField
+                  <TextField
                     required
-                  onChange={(e) => setsLogin(e.target.value)}
-                  size="small"
-                  fullWidth
-                  className="inputs-form-register"
-                  name="sLogin"
-                  label="Usuario"
-                  type="text"
-                  margin="normal"
-                  placeholder="Nombre de usuario"
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment
-                        className="iconos-labels"
-                        position="start"
-                      >
-                        <CreditScoreOutlinedIcon />
-                      </InputAdornment>
-                    ),
-                  }}
-                />
+                    error={isEmpty[6] === true}
+                    onChange={(e) => setsLogin(e.target.value)}
+                    size="small"
+                    fullWidth
+                    className="inputs-form-register"
+                    name="sLogin"
+                    label="Usuario"
+                    type="text"
+                    margin="normal"
+                    placeholder="Nombre de usuario"
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment
+                          className="iconos-labels"
+                          position="start"
+                        >
+                          <CreditScoreOutlinedIcon />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
                     </Item>
-                </Stack>
-                
+                </Stack>                
                 <LoadingButton
                   onClick={registrar}
                   className=""
