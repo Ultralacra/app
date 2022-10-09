@@ -49,30 +49,29 @@ function Registro() {
     console.log(isEmpty)
 
     console.warn(items);
+    
+    // axios
+    //   .post("https://valink-pay-api.vercel.app/users", {
 
-    return
-    axios
-      .post("https://valink-pay-api.vercel.app/users", {
+    //     sFirstName: sFirstName,
+    //     sEmail : sEmail,
+    //     sLastName: sLastName,
+    //     sPhone: sPhone,
+    //     sLogin: sLogin,
+    //     sPassword: sPassword,
+    //     iProfileID: iProfileID,
+    //   })
+    //   .then((response) => {
+    //     console.log(response.data.status);
+    //     if (response.data.status === "success") {
+    //       alert("Usuario registrado");
+    //       setLoading(false);
+    //     } else {
+    //       setLoading(false);
+    //       alert("Error al registrar usuario");
+    //     }
 
-        sFirstName: sFirstName,
-        sEmail : sEmail,
-        sLastName: sLastName,
-        sPhone: sPhone,
-        sLogin: sLogin,
-        sPassword: sPassword,
-        iProfileID: iProfileID,
-      })
-      .then((response) => {
-        console.log(response.data.status);
-        if (response.data.status === "success") {
-          alert("Usuario registrado");
-          setLoading(false);
-        } else {
-          setLoading(false);
-          alert("Error al registrar usuario");
-        }
-
-      });
+    //   });
   }
   return (
     <ThemeProvider theme={theme}>
