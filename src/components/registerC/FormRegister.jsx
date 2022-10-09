@@ -129,7 +129,7 @@ function Registro() {
                       type="text"
                       margin="normal"
                       placeholder="Nombre"
-                      helperText={'errorMessagefffffffff'}
+                      helperText={''}
                       InputProps={{
                         startAdornment: (
                           <InputAdornment
