@@ -31,10 +31,6 @@ function Registro() {
   const [iProfileID] = useState("0");
   const [loading, setLoading] = useState(false);
 
-  const validarFormulario = () => {
-    console.log(sFirstName)
-  };
-
 
   async function registrar() {
     setLoading(true);
@@ -122,7 +118,8 @@ function Registro() {
                 <Stack direction="row" spacing={2}>
                   <Item>
                     <TextField
-                    required
+                      required
+                      error={sFirstName.length === 0}
                       onChange={(e) => setsFirstname(e.target.value)}
                       size="small"
                       fullWidth
@@ -131,8 +128,8 @@ function Registro() {
                       label="Nombre"
                       type="text"
                       margin="normal"
-                      placeholder="Nombresss"
-                      error ={validarFormulario()}
+                      placeholder="Nombre"
+                      helperText={'errorMessagefffffffff'}
                       InputProps={{
                         startAdornment: (
                           <InputAdornment
