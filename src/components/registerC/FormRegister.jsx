@@ -125,7 +125,7 @@ function Registro() {
                   <Item>
                     <TextField
                       required
-                      error={isEmpty[0] || false === true ? true:false}
+                      error={isEmpty[0] === true}
                       onChange={(e) => setsFirstname(e.target.value)}
                       size="small"
                       fullWidth
