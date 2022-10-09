@@ -44,12 +44,11 @@ function Registro() {
       iProfileID,
     };
 
-    const empty = Object.values(items).map(x => x === '');
-    setIsEmpty(empty);
+    setIsEmpty(Object.values(items).map(x => x === ''));
 
     console.log(Object.values(items))
-
-    console.log(isEmpty)
+    console.log(Object.values(items).map(x => x === ''))
+    console.log(isEmpty[0])
     
     // axios
     //   .post("https://valink-pay-api.vercel.app/users", {
