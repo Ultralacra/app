@@ -128,7 +128,8 @@ function Registro() {
                       type="text"
                       margin="normal"
                       placeholder="Nombre"
-                      error ={ console.log(this.state) }
+                      error ={this.state.errorText.length === 0 ? false : true }
+                      helperText={this.state.errorText}
                       InputProps={{
                         startAdornment: (
                           <InputAdornment
