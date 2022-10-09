@@ -30,7 +30,7 @@ function Registro() {
   const [sLogin, setsLogin] = useState("");
   const [iProfileID] = useState("0");
   const [loading, setLoading] = useState(false);
-
+  const [isEmpty, setIsEmpty] = useState([]);
 
   async function registrar() {
     setLoading(true);
@@ -44,11 +44,11 @@ function Registro() {
       iProfileID,
     };
 
-    const isEmpty = Object.values(items).map(x => x === '');
+    setIsEmpty(Object.values(items).map(x => x === ''));
+
+    console.log(Object.values(items))
 
     console.log(isEmpty)
-
-    console.warn(items);
     
     // axios
     //   .post("https://valink-pay-api.vercel.app/users", {
@@ -125,7 +125,7 @@ function Registro() {
                   <Item>
                     <TextField
                       required
-                      error
+                      error={isEmpty[0] || false === true ? true:false}
                       onChange={(e) => setsFirstname(e.target.value)}
                       size="small"
                       fullWidth
