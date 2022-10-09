@@ -43,6 +43,11 @@ function Registro() {
       sPassword,
       iProfileID,
     };
+
+    const isEmpty = Object.values(items).every(x => x === '');
+
+    console.log(isEmpty)
+
     console.warn(items);
     axios
       .post("https://valink-pay-api.vercel.app/users", {
