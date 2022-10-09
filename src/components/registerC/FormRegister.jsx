@@ -153,6 +153,7 @@ function Registro() {
                       type="text"
                       margin="normal"
                       placeholder="Apellido"
+                      autocomplete="on"
                       InputProps={{
                         startAdornment: (
                           <InputAdornment
@@ -179,6 +180,7 @@ function Registro() {
                       type="tel"
                       margin="normal"
                       placeholder="Teléfono"
+                      autocomplete="on"
                       InputProps={{
                         startAdornment: (
                           <InputAdornment
@@ -203,6 +205,7 @@ function Registro() {
                   name="sEmail"
                   margin="normal"
                   placeholder="Correo electrónico"
+                  autocomplete="on"
                   InputProps={{
                     startAdornment: (
                       <InputAdornment
@@ -229,6 +232,7 @@ function Registro() {
                   type="password"
                   margin="normal"
                   placeholder="Contraseña"
+                  autocomplete="on"
                   InputProps={{
                     startAdornment: (
                       <InputAdornment
@@ -253,6 +257,7 @@ function Registro() {
                   type="text"
                   margin="normal"
                   placeholder="Nombre de usuario"
+                  autocomplete="on"
                   InputProps={{
                     startAdornment: (
                       <InputAdornment
