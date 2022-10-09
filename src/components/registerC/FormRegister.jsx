@@ -133,7 +133,7 @@ function Registro() {
                       margin="normal"
                       placeholder="Nombre"
                       error ={() => validarFormulario(this)}
-                      helperText={this.state.errorText}
+                      // helperText={this.st}
                       InputProps={{
                         startAdornment: (
                           <InputAdornment
