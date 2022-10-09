@@ -199,7 +199,7 @@ function Registro() {
                   <Item>
                   <TextField
                     required
-                    error={isEmpty[4] === true}
+                    error={isEmpty[1] === true}
                     onChange={(e) => setsEmail(e.target.value)}
                     size="small"
                     fullWidth
@@ -251,7 +251,7 @@ function Registro() {
                     <Item>
                   <TextField
                     required
-                    error={isEmpty[6] === true}
+                    error={isEmpty[4] === true}
                     onChange={(e) => setsLogin(e.target.value)}
                     size="small"
                     fullWidth
