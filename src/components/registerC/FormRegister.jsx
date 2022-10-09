@@ -128,6 +128,7 @@ function Registro() {
                       type="text"
                       margin="normal"
                       placeholder="Nombre"
+                      autocomplete="on"
                       InputProps={{
                         startAdornment: (
                           <InputAdornment
