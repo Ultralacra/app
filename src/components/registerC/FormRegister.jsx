@@ -49,6 +49,8 @@ function Registro() {
     console.log(isEmpty)
 
     console.warn(items);
+
+    return
     axios
       .post("https://valink-pay-api.vercel.app/users", {
 
