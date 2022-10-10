@@ -21,10 +21,7 @@ const EmptyField = () => {
 
     })
 }
-    return (    
-        <div>
-        </div>
-    )
+    return (<div>{EmptyField()}</div>)
 
 }
 export default ModalEmptyFields;
