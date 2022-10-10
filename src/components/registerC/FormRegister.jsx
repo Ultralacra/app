@@ -225,7 +225,6 @@ function Registro() {
                   <Item>
                   <TextField
                     required
-                    validarCorreo = {validarCorreo}
                     error={isEmpty[1] === true}
                     onChange={(e) => changeEvent(e,4)}
                     size="small"
