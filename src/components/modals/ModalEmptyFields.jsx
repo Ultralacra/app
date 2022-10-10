@@ -3,10 +3,9 @@ import React, { useState, useEffect } from "react";
 import swal from 'sweetalert2';
 
 function ModalEmptyFields() {
-
+    console.log('ffffffffffffff')
     const EmptyField = () => {
-        swal.fire({
-            
+        swal.fire({            
             toast: true,
             position: 'top-end',
             showConfirmButton: false,
@@ -14,7 +13,6 @@ function ModalEmptyFields() {
             timerProgressBar: true,
             icon: 'error',
             title: 'Debe completar todos los campos',
-
         })
     }
     

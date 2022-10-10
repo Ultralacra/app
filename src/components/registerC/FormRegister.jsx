@@ -22,8 +22,6 @@ import ModalRegistroExitoso from "../modals/ModalRegistroExitoso";
 import ModalEmptyFields from "../modals/ModalEmptyFields";
 import axios from "axios";
 
-
-
 const theme = createTheme();
 
 function Registro() {
