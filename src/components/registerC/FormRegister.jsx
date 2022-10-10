@@ -71,7 +71,7 @@ function Registro() {
         iProfileID: iProfileID,
       })
       .then((response) => {
-        console.log(response.data.status);
+        console.log(response)
         if (response.data.status === "success") {
           alert("Usuario registrado");
           setModal(true);
