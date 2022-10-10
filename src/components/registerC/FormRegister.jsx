@@ -34,11 +34,9 @@ function Registro() {
   const [sPassword, setsPassword] = useState("");
   const [sLogin, setsLogin] = useState("");
   const [iProfileID] = useState("0");
-  const [loading, setLoading] = useState(false);
   const [isEmpty, setIsEmpty] = useState([]);
   const [modal , setModal] = useState(false);
   const [modalEmpty , setModalEmpty] = useState(false);
-
 
 
   async function registrar() {
@@ -57,9 +55,15 @@ function Registro() {
     if(Object.values(items).filter(x => x === '').length > 0) 
     {
       setModalEmpty(true);
-     /*  alert('Uno o mas campos del formulario estan vacios, por favor llenarlos'); */
+      alert('Uno o mas campos del formulario estan vacios, por favor llenarlos'); 
       return;
+
+      
+    }else{
+
     }
+
+
 
     axios
       .post("https://valink-pay-api.vercel.app/users", {
@@ -293,11 +297,11 @@ function Registro() {
                     </Item>
                 </Stack>                
                 <LoadingButton
+
                 endIcon={<SendIcon />}
                   onClick={registrar}
-                  className=""
+                  className="btn-create-account"
                   fullWidth
-                  loading={loading}
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
                 >

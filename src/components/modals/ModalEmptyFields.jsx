@@ -1,23 +1,25 @@
 
-import React from 'react'
+import React, { useState, useEffect } from "react";
 import swal from 'sweetalert2'
-import { useEffect } from 'react'
 
-function FieldsEmpty() {
+
+// eslint-disable-next-line react-hooks/rules-of-hooks
+
+function ModalEmptyFields() {
 useEffect(() => {
-    AlertFieldsEmpty()
+    EmptyField()
 }, [])
 
-const AlertFieldsEmpty = () => {
+const EmptyField = () => {
     swal.fire({
         
         toast: true,
         position: 'top-end',
         showConfirmButton: false,
-        timer: 3000,
+        timer: 1500,
         timerProgressBar: true,
         icon: 'error',
-        title: 'Uno o mas campos del formulario estan vacios, por favor completa todos los campos',
+        title: 'Debe completar todos los campos',
 
     })
 }
@@ -28,4 +30,4 @@ const AlertFieldsEmpty = () => {
     )
 
 }
-export default FieldsEmpty;
+export default ModalEmptyFields;
