@@ -39,7 +39,6 @@ function Registro() {
 
   async function registrar() {
     setModalEmpty(false);
-    validarCorreo(true);
     setModal(false);
 
     let items = {
@@ -94,15 +93,7 @@ function Registro() {
     if(modal) setModal(false);
   };
 
-  function validarCorreo() {
-    var correo = document.getElementById("email").value;
-    var expresion = /\w+@\w+\.+[a-z]/;
-    if (correo === "" || !expresion.test(correo)) {
-      alert("Debe ingresar un correo válido");
-      return false;
-    } else {
-    }
-  }
+
 
   return (
     <ThemeProvider theme={theme}>
