@@ -39,6 +39,7 @@ function Registro() {
 
   async function registrar() {
     setModalEmpty(false);
+    validarCorreo(true);
     setModal(false);
 
     let items = {
@@ -92,6 +93,16 @@ function Registro() {
     if(modalEmpty) setModalEmpty(false);
     if(modal) setModal(false);
   };
+
+  function validarCorreo() {
+    var correo = document.getElementById("email").value;
+    var expresion = /\w+@\w+\.+[a-z]/;
+    if (correo === "" || !expresion.test(correo)) {
+      alert("Debe ingresar un correo válido");
+      return false;
+    } else {
+    }
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -223,9 +234,11 @@ function Registro() {
                   <Item>
                   <TextField
                     required
+                    validarCorreo = {validarCorreo}
                     error={isEmpty[1] === true}
                     onChange={(e) => changeEvent(e,4)}
                     size="small"
+                    id="email"
                     fullWidth
                     className="inputs-form-register"
                     type="email"
