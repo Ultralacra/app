@@ -55,8 +55,7 @@ function Registro() {
     if(Object.values(items).filter(x => x === '').length > 0) 
     {
       setModalEmpty(true);
-      setModalEmpty(false);
-      alert('Uno o mas campos del formulario estan vacios, por favor llenarlos'); 
+      // alert('Uno o mas campos del formulario estan vacios, por favor llenarlos'); 
       return;      
     }
     
