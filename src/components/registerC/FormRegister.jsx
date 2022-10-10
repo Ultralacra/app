@@ -54,17 +54,11 @@ function Registro() {
 
     if(Object.values(items).filter(x => x === '').length > 0) 
     {
-      setModalEmpty(true);
+      // setModalEmpty(true);
       alert('Uno o mas campos del formulario estan vacios, por favor llenarlos'); 
-      return;
-
-      
-    }else{
-
+      return;      
     }
-
-
-
+    
     axios
       .post("https://valink-pay-api.vercel.app/users", {
 
