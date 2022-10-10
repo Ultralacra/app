@@ -39,6 +39,7 @@ function Registro() {
 
   async function registrar() {
     setModalEmpty(false);
+    setModal(false);
 
     let items = {
       sFirstName,
@@ -71,12 +72,8 @@ function Registro() {
         iProfileID: iProfileID,
       })
       .then((response) => {
-        console.log(response)
-        if (response.data.status === "success") {
-          alert("Usuario registrado");
+        if (response.status === 200) {
           setModal(true);
-
-
         } else {
 
           alert("Error al registrar usuario");
@@ -93,6 +90,7 @@ function Registro() {
     if(field === 5) setsPassword(e.target.value);
     if(field === 6) setsLogin(e.target.value);
     if(modalEmpty) setModalEmpty(false);
+    if(modal) setModal(false);
   };
 
   return (
