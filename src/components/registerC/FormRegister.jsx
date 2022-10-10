@@ -54,10 +54,9 @@ function Registro() {
 
     if(Object.values(items).filter(x => x === '').length > 0) 
     {
-      // setModalEmpty(true);
-      return <ModalEmptyFields/>;
+      setModalEmpty(true);
       // alert('Uno o mas campos del formulario estan vacios, por favor llenarlos'); 
-      // return;      
+      return;      
     }
     
     axios
@@ -88,7 +87,7 @@ function Registro() {
   return (
     <ThemeProvider theme={theme}>
      {modal && <ModalRegistroExitoso/>} 
-     {/* {modalEmpty && <ModalEmptyFields/>}  */}
+     {modalEmpty && <ModalEmptyFields/>} 
       <Box sx={{ display: "flex" }}>
         <Grid container component="main" sx={{ height: "100vh" }}>
           <CssBaseline />
