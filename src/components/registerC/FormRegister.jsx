@@ -84,6 +84,11 @@ function Registro() {
 
     });
   }
+
+  const changeEvent = (e,field) => {
+    if(field === 1) setsFirstname(e.target.value);
+  };
+
   return (
     <ThemeProvider theme={theme}>
      {modal && <ModalRegistroExitoso/>} 
@@ -138,7 +143,7 @@ function Registro() {
                     <TextField
                       required
                       error={isEmpty[0] === true}
-                      onChange={(e) => {setsFirstname(e.target.value);if(modalEmpty) setModalEmpty(false);}}
+                      onChange={(e) => changeEvent(e,1)}
                       size="small"
                       fullWidth
                       className="input-izquierdo inputs-form-register "
