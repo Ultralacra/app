@@ -87,7 +87,7 @@ function Registro() {
   return (
     <ThemeProvider theme={theme}>
      {modal && <ModalRegistroExitoso/>} 
-     {modalEmpty && <ModalEmptyFields fn={setModalEmpty(false)}/>} 
+     {modalEmpty && <ModalEmptyFields fn={setModalEmpty(true)}/>} 
       <Box sx={{ display: "flex" }}>
         <Grid container component="main" sx={{ height: "100vh" }}>
           <CssBaseline />
