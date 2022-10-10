@@ -87,7 +87,7 @@ function Registro() {
   return (
     <ThemeProvider theme={theme}>
      {modal && <ModalRegistroExitoso/>} 
-     {modalEmpty && <ModalEmptyFields/>} 
+     {modalEmpty && <ModalEmptyFields fn={setModalEmpty(false)}/>} 
       <Box sx={{ display: "flex" }}>
         <Grid container component="main" sx={{ height: "100vh" }}>
           <CssBaseline />
@@ -147,7 +147,6 @@ function Registro() {
                       type="text"
                       margin="normal"
                       placeholder="Nombre"
-                      helperText={''}
                       InputProps={{
                         startAdornment: (
                           <InputAdornment
