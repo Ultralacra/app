@@ -19,7 +19,7 @@ import Item from "@mui/material/Stack";
 import SendIcon from "@mui/icons-material/Send";
 import { LoadingButton } from '@mui/lab';
 import ModalRegistroExitoso from "../modals/ModalRegistroExitoso";
-import ModalEmptyFields from "../modals/ModalEmptyFields";
+import ModalEmptyFields from "../modals/EmptyField";
 import axios from "axios";
 
 
