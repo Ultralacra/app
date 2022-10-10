@@ -38,6 +38,8 @@ function Registro() {
 
 
   async function registrar() {
+    setModalEmpty(false);
+
     let items = {
       sFirstName,
       sEmail,
