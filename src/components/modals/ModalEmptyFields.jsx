@@ -6,11 +6,9 @@ import swal from 'sweetalert2'
 // eslint-disable-next-line react-hooks/rules-of-hooks
 
 function ModalEmptyFields() {
-useEffect(() => {
-    EmptyField()
-}, [])
 
 const EmptyField = () => {
+    console.log('ffffffffff')
     swal.fire({
         
         toast: true,
