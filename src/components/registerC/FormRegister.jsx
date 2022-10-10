@@ -87,6 +87,12 @@ function Registro() {
 
   const changeEvent = (e,field) => {
     if(field === 1) setsFirstname(e.target.value);
+    if(field === 2) setsLastname(e.target.value);
+    if(field === 3) setsPhone(e.target.value);
+    if(field === 4) setsEmail(e.target.value);
+    if(field === 5) setsPassword(e.target.value);
+    if(field === 6) setsLogin(e.target.value);
+    if(modalEmpty) setModalEmpty(false);
   };
 
   return (
@@ -168,7 +174,7 @@ function Registro() {
                     <TextField
                       required
                       error={isEmpty[2] === true}
-                      onChange={(e) => {setsLastname(e.target.value);if(modalEmpty) setModalEmpty(false);}}
+                      onChange={(e) => changeEvent(e,2)}
                       size="small"
                       fullWidth
                       className="inputs-form-register"
@@ -195,7 +201,7 @@ function Registro() {
                     <TextField
                       required
                       error={isEmpty[3] === true}
-                      onChange={(e) => {setsPhone(e.target.value);if(modalEmpty) setModalEmpty(false);}}
+                      onChange={(e) => changeEvent(e,3)}
                       size="small"
                       fullWidth
                       className="input-izquierdo  inputs-form-register"
@@ -220,7 +226,7 @@ function Registro() {
                   <TextField
                     required
                     error={isEmpty[1] === true}
-                    onChange={(e) => {setsEmail(e.target.value);if(modalEmpty) setModalEmpty(false);}}
+                    onChange={(e) => changeEvent(e,4)}
                     size="small"
                     fullWidth
                     className="inputs-form-register"
@@ -247,7 +253,7 @@ function Registro() {
                     <TextField
                       required
                       error={isEmpty[5] === true}
-                      onChange={(e) => {setsPassword(e.target.value);if(modalEmpty) setModalEmpty(false);}}
+                      onChange={(e) => changeEvent(e,5)}
                       fullWidth
                       size="small"
                       className="input-izquierdo inputs-form-register"
@@ -272,7 +278,7 @@ function Registro() {
                   <TextField
                     required
                     error={isEmpty[4] === true}
-                    onChange={(e) => {setsLogin(e.target.value);if(modalEmpty) setModalEmpty(false);}}
+                    onChange={(e) => changeEvent(e,6)}
                     size="small"
                     fullWidth
                     className="inputs-form-register"
