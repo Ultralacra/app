@@ -16,9 +16,14 @@ import { Typography } from "@mui/material";
 
 
 export default function SignInSide() {
+
+
+
+
   
   const theme = createTheme();
   const [loading, setLoading] = useState(false);
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -45,9 +50,6 @@ export default function SignInSide() {
     });
   };
   
-
-
-
   return (
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: "100vh" }}>
@@ -143,16 +145,16 @@ export default function SignInSide() {
                     ¿Olvidaste tu contraseña?
                   </Link>
               <hr />
-            <Stack>
-              <Item>
-              <Link
-              className="btn-register"
+              <Stack>
+                <Item>
+                <Link
+                className="btn-register"
                 type="submit"
                 fullWidth
                 size="small"
                 variant="contained"
                 sx={{ mt: 1, mb: 1 }}
-              to="/register-page"
+                to="/register-page"
               >REGISTRARME
               </Link>
               </Item>

@@ -20,7 +20,11 @@ import SendIcon from "@mui/icons-material/Send";
 import { LoadingButton } from '@mui/lab';
 import ModalRegistroExitoso from "../modals/ModalRegistroExitoso";
 import ModalEmptyFields from "../modals/ModalEmptyFields";
+import validator from 'validator'
 import axios from "axios";
+
+
+
 
 const theme = createTheme();
 
@@ -35,6 +39,8 @@ function Registro() {
   const [isEmpty, setIsEmpty] = useState([]);
   const [modal , setModal] = useState(false);
   const [modalEmpty , setModalEmpty] = useState(false);
+  const [message, setMessage] = useState("");
+
 
 
   async function registrar() {
@@ -51,6 +57,9 @@ function Registro() {
       iProfileID,
     };
 
+  
+  
+   
    setIsEmpty(Object.values(items).map(x => x === '')); 
 
     if(Object.values(items).filter(x => x === '').length > 0) 
@@ -59,7 +68,17 @@ function Registro() {
       // alert('Uno o mas campos del formulario estan vacios, por favor llenarlos'); 
       return;      
     }
-    
+      
+    const validateEmail = (e) => {
+      var email = e.target.value;
+  
+      if (validator.isEmail(email)) {
+        setMessage("Thank you");
+      } else {
+        setMessage("Please, enter valid Email!");
+      }
+    };
+
     axios
       .post("https://valink-pay-api.vercel.app/users", {
 
@@ -224,11 +243,14 @@ function Registro() {
                   </Item>
                   <Item>
                   <TextField
+
                     required
                     error={isEmpty[1] === true}
+                    
+                    // validad email 
                     onChange={(e) => changeEvent(e,4)}
                     size="small"
-                    id="email"
+                    id="userEmail"
                     fullWidth
                     className="inputs-form-register"
                     type="email"
