@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -17,12 +17,12 @@ import CreditScoreOutlinedIcon from "@mui/icons-material/CreditScoreOutlined";
 import Stack from "@mui/material/Stack";
 import Item from "@mui/material/Stack";
 import SendIcon from "@mui/icons-material/Send";
-import { LoadingButton } from '@mui/lab';
+import { LoadingButton } from "@mui/lab";
 import ModalRegistroExitoso from "../modals/ModalRegistroExitoso";
 import ModalEmptyFields from "../modals/ModalEmptyFields";
-import validator from 'validator'
+import validator from "validator";
+import swal from "sweetalert2";
 import axios from "axios";
-
 
 
 
@@ -37,9 +37,11 @@ function Registro() {
   const [sLogin, setsLogin] = useState("");
   const [iProfileID] = useState("0");
   const [isEmpty, setIsEmpty] = useState([]);
-  const [modal , setModal] = useState(false);
-  const [modalEmpty , setModalEmpty] = useState(false);
-  const [message, setMessage] = useState("");
+  const [modal, setModal] = useState(false);
+  const [modalEmpty, setModalEmpty] = useState(false);
+  const [emailError, setEmailError] = useState("");
+
+
 
 
 
@@ -57,33 +59,33 @@ function Registro() {
       iProfileID,
     };
 
-  
-  
-   
-   setIsEmpty(Object.values(items).map(x => x === '')); 
+    // Alert de campos vacios
+    setIsEmpty(Object.values(items).map((x) => x === ""));
 
-    if(Object.values(items).filter(x => x === '').length > 0) 
-    {
+    if (Object.values(items).filter((x) => x === "").length > 0) {
       setModalEmpty(true);
-      // alert('Uno o mas campos del formulario estan vacios, por favor llenarlos'); 
-      return;      
+      return;
     }
-      
-    const validateEmail = (e) => {
-      var email = e.target.value;
-  
-      if (validator.isEmail(email)) {
-        setMessage("Thank you");
-      } else {
-        setMessage("Please, enter valid Email!");
-      }
-    };
+
+    if (!validator.isEmail(sEmail)) {
+      swal 
+        .fire({
+          toast: true,
+          position: "top-end",
+          icon : "error",
+          title: "Oops...",
+          text: "El correo electrónico no es válido",
+          showConfirmButton: false,
+          timer: 1500,
+          timerProgressBar: true,
+        })
+      return;
+    }
 
     axios
       .post("https://valink-pay-api.vercel.app/users", {
-
         sFirstName: sFirstName,
-        sEmail : sEmail,
+        sEmail: sEmail,
         sLastName: sLastName,
         sPhone: sPhone,
         sLogin: sLogin,
@@ -94,30 +96,26 @@ function Registro() {
         if (response.status === 200) {
           setModal(true);
         } else {
-
           alert("Error al registrar usuario");
         }
-
-    });
+      });
   }
 
-  const changeEvent = (e,field) => {
-    if(field === 1) setsFirstname(e.target.value);
-    if(field === 2) setsLastname(e.target.value);
-    if(field === 3) setsPhone(e.target.value);
-    if(field === 4) setsEmail(e.target.value);
-    if(field === 5) setsPassword(e.target.value);
-    if(field === 6) setsLogin(e.target.value);
-    if(modalEmpty) setModalEmpty(false);
-    if(modal) setModal(false);
+  const changeEvent = (e, field) => {
+    if (field === 1) setsFirstname(e.target.value);
+    if (field === 2) setsLastname(e.target.value);
+    if (field === 3) setsPhone(e.target.value);
+    if (field === 4) setsEmail(e.target.value);
+    if (field === 5) setsPassword(e.target.value);
+    if (field === 6) setsLogin(e.target.value);
+    if (modalEmpty) setModalEmpty(false);
+    if (modal) setModal(false);
   };
-
-
 
   return (
     <ThemeProvider theme={theme}>
-     {modal && <ModalRegistroExitoso/>} 
-     {modalEmpty && <ModalEmptyFields/>} 
+      {modal && <ModalRegistroExitoso />}
+      {modalEmpty && <ModalEmptyFields />}
       <Box sx={{ display: "flex" }}>
         <Grid container component="main" sx={{ height: "100vh" }}>
           <CssBaseline />
@@ -127,8 +125,7 @@ function Registro() {
             sm={4}
             md={7}
             sx={{
-              backgroundImage:
-                "url()",
+              backgroundImage: "url()",
               backgroundRepeat: "no-repeat",
               backgroundSize: "75%",
             }}
@@ -158,17 +155,17 @@ function Registro() {
                 width={200}
                 alt="logo"
               ></img>
-
               <Typography component="h1" variant="h5" sx={{ mt: 4 }}>
                 Completa los datos solicitados
               </Typography>
               <Box component="form" noValidate sx={{ mt: 1 }}>
-                <Stack direction="row" spacing={2}>
+                <Stack direction="row" spacing={2}
+                >
                   <Item>
                     <TextField
                       required
                       error={isEmpty[0] === true}
-                      onChange={(e) => changeEvent(e,1)}
+                      onChange={(e) => changeEvent(e, 1)}
                       size="small"
                       fullWidth
                       className="input-izquierdo inputs-form-register "
@@ -193,7 +190,7 @@ function Registro() {
                     <TextField
                       required
                       error={isEmpty[2] === true}
-                      onChange={(e) => changeEvent(e,2)}
+                      onChange={(e) => changeEvent(e, 2)}
                       size="small"
                       fullWidth
                       className="inputs-form-register"
@@ -220,7 +217,7 @@ function Registro() {
                     <TextField
                       required
                       error={isEmpty[3] === true}
-                      onChange={(e) => changeEvent(e,3)}
+                      onChange={(e) => changeEvent(e, 3)}
                       size="small"
                       fullWidth
                       className="input-izquierdo  inputs-form-register"
@@ -242,41 +239,39 @@ function Registro() {
                     />
                   </Item>
                   <Item>
-                  <TextField
-
-                    required
-                    error={isEmpty[1] === true}
-                    
-                    // validad email 
-                    onChange={(e) => changeEvent(e,4)}
-                    size="small"
-                    id="userEmail"
-                    fullWidth
-                    className="inputs-form-register"
-                    type="email"
-                    label="Correo electrónico"
-                    name="sEmail"
-                    margin="normal"
-                    placeholder="Correo electrónico"
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment
-                          className="iconos-labels"
-                          position="start"
-                        >
-                          <MarkEmailReadOutlinedIcon />
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
+                    <TextField
+                      required
+                      error={isEmpty[1] === true}
+                      onChange={(e) => changeEvent(e, 4)}
+                      size="small"
+                      id="userEmail"
+                      fullWidth
+                      className="inputs-form-register"
+                      type="email"
+                      label="Correo electrónico"
+                      name="sEmail"
+                      margin="normal"
+                      placeholder="Correo electrónico"
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment
+                            className="iconos-labels"
+                            position="start"
+                          >
+                            <MarkEmailReadOutlinedIcon />
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
+                    {emailError && <p className="error">{emailError}</p>}
                   </Item>
                 </Stack>
                 <Stack direction="row" spacing={2}>
-                    <Item>
+                  <Item>
                     <TextField
                       required
                       error={isEmpty[5] === true}
-                      onChange={(e) => changeEvent(e,5)}
+                      onChange={(e) => changeEvent(e, 5)}
                       fullWidth
                       size="small"
                       className="input-izquierdo inputs-form-register"
@@ -296,36 +291,35 @@ function Registro() {
                         ),
                       }}
                     />
-                    </Item>
-                    <Item>
-                  <TextField
-                    required
-                    error={isEmpty[4] === true}
-                    onChange={(e) => changeEvent(e,6)}
-                    size="small"
-                    fullWidth
-                    className="inputs-form-register"
-                    name="sLogin"
-                    label="Usuario"
-                    type="text"
-                    margin="normal"
-                    placeholder="Nombre de usuario"
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment
-                          className="iconos-labels"
-                          position="start"
-                        >
-                          <CreditScoreOutlinedIcon />
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
-                    </Item>
-                </Stack>                
+                  </Item>
+                  <Item>
+                    <TextField
+                      required
+                      error={isEmpty[4] === true}
+                      onChange={(e) => changeEvent(e, 6)}
+                      size="small"
+                      fullWidth
+                      className="inputs-form-register"
+                      name="sLogin"
+                      label="Usuario"
+                      type="text"
+                      margin="normal"
+                      placeholder="Nombre de usuario"
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment
+                            className="iconos-labels"
+                            position="start"
+                          >
+                            <CreditScoreOutlinedIcon />
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
+                  </Item>
+                </Stack>
                 <LoadingButton
-
-                endIcon={<SendIcon />}
+                  endIcon={<SendIcon />}
                   onClick={registrar}
                   className="btn-create-account"
                   fullWidth
