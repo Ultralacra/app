@@ -13,37 +13,52 @@ import { LoadingButton } from '@mui/lab';
 import Axios from 'axios';
 import LoginIcon from '@mui/icons-material/Login';
 import { Typography } from "@mui/material";
-
+import Swal from 'sweetalert2';
 
 export default function SignInSide() {
 
-
-
-
-  
   const theme = createTheme();
   const [loading, setLoading] = useState(false);
 
 
   const handleSubmit = (event) => {
+
+     //campos vacios empty fields
+     
+
+
+
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     setLoading(true);
     
     Axios.post('https://valink-pay-api.vercel.app/login', {
-        
+
         login: data.get("username"),
         password: data.get("password"),
     })
     .then(function (response) {
       console.warn(response);
-      if(response.data.status !== 'success') return alert(response.data.message.message);
-      alert('Datos Correctos');
+      if(response.data.status !== 'success')
+      return Swal.fire({
+
+        toast: true,
+        position: 'top-end',
+        showCloseButton : true,
+        icon: 'error',
+        text: 'Usuario o contraseña incorrectos',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+
+        })
+        setLoading(false);
         localStorage.setItem("auth", JSON.stringify("yes"));
         window.location.href = "/dashboard-users";  
     })
     .catch(function (error) {
       console.warn(error);
+
     })
     .then(function () { 
       setLoading(false);
@@ -140,7 +155,7 @@ export default function SignInSide() {
                 control={<Checkbox value="remember" color="primary" />}
                 label="Recordar contraseña"
               />
-              <Link to="/"
+              <Link to="recovery-account"
               className="text-lost-password">
                     ¿Olvidaste tu contraseña?
                   </Link>

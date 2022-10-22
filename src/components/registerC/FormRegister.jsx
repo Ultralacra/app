@@ -93,10 +93,22 @@ function Registro() {
         iProfileID: iProfileID,
       })
       .then((response) => {
-        if (response.status === 200) {
-          setModal(true);
+        console.warn(response.data.error);
+        if (response.data.error === true) {
+          swal
+            .fire({
+              toast: true,
+              position: "top-end",
+              icon: "error",
+              title: "Oops...",
+              text: "El correo electrónico ya existe",
+              showConfirmButton: false,
+              timer: 1500,
+              timerProgressBar: true,
+            })
+
         } else {
-          alert("Error al registrar usuario");
+          setModal(true);
         }
       });
   }
