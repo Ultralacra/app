@@ -73,8 +73,7 @@ function Registro() {
           toast: true,
           position: "top-end",
           icon : "error",
-          title: "Oops...",
-          text: "El correo electrónico no es válido",
+          text: "Por favor ingrese un correo válido",
           showConfirmButton: false,
           timer: 1500,
           timerProgressBar: true,
@@ -94,14 +93,13 @@ function Registro() {
       })
       .then((response) => {
         console.warn(response.data.error);
-        if (response.data.error === true) {
+        if (response.data.status === "fail") {
           swal
             .fire({
               toast: true,
               position: "top-end",
               icon: "error",
-              title: "Oops...",
-              text: "El correo electrónico ya existe",
+              text: "Correo electrónico o usuario ya registrado",
               showConfirmButton: false,
               timer: 1500,
               timerProgressBar: true,
@@ -275,7 +273,7 @@ function Registro() {
                         ),
                       }}
                     />
-                    {emailError && <p className="error">{emailError}</p>}
+                    {/* {emailError && <p className="error">{emailError}</p>} */}
                   </Item>
                 </Stack>
                 <Stack direction="row" spacing={2}>

@@ -29,7 +29,7 @@ const RecoveryAccount = () => {
     code: "",
     new_password: "",
   });
-  const [loading, setLoading] = useState(false);
+  /* const [loading, setLoading] = useState(false); */
   const [modal, setModal] = useState(false);
 
   const handleRecoveryPassword = (e) => {
@@ -48,6 +48,10 @@ const RecoveryAccount = () => {
   };
 
   async function enviarCorreo() {
+
+
+
+
     //campos vacios empty fields
 
     if (
@@ -69,7 +73,7 @@ const RecoveryAccount = () => {
       return;
     }
 
-    setLoading(true);
+    /* setLoading(true); */
 
     if (
       body.login === "" ||
@@ -85,57 +89,39 @@ const RecoveryAccount = () => {
         email: body.email,
         new_password: body.new_password,
         code: body.code,
-        
-
+      
       })
       .then((response) => {
         console.log(response);
-        console.log(body);
-        if (response.data.message === "Codigo de verificación invalido") {
+        if (response.data.status === "success") {
           Swal.fire({
             toast: true,
             position: "top-end",
-            text: "Código de verificación invalido",
             icon: "error",
+            text: "contraseña actualizada exitosamente",
             showConfirmButton: false,
-            timer: 2500,
-            timerProgressBar: true,
-          });
-          setLoading(false);
-        } else if (
-          response.data.message === "Usuario y/o email no registrado"
-        ) {
-          Swal.fire({
-            toast: true,
-            position: "top-end",
-            text: "Usuario y/o email no registrado",
-            icon: "error",
-            showConfirmButton: false,
-            timer: 2500,
+            timer: 3000,
             timerProgressBar: true,
           });
 
-          setLoading(false);
         } else {
           Swal.fire({
             toast: true,
             position: "top-end",
-            text: "Contraseña cambiada con éxito",
-            icon: "success",
+            icon: "error",
+            text: "Error al actualizar la contraseña",
             showConfirmButton: false,
-            timer: 2500,
+            timer: 3000,
             timerProgressBar: true,
           });
-          setLoading(false);
-          setModal(true);
         }
       })
-
       .catch((error) => {
-        console.warn(error);
-        setLoading(false);
+        console.log(error);
+
       });
   }
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -277,7 +263,7 @@ const RecoveryAccount = () => {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
-                loading={loading}
+                /* loading={loading} */
                 loadingPosition="end"
               >
                 Enviar

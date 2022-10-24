@@ -14,6 +14,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useState } from "react";
 import { LoadingButton } from '@mui/lab';
 import Swal from "sweetalert2";
+import validator from "validator";
 import axios from "axios";
 
 
@@ -39,13 +40,13 @@ const handleRecoveryPassword = e => {
 
   async function enviarCorreo() {
 
+
   //campos vacios empty fields
     if (body.login === "" || body.email === "") {
         Swal.fire({
             toast: true,
             position: "top-end",
             icon: "info",
-            title: "Oops...",
             text: "Todos los campos son obligatorios",
             showConfirmButton: false,
             timer: 3000,
@@ -63,7 +64,7 @@ const handleRecoveryPassword = e => {
           email: body.email,
 
     }).then((response) => {
-      if (response.data.message === "Usuario y/o email no registrado") {
+      if (response.data.status === "fail") {
         Swal.fire({
             toast: true,
             position: 'top-end',
