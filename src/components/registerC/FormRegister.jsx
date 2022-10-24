@@ -24,8 +24,6 @@ import validator from "validator";
 import swal from "sweetalert2";
 import axios from "axios";
 
-
-
 const theme = createTheme();
 
 function Registro() {
@@ -40,10 +38,6 @@ function Registro() {
   const [modal, setModal] = useState(false);
   const [modalEmpty, setModalEmpty] = useState(false);
   const [emailError, setEmailError] = useState("");
-
-
-
-
 
   async function registrar() {
     setModalEmpty(false);
@@ -68,16 +62,15 @@ function Registro() {
     }
 
     if (!validator.isEmail(sEmail)) {
-      swal 
-        .fire({
-          toast: true,
-          position: "top-end",
-          icon : "error",
-          text: "Por favor ingrese un correo válido",
-          showConfirmButton: false,
-          timer: 1500,
-          timerProgressBar: true,
-        })
+      swal.fire({
+        toast: true,
+        position: "top-end",
+        icon: "error",
+        text: "Por favor ingrese un correo válido",
+        showConfirmButton: false,
+        timer: 1500,
+        timerProgressBar: true,
+      });
       return;
     }
 
@@ -94,17 +87,15 @@ function Registro() {
       .then((response) => {
         console.warn(response.data.error);
         if (response.data.status === "fail") {
-          swal
-            .fire({
-              toast: true,
-              position: "top-end",
-              icon: "error",
-              text: "Correo electrónico o usuario ya registrado",
-              showConfirmButton: false,
-              timer: 1500,
-              timerProgressBar: true,
-            })
-
+          swal.fire({
+            toast: true,
+            position: "top-end",
+            icon: "error",
+            text: "Correo electrónico o usuario ya registrado",
+            showConfirmButton: false,
+            timer: 1500,
+            timerProgressBar: true,
+          });
         } else {
           setModal(true);
         }
@@ -169,8 +160,7 @@ function Registro() {
                 Completa los datos solicitados
               </Typography>
               <Box component="form" noValidate sx={{ mt: 1 }}>
-                <Stack direction="row" spacing={2}
-                >
+                <Stack direction="row" spacing={2}>
                   <Item>
                     <TextField
                       required

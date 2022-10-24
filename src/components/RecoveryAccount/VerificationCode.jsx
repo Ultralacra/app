@@ -20,6 +20,7 @@ import Stack from "@mui/material/Stack";
 import Item from "@mui/material/Grid";
 import axios from "axios";
 import ModalRecoveryPassword from "../modals/ModalRecoveryPassword";
+import validator from "validator";
 
 const theme = createTheme();
 const RecoveryAccount = () => {
@@ -50,10 +51,6 @@ const RecoveryAccount = () => {
   async function enviarCorreo() {
 
 
-
-
-    //campos vacios empty fields
-
     if (
       body.login === "" ||
       body.email === "" ||
@@ -73,7 +70,20 @@ const RecoveryAccount = () => {
       return;
     }
 
-    /* setLoading(true); */
+    // validar correo electronico
+    if (!validator.isEmail(body.email)) {
+      Swal.fire({
+        toast: true,
+        position: "top-end",
+        icon: "error",
+        showConfirmButton: false,
+        timer: 1500,
+        text: "Por favor ingrese un correo válido",
+      });
+      return;
+    }
+
+    //Empty fields
 
     if (
       body.login === "" ||
@@ -92,33 +102,25 @@ const RecoveryAccount = () => {
       
       })
       .then((response) => {
+        console.log(body)
         console.log(response);
-        if (response.data.status === "success") {
-          Swal.fire({
-            toast: true,
-            position: "top-end",
-            icon: "error",
-            text: "contraseña actualizada exitosamente",
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-          });
 
-        } else {
-          Swal.fire({
-            toast: true,
-            position: "top-end",
-            icon: "error",
-            text: "Error al actualizar la contraseña",
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-          });
-        }
+        let icon = response.data.status === 'fail' ? 'error':'success';
+
+        Swal.fire({
+          toast: true,
+          position: "top-end",
+          icon: icon,
+          text: response.data.message,
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+        });
+
+        if(response.data.status === 'success') return setModal(true);                
       })
       .catch((error) => {
         console.log(error);
-
       });
   }
 
