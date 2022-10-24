@@ -94,7 +94,7 @@ const RecoveryAccount = () => {
     )
       console.warn(body);
     axios
-      .get("https://valink-pay-api.vercel.app/pwd/verifyCode", {
+      .post("https://valink-pay-api.vercel.app/pwd/verifyCode", {
 
         login: body.login,
         email: body.email,
