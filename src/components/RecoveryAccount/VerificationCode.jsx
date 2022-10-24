@@ -71,6 +71,7 @@ const RecoveryAccount = () => {
     }
 
     // validar correo electronico
+    
     if (!validator.isEmail(body.email)) {
       Swal.fire({
         toast: true,

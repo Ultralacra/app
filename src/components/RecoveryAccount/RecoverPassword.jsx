@@ -55,6 +55,19 @@ const handleRecoveryPassword = e => {
         return;
     }
 
+
+    if (!validator.isEmail(body.email)) {
+      Swal.fire({
+        toast: true,
+        position: "top-end",
+        icon: "error",
+        showConfirmButton: false,
+        timer: 1500,
+        text: "Por favor ingrese un correo válido",
+      });
+      return;
+    }
+
     setLoading(true);
     if (body.login === '' || body.password === '')
     console.warn(body);
