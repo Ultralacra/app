@@ -4,7 +4,6 @@ import Grid from "@mui/material/Unstable_Grid2";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import LoadingButton from "@mui/lab/LoadingButton";
 import SendIcon from "@mui/icons-material/Send";
 
@@ -51,7 +50,6 @@ export default function InfoValinkPay() {
             >
               Realiza cobros en línea a través de Internet desde cualquier lugar
               en que te encuentres y a cualquier hora.
-
              <br></br> 
              <br></br> 
             Comparte a tus clientes
@@ -62,16 +60,15 @@ export default function InfoValinkPay() {
               Recibe pagos con Crédito, Débito y Prepago 
               <br></br>
               <br></br>
-              Paga una comisión por cada venta.{" "}
-
+              Paga una comisión por cada venta.
             </Typography>
             <br></br><br></br>
             <LoadingButton
-
                 className="btn-forms"
                 align="left"
                 type="submit"
                 variant="contained"
+                disabled
                 size="large"
                 endIcon={<SendIcon />}
                 >

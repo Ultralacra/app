@@ -19,6 +19,7 @@ import Swal from "sweetalert2";
 import Stack from "@mui/material/Stack";
 import Item from "@mui/material/Grid";
 import axios from "axios";
+import SendIcon from "@mui/icons-material/Send";
 import ModalRecoveryPassword from "../modals/ModalRecoveryPassword";
 import validator from "validator";
 
@@ -255,15 +256,16 @@ const RecoveryAccount = () => {
                 </Item>
               </Stack>
 
-              <Link className="back-session" to="/" variant="body2">
+              <Link className="text-lost-password" to="/" variant="body2">
                 <KeyboardArrowLeftIcon className="icons-back icons-form" />{" "}
                 Atrás para iniciar sesión
               </Link>
               <LoadingButton
                 size="small"
+                className="btn-login"
                 onClick={enviarCorreo}
-                className="boton-enviar"
                 fullWidth
+                endIcon={<SendIcon />}
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
                 /* loading={loading} */
@@ -278,7 +280,7 @@ const RecoveryAccount = () => {
                 sx={{ mt: 4 }}
               >
                 ¿Nuevo en nuestra plataforma?{" "}
-                <Link className="texto-1" to="/register-page" variant="body2">
+                <Link className="text-lost-password" to="/register-page" variant="body2">
                   Crear una cuenta
                 </Link>
               </Typography>

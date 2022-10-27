@@ -16,6 +16,7 @@ import { LoadingButton } from '@mui/lab';
 import Swal from "sweetalert2";
 import validator from "validator";
 import axios from "axios";
+import SendIcon from "@mui/icons-material/Send";
 
 
 const theme = createTheme();
@@ -129,7 +130,9 @@ const handleRecoveryPassword = e => {
         />
         
 
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square
+        
+        >
 
           <Box
           className="box-login-form"
@@ -153,7 +156,7 @@ const handleRecoveryPassword = e => {
             </Typography>
 
             <Typography className="texto-recuperar" sx={{ mt: 4 }}>
-              Ingresa tu dirección de correo electrónico y te enviamos un link
+              Ingresa tu dirección de correo electrónico y te enviamos un código
               para reestablecer tu contraseña
             </Typography>
 
@@ -194,18 +197,19 @@ const handleRecoveryPassword = e => {
                   ),
                 }}
               />
-              <Link className="back-session" to="/" variant="body2">
+              <Link className="text-lost-password" to="/" variant="body2">
                 <KeyboardArrowLeftIcon className="icons-back icons-form" />{" "}
                 Atrás para iniciar sesión
               </Link>
               <LoadingButton
                 size="small"
                 onClick={enviarCorreo}	
-                className="boton-enviar"
+                className="btn-login"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
                 loading={loading}
+                endIcon={<SendIcon />}
                 loadingPosition="end"
               >
                 Enviar
@@ -217,7 +221,7 @@ const handleRecoveryPassword = e => {
                 sx={{ mt: 4 }}
               >
                 ¿Nuevo en nuestra plataforma?{" "}
-                <Link className="texto-1" to="/register-page" variant="body2">
+                <Link className="text-lost-password" to="/register-page" variant="body2">
                   Crear una cuenta
                 </Link>
               </Typography>

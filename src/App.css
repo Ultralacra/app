@@ -97,6 +97,13 @@
 
 /***** REGISTER FORM *****/
 
+.caja-register{
+  padding: 5px;
+  box-shadow: 0 0 10px #ccc;
+  border-radius: 10px;
+}
+
+
 .btn-create-account{
   background-color: #006D8E !important;
   color:white  !important;
