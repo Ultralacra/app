@@ -175,7 +175,7 @@ export default function SignInSide() {
         </Grid>
       </Grid>
       <Stack>
-        <InfoValinkPay />
+        {/* <InfoValinkPay /> */}
       </Stack>
     </ThemeProvider>
   );
