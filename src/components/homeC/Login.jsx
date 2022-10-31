@@ -15,7 +15,7 @@ import Axios from "axios";
 import LoginIcon from "@mui/icons-material/Login";
 import { Typography } from "@mui/material";
 import Swal from "sweetalert2";
-import InfoValinkPay from "./InfoValinkPay";
+
 
 export default function SignInSide() {
   const theme = createTheme();
@@ -175,7 +175,6 @@ export default function SignInSide() {
         </Grid>
       </Grid>
       <Stack>
-        {/* <InfoValinkPay /> */}
       </Stack>
     </ThemeProvider>
   );

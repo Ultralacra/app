@@ -1,0 +1,89 @@
+.box-shadow{
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+.css-19kzrtu{
+    padding: 0px !important;
+}
+.titulo h1{
+    font-size: 3rem;
+    font-weight: 900;
+    color:#2d3338;
+    text-align: left;
+}
+
+.titulo-2 h1{
+    font-size: 2rem !important;
+    font-weight: 900 !important;
+    color:#2d3338 !important;
+    text-align: center !important;
+}
+.subtitulo p{
+    font-size: 1rem;
+    font-weight: 400;
+    color: #2d3338;
+    text-align: left;
+}
+.btn-home-saber-mas{
+    display: flex !important;
+    align-items: left;
+    padding: 10px !important;
+
+}
+.grid-box{
+    display: grid;
+    align-items: center !important;
+}
+
+.btn-contacten{
+    display: flex !important;
+    align-items: left;
+    padding: 10px !important;
+    background-color: #2d3338;
+    color: #006d8e !important;
+    border-radius: 5px;
+    border-color: #006d8e !important;
+    font-size: 1rem;
+    font-weight: 400;
+    text-align: left;
+    transition: 0.3s;
+}
+
+.btn-contratar{
+    display: flex !important;
+    align-items: left;
+    padding: 10px !important;
+    background-color: #006d8e !important;
+    color: #fff;
+    border-radius: 5px;
+    border: none;
+    font-size: 1rem;
+    font-weight: 400;
+    text-align: left;
+    transition: 0.3s;
+}
+.btn-contratar:hover{
+    background-color: #ffb200 !important;
+    color: black;
+}
+.css-10hburv-MuiTypography-root{
+    font-size: 1.25rem !important;
+    font-weight: bold !important;
+    color: #202830;
+    font-family: 'Roboto', sans-serif;
+}
+
+.css-83ijpv-MuiTypography-root{
+    font-size: 0.9rem !important;
+    font-weight: 400 !important;
+    color: #202830;
+    font-family: 'Roboto', sans-serif;
+}
+
+.css-2s90m6-MuiAvatar-root{
+    background-color: #ffb200 !important;
+}
+
+.css-i4bv87-MuiSvgIcon-root{
+    color:White !important;
+}

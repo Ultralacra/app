@@ -8,7 +8,7 @@ import RegisterPage from './pages/RegisterPage';
 import RecoveryPasswordPage from './pages/RecoveryPasswordPage';
 import NotFoundPage from './pages/NotFoundPage';
 import VerificationCodePage from './pages/VerificationCodePage';
-
+import Home from './pages/Home';
 
 function App() {
   return (
@@ -17,12 +17,13 @@ function App() {
 
  {/* rutas publicas  */}
 
- <BrowserRouter>
-       <Routes>
-            <Route path="/" element={<HomePage/>} /> 
-            <Route path="recovery-account" element={<RecoveryPasswordPage/>} /> 
-            <Route path="complete-recovery-password" element={<VerificationCodePage/>} /> 
+<BrowserRouter>
+    <Routes>
+            <Route path="/" element={<Home/>} /> 
+            <Route path="/recovery-account" element={<RecoveryPasswordPage/>} /> 
+            <Route path="/complete-recovery-password" element={<VerificationCodePage/>} /> 
             <Route path="/register-page" element={<RegisterPage/>}/>
+            <Route path="/Login" element={<HomePage/>}/>
             <Route path="*" element={<NotFoundPage/>}/> 
         </Routes> 
     </BrowserRouter>  
@@ -35,7 +36,7 @@ function App() {
         </Routes>
         </BrowserRouter>
 
-     </div>
+  </div>
   );
 }
 export default App;
