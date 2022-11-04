@@ -71,14 +71,6 @@
     background-color: #ffb200 !important;
     color: black;
 }
-
-.css-10hburv-MuiTypography-root {
-    font-size: 1.25rem !important;
-    font-weight: bold !important;
-    color: #202830;
-    font-family: 'Roboto', sans-serif;
-}
-
 .css-83ijpv-MuiTypography-root {
     font-size: 0.9rem !important;
     font-weight: 400 !important;
@@ -104,8 +96,7 @@
 
 .container-2 {
     background-color: #F9FBFE !important;
-    text-align: right !important;
-    display: flex !;
+    display: flex none !important;
 }
 .grid-2 {
     background-color: #F9FBFE !important;
@@ -184,20 +175,42 @@
     border-radius: 10px !important;
 }
 
-.icon-services-1 {
+
+.espaciador-azul-4 {
+    margin-top: 1rem !important;
+    background-color: #ffb200 !important;
+    width: 5rem !important;
+    margin: auto;
+    height: 5px !important;
+    border-radius: 10px !important;
+}
+
+
+.icons-services-1 {
     font-size: 2rem !important;
-    color: #006d8e !important;
-    margin-right: 0.5rem !important;
+    color: white !important;
 }
 
 
-.css-1p823my-MuiListItem-root{
-    padding-top: 0px !important;
+
+.css-2s90m6-MuiAvatar-root{
+    background-color: #ffb200 !important;
+}
+.list-2 li{
+    align-items: start !important;
+margin: 0px !important;
+
+}
+
+.text-list {
+    font-size: 1rem !important;
+    font-weight: 400 !important;
+    color: #2d3338 !important;
+    text-align: left !important;
+    margin-top: 0rem !important;
+    margin-bottom: 0.5rem !important;
+}
+.box-btn-info{
     display: flex !important;
-    align-items: flex-start !important;
-}
-
-.css-konndc-MuiListItemText-root{
-    margin-top: 0px !important;
-    margin-bottom: 0px !important;
+    justify-content: center !important;
 }

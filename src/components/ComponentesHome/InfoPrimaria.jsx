@@ -18,6 +18,8 @@ import StorefrontIcon from "@mui/icons-material/Storefront";
 import SellIcon from "@mui/icons-material/Sell";
 import PaymentIcon from "@mui/icons-material/Payment";
 import TabsHome from "../Tabs/TabsHome";
+import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
+import HistoryEduIcon from '@mui/icons-material/HistoryEdu';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -38,9 +40,7 @@ export default function RowAndColumnSpacing() {
           columns={{ xs: 4, sm: 8, md: 12 }}
         >
           <Grid className="grid-box" xs={6}>
-            <Item elevation={0}
-            
-            >
+            <Item elevation={0}>
               <Typography className="titulo">
                 <h1>Te ayudamos a vender por internet.</h1>
               </Typography>
@@ -95,9 +95,7 @@ export default function RowAndColumnSpacing() {
                     justifyContent="center"
                     alignItems="center"
                   >
-                    <Item  elevation={0} className="container-2"
-                    
-                    >
+                    <Item elevation={0} className="container-2">
                       <img
                         src="https://publico.transbank.cl/documents/20129/0/thumb-quees.png/ddc97b19-c80d-fef2-9bac-ba62bdc24940?t=1662085910717&download=true"
                         alt="logo"
@@ -108,54 +106,119 @@ export default function RowAndColumnSpacing() {
                   </Grid>
                   <Grid item xs={6}>
                     <Item elevation={0} className="container-2">
-                      <List
-                         className="container-2 info-list-vp"
+                      <List 
+                        
+                        
+                        className="container-2  list-2"
                         sx={{
                           width: "100%",
-                          
-                          bgcolor: "background.paper",
+                          mt: 6,
+                          ml: 2,
                         }}
                       >
-                        <ListItem className="list-items-3" >
-                          <ListItemAvatar>
+                        <ListItem
+                        >
+                          <ListItemAvatar className="icon-avatar">
                             <Avatar>
                               <PaymentIcon className="icons-services-1" />
                             </Avatar>
                           </ListItemAvatar>
                           <ListItemText
-                          className=""
-                            primary="Paga solo por lo que vendes."
-                            secondary="No pagarás mensualidades fijas, solo las comisiones asociadas a cada venta."
+                          className="text-list"
+                            primary={
+                              <Typography
+                                sx={{
+                                  fontWeight: "bold",
+                                  fontSize: "1.2rem",
+                                  color: "#000",
+                                }}
+                                
+                              >
+                                Transacciones seguras
+                              </Typography>
+                            }
+                            secondary={
+                              <Typography
+                                sx={{ fontSize: "1rem", color: "#000" }}
+                               
+                              >
+                                No pagarás mensualidades fijas, solo las
+                                comisiones asociadas a cada venta.
+                              </Typography>
+                            }
                           />
                         </ListItem>
                         <ListItem>
-                          <ListItemAvatar>
+                          <ListItemAvatar className="icon-avatar">
                             <Avatar>
                               <StorefrontIcon className="icons-services-1" />
                             </Avatar>
                           </ListItemAvatar>
                           <ListItemText
-                            primary="Integra en tu sitio web."
-                            secondary="Integra la pasarela de pago a tu proceso de compra en tu sitio web. ¡Puedes optar por integrarlo por tu cuenta o con nuestro apoyo!"
+                          className="text-list"
+                            primary={
+                              <Typography
+                                sx={{
+                                  fontWeight: "bold",
+                                  fontSize: "1.2rem",
+                                  color: "#000",
+                                }}
+                                
+                              >
+                                Integra en tu sitio web
+                              </Typography>
+                            }
+                            secondary={
+                              <Typography
+                                sx={{ fontSize: "1rem", color: "#000" }}
+                              
+                              >
+                                Integra la pasarela de pago a tu proceso de
+                                compra en tu sitio web. ¡Puedes optar por
+                                integrarlo por tu cuenta o con nuestro apoyo!
+                              </Typography>
+                            }
                           />
                         </ListItem>
                         <ListItem>
-                          <ListItemAvatar>
+                          <ListItemAvatar className="icon-avatar">
                             <Avatar>
                               <SellIcon className="icons-services-1" />
                             </Avatar>
                           </ListItemAvatar>
                           <ListItemText
-                            primary="Vende en línea con la seguridad de ValinkPay."
-                            secondary="Ofrece a tus clientes transacciones seguras y protégete de fraudes con nuestra tecnología."
+                          className="text-list"
+                            primary={
+                              <Typography
+                                sx={{
+                                  fontWeight: "bold",
+                                  fontSize: "1.2rem",
+                                  color: "#000",
+                                }}
+                              
+                              >
+                                Vende en línea con la seguridad de ValinkPay.
+                              </Typography>
+                            }
+                            secondary={
+                              <Typography
+                                sx={{ fontSize: "1rem", color: "#000" }}
+                                className="text-list"
+                              >
+                                Ofrece a tus clientes transacciones seguras y
+                                protégete de fraudes con nuestra tecnología.
+                              </Typography>
+                            }
                           />
                         </ListItem>
                       </List>
                       <Stack
+                      className="box-btn-info"
                         direction={{ xs: "column", sm: "row" }}
-                        spacing={{ xs: 1, sm: 2, md: 4 }}
+                        spacing={{ xs: 1, sm: 2, md: 4,  }}
                       >
-                        <Item elevation={0} className="container-2">
+                        <Item elevation={0} className="container-2"
+                        >
                           <LoadingButton
                             variant="outlined"
                             className="btn-contacten"
@@ -164,7 +227,9 @@ export default function RowAndColumnSpacing() {
                             Quiero que me contacten
                           </LoadingButton>
                         </Item>
-                        <Item elevation={0} className="container-2">
+                        
+                        <Item elevation={0} className="container-2"
+                        >
                           <LoadingButton
                             fullWidth
                             className="btn-contratar"
@@ -237,7 +302,10 @@ export default function RowAndColumnSpacing() {
                   Recibe pagos desde tu sitio web con el respaldo de seguridad
                   de ValinkPay.
                 </h1>
-                <Typography textAlign="left">
+                <Typography textAlign="left"
+                fontweight="bold"
+                color="#000"
+                >
                   <p>
                     ¡Olvídate de las transferencias! Tus clientes podrán optar a
                     la posibilidad de pagar desde tu sitio web con tarjetas de
@@ -270,23 +338,16 @@ export default function RowAndColumnSpacing() {
               />
               <Typography
                 sx={{
+                  mt: 2,
                   color: "#ffb200",
-                  fontSize: "2rem",
+                  fontSize: "1.5rem",
                   fontWeight: "bold",
                 }}
               >
                 Solo pagas comision <br></br> por cada venta
               </Typography>
-              <Divider
-                sx={{
-                  margin: "auto",
-                  borderRadius: "4px",
-                  width: "20%",
-                  marginBottom: "1rem",
-                  marginTop: "1rem",
-                  color: "black",
-                }}
-              />
+
+              <div className="espaciador-azul-4"></div>
               <div>
                 <ul className="list-info">
                   <li>
@@ -319,6 +380,7 @@ export default function RowAndColumnSpacing() {
                 fullWidth
                 className="btn-contratar"
                 variant="contained"
+                endIcon={<PhoneIphoneIcon />}
               >
                 Quiero que me llamen
               </LoadingButton>
@@ -327,6 +389,7 @@ export default function RowAndColumnSpacing() {
                 fullWidth
                 className="btn-llamar"
                 variant="contained"
+                endIcon={<HistoryEduIcon />}
               >
                 Contratar ValinkPay
               </LoadingButton>
