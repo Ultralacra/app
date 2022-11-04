@@ -95,7 +95,9 @@ export default function RowAndColumnSpacing() {
                     justifyContent="center"
                     alignItems="center"
                   >
-                    <Item elevation={0} className="container-2">
+                    <Item  elevation={0} className="container-2"
+                    
+                    >
                       <img
                         src="https://publico.transbank.cl/documents/20129/0/thumb-quees.png/ddc97b19-c80d-fef2-9bac-ba62bdc24940?t=1662085910717&download=true"
                         alt="logo"
@@ -107,20 +109,21 @@ export default function RowAndColumnSpacing() {
                   <Grid item xs={6}>
                     <Item elevation={0} className="container-2">
                       <List
-                        className="container-2"
+                         className="container-2 info-list-vp"
                         sx={{
                           width: "100%",
-                          maxWidth: 360,
+                          
                           bgcolor: "background.paper",
                         }}
                       >
-                        <ListItem>
+                        <ListItem className="list-items-3" >
                           <ListItemAvatar>
                             <Avatar>
                               <PaymentIcon className="icons-services-1" />
                             </Avatar>
                           </ListItemAvatar>
                           <ListItemText
+                          className=""
                             primary="Paga solo por lo que vendes."
                             secondary="No pagarás mensualidades fijas, solo las comisiones asociadas a cada venta."
                           />
