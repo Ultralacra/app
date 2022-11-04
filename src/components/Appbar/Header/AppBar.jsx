@@ -1,4 +1,6 @@
 import * as React from "react";
+import "./AppBar.css";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -14,7 +16,6 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
-import "./AppBar.css";
 
 const drawerWidth = 240;
 const navItems = [
@@ -35,9 +36,14 @@ function DrawerAppBar(props) {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        VALINKPAY
+        <img
+        width="50%"
+        src="http://valinkgroup.com/wp-content/uploads/2022/05/Negro.png" 
+        alt="logo" 
+        href="/"
+        />
+        
       </Typography>
-      <Divider />
       <List>
         {navItems.map((item) => (
           <ListItem key={item}>
@@ -48,33 +54,39 @@ function DrawerAppBar(props) {
         ))}
       </List>
       <ListItem>
-            <ListItemButton>
-              <ListItemText>
-                <Button>
-                  Iniciar Sesión
-                </Button>
-              </ListItemText>
-          
-            </ListItemButton>
-          </ListItem>
-          <ListItem>
-            <ListItemButton>
-              <ListItemText>
-                <Button variant="contained">
-                 Acceso Clientes
-                </Button>
-              </ListItemText>
-            </ListItemButton>
-          </ListItem>
+        <ListItemButton>
+          <ListItemText>
+            <Link
+            className="btn-movil-login" 
+            to="/login"
+            variant="contained"
+            fullWidth
+            >Acceso clientes</Link>
+          </ListItemText>
+        </ListItemButton>
+      </ListItem>
+      <ListItem>
+        <ListItemButton>
+          <ListItemText>
+            <Link
+            className="btn-movil-registro"
+            to="/register-page"
+            fullWidth
+            variant="contained">Registro</Link>
+          </ListItemText>
+        </ListItemButton>
+      </ListItem>
     </Box>
-    
   );
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box className="test">
+    <>
+  
+    <Box>
+    
       <AppBar
         component="nav"
         sx={{
@@ -85,7 +97,12 @@ function DrawerAppBar(props) {
           overflow: "hidden",
         }}
       >
+        <div className="franja-up">
+      <div className="franja-up calipso" ></div>
+      <div className="franja-up rojo" ></div>
+    </div>
         <Toolbar>
+          
           <IconButton
             aria-label="open drawer"
             edge="start"
@@ -98,6 +115,7 @@ function DrawerAppBar(props) {
             src="http://valinkgroup.com/wp-content/uploads/2022/05/Negro.png"
             alt="logo"
             width="150"
+            href="/"
           />
           <Box
             sx={{ display: { xs: "none", sm: "block" } }}
@@ -109,23 +127,15 @@ function DrawerAppBar(props) {
                 sx={{
                   color: "black",
                   fontSize: "0.9rem",
-                  fontWeight: "100",
                   fontFamily: "roboto",
                   textTransform: "none",
-                  margin: "0 1rem",
-                  "&:hover": {
-                    bgcolor: "#006D8E",
-                    color: "white",
-                  },
-                }}
-              >
+                  fontWeight: "bold",
+                  margin: "0.1rem",
+                }}>
                 {item}
               </Button>
             ))}
-
           </Box>
-      
-
         </Toolbar>
       </AppBar>
       <Box component="nav">
@@ -152,6 +162,7 @@ function DrawerAppBar(props) {
         <Toolbar />
       </Box>
     </Box>
+    </>
   );
 }
 

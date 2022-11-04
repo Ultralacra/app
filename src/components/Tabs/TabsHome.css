@@ -2,11 +2,18 @@
     text-align: left !important;
     font-size: 1.125rem !important;
     color: #2d3338 !important;
-    content: "\ea63" !important;
-    list-style: none !important;
-    margin-top: 50px !important;
+    margin-top: 80px;
 }
-
 .css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected {
     color: #006d8e !important;
+}
+.tabs-info li{
+    margin-bottom: 50px;
+    list-style: none !important;
+}
+.icono-check-1{
+    color: #006d8e !important;
+    font-size: 1.5rem !important;
+    margin-right: 0.5rem !important;
+    ;
 }

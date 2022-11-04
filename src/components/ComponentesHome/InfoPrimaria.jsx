@@ -2,8 +2,8 @@ import * as React from "react";
 import "./InfoPrimaria.css";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
-import Box from "@mui/material/Box";
 import { Button, CssBaseline, Typography } from "@mui/material";
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
@@ -82,25 +82,23 @@ export default function RowAndColumnSpacing() {
                     crédito de manera eficaz y segura.
                   </p>
                 </Typography>
-                <Divider
-                  variant="contained"
-                  sx={{
-                    border: "1px solid #000",
-                    borderRadius: "4px",
-                    width: "20%",
-                    margin: "auto",
-                    marginBottom: "5rem",
-                    marginTop: "2rem",
-                    color: "black",
-                  }}
-                />
+
+                <div className="espaciador-azul"></div>
                 <Grid container columns={{ xs: 4, sm: 8, md: 12 }}>
-                  <Grid item xs={6}>
-                    <Item elevation={0} className="container-2">
+                  <Grid item xs={6}
+                   
+                   direction="row"
+                   justifyContent="center"
+                   alignItems="center"
+                  >
+                    <Item 
+                    elevation={0} 
+                    className="container-2">
                       <img
                         src="https://publico.transbank.cl/documents/20129/0/thumb-quees.png/ddc97b19-c80d-fef2-9bac-ba62bdc24940?t=1662085910717&download=true"
                         alt="logo"
                         width="60%"
+                        alignItems="right"
                       />
                     </Item>
                   </Grid>
@@ -117,7 +115,7 @@ export default function RowAndColumnSpacing() {
                         <ListItem>
                           <ListItemAvatar>
                             <Avatar>
-                              <PaymentIcon />
+                              <PaymentIcon className="icons-services-1" />
                             </Avatar>
                           </ListItemAvatar>
                           <ListItemText
@@ -128,7 +126,7 @@ export default function RowAndColumnSpacing() {
                         <ListItem>
                           <ListItemAvatar>
                             <Avatar>
-                              <StorefrontIcon />
+                              <StorefrontIcon className="icons-services-1" />
                             </Avatar>
                           </ListItemAvatar>
                           <ListItemText
@@ -139,7 +137,7 @@ export default function RowAndColumnSpacing() {
                         <ListItem>
                           <ListItemAvatar>
                             <Avatar>
-                              <SellIcon />
+                              <SellIcon className="icons-services-1" />
                             </Avatar>
                           </ListItemAvatar>
                           <ListItemText
@@ -195,16 +193,7 @@ export default function RowAndColumnSpacing() {
             <Item elevation={0}>
               <Typography className="titulo-3">
                 <h1>¿Qué beneficios tiene ValinkPay para mí y mis clientes?</h1>
-                <Divider
-                  sx={{
-                    border: "1px solid #000",
-                    borderRadius: "4px",
-                    width: "20%",
-                    marginBottom: "5rem",
-                    marginTop: "2rem",
-                    color: "black",
-                  }}
-                />
+                <div className="espaciador-azul-2"></div>
                 <img
                   src="https://publico.transbank.cl/documents/20129/0/Ilustracion+04+%281%29.webp/180198e7-2c59-cbb5-a9db-204e4b74a873?t=1661555290480&download=true"
                   alt="logo"
@@ -255,30 +244,22 @@ export default function RowAndColumnSpacing() {
                     débito y crédito ¡y en muy pocos pasos!
                   </p>
                 </Typography>
-                <Divider
-                  sx={{
-                    border: "1px solid #000",
-                    borderRadius: "4px",
-                    width: "20%",
-                    marginBottom: "5rem",
-                    marginTop: "2rem",
-                    color: "black",
-                  }}
-                />
+                <div className="espaciador-azul-3"></div>
                 <img
                   src="https://publico.transbank.cl/documents/20129/0/valor-comision-thumb.png/5c245c94-212b-db56-c8d8-0ccf39a92499?t=1662085949341&download=true"
                   alt="logo"
-                  width="55%"
+                  width="65%"
                 />
               </Typography>
             </Item>
           </Grid>
           <Grid item xs={4}>
             <Item
+            flexItem
             elevation={20}
               sx={{
+                alignItems: "stretch",
                 padding: "2rem",
-                marginTop: "2rem",
                 borderRadius: "10px",
               }}
             >
@@ -309,19 +290,19 @@ export default function RowAndColumnSpacing() {
               />
               <div>
                 <ul className="list-info">
-                  <li>
+                  <li><CheckCircleOutlineIcon className="icono-check-2"/>
                     No pagarás mensualidades fijas, solo las comisiones
                     asociadas a cada venta.
                   </li>
-                  <li>
+                  <li> <CheckCircleOutlineIcon  className="icono-check-2"/>
                     Integra la pasarela de pago a tu proceso de compra en tu
                     sitio web.
                   </li>
-                  <li>
+                  <li> <CheckCircleOutlineIcon  className="icono-check-2"/>
                     Accede a toda la información de tus ventas a través de
                     nuestro Portal de Clientes.
                   </li>
-                  <li>
+                  <li> <CheckCircleOutlineIcon  className="icono-check-2"/>
                     Vende tranquilo por internet gracias a los altos estándares
                     de seguridad de ValinkPay.
                   </li>

@@ -4,6 +4,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import "./TabsHome.css";
 
 function TabPanel(props) {
@@ -59,40 +60,40 @@ export default function BasicTabs() {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        <li className="tabs-info"  >
-          <ul>
+        <ul className="tabs-info"  >
+          <li> <CheckCircleOutlineIcon className="icono-check-1" />
             Mayor seguridad: ValinkPay cuenta con autenticación bancaria para
             tarjetas de emisores habilitados, que otorga alta seguridad a las
             transacciones.
-          </ul>
-          <ul>
+          </li>
+          <li> <CheckCircleOutlineIcon className="icono-check-1" />
             Pago garantizado de transacciones autenticadas: el abono se
             realizará en 24 horas hábiles para ventas con débito/prepago y 48
             horas hábiles para ventas con crédito.
-          </ul>
-          <ul>
+          </li>
+          <li> <CheckCircleOutlineIcon className="icono-check-1" />
             Acceso a más clientes: permite vender a clientes nacionales y
             extranjeros.
-          </ul>
-        </li>
+          </li>
+        </ul>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <li className="tabs-info" >
-          <ul>
+        <ul className="tabs-info" >
+          <li> <CheckCircleOutlineIcon className="icono-check-1" />
             Contarán con nuevas facilidades de pago (no efectivo y
             transferencias): ahora podrán pagarte con tarjetas de débito,
             crédito y tarjetas prepago.
-          </ul>
-          <ul>
+          </li>
+          <li> <CheckCircleOutlineIcon className="icono-check-1" />
             Transacciones seguras: sus transacciones cumplirán con los más altos
             estándares de seguridad de ValinkPay y la industria mediante la
             autenticación bancaria para tarjetas de emisores habilitados.
-          </ul>
-          <ul>
+          </li>
+          <li> <CheckCircleOutlineIcon className="icono-check-1" />
             Comodidad y disponibilidad: podrán comprar las 24 horas del día,
             todo el año, desde cualquier dispositivo conectado a Internet.
-          </ul>
-        </li>
+          </li>
+        </ul>
       </TabPanel>
     </Box>
   );
