@@ -139,8 +139,7 @@ export default function RowAndColumnSpacing() {
                             }
                             secondary={
                               <Typography
-                                sx={{ fontSize: "1rem", color: "#000" }}
-                               
+                                sx={{ fontSize: "1rem", color: "#000" }} 
                               >
                                 No pagarás mensualidades fijas, solo las
                                 comisiones asociadas a cada venta.
