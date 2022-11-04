@@ -3,7 +3,7 @@ import "./InfoPrimaria.css";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import { Button, CssBaseline, Typography } from "@mui/material";
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
@@ -32,12 +32,15 @@ export default function RowAndColumnSpacing() {
     <>
       <Container maxWidth="lg" className="box-1">
         <Grid
+          sx={{ padding: 2 }}
           container
           spacing={{ xs: 2, md: 3 }}
           columns={{ xs: 4, sm: 8, md: 12 }}
         >
           <Grid className="grid-box" xs={6}>
-            <Item elevation={0}>
+            <Item elevation={0}
+            
+            >
               <Typography className="titulo">
                 <h1>Te ayudamos a vender por internet.</h1>
               </Typography>
@@ -85,15 +88,14 @@ export default function RowAndColumnSpacing() {
 
                 <div className="espaciador-azul"></div>
                 <Grid container columns={{ xs: 4, sm: 8, md: 12 }}>
-                  <Grid item xs={6}
-                   
-                   direction="row"
-                   justifyContent="center"
-                   alignItems="center"
+                  <Grid
+                    item
+                    xs={6}
+                    direction="row"
+                    justifyContent="center"
+                    alignItems="center"
                   >
-                    <Item 
-                    elevation={0} 
-                    className="container-2">
+                    <Item elevation={0} className="container-2">
                       <img
                         src="https://publico.transbank.cl/documents/20129/0/thumb-quees.png/ddc97b19-c80d-fef2-9bac-ba62bdc24940?t=1662085910717&download=true"
                         alt="logo"
@@ -179,7 +181,6 @@ export default function RowAndColumnSpacing() {
       </Container>
 
       <Container
-      
         fixed
         sx={{
           backgroundColor: "white",
@@ -211,9 +212,7 @@ export default function RowAndColumnSpacing() {
       </Container>
 
       <Container
-
-      
-      fixed
+        fixed
         sx={{
           backgroundColor: "white",
           color: "#fff",
@@ -222,7 +221,6 @@ export default function RowAndColumnSpacing() {
         }}
       >
         <Grid
-
           container
           columns={{ xs: 4, sm: 8, md: 12 }}
           direction="row"
@@ -230,8 +228,7 @@ export default function RowAndColumnSpacing() {
           alignItems="stretch"
         >
           <Grid item xs={6}>
-            <Item elevation={0}
-            >
+            <Item elevation={0}>
               <Typography className="titulo-3">
                 <h1>
                   Recibe pagos desde tu sitio web con el respaldo de seguridad
@@ -255,8 +252,8 @@ export default function RowAndColumnSpacing() {
           </Grid>
           <Grid item xs={4}>
             <Item
-            flexItem
-            elevation={20}
+              flexItem
+              elevation={20}
               sx={{
                 alignItems: "stretch",
                 padding: "2rem",
@@ -273,7 +270,6 @@ export default function RowAndColumnSpacing() {
                   color: "#ffb200",
                   fontSize: "2rem",
                   fontWeight: "bold",
-
                 }}
               >
                 Solo pagas comision <br></br> por cada venta
@@ -290,30 +286,45 @@ export default function RowAndColumnSpacing() {
               />
               <div>
                 <ul className="list-info">
-                  <li><CheckCircleOutlineIcon className="icono-check-2"/>
+                  <li>
+                    <CheckCircleOutlineIcon className="icono-check-2" />
                     No pagarás mensualidades fijas, solo las comisiones
                     asociadas a cada venta.
                   </li>
-                  <li> <CheckCircleOutlineIcon  className="icono-check-2"/>
+                  <li>
+                    {" "}
+                    <CheckCircleOutlineIcon className="icono-check-2" />
                     Integra la pasarela de pago a tu proceso de compra en tu
                     sitio web.
                   </li>
-                  <li> <CheckCircleOutlineIcon  className="icono-check-2"/>
+                  <li>
+                    {" "}
+                    <CheckCircleOutlineIcon className="icono-check-2" />
                     Accede a toda la información de tus ventas a través de
                     nuestro Portal de Clientes.
                   </li>
-                  <li> <CheckCircleOutlineIcon  className="icono-check-2"/>
+                  <li>
+                    {" "}
+                    <CheckCircleOutlineIcon className="icono-check-2" />
                     Vende tranquilo por internet gracias a los altos estándares
                     de seguridad de ValinkPay.
                   </li>
                 </ul>
               </div>
 
-              <LoadingButton fullWidth className="btn-contratar" variant="contained">
-              Quiero que me llamen
+              <LoadingButton
+                fullWidth
+                className="btn-contratar"
+                variant="contained"
+              >
+                Quiero que me llamen
               </LoadingButton>
               <br />
-              <LoadingButton fullWidth className="btn-llamar" variant="contained">
+              <LoadingButton
+                fullWidth
+                className="btn-llamar"
+                variant="contained"
+              >
                 Contratar ValinkPay
               </LoadingButton>
             </Item>
