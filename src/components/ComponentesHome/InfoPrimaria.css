@@ -85,6 +85,14 @@
     text-align: left !important;
 }
 
+.titulo-4 h1 {
+    font-size: 1.5rem !important;
+    font-weight: 900 !important;
+    color: #2d3338 !important;
+    text-align: center !important;
+}
+
+
 .subtitulo-2 {
     font-size: 1rem !important;
     font-weight: 400 !important;
@@ -130,6 +138,17 @@
     text-align: left;
     transition: 0.3s;
 }
+.btn-llamar-2 {
+
+    padding: 10px !important;
+    background-color: #ffb200 !important;
+    color: black !important;
+    border-radius: 5px;
+    border-color: #ffb200 !important;
+
+}
+
+
 .btn-llamar:hover {
     display: flex !important;
     align-items: left;

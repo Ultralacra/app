@@ -7,7 +7,6 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
-import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
@@ -18,8 +17,8 @@ import StorefrontIcon from "@mui/icons-material/Storefront";
 import SellIcon from "@mui/icons-material/Sell";
 import PaymentIcon from "@mui/icons-material/Payment";
 import TabsHome from "../Tabs/TabsHome";
-import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
-import HistoryEduIcon from '@mui/icons-material/HistoryEdu';
+import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
+import HistoryEduIcon from "@mui/icons-material/HistoryEdu";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -106,9 +105,7 @@ export default function RowAndColumnSpacing() {
                   </Grid>
                   <Grid item xs={6}>
                     <Item elevation={0} className="container-2">
-                      <List 
-                        
-                        
+                      <List
                         className="container-2  list-2"
                         sx={{
                           width: "100%",
@@ -116,15 +113,14 @@ export default function RowAndColumnSpacing() {
                           ml: 2,
                         }}
                       >
-                        <ListItem
-                        >
+                        <ListItem>
                           <ListItemAvatar className="icon-avatar">
                             <Avatar>
                               <PaymentIcon className="icons-services-1" />
                             </Avatar>
                           </ListItemAvatar>
                           <ListItemText
-                          className="text-list"
+                            className="text-list"
                             primary={
                               <Typography
                                 sx={{
@@ -132,14 +128,13 @@ export default function RowAndColumnSpacing() {
                                   fontSize: "1.2rem",
                                   color: "#000",
                                 }}
-                                
                               >
                                 Transacciones seguras
                               </Typography>
                             }
                             secondary={
                               <Typography
-                                sx={{ fontSize: "1rem", color: "#000" }} 
+                                sx={{ fontSize: "1rem", color: "#000" }}
                               >
                                 No pagarás mensualidades fijas, solo las
                                 comisiones asociadas a cada venta.
@@ -154,7 +149,7 @@ export default function RowAndColumnSpacing() {
                             </Avatar>
                           </ListItemAvatar>
                           <ListItemText
-                          className="text-list"
+                            className="text-list"
                             primary={
                               <Typography
                                 sx={{
@@ -162,7 +157,6 @@ export default function RowAndColumnSpacing() {
                                   fontSize: "1.2rem",
                                   color: "#000",
                                 }}
-                                
                               >
                                 Integra en tu sitio web
                               </Typography>
@@ -170,7 +164,6 @@ export default function RowAndColumnSpacing() {
                             secondary={
                               <Typography
                                 sx={{ fontSize: "1rem", color: "#000" }}
-                              
                               >
                                 Integra la pasarela de pago a tu proceso de
                                 compra en tu sitio web. ¡Puedes optar por
@@ -186,7 +179,7 @@ export default function RowAndColumnSpacing() {
                             </Avatar>
                           </ListItemAvatar>
                           <ListItemText
-                          className="text-list"
+                            className="text-list"
                             primary={
                               <Typography
                                 sx={{
@@ -194,7 +187,6 @@ export default function RowAndColumnSpacing() {
                                   fontSize: "1.2rem",
                                   color: "#000",
                                 }}
-                              
                               >
                                 Vende en línea con la seguridad de ValinkPay.
                               </Typography>
@@ -212,12 +204,11 @@ export default function RowAndColumnSpacing() {
                         </ListItem>
                       </List>
                       <Stack
-                      className="box-btn-info"
+                        className="box-btn-info"
                         direction={{ xs: "column", sm: "row" }}
-                        spacing={{ xs: 1, sm: 2, md: 4,  }}
+                        spacing={{ xs: 1, sm: 2, md: 4 }}
                       >
-                        <Item elevation={0} className="container-2"
-                        >
+                        <Item elevation={0} className="container-2">
                           <LoadingButton
                             variant="outlined"
                             className="btn-contacten"
@@ -226,9 +217,8 @@ export default function RowAndColumnSpacing() {
                             Quiero que me contacten
                           </LoadingButton>
                         </Item>
-                        
-                        <Item elevation={0} className="container-2"
-                        >
+
+                        <Item elevation={0} className="container-2">
                           <LoadingButton
                             fullWidth
                             className="btn-contratar"
@@ -301,10 +291,7 @@ export default function RowAndColumnSpacing() {
                   Recibe pagos desde tu sitio web con el respaldo de seguridad
                   de ValinkPay.
                 </h1>
-                <Typography textAlign="left"
-                fontweight="bold"
-                color="#000"
-                >
+                <Typography textAlign="left" fontweight="bold" color="#000">
                   <p>
                     ¡Olvídate de las transferencias! Tus clientes podrán optar a
                     la posibilidad de pagar desde tu sitio web con tarjetas de
@@ -392,6 +379,112 @@ export default function RowAndColumnSpacing() {
               >
                 Contratar ValinkPay
               </LoadingButton>
+            </Item>
+          </Grid>
+        </Grid>
+      </Container>
+
+      <Container
+        maxWidth="false"
+        sx={{
+          backgroundColor: "#F9FBFE",
+          color: "#fff",
+          padding: "2rem",
+          marginTop: "2rem",
+        }}
+      >
+        <Grid columns={{ xs: 4, sm: 8, md: 12 }} justifyContent="space-evenly">
+          <Grid item xs={6} sx={{ bgcolor: "#F9FBFE" }}>
+            <Item elevation={0} sx={{ bgcolor: "#F9FBFE" }}>
+              <Typography
+                className="titulo-4"
+                textAlign="center"
+                mt={2}
+                mb={4}
+                fontweight="bold"
+                color="#000"
+                fontSize="2.5rem"
+                variant="h3"
+              >
+                <h1>¿Necesitas ayuda con tu contratación?</h1>
+                <Typography textAlign="" fontweight="bold" color="#000">
+                  <p>
+                    ¡Podemos asistirte para que resuelvas las dudas que tengas y
+                    comiences a vender lo antes posible!<br></br> Haz clic en el
+                    siguiente botón y podrás acceder a nuestro formulario de
+                    contacto. Ingresa tus datos y te llamaremos dentro de las
+                    próximas 24 hrs.
+                  </p>
+                </Typography>
+                <div className="espaciador-azul-4"></div>
+              </Typography>
+              <LoadingButton
+              className="btn-llamar-2"
+                variant="contained"
+                endIcon={<PhoneIphoneIcon />}
+              >
+                Quiero que me llamen
+              </LoadingButton>
+            </Item>
+          </Grid>
+        </Grid>
+      </Container>
+
+      <Container
+        maxWidth="lg"
+        sx={{
+          backgroundColor: "white",
+
+          padding: "2rem",
+          marginTop: "2rem",
+        }}
+      >
+        <Grid columns={{ xs: 4, sm: 8, md: 12 }} justifyContent="space-evenly">
+          <Grid item xs={6} sx={{ bgcolor: "white" }}>
+            <Item elevation={0} sx={{ bgcolor: "white" }}>
+              <Typography
+                className="titulo-4"
+                textAlign="center"
+                mt={2}
+                mb={4}
+                fontweight="bold"
+                color="#000"
+                fontSize="2.5rem"
+                variant="h3"
+              >
+                <h1>
+                  Recibe pagos con tarjetas de manera segura y fácil de usar.
+                </h1>
+
+                <div className="espaciador-azul-4"></div>
+              </Typography>
+              <Stack
+                direction={{ xs: "column", sm: "row" }}
+                spacing={{ xs: 1, sm: 2, md: 4 }}
+                justifyContent="center"
+              >
+                <Item alignItems="center" justifyContent="center" elevation={0}>
+                  <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/2560px-Visa_Inc._logo.svg.png"
+                    alt="logo"
+                    width="50%"
+                  />
+                </Item>
+                <Item elevation={0}>
+                  <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/1200px-Mastercard-logo.svg.png"
+                    alt="logo"
+                    width="50%"
+                  />
+                </Item>
+                <Item elevation={0}>
+                  <img
+                    src="https://1000marcas.net/wp-content/uploads/2020/03/logo-American-Express.png"
+                    alt="logo"
+                    width="50%"
+                  />
+                </Item>
+              </Stack>
             </Item>
           </Grid>
         </Grid>
