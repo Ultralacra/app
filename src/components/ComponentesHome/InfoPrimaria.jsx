@@ -419,7 +419,7 @@ export default function RowAndColumnSpacing() {
                 <div className="espaciador-azul-4"></div>
               </Typography>
               <LoadingButton
-              className="btn-llamar-2"
+                className="btn-llamar-2"
                 variant="contained"
                 endIcon={<PhoneIphoneIcon />}
               >
@@ -465,21 +465,28 @@ export default function RowAndColumnSpacing() {
               >
                 <Item alignItems="center" justifyContent="center" elevation={0}>
                   <img
-                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/2560px-Visa_Inc._logo.svg.png"
+                    src="http://valinkgroup.com/wp-content/uploads/2022/11/pngegg-53.png"
                     alt="logo"
                     width="50%"
                   />
                 </Item>
                 <Item elevation={0}>
                   <img
-                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/1200px-Mastercard-logo.svg.png"
+                    src="http://valinkgroup.com/wp-content/uploads/2022/11/pngegg-50.png"
                     alt="logo"
                     width="50%"
                   />
                 </Item>
                 <Item elevation={0}>
                   <img
-                    src="https://1000marcas.net/wp-content/uploads/2020/03/logo-American-Express.png"
+                    src="http://valinkgroup.com/wp-content/uploads/2022/11/pngegg-52.png"
+                    alt="logo"
+                    width="50%"
+                  />
+                </Item>
+                <Item elevation={0}>
+                  <img
+                    src="http://valinkgroup.com/wp-content/uploads/2022/11/pngegg-52.png"
                     alt="logo"
                     width="50%"
                   />
