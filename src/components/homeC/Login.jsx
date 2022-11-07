@@ -97,34 +97,39 @@ export default function SignInSide() {
             />
 
             <Box component="form" noValidate onSubmit={handleSubmit}>
-              <Stack spacing={2} className="box-login-form">
+              <Stack spacing={2} className>
                 <Item>
+                
                   <Typography
                     component="p"
+                    mt={4}
+                    fontSize="2rem"
                     variant="p"
                     align="center"
                     fontWeight="bold"
                     color="#006D8E"
                   >
-                    INGRESAR
+                    Inicia sesión
+
+
                   </Typography>
                   <TextField
+                  size="small"
                     className="input-forms"
                     margin="normal"
-                    size="small"
                     required
                     id="username"
                     label="Usuario"
                     name="username"
                     autoComplete="username"
-                    autoFocus
+                    
                   />
                 </Item>
                 <Item>
                   <TextField
+                  size="small"
                     className="input-forms"
                     margin="normal"
-                    size="small"
                     required
                     name="password"
                     label="Contraseña"
@@ -140,7 +145,6 @@ export default function SignInSide() {
                     loading={loading}
                     type="submit"
                     fullWidth
-                    size="small"
                     variant="contained"
                     sx={{ mt: 1, mb: 1 }}
                   >
@@ -152,7 +156,7 @@ export default function SignInSide() {
                 control={<Checkbox value="remember" color="primary" />}
                 label="Recordar contraseña"
               />
-              <Link to="recovery-account" className="text-lost-password">
+              <Link to="/recovery-account" className="text-lost-password">
                 ¿Olvidaste tu contraseña?
               </Link>
               <hr />

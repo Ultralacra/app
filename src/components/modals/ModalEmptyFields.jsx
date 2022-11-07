@@ -10,7 +10,7 @@ function ModalEmptyFields() {
             showConfirmButton: false,
             timer: 1500,
             timerProgressBar: true,
-            icon: 'error',
+            icon: 'info',
             title: 'Debe completar todos los campos',
         })
     }

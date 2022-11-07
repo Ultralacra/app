@@ -17,7 +17,6 @@ const RecoveryPassword = () => {
         title: 'Contraseña cambiada con éxito',
         text  : "Su contraseña ha sido cambiada con éxito, haga click en el botón para continuar.",
         confirmButtonText: 'continuar',
-        
     })
 }
     return (    

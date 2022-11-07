@@ -50,14 +50,11 @@ const RecoveryAccount = () => {
   };
 
   async function enviarCorreo() {
-
-
     if (
       body.login === "" ||
       body.email === "" ||
       body.new_password === "" ||
-      body.code === "" 
-      
+      body.code === ""
     ) {
       Swal.fire({
         toast: true,
@@ -72,7 +69,7 @@ const RecoveryAccount = () => {
     }
 
     // validar correo electronico
-    
+
     if (!validator.isEmail(body.email)) {
       Swal.fire({
         toast: true,
@@ -96,18 +93,16 @@ const RecoveryAccount = () => {
       console.warn(body);
     axios
       .post("https://valink-pay-api.vercel.app/pwd/verifyCode", {
-
         login: body.login,
         email: body.email,
         new_password: body.new_password,
         code: body.code,
-      
       })
       .then((response) => {
-        console.log(body)
+        console.log(body);
         console.log(response);
 
-        let icon = response.data.status === 'fail' ? 'error':'success';
+        let icon = response.data.status === "fail" ? "error" : "success";
 
         Swal.fire({
           toast: true,
@@ -119,13 +114,15 @@ const RecoveryAccount = () => {
           timerProgressBar: true,
         });
 
-        if(response.data.status === 'success') return setModal(true);                
+        if (response.data.status === "success") return setModal(true);
+        
+        
+
       })
       .catch((error) => {
         console.log(error);
       });
   }
-
 
   return (
     <ThemeProvider theme={theme}>
@@ -147,7 +144,7 @@ const RecoveryAccount = () => {
 
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <Box
-            className="box-login-form"
+            className
             sx={{
               my: 8,
               mx: 4,
@@ -157,10 +154,13 @@ const RecoveryAccount = () => {
             }}
           >
             <Typography
-              className="texto-paginas-login"
-              component="h1"
-              variant="h5"
-              sx={{ mt: 4 }}
+              component="p"
+              mt={4}
+              fontSize="2rem"
+              variant="p"
+              align="center"
+              fontWeight="bold"
+              color="#006D8E"
             >
               Recuperación de datos de acceso
             </Typography>
@@ -255,13 +255,8 @@ const RecoveryAccount = () => {
                   />
                 </Item>
               </Stack>
-
-              <Link className="text-lost-password" to="/" variant="body2">
-                <KeyboardArrowLeftIcon className="icons-back icons-form" />{" "}
-                Atrás para iniciar sesión
-              </Link>
               <LoadingButton
-                size="small"
+                size=""
                 className="btn-login"
                 onClick={enviarCorreo}
                 fullWidth
@@ -271,8 +266,12 @@ const RecoveryAccount = () => {
                 /* loading={loading} */
                 loadingPosition="end"
               >
-                Enviar
+                Cambiar contraseña
               </LoadingButton>
+              <Link className="text-lost-password" to="/login" variant="body2">
+                <KeyboardArrowLeftIcon className="icons-back icons-form" />{" "}
+                Atrás para iniciar sesión
+              </Link>
               <Typography
                 variant="body2"
                 color="textSecondary"
@@ -280,7 +279,11 @@ const RecoveryAccount = () => {
                 sx={{ mt: 4 }}
               >
                 ¿Nuevo en nuestra plataforma?{" "}
-                <Link className="text-lost-password" to="/register-page" variant="body2">
+                <Link
+                  className="text-lost-password"
+                  to="/register-page"
+                  variant="body2"
+                >
                   Crear una cuenta
                 </Link>
               </Typography>

@@ -118,10 +118,7 @@ function Registro() {
       {modal && <ModalRegistroExitoso />}
       {modalEmpty && <ModalEmptyFields />}
       <Box sx={{ display: "flex" }}>
-        <Grid 
-        container 
-        component="main" 
-        sx={{ height: "100vh" }}>
+        <Grid container component="main" sx={{ height: "100vh" }}>
           <CssBaseline />
           <Grid
             item
@@ -136,7 +133,6 @@ function Registro() {
           />
 
           <Grid
-          
             item
             xs={12}
             sm={8}
@@ -146,7 +142,6 @@ function Registro() {
             square
           >
             <Box
-            
               sx={{
                 my: 8,
                 mx: 1,
@@ -161,10 +156,17 @@ function Registro() {
                 width={200}
                 alt="logo"
               ></img>
-              <Typography component="h1" variant="h5" sx={{ mt: 4 }}>
+              <Typography
+                component="p"
+                mt={4}
+                fontSize="2rem"
+                variant="p"
+                align="center"
+                fontWeight="bold"
+                color="#006D8E"
+              >
                 Completa los datos solicitados
               </Typography>
-
 
               <Box>
                 <Stack direction="row" spacing={2}>
@@ -336,24 +338,27 @@ function Registro() {
                   Crear cuenta
                 </LoadingButton>
 
-                <div className="caja-register">
-                <Typography
-                  variant="body2"
-                  color="textSecondary"
-                  align="center"
-                  sx={{ mt: 1 }}
-                >
-                  Al hacer click en Crear cuenta, declaras haber leído y <br />{" "}
-                  muestras tu conformidad con nuestros{" "}
-                  <Link className="texto-1" href="#" variant="body2">
-                    Términos de Servicio
+                <div className>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    align="center"
+                    sx={{ mt: 1 }}
+                    mt={1}
+                    mb={1}
+                  >
+                    Al hacer click en Crear cuenta, declaras haber leído y{" "}
+                    <br /> muestras tu conformidad con nuestros{" "}
+                    <Link className="text-lost-password" href="#" variant="body2">
+                      Términos de Servicio
+                    </Link>
+                  </Typography>
+                  <KeyboardArrowLeftIcon className="icons-back icons-form" />
+
+                  <Link className="text-lost-password" to="/login" variant="body2">
+                    Atrás para iniciar sesión
                   </Link>
-                </Typography>
-                <KeyboardArrowLeftIcon className="icons-back icons-form" />
-                <Link className="back-session" to="/" variant="body2">
-                  Atrás para iniciar sesión
-                </Link>
-              </div>
+                </div>
               </Box>
             </Box>
           </Grid>

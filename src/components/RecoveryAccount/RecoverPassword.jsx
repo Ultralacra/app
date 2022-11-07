@@ -135,7 +135,7 @@ const handleRecoveryPassword = e => {
         >
 
           <Box
-          className="box-login-form"
+          className
             sx={{
               my: 8,
               mx: 4,
@@ -147,12 +147,16 @@ const handleRecoveryPassword = e => {
         
 
             <Typography
-              className="texto-paginas-login"
-              component="h1"
-              variant="h5"
-              sx={{ mt: 4 }}
+              component="p"
+              mt={4}
+              fontSize="2rem"
+              variant="p"
+              align="center"
+              fontWeight="bold"
+              color="#006D8E"
             >
-              Recuperación de datos de acceso
+              Reestablece tu contraseña
+
             </Typography>
 
             <Typography className="texto-recuperar" sx={{ mt: 4 }}>
@@ -161,16 +165,15 @@ const handleRecoveryPassword = e => {
             </Typography>
 
             <Box
-             
               component="form"
               sx={{ mt: 4 }}
             >
               <TextField
                 size="small"
+                fullWidth
                 onChange={handleRecoveryPassword}
                 margin="normal"
                 placeholder="Usuario"
-                fullWidth
                 label="Usuario"
                 name="login"
                 InputProps={{
@@ -183,10 +186,10 @@ const handleRecoveryPassword = e => {
               />
               <TextField
                 size="small"
+                fullWidth
                 onChange={handleRecoveryPassword}
                 margin="normal"
                 placeholder="Email"
-                fullWidth
                 label="Email"
                 name="email"
                 InputProps={{
@@ -197,12 +200,8 @@ const handleRecoveryPassword = e => {
                   ),
                 }}
               />
-              <Link className="text-lost-password" to="/" variant="body2">
-                <KeyboardArrowLeftIcon className="icons-back icons-form" />{" "}
-                Atrás para iniciar sesión
-              </Link>
+             
               <LoadingButton
-                size="small"
                 onClick={enviarCorreo}	
                 className="btn-login"
                 fullWidth
@@ -214,6 +213,10 @@ const handleRecoveryPassword = e => {
               >
                 Enviar
               </LoadingButton>
+              <Link className="text-lost-password" to="/login" variant="body2">
+                <KeyboardArrowLeftIcon className="icons-back icons-form" />{" "}
+                Atrás para iniciar sesión
+              </Link>
               <Typography
                 variant="body2"
                 color="textSecondary"

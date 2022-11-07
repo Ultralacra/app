@@ -6,8 +6,6 @@ import AppBar from "../components/Appbar/Header/AppBar";
 export default function HomePage() {
   return (
     <>
-      <AppBar />
-
       <Login />
     </>
   );
