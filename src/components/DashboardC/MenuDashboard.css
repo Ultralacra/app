@@ -1,0 +1,27 @@
+.espaciador-azul-dashboard {
+    background-color: #ffb200 !important;
+    height: 5px !important;
+}
+
+.list-menu-dashboard {
+    background-color: #006d8e !important;
+    color: #fff !important;
+}
+
+.icon-list-dashboard{
+    color: #fff !important;
+}
+
+.text-list-dashboard{
+    color: #fff !important;
+}
+
+.list-menu-dashboard:hover{
+    background-color: black !important;
+    color: #fff !important;
+}
+
+.list-menu-dashboard:active{
+    background-color: black !important;
+    color: #fff !important;
+}

@@ -1,10 +1,12 @@
 import React from 'react'
 import Content from '../components/DashboardC/Content'
 
-export const DashboardUsers = () => {
+export const CompletarRegistro = () => {
   return (
     <>
-      <Content />
+        <Content/>    
     </>
   )
 }
+
+export default CompletarRegistro;

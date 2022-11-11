@@ -9,6 +9,8 @@ import RecoveryPasswordPage from './pages/RecoveryPasswordPage';
 import NotFoundPage from './pages/NotFoundPage';
 import VerificationCodePage from './pages/VerificationCodePage';
 import Home from './pages/Home';
+import CompletarRegistro from './pages/CompletarRegistro';
+import TransaccionTest from './pages/TransaccionTest';
 
 function App() {
   return (
@@ -33,6 +35,8 @@ function App() {
         <BrowserRouter>
         <Routes>
             <Route exact path="/dashboard-users" element={<RouteController component={DashboardUsers}/>}/>
+            <Route exact path="/completar-registro" element={<RouteController component={CompletarRegistro}/>}/>
+            <Route exact path="/transaccion-test" element={<RouteController component={TransaccionTest}/>}/>
         </Routes>
         </BrowserRouter>
 
