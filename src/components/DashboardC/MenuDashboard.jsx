@@ -13,14 +13,16 @@ import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import  Button from '@mui/material/Button';
 import "./MenuDashboard.css";
+import { clear } from '@testing-library/user-event/dist/clear';
+import { Typography } from '@mui/material';
 
 
 export const MenuDashboard = () => {
 
-function logout(){
+function Logout(){
+ localStorage.clear();
+  window.location.href = "/login";
 
-  localStorage.clear();
-  window.location.href = "/";
 }
 
 
@@ -29,9 +31,26 @@ function logout(){
 
 
 <div>
-      
-      <Toolbar/>
 
+      <Toolbar
+      sx={{
+        backgroundImage: "url(http://valinkgroup.com/wp-content/uploads/2022/11/Negro.png)",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "contain",
+        backgroundPosition: "center",
+        width: "70%",
+
+      }}
+
+/>
+      <List className='list-menu-dashboard'>
+        <ListItemButton className="text-list-dashboard" disabled component={Link} to="/dashboard-users">
+          <ListItemIcon className='icon-list-dashboard' >
+            <AppRegistrationIcon />
+          </ListItemIcon>
+          Dashboard
+        </ListItemButton>
+      </List>
       <List className='list-menu-dashboard'>
         <ListItemButton className="text-list-dashboard" component={Link} to="/completar-registro">
           <ListItemIcon className='icon-list-dashboard' >
@@ -51,14 +70,15 @@ function logout(){
       </List>
       <div className="espaciador-azul-dashboard"></div>
       <List>
-          <Button
+          <LoandingButton
             size="small"
             endIcon={<LogoutIcon />}
             variant="outlined"
-            onclick={logout}
+            onClick={Logout}
+            
               >
             Cerrar Sesion
-          </Button>
+          </LoandingButton>
       </List>
     </div>
 
