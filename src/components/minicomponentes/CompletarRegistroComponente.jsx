@@ -25,7 +25,7 @@ const AppBarDashboard = () => {
       >
         <Stack>
           <Item>
-              <h1>test</h1>
+              <h1>esta es la vista de completar registro</h1>
           </Item>
         </Stack>
       </Box>
