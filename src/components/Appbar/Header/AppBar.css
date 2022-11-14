@@ -1,34 +1,32 @@
-
-.navbar-container{
-    background-color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-}
-
-.franja-up {
-    width: 100%;
+.franja-up { 
+    width: 30%;
     height: 5px;
     background: #ffb200;
     position: absolute;
     top: 0;
     z-index: 9999;
-    outline-style: none !important;
-
 }
-
 .franja-up .calipso {
-    width: 288px;
+    width: 50%;
     height: 5px;
     background: #303030;
-    float: right;
+ 
 }
 
 .franja-up .rojo {
-    width: 177px;
+    width: 10%;
     height: 5px;
     background: #006d8e;
-    float: right;
+}
+.nav-botones{
+gap: 20px;
+}
+.btn:hover{
+    background: #006d8e;
+    color: #fff !important;
 }
 
+.btn-2:hover{
+    background: #ffb200;
+    color: black !important;
+}

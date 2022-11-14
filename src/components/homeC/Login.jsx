@@ -22,6 +22,7 @@ export default function SignInSide() {
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = (event) => {
+
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     setLoading(true);
@@ -33,6 +34,7 @@ export default function SignInSide() {
       .then(function (response) {
         console.warn(response);
         if (response.data.status !== "success")
+        
           return Swal.fire({
             toast: true,
             position: "top-end",
@@ -40,9 +42,10 @@ export default function SignInSide() {
             icon: "error",
             text: "Usuario o contraseña incorrectos",
             showConfirmButton: false,
-            timer: 1500,
+            timer: 1000 ,
             timerProgressBar: true,
-          });
+          }); 
+      
         localStorage.setItem("auth", JSON.stringify("yes"));
         window.location.href = "/dashboard-users";
       })
@@ -51,6 +54,7 @@ export default function SignInSide() {
       })
       .then(function () {
         setLoading(false);
+      
       });
   };
 
