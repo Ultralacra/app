@@ -8,7 +8,7 @@ import RegisterPage from './pages/RegisterPage';
 import RecoveryPasswordPage from './pages/RecoveryPasswordPage';
 import NotFoundPage from './pages/NotFoundPage';
 import VerificationCodePage from './pages/VerificationCodePage';
-import Home from './pages/Home';
+import LandingPage from './pages/LandingPage';
 import CompletarRegistro from './pages/CompletarRegistro';
 import TransaccionTest from './pages/TransaccionTest';
 
@@ -21,7 +21,7 @@ function App() {
 
 <BrowserRouter>
     <Routes>
-            <Route path="/" element={<Home/>} /> 
+            <Route path="/" element={<LandingPage/>} /> 
             <Route path="/recovery-account" element={<RecoveryPasswordPage/>} /> 
             <Route path="/complete-recovery-password" element={<VerificationCodePage/>} /> 
             <Route path="/register-page" element={<RegisterPage/>}/>

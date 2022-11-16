@@ -1,8 +1,8 @@
 import * as React from "react";
-import "./InfoPrimaria.css";
+import "./LandingPageValinkPay.css";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
-import { Button, CssBaseline, Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
@@ -31,7 +31,15 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function RowAndColumnSpacing() {
   return (
     <>
-      <Container   className="box-1">
+      <Container   className="box-1"
+        sx={{
+          mt: 10,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         <Grid
 
           sx={{ padding: 2 }}
@@ -370,8 +378,9 @@ export default function RowAndColumnSpacing() {
               </div>
 
               <LoadingButton
+              mb={2}
                 fullWidth
-                className="btn-contratar"
+                className="btn-llamar"
                 variant="contained"
                 endIcon={<PhoneIphoneIcon />}
               >
@@ -380,8 +389,8 @@ export default function RowAndColumnSpacing() {
               <br />
               <LoadingButton
                 fullWidth
-                className="btn-llamar"
-                variant="contained"
+               className="btn-contratar-2"
+                variant="outlined"
                 endIcon={<HistoryEduIcon />}
               >
                 Contratar ValinkPay
@@ -426,7 +435,7 @@ export default function RowAndColumnSpacing() {
                 <div className="espaciador-azul-4"></div>
               </Typography>
               <LoadingButton
-                className="btn-llamar-2"
+                className="btn-llamar"
                 variant="contained"
                 endIcon={<PhoneIphoneIcon />}
               >
@@ -480,13 +489,6 @@ export default function RowAndColumnSpacing() {
                 <Item elevation={0}>
                   <img
                     src="http://valinkgroup.com/wp-content/uploads/2022/11/pngegg-50.png"
-                    alt="logo"
-                    width="50%"
-                  />
-                </Item>
-                <Item elevation={0}>
-                  <img
-                    src="http://valinkgroup.com/wp-content/uploads/2022/11/pngegg-52.png"
                     alt="logo"
                     width="50%"
                   />

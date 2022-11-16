@@ -1,13 +1,13 @@
 import React from 'react'
 import AppBar from "../components/Appbar/Header/AppBar";
-import InfoPrimaria from "../components/ComponentesHome/InfoPrimaria";
+import LandingPageValinkPay from "../components/ComponentesHome/LandingPageValinkPay";
 
 
 const Home = () => {
   return (
     <>
       < AppBar />
-      <InfoPrimaria />
+      <LandingPageValinkPay />
     </>
   )
 }

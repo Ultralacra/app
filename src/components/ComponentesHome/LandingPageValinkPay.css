@@ -125,37 +125,17 @@
     margin-bottom: 0.5rem !important;
     margin-top: 20px;
 }
-.btn-llamar {
-    display: flex !important;
-    align-items: left;
-    padding: 10px !important;
+.btn-llamar{
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
     background-color: #ffb200 !important;
     color: black !important;
-    border-radius: 5px;
-    border-color: #ffb200 !important;
-    font-size: 1rem;
-    font-weight: 400;
-    text-align: left;
-    transition: 0.3s;
 }
-.btn-llamar-2 {
-
-    padding: 10px !important;
-    background-color: #ffb200 !important;
-    color: black !important;
-    border-radius: 5px;
-    border-color: #ffb200 !important;
-
-}
-
-
-.btn-llamar:hover {
-    display: flex !important;
-    align-items: left;
-    padding: 10px !important;
-    background-color: #006d8e !important;
-    color: white !important;
-    border-radius: 5px;
+.btn-contratar-2{
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+    border-color: #006d8e !important;
+    color: #006d8e !important;
 
 }
 .icono-check-2 {
