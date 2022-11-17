@@ -1,37 +1,216 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Stack from "@mui/material/Stack";
 import Item from "@mui/material/Stack";
 import Box from "@mui/material/Box";
-import CssBaseline from "@mui/material/CssBaseline";
+import { Typography } from "@mui/material";
+import Grid from "@mui/material/Grid";
+import "./CompletarRegistroComponente.css";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import axios from "axios";
+import { styled } from "@mui/material/styles";
+import Paper from "@mui/material/Paper";
 
+const CompletarRegistroComponente = () => {
+  const [usuario, setUsuario] = useState([]);
 
-const AppBarDashboard = () => {
+  useEffect(() => {
+    const id = JSON.parse(localStorage.getItem("id"));
+    axios
+      .get(`https://valink-pay-api.vercel.app/users/${id}`, {
+        headers: {
+          Authorization: JSON.parse(localStorage.getItem("token")),
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+        setUsuario(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
-  const drawerWidth = 100;
+  const drawerWidth = 240;
+
+  const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: "center",
+    color: theme.palette.text.secondary,
+  }));
 
   return (
-    <>
-<Box sx={{ display: "flex" }}>
-<CssBaseline />
+    <Box
+      sx={{
+        width: { sm: `calc(100% - ${drawerWidth}px)` },
+        ml: { sm: `${drawerWidth}px` },
+      }}
+    >
+      <Container>
+        <Typography
+          variant="h4"
+          textAlign="left"
+          color="#006d8e"
+          fontWeight="bold"
+          fontFamily=""
+          mb={2}
+        >
+          TUS DATOS
+        </Typography>
 
-<Box
-
-        sx={{
-          height: "50vh",
-          width: { sm: `calc(100% - ${drawerWidth}px)` }, 
-          p: 3,
-        }}
-      >
-        <Stack>
-          <Item>
-              <h1>esta es la vista de completar registro</h1>
-          </Item>
-        </Stack>
-      </Box>
-
-</Box>
-    </>
+        <Grid
+         
+          container
+          spacing={{ xs: 2, md: 3 }}
+          columns={{ xs: 4, sm: 8, md: 12 }}
+        >
+          <Grid item xs>
+            <Item
+              className="item-1-registro"
+              sx={{
+                backgroundColor: "##E6F6FF",
+              }}
+            >
+              <Typography
+                variant="p"
+                fontWeight="bold"
+                color="#006d8e"
+                fontFamily=""
+                align="left"
+                fontSize="1rem"
+              >
+                Tu información personal
+              </Typography>
+              <div className="espaciador-amarillo"></div>
+              <br></br>
+              <Typography
+                variant="p"
+                textAlign="left"
+                fontWeight="bold"
+                color="black"
+                fontSize="1rem"
+              >
+                Nombre:
+              </Typography>
+              <br></br>
+              <Typography
+                variant="p"
+                textAlign="left"
+                fontWeight="100"
+                color="black"
+                fontSize="1rem"
+              >
+                {usuario.sFirstName}
+              </Typography>
+              <br></br>
+              <Typography
+                variant="p"
+                textAlign="left"
+                fontWeight="bold"
+                color="black"
+                fontSize="1rem"
+              >
+                Apellido:
+              </Typography>
+              <br></br>
+              <Typography
+                variant="p"
+                textAlign="left"
+                fontWeight="100"
+                color="black"
+                fontSize="1rem"
+              >
+                {usuario.sLastName}
+              </Typography>
+              <br></br>
+              <Typography
+                variant="p"
+                textAlign="left"
+                fontWeight="bold"
+                color="black"
+                fontSize="1rem"
+              >
+                Numero de teléfono:
+              </Typography>
+              <br></br>
+              <Typography
+                variant="p"
+                textAlign="left"
+                fontWeight="100"
+                color="black"
+                fontSize="1rem"
+              >
+                {usuario.sPhone}
+              </Typography>
+              <br></br>
+              <Typography
+                variant="p"
+                textAlign="left"
+                fontWeight="bold"
+                color="black"
+                fontSize="1rem"
+              >
+                Email:
+              </Typography>
+              <br></br>
+              <Typography
+                variant="p"
+                textAlign="left"
+                fontWeight="100"
+                color="black"
+                fontSize="1rem"
+              >
+                {usuario.sEmail}
+              </Typography>
+              <br></br>
+              <Typography
+                variant="p"
+                textAlign="left"
+                fontWeight="bold"
+                color="black"
+                fontSize="1rem"
+              >
+                Usuario de acceso:
+              </Typography>
+              <br></br>
+              <Typography
+                variant="p"
+                textAlign="left"
+                fontWeight="100"
+                color="black"
+                fontSize="1rem"
+              >
+                {usuario.sLogin}
+              </Typography>
+              <br></br>
+            </Item>
+          </Grid>
+          <Grid item xs={6}>
+            <Item
+              className="item-2-registro"
+            ><Typography
+            variant="p"
+            fontWeight="bold"
+            color="#006d8e"
+            fontFamily=""
+            align="left"
+            fontSize="1rem"
+          >
+            Completa o actualiza tus datos
+          </Typography>
+          <div className="espaciador-amarillo-2"></div>
+            </Item>
+          </Grid>
+          <Grid item xs>
+            <Item>xs</Item>
+          </Grid>
+        </Grid>
+      </Container>
+    </Box>
   );
 };
 
-export default AppBarDashboard;
+export default CompletarRegistroComponente;

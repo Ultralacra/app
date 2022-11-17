@@ -37,7 +37,7 @@ function Logout(){
 
 />
       <List className='list-menu-dashboard'>
-        <ListItemButton className="text-list-dashboard" disabled component={Link} to="/dashboard-users">
+        <ListItemButton className="text-list-dashboard"  component={Link} to="/dashboard-users">
           <ListItemIcon className='icon-list-dashboard' >
             <AppRegistrationIcon />
           </ListItemIcon>

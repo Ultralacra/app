@@ -28,13 +28,16 @@ export default function SignInSide() {
     setLoading(true);
 
     Axios.post("https://valink-pay-api.vercel.app/login", {
+
       login: data.get("username"),
       password: data.get("password"),
+      Authorization: "Bearer " +  JSON.parse(localStorage.getItem("token")),
+
     })
       .then(function (response) {
         console.warn(response);
         if (response.data.status !== "success")
-        
+
           return Swal.fire({
             toast: true,
             position: "top-end",
@@ -46,7 +49,12 @@ export default function SignInSide() {
             timerProgressBar: true,
           }); 
       
-        localStorage.setItem("auth", JSON.stringify("yes"));
+        
+          localStorage.setItem("auth", JSON.stringify("yes"));
+          localStorage.setItem("id", JSON.stringify(response.data.message.userId));
+          localStorage.setItem("token", JSON.stringify(response.data.message.Authorization));
+
+
         window.location.href = "/dashboard-users";
       })
       .catch(function (error) {

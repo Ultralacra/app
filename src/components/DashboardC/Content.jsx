@@ -36,10 +36,12 @@ function ResponsiveDrawer(props) {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
+      
       <AppBar className="appbar-dashboard"
         position="fixed"
         
         sx={{
+
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
           
@@ -106,12 +108,6 @@ function ResponsiveDrawer(props) {
           width: { sm: `calc(100% - ${drawerWidth}px)` },
         }}
       >
-        <Toolbar />
-        <Stack>
-          <Item>
-              <h1>test</h1>
-          </Item>
-        </Stack>
       </Box>
     </Box>
   );

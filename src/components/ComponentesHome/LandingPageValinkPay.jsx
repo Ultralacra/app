@@ -31,7 +31,8 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function RowAndColumnSpacing() {
   return (
     <>
-      <Container   className="box-1"
+      <Container
+        className="box-1"
         sx={{
           mt: 10,
           display: "flex",
@@ -41,7 +42,6 @@ export default function RowAndColumnSpacing() {
         }}
       >
         <Grid
-
           sx={{ padding: 2 }}
           container
           spacing={{ xs: 2, md: 3 }}
@@ -61,15 +61,12 @@ export default function RowAndColumnSpacing() {
               <Button
                 className="btn-home-saber-mas  btn-login"
                 variant="contained"
-
               >
                 Quiero saber más
               </Button>
             </Item>
           </Grid>
-          <Grid
-          mt={8}
-          item xs={6}>
+          <Grid mt={8} item xs={6}>
             <Item elevation={0}>
               <img
                 src="http://valinkgroup.com/wp-content/uploads/2022/10/header-webpayplus.png"
@@ -81,9 +78,7 @@ export default function RowAndColumnSpacing() {
         </Grid>
       </Container>
       <div id="que-es-valinkpay"></div>
-      <Container className="container-2"
-      maxWidth="lg"
-      >
+      <Container className="container-2" maxWidth="lg">
         <Grid className="grid-2">
           <Stack className="container-2">
             <Item elevation={0} className="container-2">
@@ -252,8 +247,6 @@ export default function RowAndColumnSpacing() {
       </Container>
 
       <Container
-
-        
         sx={{
           backgroundColor: "white",
           color: "#fff",
@@ -284,7 +277,6 @@ export default function RowAndColumnSpacing() {
       </Container>
 
       <Container
-        
         sx={{
           backgroundColor: "white",
           color: "#fff",
@@ -378,7 +370,7 @@ export default function RowAndColumnSpacing() {
               </div>
 
               <LoadingButton
-              mb={2}
+                mb={2}
                 fullWidth
                 className="btn-llamar"
                 variant="contained"
@@ -389,7 +381,7 @@ export default function RowAndColumnSpacing() {
               <br />
               <LoadingButton
                 fullWidth
-               className="btn-contratar-2"
+                className="btn-contratar-2"
                 variant="outlined"
                 endIcon={<HistoryEduIcon />}
               >
@@ -447,7 +439,6 @@ export default function RowAndColumnSpacing() {
       </Container>
 
       <Container
-    
         sx={{
           backgroundColor: "white",
 
