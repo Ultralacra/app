@@ -10,16 +10,12 @@
     align-items: center;
     padding: 10px;
 }
-.css-1j6lkhf-MuiPaper-root{
-    padding: 20px !important;
-    text-align: left !important;
-}
-
 .item-1-registro{
     box-shadow:0 0 10px 0 rgba(0,0,0,.2) !important;
+    text-align: left !important;
+    padding: 20px !important;
    
 }
-
 .espaciador-amarillo {
     margin-top: 1rem !important;
     background-color: #ffb200 !important;
@@ -39,10 +35,7 @@
 
 .item-2-registro{
     box-shadow:0 0 10px 0 rgba(0,0,0,.2) !important;
-   
-}
-
-.css-1633um2-MuiPaper-root{
-    padding: 20px !important;
     text-align: left !important;
+    padding: 20px !important;
+   
 }

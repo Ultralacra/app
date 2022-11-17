@@ -52,7 +52,6 @@ function Logout(){
           </ListItemIcon>
           Completar Registro
         </ListItemButton>
-        
       </List>
       <div className="espaciador-azul-dashboard"></div>
       <List className='list-menu-dashboard' >

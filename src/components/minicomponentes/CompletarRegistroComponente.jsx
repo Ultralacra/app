@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from "react";
-import Stack from "@mui/material/Stack";
-import Item from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import "./CompletarRegistroComponente.css";
 import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import axios from "axios";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
+import FormCompletarRegistro from "./FormCompletarRegistro";
+import Divider from "@mui/material/Divider";
 
 const CompletarRegistroComponente = () => {
   const [usuario, setUsuario] = useState([]);
@@ -53,7 +51,7 @@ const CompletarRegistroComponente = () => {
         <Typography
           variant="h4"
           textAlign="left"
-          color="#006d8e"
+          color="#262626"
           fontWeight="bold"
           fontFamily=""
           mb={2}
@@ -61,8 +59,17 @@ const CompletarRegistroComponente = () => {
           TUS DATOS
         </Typography>
 
+        <Divider
+          sx={{
+            backgroundColor: "#006d8e",
+            height: "2px",
+            width: "100%",
+            mb: 2,
+            borderRadius: "10px",
+          }}
+        />
+
         <Grid
-         
           container
           spacing={{ xs: 2, md: 3 }}
           columns={{ xs: 4, sm: 8, md: 12 }}
@@ -189,23 +196,12 @@ const CompletarRegistroComponente = () => {
             </Item>
           </Grid>
           <Grid item xs={6}>
-            <Item
-              className="item-2-registro"
-            ><Typography
-            variant="p"
-            fontWeight="bold"
-            color="#006d8e"
-            fontFamily=""
-            align="left"
-            fontSize="1rem"
-          >
-            Completa o actualiza tus datos
-          </Typography>
-          <div className="espaciador-amarillo-2"></div>
+            <Item className="item-1-registro" >
+              <FormCompletarRegistro />
             </Item>
           </Grid>
           <Grid item xs>
-            <Item>xs</Item>
+            <Item>cuadro vacio</Item>
           </Grid>
         </Grid>
       </Container>
