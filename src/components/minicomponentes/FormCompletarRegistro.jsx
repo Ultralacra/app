@@ -15,6 +15,7 @@ import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import { Typography } from "@mui/material";
+import Select from "react-select";
 
 const FormCompletarRegistro = () => {
   const Item = styled(Paper)(({ theme }) => ({
@@ -25,61 +26,51 @@ const FormCompletarRegistro = () => {
     color: theme.palette.text.secondary,
   }));
 
+  const handleSelectChange = (event) => {
+    console.log(event);
+  };
 
-
-  
   //consultar api para traer los estados de un endpoint y mostrarlos en el select
+
+//cambiar el id del estado segun el estado seleccionado
+
 
   const [estados, setEstados] = useState([]);
 
+  // Consulta Estados y guardar el id del estado seleccionado
   useEffect(() => {
-    const fetchEstados = async () => {
-      const response = await axios.get(
-        "https://valink-pay-api.vercel.app/formulario/lista/estados"
-      );
-      const newData = await response.data;
-      setEstados(newData);
-      console.warn(response.data);
+    const consultarAPI = async () => {
+      const url = "https://valink-pay-api.vercel.app/formulario/lista/estados";
+      const resultado = await axios.get(url);
+      setEstados(resultado.data);
+
     };
-    fetchEstados();
+    consultarAPI();
+    console.log(estados);
   }, []);
 
-    const [usuario, setUsuario] = useState([]);
-  
-    useEffect(() => {
-      const id = JSON.parse(localStorage.getItem("id"));
-      axios
-        .get(`https://valink-pay-api.vercel.app/users/${id}`, {
-          headers: {
-            Authorization: JSON.parse(localStorage.getItem("token")),
-          },
-        })
-        .then((response) => {
-          console.log(response.data);
-          setUsuario(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }, []);
+
+
+
+
 
   return (
     <div className="form-completar-registro">
       <Form>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <FormControl>
-          <Typography
-                variant="p"
-                fontWeight="bold"
-                color="#006d8e"
-                fontFamily=""
-                align="left"
-                fontSize="1rem"
-              >
-                Completar registro
-              </Typography>
-              <div className="espaciador-amarillo"></div>
-              <br />
+            <Typography
+              variant="p"
+              fontWeight="bold"
+              color="#006d8e"
+              fontFamily=""
+              align="left"
+              fontSize="1rem"
+            >
+              Completar registro
+            </Typography>
+            <div className="espaciador-amarillo"></div>
+            <br />
             <Alert icon={false} severity="info">
               ¿Utilizarás ValinkPay como persona natural o como persona jurídica
               (empresa)?
@@ -100,7 +91,8 @@ const FormCompletarRegistro = () => {
         </Form.Group>
         <Alert icon={false} severity="info">
           Datos de comercio<br></br>
-          -Debes ingresar el nombre o razón social tal como aparece en el documento de identificación.
+          -Debes ingresar el nombre o razón social tal como aparece en el
+          documento de identificación.
         </Alert>
         <Stack
           direction={{ xs: "column", sm: "row" }}
@@ -152,8 +144,7 @@ const FormCompletarRegistro = () => {
             />
           </Item>
         </Stack>
-        <Stack
-        >
+        <Stack>
           <Item elevation={0}>
             <TextField
               id="outlined-basic"
@@ -183,25 +174,21 @@ const FormCompletarRegistro = () => {
           spacing={{ xs: 1, sm: 2, md: 4 }}
         >
           <Item elevation={0}>
-            <TextField
-              id="outlined-basic"
-              label="Estado"
+            <Select
+              options={estados.map((estados) => ({
+                label: estados.estado,
+                value: estados.id_estado,}))}
+              onChange={handleSelectChange}
               placeholder="Seleccione un estado"
-              variant="outlined"
-              size="small"
-              fullWidth
+              
+    
             />
           </Item>
           <Item elevation={0}>
-          <TextField
-              id="outlined-basic"
-              label="Ciudad"
-              placeholder="Seleccione una ciudad"
-              variant="outlined"
-              size="small"
-              fullWidth
+                
 
-            />
+
+
           </Item>
         </Stack>
         <Stack
@@ -219,7 +206,7 @@ const FormCompletarRegistro = () => {
             />
           </Item>
           <Item elevation={0}>
-          <TextField
+            <TextField
               id="outlined-basic"
               label="dirección"
               placeholder="Ej: Av. Los Ruices, Edificio ValinkPay, Piso 1, Oficina 1"
@@ -230,8 +217,7 @@ const FormCompletarRegistro = () => {
           </Item>
         </Stack>
         <Alert icon={false} severity="info">
-        Datos del representante legal
-
+          Datos del representante legal
         </Alert>
         <Stack
           direction={{ xs: "column", sm: "row" }}
@@ -249,7 +235,7 @@ const FormCompletarRegistro = () => {
             />
           </Item>
           <Item elevation={0}>
-          <TextField
+            <TextField
               id="outlined-basic"
               label="Cedula del Represéntate Legal"
               placeholder="Ej: V-12345678"
@@ -274,7 +260,7 @@ const FormCompletarRegistro = () => {
             />
           </Item>
           <Item elevation={0}>
-          <TextField
+            <TextField
               id="outlined-basic"
               label="Teléfono del Representante
               Legal"
@@ -286,15 +272,13 @@ const FormCompletarRegistro = () => {
           </Item>
         </Stack>
         <Alert icon={false} severity="info">
-        Datos de contacto
-        Indícanos con quien ValinkPay debe contactarse en caso que sea necesario.
-        <br></br>
-- Estos son los datos de la persona que administra la cuenta ValinkPay.
-<br></br>
-- Esta persona puede ser distinta al representante legal.
-<br></br>
-- Debes ingresar el nombre tal como aparece en el documento de identificación.
-
+          Datos de contacto Indícanos con quien ValinkPay debe contactarse en
+          caso que sea necesario.
+          <br></br>- Estos son los datos de la persona que administra la cuenta
+          ValinkPay.
+          <br></br>- Esta persona puede ser distinta al representante legal.
+          <br></br>- Debes ingresar el nombre tal como aparece en el documento
+          de identificación.
         </Alert>
         <Stack
           direction={{ xs: "column", sm: "row" }}
@@ -311,7 +295,7 @@ const FormCompletarRegistro = () => {
             />
           </Item>
           <Item elevation={0}>
-          <TextField
+            <TextField
               id="outlined-basic"
               label="Teléfono de Contacto "
               placeholder="Ej: 0414-1234567"
@@ -335,10 +319,8 @@ const FormCompletarRegistro = () => {
               fullWidth
             />
           </Item>
-
+          <Item elevation={0}></Item>
         </Stack>
-    
-    
       </Form>
     </div>
   );
