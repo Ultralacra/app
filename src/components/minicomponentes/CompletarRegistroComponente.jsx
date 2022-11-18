@@ -8,7 +8,9 @@ import axios from "axios";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import FormCompletarRegistro from "./FormCompletarRegistro";
+import FormCompletarRegistro2 from "./FormCompletarRegistro2";
 import Divider from "@mui/material/Divider";
+
 
 const CompletarRegistroComponente = () => {
   const [usuario, setUsuario] = useState([]);
@@ -201,7 +203,10 @@ const CompletarRegistroComponente = () => {
             </Item>
           </Grid>
           <Grid item xs>
-            <Item>cuadro vacio</Item>
+           <Item className="item-1-registro" >
+           
+              <FormCompletarRegistro2 />
+            </Item>
           </Grid>
         </Grid>
       </Container>
