@@ -19,95 +19,8 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import { LoadingButton } from "@mui/lab";
 import SendIcon from '@mui/icons-material/Send';
-import FileUpload from "./FileUpload";
-import { Upload } from 'antd';
-import ImgCrop from 'antd-img-crop';
 
 const CompletarRegistroComponente = () => {
-  const [TypePerson, setTypePerson] = useState("");
-  const [usuario, setUsuario] = useState([]);
-  const [datos, setDatos] = useState({
-    sUserId: "",
-    sTipoPersona: "",
-    sCedula: "",
-    sRazonSocial: " ",
-    sSitioWeb: "",
-    sTelefonoAsociado: "",
-    sCategoriaRubro: "",
-    sRubro: "",
-    sEstado: "",
-    sCiudad: "",
-    sMunicipio: "",
-    sDireccion: " ",
-    sActividadEcon: "",
-    sNombreReprLegal: " ",
-    sCedulaReprLegal: "",
-    sTelefonoReprLegal: "",
-    sEmailReprLegal: "",
-    sNombreContacto: "",
-    sTelefonoContacto: "",
-    sEmailContacto: "",
-    sNombrePublico: " ",
-    sEmailPublico: "",
-    sUrlLogo: "",
-    sTipoCuenta: "",
-    sRazonSocialCuenta: "",
-    sCedulaRif: "",
-    sNroCuentaBanco: "",
-    sConfirmarCuentaBan: "",
-    sMedioPago: "",
-  });
-
-  //caputrar el valor del input
-  const handleInputChange = (event) => {
-    console.log(event.target.value);
-
-    setDatos({
-      ...datos,
-      [event.target.name]: event.target.value,
-    });
-  };
-
-  const tipoDePersona = [
-    { id: "N", name: "Persona Natural" },
-    { id: "J", name: "Persona Jurídica" },
-  ];
-
-  //validar campos vacios
-
-  //Llamar los usuario
-  useEffect(() => {
-    const id = JSON.parse(localStorage.getItem("id"));
-    axios
-      .get(`https://valink-pay-api.vercel.app/users/${id}`, {
-        headers: {
-          Authorization: JSON.parse(localStorage.getItem("token")),
-        },
-      })
-      .then((response) => {
-        console.log(response.data);
-        setUsuario(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
-
-  //LLamar los bancos
-
-  const [bancos, setBancos] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get("https://valink-pay-api.vercel.app/formulario/lista/bancos")
-      .then((response) => {
-        console.log(response.data);
-        setBancos(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
 
   const drawerWidth = 240;
 
@@ -119,8 +32,177 @@ const CompletarRegistroComponente = () => {
     color: theme.palette.text.secondary,
   }));
 
+
+
+
+
+  //Llamar info usuario
+  const [usuario, setUsuario] = useState([]);
+useEffect(() => {
+  async function fetchData() {
+    const id = JSON.parse(localStorage.getItem("id"));
+    const response = await axios.get(
+      `https://valink-pay-api.vercel.app/users/${id}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: JSON.parse(localStorage.getItem("token")),
+        },
+      }
+    );
+    setUsuario(response.data);
+  }
+  fetchData();
+}, []);
+
+  //LLamar lista de bancos
+  const [bancos, setBancos] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await axios.get(
+        `https://valink-pay-api.vercel.app/formulario/lista/bancos`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: JSON.parse(localStorage.getItem("token")),
+          },
+        }
+      );
+      setBancos(response.data);
+    }
+    fetchData();
+  }, []);
+
+ //select de tipo de persona
+
+  const [typeperson, setTypePerson] = useState("");
+  const handleChange = (event) => {
+    setTypePerson(event.target.value);
+  };
+
+
+
+  const [sUserId, setsUserId] = useState(localStorage.getItem("id"));
+  const [sTipoPersona, setsTipoPersona] = useState("");
+  const [sCedula, setsCedula] = useState("");
+  const [sRazonSocial, setsRazonSocial] = useState("");
+  const [sSitioWeb, setsSitioWeb] = useState("");
+  const [sTelefonoAsociado, setsTelefonoAsociado] = useState("");
+  const [sCategoriaRubro, setsCategoriaRubro] = useState("");
+  const [sRubro, setsRubro] = useState("");
+  const [sEstado, setsEstado] = useState("");
+  const [sCiudad, setsCiudad] = useState("");
+  const [sMunicipio, setsMunicipio] = useState("");
+  const [sDireccion, setsDireccion] = useState("");
+  const [sActividadEcon, setsActividadEcon] = useState("");
+  const [sNombreReprLegal, setsNombreReprLegal] = useState("");
+  const [sCedulaReprLegal, setsCedulaReprLegal] = useState("");
+  const [sTelefonoReprLegal, setsTelefonoReprLegal] = useState("");
+  const [sEmailReprLegal, setsEmailReprLegal] = useState("");
+  const [sNombreContacto, setsNombreContacto] = useState("");
+  const [sTelefonoContacto, setsTelefonoContacto] = useState("");
+  const [sEmailContacto, setsEmailContacto] = useState("");
+  const [sNombrePublico, setsNombrePublico] = useState("");
+  const [sEmailPublico, setsEmailPublico] = useState("");
+  const [sUrlLogo, setsUrlLogo] = useState("");
+  const [sTipoCuenta, setsTipoCuenta] = useState("");
+  const [sBanco, setsBanco] = useState("");
+  const [sCedulaRif, setsCedulaRif] = useState("");
+  const [sNroCuentaBanco, setsNroCuentaBanco] = useState("");
+  const [sConfirmarCuentaBan, setsConfirmarCuentaBan] = useState("");
+  const [sMedioPago, setsMedioPago] = useState("");
+
+  async function finalizarRegistro  (e) {
+    e.preventDefault();
+    const response = await axios.post(
+      `https://valink-pay-api.vercel.app/clientes/completarregistro`,
+      {
+        sUserId: localStorage.getItem("id"),
+        sTipoPersona,
+        sCedula,
+        sRazonSocial,
+        sSitioWeb,
+        sTelefonoAsociado,
+        sCategoriaRubro,
+        sRubro,
+        sEstado,
+        sCiudad,
+        sMunicipio,
+        sDireccion,
+        sActividadEcon,
+        sNombreReprLegal,
+        sCedulaReprLegal,
+        sTelefonoReprLegal,
+        sEmailReprLegal,
+        sNombreContacto,
+        sTelefonoContacto,
+        sEmailContacto,
+        sNombrePublico,
+        sEmailPublico,
+        sUrlLogo,
+        sTipoCuenta,
+        sBanco,
+        sCedulaRif,
+        sNroCuentaBanco,
+        sConfirmarCuentaBan,
+        sMedioPago,
+      },
+    );
+
+    if (response.data.status === "success") {
+      console.log(response.data);
+      alert("Registro completado");
+    } else {
+      console.log(response.data);
+
+      alert("Error al completar el registro");
+    }
+  }
+
+
+
+
+ //Capturar datos de los inputs
+const changeEvent = (e, field) => {
+  if (field === 1) setsTipoPersona(e.target.value);
+  if (field === 2) setsCedula(e.target.value);
+  if (field === 3) setsRazonSocial(e.target.value);
+  if (field === 4) setsSitioWeb(e.target.value);
+  if (field === 5) setsTelefonoAsociado(e.target.value);
+  if (field === 6) setsCategoriaRubro(e.target.value);
+  if (field === 7) setsRubro(e.target.value);
+  if (field === 8) setsEstado(e.target.value);
+  if (field === 9) setsCiudad(e.target.value);
+  if (field === 10) setsMunicipio(e.target.value);
+  if (field === 11) setsDireccion(e.target.value);
+  if (field === 12) setsActividadEcon(e.target.value);
+  if (field === 13) setsNombreReprLegal(e.target.value);
+  if (field === 14) setsCedulaReprLegal(e.target.value);
+  if (field === 15) setsTelefonoReprLegal(e.target.value);
+  if (field === 16) setsEmailReprLegal(e.target.value);
+  if (field === 17) setsNombreContacto(e.target.value);
+  if (field === 18) setsTelefonoContacto(e.target.value);
+  if (field === 19) setsEmailContacto(e.target.value);
+  if (field === 20) setsNombrePublico(e.target.value);
+  if (field === 21) setsUrlLogo(e.target.value);
+  if (field === 22) setsTipoCuenta(e.target.value);
+  if (field === 23) setsBanco(e.target.value);
+  if (field === 24) setsCedulaRif(e.target.value);
+  if (field === 25) setsNroCuentaBanco(e.target.value);
+  if (field === 26) setsConfirmarCuentaBan(e.target.value);
+  if (field === 27) setsMedioPago(e.target.value);
+
+  console.log(e.target.value);
+
+};
+
+
   return (
-    <Box
+
+        
+    <div>
+ <Box
       sx={{
         width: { sm: `calc(100% - ${drawerWidth}px)` },
         ml: { sm: `${drawerWidth}px` },
@@ -281,6 +363,7 @@ const CompletarRegistroComponente = () => {
                       jurídica (empresa)?
                     </Alert>
                     <br />
+                  
 
                     <Alert icon={false} severity="info">
                       Datos de comercio<br></br>- Debes ingresar el nombre o
@@ -289,12 +372,12 @@ const CompletarRegistroComponente = () => {
                     </Alert>
                     <Grid
                       container
-                      rowSpacing={1}
                       columnSpacing={{ xs: 0.5, sm: 4, md: 1 }}
                     >
                       <Grid item xs={6}>
                         <Item elevation={0}>
                           <TextField
+                            onChange={(e) => changeEvent(e, 2)}
                             name="sCedula"
                             required
                             type="text"
@@ -302,7 +385,7 @@ const CompletarRegistroComponente = () => {
                             placeholder="Cédula o rif"
                             variant="outlined"
                             size="small"
-                            fullWidth
+                            
                           />
                         </Item>
                       </Grid>
@@ -316,7 +399,7 @@ const CompletarRegistroComponente = () => {
                             placeholder="Ejemplo: ValinkGroup C.A"
                             variant="outlined"
                             size="small"
-                            fullWidth
+                            
                           />
                         </Item>
                       </Grid>
@@ -330,7 +413,7 @@ const CompletarRegistroComponente = () => {
                             placeholder="Ejem: www.valinkgroup.com"
                             variant="outlined"
                             size="small"
-                            fullWidth
+                            
                           />
                         </Item>
                       </Grid>
@@ -344,36 +427,17 @@ const CompletarRegistroComponente = () => {
                             placeholder="Ejem: 0414-1234567"
                             variant="outlined"
                             size="small"
-                            fullWidth
                           />
                         </Item>
                       </Grid>
                       <Grid item xs={6}>
                         <Item elevation={0}>
-                          <TextField
-                            name="sCategoriaRubro"
-                            required
-                            select
-                            type="text"
-                            label="Categoria Rubro"
-                            variant="outlined"
-                            size="small"
-                            fullWidth
-                          />
+                          Categoria Rubro
                         </Item>
                       </Grid>
                       <Grid item xs={6}>
                         <Item elevation={0}>
-                          <TextField
-                            name="sRubro"
-                            required
-                            select
-                            type="text"
-                            label="Rubro"
-                            variant="outlined"
-                            size="small"
-                            fullWidth
-                          />
+                        Rubro
                         </Item>
                       </Grid>
                     </Grid>
@@ -382,45 +446,22 @@ const CompletarRegistroComponente = () => {
                     </Alert>
                     <Grid
                       container
-                      rowSpacing={1}
                       columnSpacing={{ xs: 0.5, sm: 4, md: 1 }}
                     >
                       <Grid item xs={6}>
                         <Item elevation={0}>
-                          <TextField
-                            required
-                            select
-                            label="Estado"
-                            variant="outlined"
-                            size="small"
-                            fullWidth
-                          />
+                      Estado
                         </Item>
                       </Grid>
                       <Grid item xs={6}>
                         <Item elevation={0}>
-                          <TextField
-                            name="sCiudad"
-                            required
-                            select
-                            label="Ciudad"
-                            variant="outlined"
-                            size="small"
-                            fullWidth
-                          />
+                      Ciudad
+                        
                         </Item>
                       </Grid>
                       <Grid item xs={6}>
                         <Item elevation={0}>
-                          <TextField
-                            name="sMunicipio"
-                            required
-                            select
-                            label="Muicipio"
-                            variant="outlined"
-                            size="small"
-                            fullWidth
-                          />
+                        municipio 
                         </Item>
                       </Grid>
                       <Grid item xs={6}>
@@ -433,7 +474,7 @@ const CompletarRegistroComponente = () => {
                             placeholder="Ejem: Av. Principal, Edificio 1, Piso 1, Oficina 1"
                             variant="outlined"
                             size="small"
-                            fullWidth
+                            
                           />
                         </Item>
                       </Grid>
@@ -443,7 +484,6 @@ const CompletarRegistroComponente = () => {
                     </Alert>
                     <Grid
                       container
-                      rowSpacing={1}
                       columnSpacing={{ xs: 0.5, sm: 4, md: 1 }}
                     >
                       <Grid item xs={6}>
@@ -457,7 +497,7 @@ const CompletarRegistroComponente = () => {
                             placeholder="Ejem: Juan Perez"
                             variant="outlined"
                             size="small"
-                            fullWidth
+                            
                           />
                         </Item>
                       </Grid>
@@ -471,7 +511,7 @@ const CompletarRegistroComponente = () => {
                             placeholder="Ejem: 12345678"
                             variant="outlined"
                             size="small"
-                            fullWidth
+                            
                           />
                         </Item>
                       </Grid>
@@ -487,7 +527,7 @@ const CompletarRegistroComponente = () => {
                             placeholder="Ejem: 0414-1234567"
                             variant="outlined"
                             size="small"
-                            fullWidth
+                            
                           />
                         </Item>
                       </Grid>
@@ -501,7 +541,7 @@ const CompletarRegistroComponente = () => {
                             placeholder="Ejem: juanperez@gmail.com"
                             variant="outlined"
                             size="small"
-                            fullWidth
+                            
                           />
                         </Item>
                       </Grid>
@@ -512,7 +552,6 @@ const CompletarRegistroComponente = () => {
                     </Alert>
                     <Grid
                       container
-                      rowSpacing={1}
                       columnSpacing={{ xs: 0.5, sm: 4, md: 1 }}
                     >
                       <Grid item xs={6}>
@@ -525,7 +564,7 @@ const CompletarRegistroComponente = () => {
                             placeholder="Ejem: Juan Perez"
                             variant="outlined"
                             size="small"
-                            fullWidth
+                            
                           />
                         </Item>
                       </Grid>
@@ -539,7 +578,7 @@ const CompletarRegistroComponente = () => {
                             placeholder="Ejem: 0414-1234567"
                             variant="outlined"
                             size="small"
-                            fullWidth
+                            
                           />
                         </Item>
                       </Grid>
@@ -553,7 +592,7 @@ const CompletarRegistroComponente = () => {
                             placeholder="Ejem: contacto@valinkpay.com"
                             variant="outlined"
                             size="small"
-                            fullWidth
+                            
                           />
                         </Item>
                       </Grid>
@@ -579,7 +618,7 @@ const CompletarRegistroComponente = () => {
                             placeholder="Ejem: ValinkPay C.A"
                             variant="outlined"
                             size="small"
-                            fullWidth
+                            
                           />
                         </Item>
                       </Stack>
@@ -598,7 +637,6 @@ const CompletarRegistroComponente = () => {
                     </Alert>
                     <Stack
                       container
-                      rowSpacing={1}
                       columnSpacing={{ xs: 0.5, sm: 4, md: 1 }}
                     >
                       <Stack item xs={6}>
@@ -611,7 +649,7 @@ const CompletarRegistroComponente = () => {
                             disabled
                             variant="outlined"
                             size="small"
-                            fullWidth
+                            
                           />
                         </Item>
                       </Stack>
@@ -626,7 +664,6 @@ const CompletarRegistroComponente = () => {
                     </Alert>
                     <Stack
                       container
-                      rowSpacing={1}
                       columnSpacing={{ xs: 0.5, sm: 4, md: 1 }}
                     >
                       <Stack item xs={6}>
@@ -646,32 +683,10 @@ const CompletarRegistroComponente = () => {
                     </Alert>
                     <Stack>
                       <Item elevation={0}>
-                        <Select
-                          name="sBanco"
-                          required
-                          size="small"
-                          fullWidth
-                          placeholder="Seleccione el Banco"
-                        >
-                          {bancos.map((banco) => (
-                            <MenuItem value={banco.sDescripcion}>
-                              {banco.sDescripcion}
-                            </MenuItem>
-                          ))}
-                        </Select>
+                     banco
                       </Item>
                       <Item elevation={0}>
-                        <Select
-                          name="sTipoCuenta"
-                          required
-                          label="Tipo de cuenta"
-                          variant="outlined"
-                          size="small"
-                          fullWidth
-                        >
-                          <MenuItem value="ahorro">AHORRO</MenuItem>
-                          <MenuItem value="corriente">CORRIENTE</MenuItem>
-                        </Select>
+                       tipo de cuanta
                       </Item>
                       <Item elevation={0}>
                         <TextField
@@ -683,6 +698,7 @@ const CompletarRegistroComponente = () => {
                           variant="outlined"
                           size="small"
                           fullWidth
+                          
                         />
                       </Item>
                       <Item elevation={0}>
@@ -695,6 +711,7 @@ const CompletarRegistroComponente = () => {
                           variant="outlined"
                           size="small"
                           fullWidth
+                          
                         />
                       </Item>
                       <Item elevation={0}>
@@ -719,16 +736,20 @@ const CompletarRegistroComponente = () => {
                           variant="outlined"
                           size="small"
                           fullWidth
-                        />
-                        <LoadingButton
-                          fullWidth
-                          size="large"
-                          variant="contained"
-                          endIcon={<SendIcon/>}
                           
-                        >
-                          Guardar
-                        </LoadingButton>
+                          
+                        />
+                       <LoadingButton
+                  endIcon={<SendIcon />}
+                  onClick={finalizarRegistro} 
+                  className="btn-create-account"
+                  fullWidth
+                  
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                >
+                  Finalizar Registro
+                </LoadingButton>
 
                       </Item>
                     </Stack>
@@ -740,7 +761,8 @@ const CompletarRegistroComponente = () => {
         </Grid>
         <br></br>
       </Container>
-    </Box>
+    </Box> 
+  </div>
   );
 };
 
