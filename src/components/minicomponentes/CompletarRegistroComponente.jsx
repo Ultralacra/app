@@ -17,6 +17,11 @@ import Button from "@mui/material/Button";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
+import { LoadingButton } from "@mui/lab";
+import SendIcon from '@mui/icons-material/Send';
+import FileUpload from "./FileUpload";
+import { Upload } from 'antd';
+import ImgCrop from 'antd-img-crop';
 
 const CompletarRegistroComponente = () => {
   const [TypePerson, setTypePerson] = useState("");
@@ -269,16 +274,6 @@ const CompletarRegistroComponente = () => {
               >
                 <Grid item xs={6}>
                   <Item elevation={0}>
-                    <Typography
-                      variant="p"
-                      fontWeight="bold"
-                      color="#006d8e"
-                      fontFamily=""
-                      align="left"
-                      fontSize="1rem"
-                    >
-                      Completar registro
-                    </Typography>
                     <div className="espaciador-amarillo"></div>
                     <br />
                     <Alert icon={false} severity="info">
@@ -567,16 +562,6 @@ const CompletarRegistroComponente = () => {
                 </Grid>
                 <Grid item xs={6}>
                   <Item elevation={0}>
-                    <Typography
-                      variant="p"
-                      fontWeight="bold"
-                      color="#006d8e"
-                      fontFamily=""
-                      align="left"
-                      fontSize="1rem"
-                    >
-                      Datos Publicos
-                    </Typography>
                     <div className="espaciador-amarillo"></div>
                     <br />
                     <Alert icon={false} severity="info">
@@ -645,7 +630,11 @@ const CompletarRegistroComponente = () => {
                       columnSpacing={{ xs: 0.5, sm: 4, md: 1 }}
                     >
                       <Stack item xs={6}>
-                        <Item elevation={0}>Campo para subir logo</Item>
+                        <Item elevation={0}>
+
+          logo
+
+                        </Item>
                       </Stack>
                     </Stack>
                     <Stack
@@ -660,14 +649,13 @@ const CompletarRegistroComponente = () => {
                         <Select
                           name="sBanco"
                           required
-                          variant="outlined"
                           size="small"
                           fullWidth
+                          placeholder="Seleccione el Banco"
                         >
                           {bancos.map((banco) => (
-                            <MenuItem  value={banco.sDescripcion}>
+                            <MenuItem value={banco.sDescripcion}>
                               {banco.sDescripcion}
-                              
                             </MenuItem>
                           ))}
                         </Select>
@@ -732,6 +720,16 @@ const CompletarRegistroComponente = () => {
                           size="small"
                           fullWidth
                         />
+                        <LoadingButton
+                          fullWidth
+                          size="large"
+                          variant="contained"
+                          endIcon={<SendIcon/>}
+                          
+                        >
+                          Guardar
+                        </LoadingButton>
+
                       </Item>
                     </Stack>
                   </Item>
