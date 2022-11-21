@@ -70,12 +70,6 @@ const CompletarRegistroComponente = () => {
   }, []);
 
   //select de tipo de persona
-
-  const [typeperson, setTypePerson] = useState("");
-  const handleChange = (event) => {
-    setTypePerson(event.target.value);
-  };
-
   const [sUserId, setsUserId] = useState(localStorage.getItem("id"));
   const [sTipoPersona, setsTipoPersona] = useState("");
   const [sCedula, setsCedula] = useState("");
@@ -185,6 +179,7 @@ const CompletarRegistroComponente = () => {
 
     console.log(e.target.value);
   };
+
 
   return (
     <div>
@@ -359,7 +354,7 @@ const CompletarRegistroComponente = () => {
                         <Grid item xs={6}>
                           <Item elevation={0}>
                             <TextField
-                              onChange={(e) => changeEvent(e, 2)}
+                              onChange={changeEvent}
                               name="sCedula"
                               required
                               type="text"
