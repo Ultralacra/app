@@ -719,7 +719,7 @@ const changeEvent = (e, field) => {
                           required
                           helperText="Sin puntos ni guiones"
                           type="number"
-                          label="Nro. dé Cuenta de banco"
+                          label="Nro. de Cuenta de banco"
                           placeholder="Ejem: 12345678901234567890"
                           variant="outlined"
                           size="small"
