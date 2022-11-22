@@ -104,7 +104,7 @@ const handleChange = (e) => {
   };
 
 const registrar = () => {
-  console.log(valueRef.current.value);
+  // console.log(valueRef.current.value);
 };
 
 
@@ -313,7 +313,7 @@ const Item = styled(Paper)(({ theme }) => ({
                               placeholder="Ejemplo: ValinkGroup C.A"
                               variant="outlined"
                               size="small"
-                              inputRef={valueRef}
+                              // inputRef={valueRef}
                             />
                           </Item>
                         </Grid>
