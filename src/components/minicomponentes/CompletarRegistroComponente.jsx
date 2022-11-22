@@ -313,6 +313,7 @@ const Item = styled(Paper)(({ theme }) => ({
                               placeholder="Ejemplo: ValinkGroup C.A"
                               variant="outlined"
                               size="small"
+                              inputRef={sCedulaRef}
                             />
                           </Item>
                         </Grid>
