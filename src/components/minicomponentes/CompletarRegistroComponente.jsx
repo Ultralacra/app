@@ -103,7 +103,7 @@ const handleChange = (e) => {
   console.log(body)
   const obj = {...body};
   const name = e.target.name;
-  obj.name = e.target.value;
+  obj[name] = e.target.value;
   setBody(obj)
 
   console.log(body)
