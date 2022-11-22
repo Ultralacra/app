@@ -18,8 +18,13 @@ import Swal from "sweetalert2";
 
 
 export default function SignInSide() {
+
+
+
+
   const theme = createTheme();
   const [loading, setLoading] = useState(false);
+
 
   const handleSubmit = (event) => {
 
@@ -28,6 +33,10 @@ export default function SignInSide() {
     setLoading(true);
 
     Axios.post("https://valink-pay-api.vercel.app/login", {
+
+    //capos vacios
+
+    
 
       login: data.get("username"),
       password: data.get("password"),
@@ -65,6 +74,7 @@ export default function SignInSide() {
       
       });
   };
+
 
   return (
     <ThemeProvider theme={theme}>

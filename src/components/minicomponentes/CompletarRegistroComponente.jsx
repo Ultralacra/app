@@ -8,32 +8,22 @@ import axios from "axios";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import Divider from "@mui/material/Divider";
-import FormControl from "@mui/material/FormControl";
-import Form from "react-bootstrap/Form";
 import TextField from "@mui/material/TextField";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
 import { LoadingButton } from "@mui/lab";
 import SendIcon from "@mui/icons-material/Send";
-import { ConstructionOutlined } from "@mui/icons-material";
+import InputAdornment from "@mui/material/InputAdornment";
+import AccountCircle from "@mui/icons-material/AccountCircle";
 
 const CompletarRegistroComponente = () => {
-  const drawerWidth = 240;
-
-  const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-  }));
-
-  //Llamar info usuario
+  //Datos del usuario
   const [usuario, setUsuario] = useState([]);
+  //LLamar lista de bancos
+  const [bancos, setBancos] = useState([]);
+  //Datos del formulario
+ 
+//Llamar info usuario
   useEffect(() => {
     async function fetchData() {
       const id = JSON.parse(localStorage.getItem("id"));
@@ -52,8 +42,6 @@ const CompletarRegistroComponente = () => {
   }, []);
 
   //LLamar lista de bancos
-  const [bancos, setBancos] = useState([]);
-
   useEffect(() => {
     async function fetchData() {
       const response = await axios.get(
@@ -70,118 +58,63 @@ const CompletarRegistroComponente = () => {
     fetchData();
   }, []);
 
-  //select de tipo de persona
-  const [sUserId, setsUserId] = useState(localStorage.getItem("id"));
-  const [sTipoPersona, setsTipoPersona] = useState("");
-  const [sCedula, setsCedula] = useState("");
-  const [sRazonSocial, setsRazonSocial] = useState("");
-  const [sSitioWeb, setsSitioWeb] = useState("");
-  const [sTelefonoAsociado, setsTelefonoAsociado] = useState("");
-  const [sCategoriaRubro, setsCategoriaRubro] = useState("");
-  const [sRubro, setsRubro] = useState("");
-  const [sEstado, setsEstado] = useState("");
-  const [sCiudad, setsCiudad] = useState("");
-  const [sMunicipio, setsMunicipio] = useState("");
-  const [sDireccion, setsDireccion] = useState("");
-  const [sActividadEcon, setsActividadEcon] = useState("");
-  const [sNombreReprLegal, setsNombreReprLegal] = useState("");
-  const [sCedulaReprLegal, setsCedulaReprLegal] = useState("");
-  const [sTelefonoReprLegal, setsTelefonoReprLegal] = useState("");
-  const [sEmailReprLegal, setsEmailReprLegal] = useState("");
-  const [sNombreContacto, setsNombreContacto] = useState("");
-  const [sTelefonoContacto, setsTelefonoContacto] = useState("");
-  const [sEmailContacto, setsEmailContacto] = useState("");
-  const [sNombrePublico, setsNombrePublico] = useState("");
-  const [sEmailPublico, setsEmailPublico] = useState("");
-  const [sUrlLogo, setsUrlLogo] = useState("");
-  const [sTipoCuenta, setsTipoCuenta] = useState("");
-  const [sBanco, setsBanco] = useState("");
-  const [sCedulaRif, setsCedulaRif] = useState("");
-  const [sNroCuentaBanco, setsNroCuentaBanco] = useState("");
-  const [sConfirmarCuentaBan, setsConfirmarCuentaBan] = useState("");
-  const [sMedioPago, setsMedioPago] = useState("");
+ 
 
-  async function finalizarRegistro(e) {
-    e.preventDefault();
-    const response = await axios.post(
-      `https://valink-pay-api.vercel.app/clientes/completarregistro`,
-      {
-        sUserId: localStorage.getItem("id"),
-        sTipoPersona: sTipoPersona,
-        sCedula,
-        sRazonSocial: sRazonSocial,
-        sSitioWeb: sSitioWeb,
-        sTelefonoAsociado: sTelefonoAsociado,
-        sCategoriaRubro: sCategoriaRubro,
-        sRubro: sRubro,
-        sEstado: sEstado,
-        sCiudad: sCiudad,
+  
 
-        sMunicipio: sMunicipio,
-        sDireccion: sDireccion,
-        sActividadEcon: sActividadEcon,
-        sNombreReprLegal: sNombreReprLegal,
-        sCedulaReprLegal: sCedulaReprLegal,
-        sTelefonoReprLegal: sTelefonoReprLegal,
-        sEmailReprLegal: sEmailReprLegal,
-        sNombreContacto: sNombreContacto,
-        sTelefonoContacto: sTelefonoContacto,
-        sEmailContacto: sEmailContacto,
-        sNombrePublico: sNombrePublico,
-        sEmailPublico: sEmailPublico,
-        sUrlLogo: sUrlLogo,
-        sTipoCuenta: sTipoCuenta,
-        sBanco: sBanco,
-        sCedulaRif: sCedulaRif,
-        sNroCuentaBanco: sNroCuentaBanco,
-        sConfirmarCuentaBan: sConfirmarCuentaBan,
-        sMedioPago: sMedioPago
-      }
-    );
-    if (response.data.status === "fail") {
-      alert("Este usuario ya se encuentra registrado");
-    } else {
-      alert("Error al completar el registro");
-    }
-  }
+const [body , setBody] = useState({
 
+  sUserId: localStorage.getItem("id"),
+        sTipoPersona: "13123123123",
+        sCedula: "",
+        sRazonSocial: "",
+        sSitioWeb: "",
+        sTelefonoAsociado: "",
+        sCategoriaRubro: "",
+        sRubro:   "",
+        sEstado: "",
+        sCiudad: "",
+        sMunicipio:  "",
+        sDireccion: "",
+        sActividadEcon:   "",
+        sNombreReprLegal: "",
+        sCedulaReprLegal: "",
+        sTelefonoReprLegal: "",
+        sEmailReprLegal: "",  
+        sNombreContacto:  "",
+        sTelefonoContacto: "",
+        sEmailContacto: "",
+        sNombrePublico: "",
+        sEmailPublico:  "",
+        sUrlLogo: "",
+        sTipoCuenta: "",
+        sBanco: "",
+        sCedulaRif: "",
+        sNroCuentaBanco: "",
+        sConfirmarCuentaBan: "",
+        sMedioPago: "",
 
-  //Capturar datos de los inputs
-  const changeEvent = (e, field) => {
-    if (field === 1) setsTipoPersona(e.target.value);
-    if (field === 2) setsCedula(e.target.value);
-    if (field === 3) setsRazonSocial(e.target.value);
-    if (field === 4) setsSitioWeb(e.target.value);
-    if (field === 5) setsTelefonoAsociado(e.target.value);
-    if (field === 6) setsCategoriaRubro(e.target.value);
-    if (field === 7) setsRubro(e.target.value);
-    if (field === 8) setsEstado(e.target.value);
-    if (field === 9) setsCiudad(e.target.value);
-    if (field === 10) setsMunicipio(e.target.value);
-    if (field === 11) setsDireccion(e.target.value);
-    if (field === 12) setsActividadEcon(e.target.value);
-    if (field === 13) setsNombreReprLegal(e.target.value);
-    if (field === 14) setsCedulaReprLegal(e.target.value);
-    if (field === 15) setsTelefonoReprLegal(e.target.value);
-    if (field === 16) setsEmailReprLegal(e.target.value);
-    if (field === 17) setsNombreContacto(e.target.value);
-    if (field === 18) setsTelefonoContacto(e.target.value);
-    if (field === 19) setsEmailContacto(e.target.value);
-    if (field === 20) setsNombrePublico(e.target.value);
-    if (field === 21) setsEmailPublico(e.target.value);
-    if (field === 22) setsUrlLogo(e.target.value);
-    if (field === 23) setsTipoCuenta(e.target.value);
-    if (field === 24) setsBanco(e.target.value);
-    if (field === 25) setsCedulaRif(e.target.value);
-    if (field === 26) setsNroCuentaBanco(e.target.value);
-    if (field === 27) setsConfirmarCuentaBan(e.target.value);
-    if (field === 28) setsMedioPago(e.target.value);
+})
+console.log(body)
 
-    console.log(e.target.value);
+const handleChange = (e) => {
+    setBody({
+      ...body,
+      [e.target.name]: e.target.value,
+    });
   };
 
 
+//Config del tema
+const drawerWidth = 240;
 
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: "center",
+  color: theme.palette.text.secondary,
+}));
 
 
   return (
@@ -356,22 +289,20 @@ const CompletarRegistroComponente = () => {
                       <Grid container columnSpacing={{ xs: 0.5, sm: 4, md: 1 }}>
                         <Grid item xs={6}>
                           <Item elevation={0}>
-                            <TextField
-                              onChange={(e) => changeEvent(e, 2)}
-                              name="sCedula"
-                              required
-                              type="text"
-                              label="Cédula o rif"
-                              placeholder="Cédula o rif"
-                              variant="outlined"
-                              size="small"
-                            />
+                          <TextField
+                          onChange={handleChange}
+                          value={body.sCedula}
+                      required
+                      size="small"
+                      fullWidth
+                      name="sCedula"
+                      label="Cedula o Rif"
+                      type="text"/>
                           </Item>
                         </Grid>
                         <Grid item xs={6}>
                           <Item elevation={0}>
                             <TextField
-                            onChange={(e) => changeEvent(e, 3)}
                               name="sRazonSocial"
                               required
                               type="text"
@@ -385,7 +316,6 @@ const CompletarRegistroComponente = () => {
                         <Grid item xs={6}>
                           <Item elevation={0}>
                             <TextField
-                            onChange={(e) => changeEvent(e, 4)}
                               name="sSitioWeb"
                               required
                               type="text"
@@ -399,7 +329,6 @@ const CompletarRegistroComponente = () => {
                         <Grid item xs={6}>
                           <Item elevation={0}>
                             <TextField
-                            onChange={(e) => changeEvent(e, 5)}
                               name="sTelefonoAsociado"
                               required
                               type="tel"
@@ -433,7 +362,6 @@ const CompletarRegistroComponente = () => {
                         <Grid item xs={6}>
                           <Item elevation={0}>
                             <TextField
-                            onChange={changeEvent}
                               name="sDireccion"
                               required
                               type="text"
@@ -452,7 +380,6 @@ const CompletarRegistroComponente = () => {
                         <Grid item xs={6}>
                           <Item elevation={0}>
                             <TextField
-                            onChange={(e) => changeEvent(e, 13)}
                               name="sNombreReprLegal"
                               required
                               type="text"
@@ -467,7 +394,6 @@ const CompletarRegistroComponente = () => {
                         <Grid item xs={6}>
                           <Item elevation={0}>
                             <TextField
-                            onChange={(e) => changeEvent(e, 14)}
                               name="sCedulaReprLegal"
                               required
                               type="text"
@@ -481,7 +407,6 @@ const CompletarRegistroComponente = () => {
                         <Grid item xs={6}>
                           <Item elevation={0}>
                             <TextField
-                            onChange={(e) => changeEvent(e, 15)}
                               name="sTelefonoReprLegal"
                               required
                               type="tel"
@@ -497,7 +422,6 @@ const CompletarRegistroComponente = () => {
                         <Grid item xs={6}>
                           <Item elevation={0}>
                             <TextField
-                            onChange={(e) => changeEvent(e, 16)}
                               name="sEmailReprLegal"
                               required
                               type="text"
@@ -517,7 +441,6 @@ const CompletarRegistroComponente = () => {
                         <Grid item xs={6}>
                           <Item elevation={0}>
                             <TextField
-                            onChange={(e) => changeEvent(e, 17)}
                               name="sNombreContacto"
                               required
                               type="text"
@@ -531,7 +454,6 @@ const CompletarRegistroComponente = () => {
                         <Grid item xs={6}>
                           <Item elevation={0}>
                             <TextField
-                            onChange={(e) => changeEvent(e, 18)}
                               name="sTelefonoContacto"
                               required
                               type="tel"
@@ -545,7 +467,6 @@ const CompletarRegistroComponente = () => {
                         <Grid item xs={6}>
                           <Item elevation={0}>
                             <TextField
-                            onChange={(e) => changeEvent(e, 19)}
                               name="sEmailContacto"
                               required
                               type="mail"
@@ -571,7 +492,6 @@ const CompletarRegistroComponente = () => {
                         <Stack item xs={6}>
                           <Item elevation={0}>
                             <TextField
-                            onChange={(e) => changeEvent(e, 20)}
                               name="sNombrePublico"
                               required
                               type="text"
@@ -602,7 +522,6 @@ const CompletarRegistroComponente = () => {
                         <Stack item xs={6}>
                           <Item elevation={0}>
                             <TextField
-                            onChange={(e) => changeEvent(e, 21)}
                               name="sEmailPublico"
                               required
                               type="email"
@@ -655,7 +574,6 @@ const CompletarRegistroComponente = () => {
                         </Item>
                         <Item elevation={0}>
                           <TextField
-                          onChange= {(e) => changeEvent(e, 25)}
                             name="sCedulaRif"
                             required
                             type="text"
@@ -668,7 +586,6 @@ const CompletarRegistroComponente = () => {
                         </Item>
                         <Item elevation={0}>
                           <TextField
-                          onChange= {(e) => changeEvent(e, 26)}
                           name="sNroCuentaBanco"
                             required
                             helperText="Sin puntos ni guiones"
@@ -682,7 +599,6 @@ const CompletarRegistroComponente = () => {
                         </Item>
                         <Item elevation={0}>
                           <TextField
-                          onChange= {(e) => changeEvent(e, 27)}
                           name="sConfirmarCuentaBan"
                             required
                             helperText="Sin puntos ni guiones"
@@ -695,7 +611,6 @@ const CompletarRegistroComponente = () => {
                           />
                           <LoadingButton
                             endIcon={<SendIcon />}
-                            onClick={finalizarRegistro}
                             className="btn-create-account"
                             fullWidth
                             variant="contained"
