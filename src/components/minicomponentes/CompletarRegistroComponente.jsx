@@ -102,7 +102,7 @@ const handleChange = (e) => {
   };
 
 const registrar = () => {
-  console.log(this.refs.sCedulaFiled.getValue());
+  console.log(this.refs.sCedulaField.getValue());
 };
 
 
