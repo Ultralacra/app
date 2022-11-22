@@ -101,7 +101,11 @@ console.log(body)
 const handleChange = (e) => {
   console.log(e.target.value)
   console.log(body)
-  setBody(body.sCedula = e.target.value)
+  const obj = {...body};
+  obj.e.target.name
+  setBody(obj)
+
+  console.log(body)
     // setBody({
     //   ...body,
     //   [e.target.name]: e.target.value,
