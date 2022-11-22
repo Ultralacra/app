@@ -19,6 +19,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import { LoadingButton } from "@mui/lab";
 import SendIcon from "@mui/icons-material/Send";
+import { ConstructionOutlined } from "@mui/icons-material";
 
 const CompletarRegistroComponente = () => {
   const drawerWidth = 240;
@@ -106,46 +107,44 @@ const CompletarRegistroComponente = () => {
       `https://valink-pay-api.vercel.app/clientes/completarregistro`,
       {
         sUserId: localStorage.getItem("id"),
-        sTipoPersona,
+        sTipoPersona: sTipoPersona,
         sCedula,
-        sRazonSocial,
-        sSitioWeb,
-        sTelefonoAsociado,
-        sCategoriaRubro,
-        sRubro,
-        sEstado,
-        sCiudad,
-        sMunicipio,
-        sDireccion,
-        sActividadEcon,
-        sNombreReprLegal,
-        sCedulaReprLegal,
-        sTelefonoReprLegal,
-        sEmailReprLegal,
-        sNombreContacto,
-        sTelefonoContacto,
-        sEmailContacto,
-        sNombrePublico,
-        sEmailPublico,
-        sUrlLogo,
-        sTipoCuenta,
-        sBanco,
-        sCedulaRif,
-        sNroCuentaBanco,
-        sConfirmarCuentaBan,
-        sMedioPago,
+        sRazonSocial: sRazonSocial,
+        sSitioWeb: sSitioWeb,
+        sTelefonoAsociado: sTelefonoAsociado,
+        sCategoriaRubro: sCategoriaRubro,
+        sRubro: sRubro,
+        sEstado: sEstado,
+        sCiudad: sCiudad,
+
+        sMunicipio: sMunicipio,
+        sDireccion: sDireccion,
+        sActividadEcon: sActividadEcon,
+        sNombreReprLegal: sNombreReprLegal,
+        sCedulaReprLegal: sCedulaReprLegal,
+        sTelefonoReprLegal: sTelefonoReprLegal,
+        sEmailReprLegal: sEmailReprLegal,
+        sNombreContacto: sNombreContacto,
+        sTelefonoContacto: sTelefonoContacto,
+        sEmailContacto: sEmailContacto,
+        sNombrePublico: sNombrePublico,
+        sEmailPublico: sEmailPublico,
+        sUrlLogo: sUrlLogo,
+        sTipoCuenta: sTipoCuenta,
+        sBanco: sBanco,
+        sCedulaRif: sCedulaRif,
+        sNroCuentaBanco: sNroCuentaBanco,
+        sConfirmarCuentaBan: sConfirmarCuentaBan,
+        sMedioPago: sMedioPago
       }
     );
-
-    if (response.data.status === "success") {
-      console.log(response.data);
-      alert("Registro completado");
+    if (response.data.status === "fail") {
+      alert("Este usuario ya se encuentra registrado");
     } else {
-      console.log(response.data);
-
       alert("Error al completar el registro");
     }
   }
+
 
   //Capturar datos de los inputs
   const changeEvent = (e, field) => {
@@ -169,16 +168,20 @@ const CompletarRegistroComponente = () => {
     if (field === 18) setsTelefonoContacto(e.target.value);
     if (field === 19) setsEmailContacto(e.target.value);
     if (field === 20) setsNombrePublico(e.target.value);
-    if (field === 21) setsUrlLogo(e.target.value);
-    if (field === 22) setsTipoCuenta(e.target.value);
-    if (field === 23) setsBanco(e.target.value);
-    if (field === 24) setsCedulaRif(e.target.value);
-    if (field === 25) setsNroCuentaBanco(e.target.value);
-    if (field === 26) setsConfirmarCuentaBan(e.target.value);
-    if (field === 27) setsMedioPago(e.target.value);
+    if (field === 21) setsEmailPublico(e.target.value);
+    if (field === 22) setsUrlLogo(e.target.value);
+    if (field === 23) setsTipoCuenta(e.target.value);
+    if (field === 24) setsBanco(e.target.value);
+    if (field === 25) setsCedulaRif(e.target.value);
+    if (field === 26) setsNroCuentaBanco(e.target.value);
+    if (field === 27) setsConfirmarCuentaBan(e.target.value);
+    if (field === 28) setsMedioPago(e.target.value);
 
     console.log(e.target.value);
   };
+
+
+
 
 
   return (
@@ -354,7 +357,7 @@ const CompletarRegistroComponente = () => {
                         <Grid item xs={6}>
                           <Item elevation={0}>
                             <TextField
-                              onChange={changeEvent}
+                              onChange={(e) => changeEvent(e, 2)}
                               name="sCedula"
                               required
                               type="text"
@@ -368,6 +371,7 @@ const CompletarRegistroComponente = () => {
                         <Grid item xs={6}>
                           <Item elevation={0}>
                             <TextField
+                            onChange={(e) => changeEvent(e, 3)}
                               name="sRazonSocial"
                               required
                               type="text"
@@ -381,6 +385,7 @@ const CompletarRegistroComponente = () => {
                         <Grid item xs={6}>
                           <Item elevation={0}>
                             <TextField
+                            onChange={(e) => changeEvent(e, 4)}
                               name="sSitioWeb"
                               required
                               type="text"
@@ -394,6 +399,7 @@ const CompletarRegistroComponente = () => {
                         <Grid item xs={6}>
                           <Item elevation={0}>
                             <TextField
+                            onChange={(e) => changeEvent(e, 5)}
                               name="sTelefonoAsociado"
                               required
                               type="tel"
@@ -427,6 +433,7 @@ const CompletarRegistroComponente = () => {
                         <Grid item xs={6}>
                           <Item elevation={0}>
                             <TextField
+                            onChange={changeEvent}
                               name="sDireccion"
                               required
                               type="text"
@@ -445,6 +452,7 @@ const CompletarRegistroComponente = () => {
                         <Grid item xs={6}>
                           <Item elevation={0}>
                             <TextField
+                            onChange={(e) => changeEvent(e, 13)}
                               name="sNombreReprLegal"
                               required
                               type="text"
@@ -459,6 +467,7 @@ const CompletarRegistroComponente = () => {
                         <Grid item xs={6}>
                           <Item elevation={0}>
                             <TextField
+                            onChange={(e) => changeEvent(e, 14)}
                               name="sCedulaReprLegal"
                               required
                               type="text"
@@ -472,6 +481,7 @@ const CompletarRegistroComponente = () => {
                         <Grid item xs={6}>
                           <Item elevation={0}>
                             <TextField
+                            onChange={(e) => changeEvent(e, 15)}
                               name="sTelefonoReprLegal"
                               required
                               type="tel"
@@ -487,6 +497,7 @@ const CompletarRegistroComponente = () => {
                         <Grid item xs={6}>
                           <Item elevation={0}>
                             <TextField
+                            onChange={(e) => changeEvent(e, 16)}
                               name="sEmailReprLegal"
                               required
                               type="text"
@@ -506,6 +517,7 @@ const CompletarRegistroComponente = () => {
                         <Grid item xs={6}>
                           <Item elevation={0}>
                             <TextField
+                            onChange={(e) => changeEvent(e, 17)}
                               name="sNombreContacto"
                               required
                               type="text"
@@ -519,6 +531,7 @@ const CompletarRegistroComponente = () => {
                         <Grid item xs={6}>
                           <Item elevation={0}>
                             <TextField
+                            onChange={(e) => changeEvent(e, 18)}
                               name="sTelefonoContacto"
                               required
                               type="tel"
@@ -532,6 +545,7 @@ const CompletarRegistroComponente = () => {
                         <Grid item xs={6}>
                           <Item elevation={0}>
                             <TextField
+                            onChange={(e) => changeEvent(e, 19)}
                               name="sEmailContacto"
                               required
                               type="mail"
@@ -557,6 +571,7 @@ const CompletarRegistroComponente = () => {
                         <Stack item xs={6}>
                           <Item elevation={0}>
                             <TextField
+                            onChange={(e) => changeEvent(e, 20)}
                               name="sNombrePublico"
                               required
                               type="text"
@@ -587,6 +602,7 @@ const CompletarRegistroComponente = () => {
                         <Stack item xs={6}>
                           <Item elevation={0}>
                             <TextField
+                            onChange={(e) => changeEvent(e, 21)}
                               name="sEmailPublico"
                               required
                               type="email"
@@ -623,9 +639,10 @@ const CompletarRegistroComponente = () => {
                       </Alert>
                       <Stack>
                         <Item elevation={0}>banco</Item>
-                        <Item elevation={0}>tipo de cuanta</Item>
+                        <Item elevation={0}>tipo de cuenta</Item>
                         <Item elevation={0}>
                           <TextField
+                          
                             name="sRazonSocialCuenta"
                             required
                             label="Nombre o Razón Social de la
@@ -638,6 +655,7 @@ const CompletarRegistroComponente = () => {
                         </Item>
                         <Item elevation={0}>
                           <TextField
+                          onChange= {(e) => changeEvent(e, 25)}
                             name="sCedulaRif"
                             required
                             type="text"
@@ -650,6 +668,8 @@ const CompletarRegistroComponente = () => {
                         </Item>
                         <Item elevation={0}>
                           <TextField
+                          onChange= {(e) => changeEvent(e, 26)}
+                          name="sNroCuentaBanco"
                             required
                             helperText="Sin puntos ni guiones"
                             type="number"
@@ -662,6 +682,8 @@ const CompletarRegistroComponente = () => {
                         </Item>
                         <Item elevation={0}>
                           <TextField
+                          onChange= {(e) => changeEvent(e, 27)}
+                          name="sConfirmarCuentaBan"
                             required
                             helperText="Sin puntos ni guiones"
                             type="number"
