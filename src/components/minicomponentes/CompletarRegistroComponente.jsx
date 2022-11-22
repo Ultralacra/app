@@ -94,13 +94,6 @@ const CompletarRegistroComponente = () => {
 
 })
 
-const handleChange = (e) => {
-    setBody({
-      ...body,
-      [e.target.name]: e.target.value,
-    });
-  };
-
 const registrar = () => {
   alert(sCedulaRef.current.name)
   alert(sCedulaRef.current.value)
