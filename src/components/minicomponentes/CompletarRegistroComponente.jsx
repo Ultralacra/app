@@ -292,7 +292,7 @@ const Item = styled(Paper)(({ theme }) => ({
                         <Grid item xs={6}>
                           <Item elevation={0}>
                           <TextField
-                          onBlur={handleChange}
+                          blur={}={handleChange}
                           value={body.sCedula}
                           required
                           size="small"
