@@ -94,8 +94,6 @@ const CompletarRegistroComponente = () => {
 
 })
 
-console.log(body)
-
 const handleChange = (e) => {
     setBody({
       ...body,
@@ -104,9 +102,14 @@ const handleChange = (e) => {
   };
 
 const registrar = () => {
-  console.log(sCedulaRef.current.value);
+  alert(sCedulaRef.current.name)
+  alert(sCedulaRef.current.value)
+  setBody({
+    ...body,
+    [sCedulaRef.current.name]: sCedulaRef.current.value,
+  });
 };
-
+console.log(body)
 
 //Config del tema
 const drawerWidth = 240;
