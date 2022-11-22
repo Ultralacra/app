@@ -100,6 +100,7 @@ console.log(body)
 
 const handleChange = (e) => {
   console.log(e.target.value)
+  setName(e.target.value)
     // setBody({
     //   ...body,
     //   [e.target.name]: e.target.value,
