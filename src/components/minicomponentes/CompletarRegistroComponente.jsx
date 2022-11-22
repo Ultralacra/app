@@ -58,11 +58,7 @@ const CompletarRegistroComponente = () => {
     fetchData();
   }, []);
 
- 
-
-const [name,setName] = '';
-
-const [body , setBody] = useState({
+ const [body , setBody] = useState({
 
   sUserId: localStorage.getItem("id"),
         sTipoPersona: "13123123123",
@@ -95,22 +91,14 @@ const [body , setBody] = useState({
         sMedioPago: "",
 
 })
-console.log('1')
+
 console.log(body)
 
 const handleChange = (e) => {
-  console.log(e.target.value)
-  console.log(body)
-  const obj = {...body};
-  const name = e.target.name;
-  obj[e.target.name] = e.target.value;
-  setBody(obj)
-
-  console.log(body)
-    // setBody({
-    //   ...body,
-    //   [e.target.name]: e.target.value,
-    // });
+    setBody({
+      ...body,
+      [e.target.name]: e.target.value,
+    });
   };
 
 
@@ -305,7 +293,7 @@ const Item = styled(Paper)(({ theme }) => ({
                           name="sCedula"
                           label="Cedula o Rif"
                           type="text"                          
-                          value={name}
+                          value={body.sCedula}
                           onChange={handleChange}/>
                           </Item>
                         </Grid>
