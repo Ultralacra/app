@@ -104,7 +104,11 @@ const handleChange = (e) => {
   };
 
 const registrar = () => {
-  console.log(sCedulaRef.current.value);
+  console.log(sCedulaRef.current);
+  // setBody({
+  //   ...body,
+  //   [e.target.name]: sCedulaRef.current.value,
+  // });
 };
 
 
