@@ -22,8 +22,6 @@ const CompletarRegistroComponente = () => {
   //LLamar lista de bancos
   const [bancos, setBancos] = useState([]);
   //Datos del formulario
-
-  const valueRef = useRef();
  
 //Llamar info usuario
   useEffect(() => {
@@ -313,7 +311,6 @@ const Item = styled(Paper)(({ theme }) => ({
                               placeholder="Ejemplo: ValinkGroup C.A"
                               variant="outlined"
                               size="small"
-                              // inputRef={valueRef}
                             />
                           </Item>
                         </Grid>
