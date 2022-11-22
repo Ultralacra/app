@@ -104,7 +104,7 @@ const handleChange = (e) => {
   };
 
 const registrar = () => {
-  // console.log(valueRef.current.value);
+  console.log(valueRef.current.value);
 };
 
 
