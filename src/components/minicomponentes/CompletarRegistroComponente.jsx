@@ -96,10 +96,6 @@ const CompletarRegistroComponente = () => {
 
 console.log(body)
 
-const handleChange = (e) => {
-    console.log(body)
-  };
-
 const registrar = () => {
   setBody({
     ...body,
@@ -299,8 +295,7 @@ const Item = styled(Paper)(({ theme }) => ({
                           name="sCedula"
                           label="Cedula o Rif"
                           type="text"                          
-                          value={body.sCedula}
-                          onChange={handleChange}/>
+                          inputRef={sCedulaRef}/>
                           </Item>
                         </Grid>
                         <Grid item xs={6}>
@@ -313,7 +308,6 @@ const Item = styled(Paper)(({ theme }) => ({
                               placeholder="Ejemplo: ValinkGroup C.A"
                               variant="outlined"
                               size="small"
-                              inputRef={sCedulaRef}
                             />
                           </Item>
                         </Grid>
