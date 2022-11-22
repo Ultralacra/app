@@ -95,7 +95,7 @@ const [body , setBody] = useState({
         sMedioPago: "",
 
 })
-console.log('11111')
+console.log('1')
 console.log(body)
 
 const handleChange = (e) => {
@@ -293,6 +293,7 @@ const Item = styled(Paper)(({ theme }) => ({
                           <Item elevation={0}>
                           <TextField
                           onChange={handleChange}
+                          value={body.sCedula}
                           required
                           size="small"
                           fullWidth
