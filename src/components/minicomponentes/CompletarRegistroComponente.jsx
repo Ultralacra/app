@@ -292,7 +292,7 @@ const Item = styled(Paper)(({ theme }) => ({
                         <Grid item xs={6}>
                           <Item elevation={0}>
                           <TextField
-                          blur={handleChange}
+                          onChange={handleChange}
                           required
                           size="small"
                           fullWidth
