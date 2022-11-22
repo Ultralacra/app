@@ -22,6 +22,8 @@ const CompletarRegistroComponente = () => {
   //LLamar lista de bancos
   const [bancos, setBancos] = useState([]);
   //Datos del formulario
+
+  const valueRef = useRef('');
  
 //Llamar info usuario
   useEffect(() => {
