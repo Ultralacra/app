@@ -290,14 +290,14 @@ const Item = styled(Paper)(({ theme }) => ({
                         <Grid item xs={6}>
                           <Item elevation={0}>
                           <TextField
-                          onChange={handleChange}
+                          onBlur={handleChange}
                           value={body.sCedula}
-                      required
-                      size="small"
-                      fullWidth
-                      name="sCedula"
-                      label="Cedula o Rif"
-                      type="text"/>
+                          required
+                          size="small"
+                          fullWidth
+                          name="sCedula"
+                          label="Cedula o Rif"
+                          type="text"/>
                           </Item>
                         </Grid>
                         <Grid item xs={6}>
