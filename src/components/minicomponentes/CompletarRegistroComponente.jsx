@@ -95,6 +95,7 @@ const [body , setBody] = useState({
         sMedioPago: "",
 
 })
+console.log('11111')
 console.log(body)
 
 const handleChange = (e) => {
