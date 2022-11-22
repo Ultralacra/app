@@ -101,6 +101,10 @@ const handleChange = (e) => {
     });
   };
 
+const registrar = () => {
+  console.log(this.refs.sCedulaFiled.getValue());
+};
+
 
 //Config del tema
 const drawerWidth = 240;
@@ -307,6 +311,7 @@ const Item = styled(Paper)(({ theme }) => ({
                               placeholder="Ejemplo: ValinkGroup C.A"
                               variant="outlined"
                               size="small"
+                              ref='sCedulaField'
                             />
                           </Item>
                         </Grid>
@@ -612,6 +617,7 @@ const Item = styled(Paper)(({ theme }) => ({
                             fullWidth
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
+                            onClick={registrar}
                           >
                             Finalizar Registro
                           </LoadingButton>
