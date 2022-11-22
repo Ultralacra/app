@@ -97,18 +97,14 @@ const CompletarRegistroComponente = () => {
 console.log(body)
 
 const handleChange = (e) => {
-    setBody({
-      ...body,
-      [e.target.name]: e.target.value,
-    });
+    console.log(body)
   };
 
 const registrar = () => {
-  console.log(sCedulaRef.current);
-  // setBody({
-  //   ...body,
-  //   [e.target.name]: sCedulaRef.current.value,
-  // });
+  setBody({
+    ...body,
+    [sCedulaRef.current.name]: sCedulaRef.current.value,
+  });
 };
 
 
