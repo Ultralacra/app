@@ -99,7 +99,7 @@ console.log('1')
 console.log(body)
 
 const handleChange = (e) => {
-  console.log(e)
+  console.log(e.target.value)
     // setBody({
     //   ...body,
     //   [e.target.name]: e.target.value,
@@ -291,15 +291,15 @@ const Item = styled(Paper)(({ theme }) => ({
                       <Grid container columnSpacing={{ xs: 0.5, sm: 4, md: 1 }}>
                         <Grid item xs={6}>
                           <Item elevation={0}>
-                          <TextField
-                          onChange={handleChange}
-                          value={body.sCedula}
+                          <TextField                          
                           required
                           size="small"
                           fullWidth
                           name="sCedula"
                           label="Cedula o Rif"
-                          type="text"/>
+                          type="text"                          
+                          value={body.sCedula}
+                          onChange={handleChange}/>
                           </Item>
                         </Grid>
                         <Grid item xs={6}>
