@@ -95,7 +95,7 @@ const CompletarRegistroComponente = () => {
 })
 
 const registrar = () => {
-  alert(sCedulaRef.current.value)
+  alert(sCedulaRef.current.name)
   alert(sCedulaRef.current.value)
   // setBody({
   //   ...body,
