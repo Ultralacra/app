@@ -293,7 +293,7 @@ const Item = styled(Paper)(({ theme }) => ({
                           <Item elevation={0}>
                           <TextField
                           blur={}={handleChange}
-                          value={body.sCedula}
+                          // value={body.sCedula}
                           required
                           size="small"
                           fullWidth
