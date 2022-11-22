@@ -94,14 +94,14 @@ const CompletarRegistroComponente = () => {
 
 })
 
-console.log(body)
-
 const registrar = () => {
   setBody({
     ...body,
     [sCedulaRef.current.name]: sCedulaRef.current.value,
   });
 };
+
+console.log(body)
 
 
 //Config del tema
