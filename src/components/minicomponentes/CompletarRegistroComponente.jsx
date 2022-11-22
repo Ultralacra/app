@@ -298,9 +298,9 @@ const Item = styled(Paper)(({ theme }) => ({
                           fullWidth
                           name="sCedula"
                           label="Cedula o Rif"
-                          type="text"                          
-                          value={body.sCedula}
-                          onChange={handleChange}/>
+                          type="text"   
+                          inputRef={sCedulaRef}                       
+                          />
                           </Item>
                         </Grid>
                         <Grid item xs={6}>
@@ -312,8 +312,7 @@ const Item = styled(Paper)(({ theme }) => ({
                               label="Razón Social"
                               placeholder="Ejemplo: ValinkGroup C.A"
                               variant="outlined"
-                              size="small"
-                              inputRef={sCedulaRef}
+                              size="small"                              
                             />
                           </Item>
                         </Grid>
