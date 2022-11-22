@@ -23,7 +23,8 @@ const CompletarRegistroComponente = () => {
   const [bancos, setBancos] = useState([]);
   //Datos del formulario
 
-  const sCedulaRef = useRef('');
+  const sCedula = useRef('');
+  const sRazonSocial = useRef('');
  
 //Llamar info usuario
   useEffect(() => {
@@ -63,7 +64,7 @@ const CompletarRegistroComponente = () => {
  const [body , setBody] = useState({
 
   sUserId: localStorage.getItem("id"),
-        sTipoPersona: "13123123123",
+        sTipoPersona: "",
         sCedula: "",
         sRazonSocial: "",
         sSitioWeb: "",
@@ -95,14 +96,16 @@ const CompletarRegistroComponente = () => {
 })
 
 const registrar = () => {
-  alert(sCedulaRef.current.name)
-  alert(sCedulaRef.current.value)
+
   setBody({
     ...body,
-    [sCedulaRef.current.name]: sCedulaRef.current.value,
+    [sCedula.current.name]: sCedula.current.value,
+    [sRazonSocial.current.name]: sRazonSocial.current.value,
+   
+    
   });
 };
-console.log(body)
+
 
 //Config del tema
 const drawerWidth = 240;
@@ -295,7 +298,7 @@ const Item = styled(Paper)(({ theme }) => ({
                           name="sCedula"
                           label="Cedula o Rif"
                           type="text"   
-                          inputRef={sCedulaRef}                       
+                          inputRef={sCedula}                       
                           />
                           </Item>
                         </Grid>
@@ -308,7 +311,8 @@ const Item = styled(Paper)(({ theme }) => ({
                               label="Razón Social"
                               placeholder="Ejemplo: ValinkGroup C.A"
                               variant="outlined"
-                              size="small"                              
+                              size="small"
+                              inputRef={sRazonSocial}                         
                             />
                           </Item>
                         </Grid>
