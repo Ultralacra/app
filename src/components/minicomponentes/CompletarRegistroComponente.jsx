@@ -99,6 +99,7 @@ console.log('11111')
 console.log(body)
 
 const handleChange = (e) => {
+  console.log(e)
     setBody({
       ...body,
       [e.target.name]: e.target.value,
