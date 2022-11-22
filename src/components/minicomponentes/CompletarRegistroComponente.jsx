@@ -23,7 +23,7 @@ const CompletarRegistroComponente = () => {
   const [bancos, setBancos] = useState([]);
   //Datos del formulario
 
-  const sCedulaRef = useRef();
+  const sCedulaRef = useRef('');
  
 //Llamar info usuario
   useEffect(() => {
@@ -95,12 +95,12 @@ const CompletarRegistroComponente = () => {
 })
 
 const registrar = () => {
-  alert(sCedulaRef.current.name)
   alert(sCedulaRef.current.value)
-  setBody({
-    ...body,
-    [sCedulaRef.current.name]: sCedulaRef.current.value,
-  });
+  alert(sCedulaRef.current.value)
+  // setBody({
+  //   ...body,
+  //   [sCedulaRef.current.name]: sCedulaRef.current.value,
+  // });
 };
 
 console.log(body)
