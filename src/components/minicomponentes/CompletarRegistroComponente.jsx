@@ -60,7 +60,7 @@ const CompletarRegistroComponente = () => {
 
  
 
-  
+const [name,setName] = '';
 
 const [body , setBody] = useState({
 
@@ -298,7 +298,7 @@ const Item = styled(Paper)(({ theme }) => ({
                           name="sCedula"
                           label="Cedula o Rif"
                           type="text"                          
-                          value={body.sCedula}
+                          value={name}
                           onChange={handleChange}/>
                           </Item>
                         </Grid>
