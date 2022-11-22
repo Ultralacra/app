@@ -94,16 +94,18 @@ const CompletarRegistroComponente = () => {
 
 })
 
-const registrar = () => {
-  alert(sCedulaRef.current.name)
-  alert(sCedulaRef.current.value)
-  // setBody({
-  //   ...body,
-  //   [sCedulaRef.current.name]: sCedulaRef.current.value,
-  // });
-};
-
 console.log(body)
+
+const handleChange = (e) => {
+    setBody({
+      ...body,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+const registrar = () => {
+  console.log(sCedulaRef.current.value);
+};
 
 
 //Config del tema
@@ -297,7 +299,8 @@ const Item = styled(Paper)(({ theme }) => ({
                           name="sCedula"
                           label="Cedula o Rif"
                           type="text"                          
-                          inputRef={sCedulaRef}/>
+                          value={body.sCedula}
+                          onChange={handleChange}/>
                           </Item>
                         </Grid>
                         <Grid item xs={6}>
@@ -310,6 +313,7 @@ const Item = styled(Paper)(({ theme }) => ({
                               placeholder="Ejemplo: ValinkGroup C.A"
                               variant="outlined"
                               size="small"
+                              inputRef={sCedulaRef}
                             />
                           </Item>
                         </Grid>
