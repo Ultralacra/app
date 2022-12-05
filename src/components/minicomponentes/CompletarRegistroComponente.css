@@ -14,17 +14,23 @@
     box-shadow:0 0 10px 0 rgba(0,0,0,.2) !important;
     text-align: left !important;
     padding: 20px !important;
-   
 }
 .espaciador-amarillo {
     margin-top: 1rem !important;
     background-color: #ffb200 !important;
     width: 5rem !important;
-   
     height: 5px !important;
     border-radius: 10px !important;
 }
 
+.espaciador-amarillo-largo {
+    margin-top: 1rem !important;
+    background-color: #006D8E !important;
+    width: 100% !important;
+    height: 5px !important;
+    border-radius: 10px !important;
+    margin-bottom: 1rem;
+}
 .espaciador-amarillo-2{
     margin-top: 1rem !important;
     background-color: #ffb200 !important;
@@ -37,5 +43,4 @@
     box-shadow:0 0 10px 0 rgba(0,0,0,.2) !important;
     text-align: left !important;
     padding: 20px !important;
-   
 }

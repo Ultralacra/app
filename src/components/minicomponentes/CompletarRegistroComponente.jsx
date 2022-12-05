@@ -7,14 +7,11 @@ import Container from "react-bootstrap/Container";
 import axios from "axios";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
-import Divider from "@mui/material/Divider";
 import TextField from "@mui/material/TextField";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 import { LoadingButton } from "@mui/lab";
 import SendIcon from "@mui/icons-material/Send";
-import InputAdornment from "@mui/material/InputAdornment";
-import AccountCircle from "@mui/icons-material/AccountCircle";
 
 const CompletarRegistroComponente = () => {
   //Datos del usuario
@@ -121,13 +118,15 @@ const Item = styled(Paper)(({ theme }) => ({
 
   return (
     <div>
-      <Box
+      <Box 
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
         }}
       >
-        <Container className="container">
+        <Container
+          
+        >
           <Typography
             variant="h4"
             textAlign="left"
@@ -139,15 +138,7 @@ const Item = styled(Paper)(({ theme }) => ({
             TUS DATOS
           </Typography>
 
-          <Divider
-            sx={{
-              backgroundColor: "#006d8e",
-              height: "2px",
-              width: "100%",
-              mb: 2,
-              borderRadius: "10px",
-            }}
-          />
+          <div className="espaciador-amarillo-largo"></div>
 
           <Grid container spacing={1} columns={{ xs: 4, sm: 8, md: 12 }}>
             <Grid item xs={8} md={4}>
@@ -275,8 +266,6 @@ const Item = styled(Paper)(({ theme }) => ({
                 >
                   <Grid item xs={6}>
                     <Item elevation={0}>
-                      <div className="espaciador-amarillo"></div>
-                      <br />
                       <Alert icon={false} severity="info">
                         ¿Utilizarás ValinkPay como persona natural o como
                         persona jurídica (empresa)?
@@ -485,8 +474,6 @@ const Item = styled(Paper)(({ theme }) => ({
                   </Grid>
                   <Grid item xs={6}>
                     <Item elevation={0}>
-                      <div className="espaciador-amarillo"></div>
-                      <br />
                       <Alert icon={false} severity="info">
                         Indícanos el nombre de fantasía. Corresponde al nombre
                         de tu comercio que verán tus clientes.
@@ -502,6 +489,7 @@ const Item = styled(Paper)(({ theme }) => ({
                               placeholder="Ejem: ValinkPay C.A"
                               variant="outlined"
                               size="small"
+                              fullWidth
                             />
                           </Item>
                         </Stack>
@@ -532,6 +520,7 @@ const Item = styled(Paper)(({ theme }) => ({
                               disabled
                               variant="outlined"
                               size="small"
+                              fullWidth
                             />
                           </Item>
                         </Stack>

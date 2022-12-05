@@ -1,7 +1,7 @@
 import React from 'react'
 import Content from '../components/DashboardC/Content'
 
-export const CompletarRegistro = () => {
+export const TransaccionTest = () => {
   return (
     <>
         <Content/>    
@@ -9,4 +9,4 @@ export const CompletarRegistro = () => {
   )
 }
 
-export default CompletarRegistro;
+export default TransaccionTest;

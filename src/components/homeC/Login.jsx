@@ -62,6 +62,7 @@ export default function SignInSide() {
           localStorage.setItem("auth", JSON.stringify("yes"));
           localStorage.setItem("id", JSON.stringify(response.data.message.userId));
           localStorage.setItem("token", JSON.stringify(response.data.message.Authorization));
+          localStorage.setItem("profile", JSON.stringify(response.data.message.data.profile));
 
 
         window.location.href = "/dashboard-users";
@@ -77,6 +78,8 @@ export default function SignInSide() {
 
 
   return (
+
+ 
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />
