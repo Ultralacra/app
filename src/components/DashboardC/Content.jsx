@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./Content.css";
 import PropTypes from "prop-types";
 import AppBar from "@mui/material/AppBar";
@@ -12,43 +12,63 @@ import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import Item from "@mui/material/Stack";
 import { MenuDashboard } from "./MenuDashboard";
+import Tooltip from "@mui/material/Tooltip";
+import Avatar from "@mui/material/Avatar";
+import axios from "axios";
+import Grid from '@mui/material/Grid';
+
 
 const drawerWidth = 240;
 
 function ResponsiveDrawer(props) {
-  
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [usuario, setUsuario] = useState([]);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
   const drawer = (
     <div>
-      <MenuDashboard/>
+      <MenuDashboard />
     </div>
   );
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
-  return (
-    <Box sx={{
-      
-      display: "flex",
-    
-    }}>
-      <CssBaseline />
-      
-      <AppBar className="appbar-dashboard"
-        position="fixed"
-        
-        sx={{
+  //Llamar info usuario
+  useEffect(() => {
+    async function fetchData() {
+      const id = JSON.parse(localStorage.getItem("id"));
+      const response = await axios.get(
+        `https://valink-pay-api.vercel.app/users/${id}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: JSON.parse(localStorage.getItem("token")),
+          },
+        }
+      );
+      setUsuario(response.data);
+    }
+    fetchData();
+  }, []);
 
+  return (
+    <Box sx={{}}>
+      <CssBaseline />
+
+      <AppBar
+        sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
-          
         }}
       >
         <Toolbar>
@@ -61,15 +81,18 @@ function ResponsiveDrawer(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Panel de administración
-          </Typography>
+
+          <Tooltip title="Open settings">
+            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+              <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+            </IconButton>
+          </Tooltip>
         </Toolbar>
       </AppBar>
+
       <Box
         component="nav"
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-        
       >
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Drawer
@@ -89,7 +112,8 @@ function ResponsiveDrawer(props) {
           }}
         >
           {drawer}
-        </Drawer> 
+        </Drawer>
+
         <Drawer
           variant="permanent"
           sx={{
@@ -104,6 +128,7 @@ function ResponsiveDrawer(props) {
           {drawer}
         </Drawer>
       </Box>
+
       <Box
         component="main"
         sx={{
@@ -111,8 +136,7 @@ function ResponsiveDrawer(props) {
           p: 3,
           width: { sm: `calc(100% - ${drawerWidth}px)` },
         }}
-      >
-      </Box>
+      ></Box>
     </Box>
   );
 }
