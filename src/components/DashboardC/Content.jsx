@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import "./Content.css";
 import PropTypes from "prop-types";
 import AppBar from "@mui/material/AppBar";
@@ -8,19 +8,15 @@ import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Stack from "@mui/material/Stack";
-import Item from "@mui/material/Stack";
 import { MenuDashboard } from "./MenuDashboard";
 import Tooltip from "@mui/material/Tooltip";
 import Avatar from "@mui/material/Avatar";
 import axios from "axios";
-import Grid from '@mui/material/Grid';
 
 
 const drawerWidth = 240;
 
-function ResponsiveDrawer(props) {
+function Content(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -141,7 +137,7 @@ function ResponsiveDrawer(props) {
   );
 }
 
-ResponsiveDrawer.propTypes = {
+Content.propTypes = {
   /**
    * Injected by the documentation to work in an iframe.
    * You won't need it on your project.
@@ -149,4 +145,4 @@ ResponsiveDrawer.propTypes = {
   window: PropTypes.func,
 };
 
-export default ResponsiveDrawer;
+export default Content;
