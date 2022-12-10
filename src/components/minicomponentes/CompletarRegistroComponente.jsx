@@ -12,8 +12,7 @@ import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 import { LoadingButton } from "@mui/lab";
 import SendIcon from "@mui/icons-material/Send";
-import ImgCrop from 'antd-img-crop';
-import { Upload } from 'antd';
+import { useForm } from "react-hook-form";
 
 const CompletarRegistroComponente = () => {
   //Datos del usuario
@@ -22,39 +21,14 @@ const CompletarRegistroComponente = () => {
   const [bancos, setBancos] = useState([]);
   //Datos del formulario
 
+  const { register, handleSubmit } = useForm();
 
-  const [fileList, setFileList] = useState([
-    {
-      uid: '-1',
-      name: 'image.png',
-      status: 'done',
-      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-    },
-  ]);
-
-  const onChange = ({ fileList: newFileList }) => {
-    setFileList(newFileList);
-  };
-  const onPreview = async (file) => {
-    let src = file.url;
-    if (!src) {
-      src = await new Promise((resolve) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file.originFileObj);
-        reader.onload = () => resolve(reader.result);
-      });
-    }
-    const image = new Image();
-    image.src = src;
-    const imgWindow = window.open(src);
-    imgWindow?.document.write(image.outerHTML);
+  const onSubmit = (data) => {
+    console.log(data);
   };
 
 
-  const sCedula = useRef('');
-  const sRazonSocial = useRef('');
- 
-//Llamar info usuario
+  //Llamar info usuario
   useEffect(() => {
     async function fetchData() {
       const id = JSON.parse(localStorage.getItem("id"));
@@ -89,75 +63,27 @@ const CompletarRegistroComponente = () => {
     fetchData();
   }, []);
 
- const [body , setBody] = useState({
+  //Config del tema
+  const drawerWidth = 240;
 
-  sUserId: localStorage.getItem("id"),
-        sTipoPersona: "",
-        sCedula: "",
-        sRazonSocial: "",
-        sSitioWeb: "",
-        sTelefonoAsociado: "",
-        sCategoriaRubro: "",
-        sRubro:   "",
-        sEstado: "",
-        sCiudad: "",
-        sMunicipio:  "",
-        sDireccion: "",
-        sActividadEcon:   "",
-        sNombreReprLegal: "",
-        sCedulaReprLegal: "",
-        sTelefonoReprLegal: "",
-        sEmailReprLegal: "",  
-        sNombreContacto:  "",
-        sTelefonoContacto: "",
-        sEmailContacto: "",
-        sNombrePublico: "",
-        sEmailPublico:  "",
-        sUrlLogo: "",
-        sTipoCuenta: "",
-        sBanco: "",
-        sCedulaRif: "",
-        sNroCuentaBanco: "",
-        sConfirmarCuentaBan: "",
-        sMedioPago: "",
-
-})
-
-const registrar = () => {
-
-  setBody({
-    ...body,
-    [sCedula.current.name]: sCedula.current.value,
-    [sRazonSocial.current.name]: sRazonSocial.current.value,
-   
-    
-  });
-};
-
-
-//Config del tema
-const drawerWidth = 240;
-
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
-
+  const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: "center",
+    color: theme.palette.text.secondary,
+  }));
 
   return (
     <div>
-      <Box 
+      <Box
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
         }}
       >
-        <Container
-          
-        >
+        <Container>
+          <form onSubmit={handleSubmit(onSubmit)} > 
           <Typography
             variant="h4"
             textAlign="left"
@@ -308,23 +234,25 @@ const Item = styled(Paper)(({ theme }) => ({
                         razón social tal como aparece en el documento de
                         identificación.
                       </Alert>
+
                       <Grid container columnSpacing={{ xs: 0.5, sm: 4, md: 1 }}>
                         <Grid item xs={6}>
                           <Item elevation={0}>
-                          <TextField                          
-                          required
-                          size="small"
-                          fullWidth
-                          name="sCedula"
-                          label="Cedula o Rif"
-                          type="text"   
-                          inputRef={sCedula}                       
-                          />
+                            <TextField
+                              {...register("sCedula")}
+                              name="sCedula"
+                              required
+                              size="small"
+                              fullWidth
+                              label="Cedula o Rif"
+                              type="text"
+                            />
                           </Item>
                         </Grid>
                         <Grid item xs={6}>
                           <Item elevation={0}>
                             <TextField
+                            {...register("sRazonSocial")}
                               name="sRazonSocial"
                               required
                               type="text"
@@ -332,13 +260,13 @@ const Item = styled(Paper)(({ theme }) => ({
                               placeholder="Ejemplo: ValinkGroup C.A"
                               variant="outlined"
                               size="small"
-                              inputRef={sRazonSocial}                         
                             />
                           </Item>
                         </Grid>
                         <Grid item xs={6}>
                           <Item elevation={0}>
                             <TextField
+                              {...register("sSitioWeb")}
                               name="sSitioWeb"
                               required
                               type="text"
@@ -352,6 +280,7 @@ const Item = styled(Paper)(({ theme }) => ({
                         <Grid item xs={6}>
                           <Item elevation={0}>
                             <TextField
+                              {...register("sTelefonoAsociado")}
                               name="sTelefonoAsociado"
                               required
                               type="tel"
@@ -385,6 +314,7 @@ const Item = styled(Paper)(({ theme }) => ({
                         <Grid item xs={6}>
                           <Item elevation={0}>
                             <TextField
+                              {...register("sDireccion")}
                               name="sDireccion"
                               required
                               type="text"
@@ -403,11 +333,11 @@ const Item = styled(Paper)(({ theme }) => ({
                         <Grid item xs={6}>
                           <Item elevation={0}>
                             <TextField
+                              {...register("sNombreReprLegal")}
                               name="sNombreReprLegal"
                               required
                               type="text"
-                              label="Nombre del Representante
-                            Legal"
+                              label="Nombre del Representante Legal"
                               placeholder="Ejem: Juan Perez"
                               variant="outlined"
                               size="small"
@@ -417,6 +347,7 @@ const Item = styled(Paper)(({ theme }) => ({
                         <Grid item xs={6}>
                           <Item elevation={0}>
                             <TextField
+                            {...register("sCedulaReprLegal")}
                               name="sCedulaReprLegal"
                               required
                               type="text"
@@ -430,6 +361,7 @@ const Item = styled(Paper)(({ theme }) => ({
                         <Grid item xs={6}>
                           <Item elevation={0}>
                             <TextField
+                            {...register("sTelefonoReprLegal")}
                               name="sTelefonoReprLegal"
                               required
                               type="tel"
@@ -445,6 +377,7 @@ const Item = styled(Paper)(({ theme }) => ({
                         <Grid item xs={6}>
                           <Item elevation={0}>
                             <TextField
+                            {...register("sEmailReprLegal")}
                               name="sEmailReprLegal"
                               required
                               type="text"
@@ -464,6 +397,7 @@ const Item = styled(Paper)(({ theme }) => ({
                         <Grid item xs={6}>
                           <Item elevation={0}>
                             <TextField
+                            {...register("sNombreContacto")}
                               name="sNombreContacto"
                               required
                               type="text"
@@ -477,6 +411,7 @@ const Item = styled(Paper)(({ theme }) => ({
                         <Grid item xs={6}>
                           <Item elevation={0}>
                             <TextField
+                            {...register("sTelefonoContacto")}
                               name="sTelefonoContacto"
                               required
                               type="tel"
@@ -490,6 +425,7 @@ const Item = styled(Paper)(({ theme }) => ({
                         <Grid item xs={6}>
                           <Item elevation={0}>
                             <TextField
+                            {...register("sEmailContacto")}
                               name="sEmailContacto"
                               required
                               type="mail"
@@ -513,6 +449,7 @@ const Item = styled(Paper)(({ theme }) => ({
                         <Stack item xs={6}>
                           <Item elevation={0}>
                             <TextField
+                            {...register("sNombrePublico")}
                               name="sNombrePublico"
                               required
                               type="text"
@@ -544,11 +481,11 @@ const Item = styled(Paper)(({ theme }) => ({
                         <Stack item xs={6}>
                           <Item elevation={0}>
                             <TextField
+                              {...register("sEmailPublico")}
                               name="sEmailPublico"
                               required
                               type="email"
-                              label={usuario.sEmail}
-                              disabled
+                              value={usuario.sEmail}                              
                               variant="outlined"
                               size="small"
                               fullWidth
@@ -569,21 +506,7 @@ const Item = styled(Paper)(({ theme }) => ({
                         columnSpacing={{ xs: 0.5, sm: 4, md: 1 }}
                       >
                         <Stack item xs={6}>
-                          <Item elevation={0}>
-
-                          <ImgCrop rotate>
-      <Upload
-        action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-        listType="picture-card"
-        fileList={fileList}
-        onChange={onChange}
-        onPreview={onPreview}
-      >
-        {fileList.length < 5 && '+ Upload'}
-      </Upload>
-    </ImgCrop>
-
-                          </Item>
+                          <Item elevation={0}>logo</Item>
                         </Stack>
                       </Stack>
                       <Stack
@@ -598,7 +521,7 @@ const Item = styled(Paper)(({ theme }) => ({
                         <Item elevation={0}>tipo de cuenta</Item>
                         <Item elevation={0}>
                           <TextField
-                          
+                          {...register("sRazonSocialCuenta")}
                             name="sRazonSocialCuenta"
                             required
                             label="Nombre o Razón Social de la
@@ -611,6 +534,7 @@ const Item = styled(Paper)(({ theme }) => ({
                         </Item>
                         <Item elevation={0}>
                           <TextField
+                          {...register("sCedulaRif")}
                             name="sCedulaRif"
                             required
                             type="text"
@@ -623,7 +547,8 @@ const Item = styled(Paper)(({ theme }) => ({
                         </Item>
                         <Item elevation={0}>
                           <TextField
-                          name="sNroCuentaBanco"
+                          {...register("sNroCuentaBanco")}
+                            name="sNroCuentaBanco"
                             required
                             helperText="Sin puntos ni guiones"
                             type="number"
@@ -636,7 +561,8 @@ const Item = styled(Paper)(({ theme }) => ({
                         </Item>
                         <Item elevation={0}>
                           <TextField
-                          name="sConfirmarCuentaBan"
+                          {...register("sConfirmarCuentaBan")}
+                            name="sConfirmarCuentaBan"
                             required
                             helperText="Sin puntos ni guiones"
                             type="number"
@@ -647,12 +573,12 @@ const Item = styled(Paper)(({ theme }) => ({
                             fullWidth
                           />
                           <LoadingButton
+                           type="submit"
                             endIcon={<SendIcon />}
                             className="btn-create-account"
                             fullWidth
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
-                            onClick={registrar}
                           >
                             Finalizar Registro
                           </LoadingButton>
@@ -665,6 +591,7 @@ const Item = styled(Paper)(({ theme }) => ({
             </Grid>
           </Grid>
           <br></br>
+          </form>
         </Container>
       </Box>
     </div>
