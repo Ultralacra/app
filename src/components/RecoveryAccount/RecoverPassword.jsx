@@ -1,22 +1,21 @@
 import * as React from "react";
+import "./RecoverPassword.css";
 import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
-import InputAdornment from '@mui/material/InputAdornment';
-import MarkEmailReadOutlinedIcon from '@mui/icons-material/MarkEmailReadOutlined';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+
 import { useState } from "react";
 import { LoadingButton } from '@mui/lab';
 import Swal from "sweetalert2";
 import validator from "validator";
 import axios from "axios";
 import SendIcon from "@mui/icons-material/Send";
+import { Input } from "antd";
 
 
 const theme = createTheme();
@@ -145,11 +144,11 @@ const handleRecoveryPassword = e => {
             }}
           >
         
-
+           
             <Typography
               component="p"
               mt={4}
-              fontSize="2rem"
+              fontSize="1.5rem"
               variant="p"
               align="center"
               fontWeight="bold"
@@ -168,39 +167,24 @@ const handleRecoveryPassword = e => {
               component="form"
               sx={{ mt: 4 }}
             >
-              <TextField
-                size="small"
-                fullWidth
+              <Input  
+                className="input-recovery-password"
+                size="large"
                 onChange={handleRecoveryPassword}
-                margin="normal"
-                placeholder="Usuario"
-                label="Usuario"
+                placeholder="usuario"
+                label="usuario"
                 name="login"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment className="iconos-labels" position="start">
-                      <AccountCircleIcon />
-                    </InputAdornment>
-                  ),
-                }}
               />
-              <TextField
-                size="small"
-                fullWidth
+              <br></br>
+              <br></br>
+              <Input
+                className="input-recovery-password"
+                size="large"
                 onChange={handleRecoveryPassword}
-                margin="normal"
-                placeholder="Email"
+                placeholder="email"
                 label="Email"
                 name="email"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment className="iconos-labels" position="start">
-                      <MarkEmailReadOutlinedIcon />
-                    </InputAdornment>
-                  ),
-                }}
               />
-             
               <LoadingButton
                 onClick={enviarCorreo}	
                 className="btn-login"

@@ -1,19 +1,13 @@
 import React, { useState } from "react";
+import "./FormRegister.css";
 import { Link } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
-import InputAdornment from "@mui/material/InputAdornment";
-import AccountCircle from "@mui/icons-material/AccountCircle";
-import LockIcon from "@mui/icons-material/Lock";
-import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
-import MarkEmailReadOutlinedIcon from "@mui/icons-material/MarkEmailReadOutlined";
-import CreditScoreOutlinedIcon from "@mui/icons-material/CreditScoreOutlined";
 import Stack from "@mui/material/Stack";
 import Item from "@mui/material/Stack";
 import SendIcon from "@mui/icons-material/Send";
@@ -23,6 +17,16 @@ import ModalEmptyFields from "../modals/ModalEmptyFields";
 import validator from "validator";
 import swal from "sweetalert2";
 import axios from "axios";
+import { Input } from "antd";
+import { UserOutlined } from '@ant-design/icons';
+import { PhoneOutlined  } from '@ant-design/icons';
+import { MailOutlined  } from '@ant-design/icons';
+import { LockOutlined  } from '@ant-design/icons';
+
+
+
+
+
 
 const theme = createTheme();
 
@@ -151,15 +155,15 @@ function Registro() {
               }}
             >
               <img
+                width="20%"
                 class="logo-login"
                 src="http://valinkgroup.com/wp-content/uploads/2022/05/Negro.png"
-                width={200}
                 alt="logo"
               ></img>
               <Typography
                 component="p"
                 mt={4}
-                fontSize="2rem"
+                fontSize="1.5rem"
                 variant="p"
                 align="center"
                 fontWeight="bold"
@@ -167,163 +171,111 @@ function Registro() {
               >
                 Completa los datos solicitados
               </Typography>
-
+              <br></br>
               <Box>
                 <Stack direction="row" spacing={2}>
                   <Item>
-                    <TextField
+                    <Input
+                      className="register-input"
+                      size="large"
                       required
-                      error={isEmpty[0] === true}
+                      /* error={isEmpty[0] === true} */
                       onChange={(e) => changeEvent(e, 1)}
-                      size="small"
                       fullWidth
-                      className="input-izquierdo inputs-form-register "
                       name="sFirstName"
                       label="Nombre"
                       type="text"
                       margin="normal"
                       placeholder="Nombre"
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment
-                            className="iconos-labels"
-                            position="start"
-                          >
-                            <AccountCircle />
-                          </InputAdornment>
-                        ),
-                      }}
+                      prefix={<UserOutlined />} 
                     />
                   </Item>
                   <Item>
-                    <TextField
+                    <Input
+                      className="register-input"
+                      size="large"
                       required
                       error={isEmpty[2] === true}
                       onChange={(e) => changeEvent(e, 2)}
-                      size="small"
                       fullWidth
-                      className="inputs-form-register"
                       name="sLastName"
                       label="Apellido"
                       type="text"
                       margin="normal"
                       placeholder="Apellido"
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment
-                            className="iconos-labels"
-                            position="start"
-                          >
-                            <AccountCircle />
-                          </InputAdornment>
-                        ),
-                      }}
+                      prefix={<UserOutlined />} 
                     />
                   </Item>
                 </Stack>
+                <br></br>
                 <Stack direction="row" spacing={2}>
                   <Item>
-                    <TextField
+                    <Input
+                      className="register-input"
+                      size="large"
                       required
                       error={isEmpty[3] === true}
                       onChange={(e) => changeEvent(e, 3)}
-                      size="small"
                       fullWidth
-                      className="input-izquierdo  inputs-form-register"
                       name="sPhone"
                       label="Teléfono"
                       type="tel"
                       margin="normal"
                       placeholder="Teléfono"
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment
-                            className="iconos-labels"
-                            position="start"
-                          >
-                            <LocalPhoneOutlinedIcon />
-                          </InputAdornment>
-                        ),
-                      }}
+                      prefix={<PhoneOutlined />} 
                     />
                   </Item>
                   <Item>
-                    <TextField
+                    <Input
+                      className="register-input"
+                      size="large"
                       required
                       error={isEmpty[1] === true}
                       onChange={(e) => changeEvent(e, 4)}
-                      size="small"
                       id="userEmail"
                       fullWidth
-                      className="inputs-form-register"
                       type="email"
                       label="Correo electrónico"
                       name="sEmail"
                       margin="normal"
                       placeholder="Correo electrónico"
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment
-                            className="iconos-labels"
-                            position="start"
-                          >
-                            <MarkEmailReadOutlinedIcon />
-                          </InputAdornment>
-                        ),
-                      }}
+                      prefix={<MailOutlined />} 
                     />
-                    {/* {emailError && <p className="error">{emailError}</p>} */}
+                     {emailError && <p className="error">{emailError}</p>} 
                   </Item>
                 </Stack>
+                <br></br>
                 <Stack direction="row" spacing={2}>
                   <Item>
-                    <TextField
+                    <Input
+                      className="register-input"
+                      size="large"
                       required
                       error={isEmpty[5] === true}
                       onChange={(e) => changeEvent(e, 5)}
                       fullWidth
-                      size="small"
-                      className="input-izquierdo inputs-form-register"
                       name="sPassword"
                       label="Contraseña"
                       type="password"
                       margin="normal"
                       placeholder="Contraseña"
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment
-                            className="iconos-labels"
-                            position="start"
-                          >
-                            <LockIcon />
-                          </InputAdornment>
-                        ),
-                      }}
+                      prefix={<LockOutlined  />} 
                     />
                   </Item>
                   <Item>
-                    <TextField
+                    <Input
+                      className="register-input"
+                      size="large"
                       required
                       error={isEmpty[4] === true}
                       onChange={(e) => changeEvent(e, 6)}
-                      size="small"
                       fullWidth
-                      className="inputs-form-register"
                       name="sLogin"
                       label="Usuario"
                       type="text"
                       margin="normal"
                       placeholder="Nombre de usuario"
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment
-                            className="iconos-labels"
-                            position="start"
-                          >
-                            <CreditScoreOutlinedIcon />
-                          </InputAdornment>
-                        ),
-                      }}
+                      prefix={<UserOutlined />} 
                     />
                   </Item>
                 </Stack>
@@ -349,13 +301,21 @@ function Registro() {
                   >
                     Al hacer click en Crear cuenta, declaras haber leído y{" "}
                     <br /> muestras tu conformidad con nuestros{" "}
-                    <Link className="text-lost-password" href="#" variant="body2">
+                    <Link
+                      className="text-lost-password"
+                      href="#"
+                      variant="body2"
+                    >
                       Términos de Servicio
                     </Link>
                   </Typography>
                   <KeyboardArrowLeftIcon className="icons-back icons-form" />
 
-                  <Link className="text-lost-password" to="/login" variant="body2">
+                  <Link
+                    className="text-lost-password"
+                    to="/login"
+                    variant="body2"
+                  >
                     Atrás para iniciar sesión
                   </Link>
                 </div>

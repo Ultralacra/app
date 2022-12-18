@@ -1,0 +1,28 @@
+.login-inputs{
+  border-color: #F3F7FE;
+  background-color: #F3F7FE;
+  border-radius: 5px !important;
+  font-weight: 500;
+
+}
+.btn-register{
+  color:white !important  ;
+  border-radius: 5px !important;
+  border: 1px solid ffb200 !important;
+  background-color: #ffb200 ;
+  padding: 5px!important;
+  font-weight: 700;
+}
+
+.enabled {
+  /* Estilos para el botón habilitado */
+  background-color: #006d8e !important;
+  color: white;
+}
+
+.disabled {
+  /* Estilos para el botón deshabilitado */
+  background-color: gray;
+  color: white;
+  cursor: not-allowed;
+}
