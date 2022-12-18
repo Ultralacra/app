@@ -22,6 +22,7 @@ import axios from "axios";
 import SendIcon from "@mui/icons-material/Send";
 import ModalRecoveryPassword from "../modals/ModalRecoveryPassword";
 import validator from "validator";
+import { Input } from "antd";
 
 const theme = createTheme();
 const RecoveryAccount = () => {
@@ -83,7 +84,6 @@ const RecoveryAccount = () => {
     }
 
     //Empty fields
-
     if (
       body.login === "" ||
       body.email === "" ||
@@ -115,9 +115,6 @@ const RecoveryAccount = () => {
         });
 
         if (response.data.status === "success") return setModal(true);
-        
-        
-
       })
       .catch((error) => {
         console.log(error);
@@ -156,7 +153,7 @@ const RecoveryAccount = () => {
             <Typography
               component="p"
               mt={4}
-              fontSize="2rem"
+              fontSize="1.5rem"
               variant="p"
               align="center"
               fontWeight="bold"
@@ -167,74 +164,44 @@ const RecoveryAccount = () => {
             <Box component="form" sx={{ mt: 4 }}>
               <Stack direction="row" spacing={2}>
                 <Item>
-                  <TextField
-                    size="small"
+                  <Input
+                    size="large"
                     onChange={handleRecoveryPassword}
                     margin="normal"
                     placeholder="Usuario"
                     fullWidth
                     label="Usuario"
                     name="login"
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment
-                          className="iconos-labels"
-                          position="start"
-                        >
-                          <AccountCircleIcon />
-                        </InputAdornment>
-                      ),
-                    }}
                   />
                 </Item>
-
                 <Item>
-                  <TextField
-                    size="small"
+                  <Input
+                    size="large"
                     onChange={handleRecoveryPassword}
                     margin="normal"
                     placeholder="Email"
                     fullWidth
                     label="Email"
                     name="email"
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment
-                          className="iconos-labels"
-                          position="start"
-                        >
-                          <MarkEmailReadOutlinedIcon />
-                        </InputAdornment>
-                      ),
-                    }}
                   />
                 </Item>
               </Stack>
+              <br></br>
               <Stack direction="row" spacing={2}>
                 <Item>
-                  <TextField
-                    size="small"
+                  <Input
+                    size="large"
                     onChange={handleRecoveryPassword}
                     margin="normal"
                     placeholder="Codigo de seguridad"
                     fullWidth
                     label="Codigo de seguridad"
                     name="code"
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment
-                          className="iconos-labels"
-                          position="start"
-                        >
-                          <VpnKeyIcon />
-                        </InputAdornment>
-                      ),
-                    }}
                   />
                 </Item>
                 <Item>
-                  <TextField
-                    size="small"
+                  <Input
+                    size="large"
                     type="password"
                     onChange={handleRecoveryPassword}
                     margin="normal"
@@ -242,16 +209,6 @@ const RecoveryAccount = () => {
                     fullWidth
                     label="Contraseña"
                     name="new_password"
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment
-                          className="iconos-labels"
-                          position="start"
-                        >
-                          <LockOpenIcon />
-                        </InputAdornment>
-                      ),
-                    }}
                   />
                 </Item>
               </Stack>
