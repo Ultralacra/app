@@ -1,16 +1,16 @@
-.login-inputs{
-  border-color: #F3F7FE;
-  background-color: #F3F7FE;
+.login-inputs {
+  border-color: #f3f7fe;
+  background-color: #f3f7fe;
   border-radius: 5px !important;
   font-weight: 500;
-
 }
-.btn-register{
-  color:white !important  ;
+
+.btn-register {
+  color: white !important;
   border-radius: 5px !important;
   border: 1px solid ffb200 !important;
-  background-color: #ffb200 ;
-  padding: 5px!important;
+  background-color: #ffb200;
+  padding: 5px !important;
   font-weight: 700;
 }
 

@@ -1,6 +1,6 @@
 import * as React from "react";
+import "./VerificationCode.css";
 import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
 import { Link } from "react-router-dom";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
@@ -8,11 +8,6 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
-import VpnKeyIcon from "@mui/icons-material/VpnKey";
-import InputAdornment from "@mui/material/InputAdornment";
-import MarkEmailReadOutlinedIcon from "@mui/icons-material/MarkEmailReadOutlined";
-import LockOpenIcon from "@mui/icons-material/LockOpen";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useState } from "react";
 import { LoadingButton } from "@mui/lab";
 import Swal from "sweetalert2";
@@ -139,9 +134,23 @@ const RecoveryAccount = () => {
           }}
         />
 
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        <Grid
+          bgcolor="#f3f4f6"
+          item
+          xs={12}
+          sm={8}
+          md={5}
+          component={Paper}
+          elevation={0}
+          square
+        >
           <Box
-            className
+            bgcolor="#fafafa"
+            border={1}
+            borderRadius={5}
+            borderColor="#fafafa"
+            boxShadow="11px 10px 44px -7px rgba(0,0,0,0.31)"
+            padding="10px"
             sx={{
               my: 8,
               mx: 4,
@@ -161,15 +170,27 @@ const RecoveryAccount = () => {
             >
               Recuperación de datos de acceso
             </Typography>
+            <Typography
+              component="p"
+              mt={4}
+              fontSize="1rem"
+              variant="p"
+              align="center"
+              fontWeight="bold"
+              color=""
+            >
+              Para iniciar sesión en tu cuenta, inserta tu nombre de usuario,
+              correo electrónico y código de seguridad.
+            </Typography>
             <Box component="form" sx={{ mt: 4 }}>
               <Stack direction="row" spacing={2}>
                 <Item>
                   <Input
                     size="large"
-                    onChange={handleRecoveryPassword}
-                    margin="normal"
+                    onChange={(event) => {
+                      handleRecoveryPassword(event);
+                    }}
                     placeholder="Usuario"
-                    fullWidth
                     label="Usuario"
                     name="login"
                   />
@@ -177,10 +198,10 @@ const RecoveryAccount = () => {
                 <Item>
                   <Input
                     size="large"
-                    onChange={handleRecoveryPassword}
-                    margin="normal"
+                    onChange={(event) => {
+                      handleRecoveryPassword(event);
+                    }}
                     placeholder="Email"
-                    fullWidth
                     label="Email"
                     name="email"
                   />
@@ -191,10 +212,10 @@ const RecoveryAccount = () => {
                 <Item>
                   <Input
                     size="large"
-                    onChange={handleRecoveryPassword}
-                    margin="normal"
+                    onChange={(event) => {
+                      handleRecoveryPassword(event);
+                    }}
                     placeholder="Codigo de seguridad"
-                    fullWidth
                     label="Codigo de seguridad"
                     name="code"
                   />
@@ -203,24 +224,22 @@ const RecoveryAccount = () => {
                   <Input
                     size="large"
                     type="password"
-                    onChange={handleRecoveryPassword}
-                    margin="normal"
+                    onChange={(event) => {
+                      handleRecoveryPassword(event);
+                    }}
                     placeholder="Nueva contraseña"
-                    fullWidth
                     label="Contraseña"
                     name="new_password"
                   />
                 </Item>
               </Stack>
               <LoadingButton
-                size=""
-                className="btn-login"
+                className="btn-changepassoword"
                 onClick={enviarCorreo}
                 fullWidth
                 endIcon={<SendIcon />}
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
-                /* loading={loading} */
                 loadingPosition="end"
               >
                 Cambiar contraseña

@@ -10,51 +10,43 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 
 import { useState } from "react";
-import { LoadingButton } from '@mui/lab';
+import { LoadingButton } from "@mui/lab";
 import Swal from "sweetalert2";
 import validator from "validator";
 import axios from "axios";
 import SendIcon from "@mui/icons-material/Send";
 import { Input } from "antd";
 
-
 const theme = createTheme();
 const RecoveryAccount = () => {
-    const [body, setBody] = useState({ login: '', email: '' });
-    const [loading, setLoading] = useState(false);
+  const [body, setBody] = useState({ login: "", email: "" });
+  const [loading, setLoading] = useState(false);
 
-
-
-const handleRecoveryPassword = e => {
-
+  const handleRecoveryPassword = (e) => {
     if (e.target.name === "login") {
     }
     if (e.target.name === "email") {
     }
-		setBody({
-			...body,
-			[e.target.name]: e.target.value
-
-		})
-	}
+    setBody({
+      ...body,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   async function enviarCorreo() {
-
-
-  //campos vacios empty fields
+    //campos vacios empty fields
     if (body.login === "" || body.email === "") {
-        Swal.fire({
-            toast: true,
-            position: "top-end",
-            icon: "info",
-            text: "Todos los campos son obligatorios",
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-        });
-        return;
+      Swal.fire({
+        toast: true,
+        position: "top-end",
+        icon: "info",
+        text: "Todos los campos son obligatorios",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+      });
+      return;
     }
-
 
     if (!validator.isEmail(body.email)) {
       Swal.fire({
@@ -69,49 +61,46 @@ const handleRecoveryPassword = e => {
     }
 
     setLoading(true);
-    if (body.login === '' || body.password === '')
-    console.warn(body);
-    axios.post ("https://valink-pay-api.vercel.app/pwd/reset",{
-
-          login: body.login,
-          email: body.email,
-
-    }).then((response) => {
-      if (response.data.status === "fail") {
-        Swal.fire({
+    if (body.login === "" || body.password === "") console.warn(body);
+    axios
+      .post("https://valink-pay-api.vercel.app/pwd/reset", {
+        login: body.login,
+        email: body.email,
+      })
+      .then((response) => {
+        if (response.data.status === "fail") {
+          Swal.fire({
             toast: true,
-            position: 'top-end',
-            text: 'Usuario y/o email no registrado',
-            icon: 'error',
+            position: "top-end",
+            text: "Usuario y/o email no registrado",
+            icon: "error",
             showConfirmButton: false,
-            timer: 1500,    
-            })  
-            setLoading(false);
-
+            timer: 1500,
+          });
+          setLoading(false);
         } else {
-            Swal.fire({
-                toast: true,
-                position: 'top-end',
-                text: 'Correo enviado con éxito',
-                icon: 'success',
-                showConfirmButton: false,
-                timer: 1500,
-            })
-            setLoading(false);
-            window.location.href = "/complete-recovery-password";
-
+          Swal.fire({
+            toast: true,
+            position: "top-end",
+            text: "Correo enviado con éxito",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          setLoading(false);
+          window.location.href = "/complete-recovery-password";
         }
-    }).catch((error) => {
+      })
+      .catch((error) => {
         console.warn(error);
         setLoading(false);
-    })
-}
-
+      });
+  }
 
   return (
     <ThemeProvider theme={theme}>
       {/* {modal && <ModalRecuperarContraseña/>} */}
-            <Grid container component="main" sx={{ height: "100vh" }}>
+      <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />
         <Grid
           item
@@ -119,22 +108,16 @@ const handleRecoveryPassword = e => {
           sm={4}
           md={7}
           sx={{
-            backgroundImage:
-              "url()",
+            backgroundImage: "url()",
             backgroundRepeat: "cover",
 
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
         />
-        
 
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square
-        
-        >
-
+        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <Box
-          className
             sx={{
               my: 8,
               mx: 4,
@@ -143,8 +126,6 @@ const handleRecoveryPassword = e => {
               alignItems: "center",
             }}
           >
-        
-           
             <Typography
               component="p"
               mt={4}
@@ -155,7 +136,6 @@ const handleRecoveryPassword = e => {
               color="#006D8E"
             >
               Reestablece tu contraseña
-
             </Typography>
 
             <Typography className="texto-recuperar" sx={{ mt: 4 }}>
@@ -163,11 +143,8 @@ const handleRecoveryPassword = e => {
               para reestablecer tu contraseña
             </Typography>
 
-            <Box
-              component="form"
-              sx={{ mt: 4 }}
-            >
-              <Input  
+            <Box component="form" sx={{ mt: 4 }}>
+              <Input
                 className="input-recovery-password"
                 size="large"
                 onChange={handleRecoveryPassword}
@@ -186,8 +163,8 @@ const handleRecoveryPassword = e => {
                 name="email"
               />
               <LoadingButton
-                onClick={enviarCorreo}	
-                className="btn-login"
+                onClick={enviarCorreo}
+                className="btn-recovery-password"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
@@ -208,7 +185,11 @@ const handleRecoveryPassword = e => {
                 sx={{ mt: 4 }}
               >
                 ¿Nuevo en nuestra plataforma?{" "}
-                <Link className="text-lost-password" to="/register-page" variant="body2">
+                <Link
+                  className="text-lost-password"
+                  to="/register-page"
+                  variant="body2"
+                >
                   Crear una cuenta
                 </Link>
               </Typography>
@@ -218,6 +199,6 @@ const handleRecoveryPassword = e => {
       </Grid>
     </ThemeProvider>
   );
-}
+};
 
 export default RecoveryAccount;

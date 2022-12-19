@@ -17,14 +17,12 @@ import { Typography } from "@mui/material";
 import Swal from "sweetalert2";
 import { Input } from "antd";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
-import { Button, Space } from "antd";
 
 export default function SignInSide() {
   const theme = createTheme();
   const [loading, setLoading] = useState(false);
   const [username, setUsername] = useState(""); //para asignar el valor al estado y poder acceder
   const [password, setPassword] = useState(""); //para asignar el valor al estado y poder acceder
-  const [passwordVisible, setPasswordVisible] = React.useState(false);
 
   // Muestra/oculta la contraseña cada vez que se haga clic en el botón
 
@@ -149,7 +147,6 @@ export default function SignInSide() {
                     name="username"
                     size="large"
                   />
-
                 </Item>
                 <Item>
                   <Input

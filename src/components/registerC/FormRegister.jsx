@@ -18,15 +18,10 @@ import validator from "validator";
 import swal from "sweetalert2";
 import axios from "axios";
 import { Input } from "antd";
-import { UserOutlined } from '@ant-design/icons';
-import { PhoneOutlined  } from '@ant-design/icons';
-import { MailOutlined  } from '@ant-design/icons';
-import { LockOutlined  } from '@ant-design/icons';
-
-
-
-
-
+import { UserOutlined } from "@ant-design/icons";
+import { PhoneOutlined } from "@ant-design/icons";
+import { MailOutlined } from "@ant-design/icons";
+import { LockOutlined } from "@ant-design/icons";
 
 const theme = createTheme();
 
@@ -42,6 +37,8 @@ function Registro() {
   const [modal, setModal] = useState(false);
   const [modalEmpty, setModalEmpty] = useState(false);
   const [emailError, setEmailError] = useState("");
+
+  // Limpia los campos del formulario
 
   async function registrar() {
     setModalEmpty(false);
@@ -137,6 +134,7 @@ function Registro() {
           />
 
           <Grid
+            bgcolor="#f3f4f6"
             item
             xs={12}
             sm={8}
@@ -181,13 +179,11 @@ function Registro() {
                       required
                       /* error={isEmpty[0] === true} */
                       onChange={(e) => changeEvent(e, 1)}
-                      fullWidth
                       name="sFirstName"
                       label="Nombre"
                       type="text"
-                      margin="normal"
                       placeholder="Nombre"
-                      prefix={<UserOutlined />} 
+                      prefix={<UserOutlined />}
                     />
                   </Item>
                   <Item>
@@ -197,13 +193,11 @@ function Registro() {
                       required
                       error={isEmpty[2] === true}
                       onChange={(e) => changeEvent(e, 2)}
-                      fullWidth
                       name="sLastName"
                       label="Apellido"
                       type="text"
-                      margin="normal"
                       placeholder="Apellido"
-                      prefix={<UserOutlined />} 
+                      prefix={<UserOutlined />}
                     />
                   </Item>
                 </Stack>
@@ -216,13 +210,11 @@ function Registro() {
                       required
                       error={isEmpty[3] === true}
                       onChange={(e) => changeEvent(e, 3)}
-                      fullWidth
                       name="sPhone"
                       label="Teléfono"
                       type="tel"
-                      margin="normal"
                       placeholder="Teléfono"
-                      prefix={<PhoneOutlined />} 
+                      prefix={<PhoneOutlined />}
                     />
                   </Item>
                   <Item>
@@ -233,15 +225,13 @@ function Registro() {
                       error={isEmpty[1] === true}
                       onChange={(e) => changeEvent(e, 4)}
                       id="userEmail"
-                      fullWidth
                       type="email"
                       label="Correo electrónico"
                       name="sEmail"
-                      margin="normal"
                       placeholder="Correo electrónico"
-                      prefix={<MailOutlined />} 
+                      prefix={<MailOutlined />}
                     />
-                     {emailError && <p className="error">{emailError}</p>} 
+                    {emailError && <p className="error">{emailError}</p>}
                   </Item>
                 </Stack>
                 <br></br>
@@ -253,13 +243,11 @@ function Registro() {
                       required
                       error={isEmpty[5] === true}
                       onChange={(e) => changeEvent(e, 5)}
-                      fullWidth
                       name="sPassword"
                       label="Contraseña"
                       type="password"
-                      margin="normal"
                       placeholder="Contraseña"
-                      prefix={<LockOutlined  />} 
+                      prefix={<LockOutlined />}
                     />
                   </Item>
                   <Item>
@@ -269,13 +257,11 @@ function Registro() {
                       required
                       error={isEmpty[4] === true}
                       onChange={(e) => changeEvent(e, 6)}
-                      fullWidth
                       name="sLogin"
                       label="Usuario"
                       type="text"
-                      margin="normal"
                       placeholder="Nombre de usuario"
-                      prefix={<UserOutlined />} 
+                      prefix={<UserOutlined />}
                     />
                   </Item>
                 </Stack>
