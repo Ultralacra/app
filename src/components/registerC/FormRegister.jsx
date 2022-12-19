@@ -38,6 +38,8 @@ function Registro() {
   const [modalEmpty, setModalEmpty] = useState(false);
   const [emailError, setEmailError] = useState("");
 
+
+
   // Limpia los campos del formulario
 
   async function registrar() {
@@ -103,6 +105,9 @@ function Registro() {
       });
   }
 
+
+
+
   const changeEvent = (e, field) => {
     if (field === 1) setsFirstname(e.target.value);
     if (field === 2) setsLastname(e.target.value);
@@ -113,6 +118,8 @@ function Registro() {
     if (modalEmpty) setModalEmpty(false);
     if (modal) setModal(false);
   };
+
+
 
   return (
     <ThemeProvider theme={theme}>

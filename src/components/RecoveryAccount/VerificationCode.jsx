@@ -18,6 +18,10 @@ import SendIcon from "@mui/icons-material/Send";
 import ModalRecoveryPassword from "../modals/ModalRecoveryPassword";
 import validator from "validator";
 import { Input } from "antd";
+import { UserOutlined } from "@ant-design/icons";
+import { SecurityScanOutlined } from "@ant-design/icons";
+import { MailOutlined } from "@ant-design/icons";
+import { LockOutlined } from "@ant-design/icons";
 
 const theme = createTheme();
 const RecoveryAccount = () => {
@@ -145,11 +149,7 @@ const RecoveryAccount = () => {
           square
         >
           <Box
-            bgcolor="#fafafa"
-            border={1}
-            borderRadius={5}
             borderColor="#fafafa"
-            boxShadow="11px 10px 44px -7px rgba(0,0,0,0.31)"
             padding="10px"
             sx={{
               my: 8,
@@ -172,12 +172,12 @@ const RecoveryAccount = () => {
             </Typography>
             <Typography
               component="p"
-              mt={4}
+              mt={2}
               fontSize="1rem"
               variant="p"
               align="center"
-              fontWeight="bold"
-              color=""
+              fontWeight="500"
+              color="#006D8E"
             >
               Para iniciar sesión en tu cuenta, inserta tu nombre de usuario,
               correo electrónico y código de seguridad.
@@ -193,6 +193,7 @@ const RecoveryAccount = () => {
                     placeholder="Usuario"
                     label="Usuario"
                     name="login"
+                    prefix={<UserOutlined />}
                   />
                 </Item>
                 <Item>
@@ -204,6 +205,7 @@ const RecoveryAccount = () => {
                     placeholder="Email"
                     label="Email"
                     name="email"
+                    prefix={<MailOutlined />}
                   />
                 </Item>
               </Stack>
@@ -218,6 +220,7 @@ const RecoveryAccount = () => {
                     placeholder="Codigo de seguridad"
                     label="Codigo de seguridad"
                     name="code"
+                    prefix={<SecurityScanOutlined />}
                   />
                 </Item>
                 <Item>
@@ -230,6 +233,7 @@ const RecoveryAccount = () => {
                     placeholder="Nueva contraseña"
                     label="Contraseña"
                     name="new_password"
+                    prefix={<LockOutlined />}
                   />
                 </Item>
               </Stack>

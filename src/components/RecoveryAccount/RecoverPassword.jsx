@@ -8,6 +8,9 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
+import { UserOutlined } from "@ant-design/icons";
+import { MailOutlined } from "@ant-design/icons";
+
 
 import { useState } from "react";
 import { LoadingButton } from "@mui/lab";
@@ -138,7 +141,16 @@ const RecoveryAccount = () => {
               Reestablece tu contraseña
             </Typography>
 
-            <Typography className="texto-recuperar" sx={{ mt: 4 }}>
+            <Typography
+                                component="p"
+                                mt={2}
+                                mb={2}
+                                fontSize="1rem"
+                                variant="p"
+                                align="center"
+                                fontWeight="500"
+                                color="#006D8E"
+            >
               Ingresa tu dirección de correo electrónico y te enviamos un código
               para reestablecer tu contraseña
             </Typography>
@@ -151,6 +163,7 @@ const RecoveryAccount = () => {
                 placeholder="usuario"
                 label="usuario"
                 name="login"
+                prefix={<UserOutlined />}
               />
               <br></br>
               <br></br>
@@ -161,6 +174,7 @@ const RecoveryAccount = () => {
                 placeholder="email"
                 label="Email"
                 name="email"
+                prefix={<MailOutlined />}
               />
               <LoadingButton
                 onClick={enviarCorreo}

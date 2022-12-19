@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./Login.css";
 import { Link } from "react-router-dom";
-import CssBaseline from "@mui/material/CssBaseline";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Paper from "@mui/material/Paper";
@@ -16,7 +15,7 @@ import LoginIcon from "@mui/icons-material/Login";
 import { Typography } from "@mui/material";
 import Swal from "sweetalert2";
 import { Input } from "antd";
-import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
+import BackToLogin from "../minicomponentes/BackToLogin";
 
 export default function SignInSide() {
   const theme = createTheme();
@@ -82,7 +81,7 @@ export default function SignInSide() {
   return (
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: "100vh" }}>
-        <CssBaseline />
+
         <Grid
           item
           xs={false}
@@ -122,20 +121,21 @@ export default function SignInSide() {
             />
 
             <Box component="form" noValidate onSubmit={handleSubmit}>
+              
               <Stack spacing={2} className>
                 <Item>
                   <Typography
                     component="p"
                     mt={2}
                     mb={2}
-                    fontSize="1.5rem"
+                    fontSize="1rem"
                     variant="p"
-                    fontFamily={""}
                     align="center"
-                    fontWeight="bold"
+                    fontWeight="500"
                     color="#006D8E"
                   >
-                    ingresar
+                    Bienvenido al Portal de Clientes de ValinkPay <br></br>
+                    Inicia sesión en tu cuenta
                   </Typography>
                   <Input
                     placeholder="nombre de usuario"
@@ -159,9 +159,6 @@ export default function SignInSide() {
                     type="password"
                     id="password"
                     size="large"
-                    iconRender={(visible) =>
-                      visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
-                    }
                   />
                 </Item>
                 <Item>
