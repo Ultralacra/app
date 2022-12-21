@@ -36,8 +36,6 @@ function Registro() {
   const [isEmpty, setIsEmpty] = useState([]);
   const [modal, setModal] = useState(false);
   const [modalEmpty, setModalEmpty] = useState(false);
-  const [emailError, setEmailError] = useState("");
-
 
 
   // Limpia los campos del formulario
@@ -105,9 +103,6 @@ function Registro() {
       });
   }
 
-
-
-
   const changeEvent = (e, field) => {
     if (field === 1) setsFirstname(e.target.value);
     if (field === 2) setsLastname(e.target.value);
@@ -118,8 +113,6 @@ function Registro() {
     if (modalEmpty) setModalEmpty(false);
     if (modal) setModal(false);
   };
-
-
 
   return (
     <ThemeProvider theme={theme}>
@@ -134,9 +127,10 @@ function Registro() {
             sm={4}
             md={7}
             sx={{
-              backgroundImage: "url()",
+              backgroundImage: "url(http://valinkgroup.com/wp-content/uploads/2022/12/plantilla-pantallas-incorporacion-sitios-web-ganar-dinero-concepto-factura-factura_146120-246.jpg)",
               backgroundRepeat: "no-repeat",
-              backgroundSize: "75%",
+              backgroundSize: "cover",
+              backgroundPosition: "center"
             }}
           />
 
@@ -159,12 +153,11 @@ function Registro() {
                 alignItems: "center",
               }}
             >
-              <img
-                width="20%"
-                class="logo-login"
-                src="http://valinkgroup.com/wp-content/uploads/2022/05/Negro.png"
-                alt="logo"
-              ></img>
+            <img
+              width="45%"
+              src="http://valinkgroup.com/wp-content/uploads/2022/05/Gris.png"
+              alt="logo"
+            />
               <Typography
                 component="p"
                 mt={4}
@@ -181,24 +174,24 @@ function Registro() {
                 <Stack direction="row" spacing={2}>
                   <Item>
                     <Input
-                      className="register-input"
+                      className="register-input inputClass"
                       size="large"
                       required
-                      /* error={isEmpty[0] === true} */
                       onChange={(e) => changeEvent(e, 1)}
                       name="sFirstName"
                       label="Nombre"
                       type="text"
                       placeholder="Nombre"
                       prefix={<UserOutlined />}
+
                     />
+
                   </Item>
                   <Item>
                     <Input
                       className="register-input"
                       size="large"
                       required
-                      error={isEmpty[2] === true}
                       onChange={(e) => changeEvent(e, 2)}
                       name="sLastName"
                       label="Apellido"
@@ -215,7 +208,6 @@ function Registro() {
                       className="register-input"
                       size="large"
                       required
-                      error={isEmpty[3] === true}
                       onChange={(e) => changeEvent(e, 3)}
                       name="sPhone"
                       label="Teléfono"
@@ -229,7 +221,6 @@ function Registro() {
                       className="register-input"
                       size="large"
                       required
-                      error={isEmpty[1] === true}
                       onChange={(e) => changeEvent(e, 4)}
                       id="userEmail"
                       type="email"
@@ -238,7 +229,6 @@ function Registro() {
                       placeholder="Correo electrónico"
                       prefix={<MailOutlined />}
                     />
-                    {emailError && <p className="error">{emailError}</p>}
                   </Item>
                 </Stack>
                 <br></br>
@@ -248,7 +238,6 @@ function Registro() {
                       className="register-input"
                       size="large"
                       required
-                      error={isEmpty[5] === true}
                       onChange={(e) => changeEvent(e, 5)}
                       name="sPassword"
                       label="Contraseña"
@@ -262,7 +251,6 @@ function Registro() {
                       className="register-input"
                       size="large"
                       required
-                      error={isEmpty[4] === true}
                       onChange={(e) => changeEvent(e, 6)}
                       name="sLogin"
                       label="Usuario"

@@ -13,10 +13,11 @@ useEffect(() => {
 const RecoveryPassword = () => {
     swal.fire({
         
-        imageUrl: 'https://indrasolutions.cl/wp-content/uploads/2022/09/Group-163.png',
+        imageUrl: "http://valinkgroup.com/wp-content/uploads/2022/12/Group-163.webp",
         title: 'Contraseña cambiada con éxito',
         text  : "Su contraseña ha sido cambiada con éxito, haga click en el botón para continuar.",
         confirmButtonText: 'continuar',
+        confirmButtonColor: "#ffb200"
     })
 }
     return (    

@@ -1,6 +1,6 @@
 .login-inputs {
-  border-color: #f3f7fe;
-  background-color: #f3f7fe;
+  border-color: white;
+  background-color: white;
   border-radius: 5px !important;
   font-weight: 500;
 }
@@ -26,3 +26,8 @@
   color: white;
   cursor: not-allowed;
 }
+.justify-boxes{
+  display: flex !important;
+
+}
+  

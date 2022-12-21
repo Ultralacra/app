@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
 import "./DashboardMain.css";
@@ -6,11 +6,15 @@ import Container from "react-bootstrap/Container";
 import axios from "axios";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
+import Swal from "sweetalert2";
+import Axios from "axios";
 
 const DashboardMain = () => {
   //Datos del usuario
   const [usuario, setUsuario] = useState([]);
-  //LLamar lista de bancos
+
+
+
 
   //Llamar info usuario
   useEffect(() => {
@@ -22,6 +26,8 @@ const DashboardMain = () => {
           headers: {
             "Content-Type": "application/json",
             Authorization: JSON.parse(localStorage.getItem("token")),
+
+
           },
         }
       );
@@ -60,7 +66,7 @@ const DashboardMain = () => {
             fontFamily=""
             mb={2}
           >
-            DASHBOARD
+            DASHBOARD 
           </Typography>
           <div className="espaciador-amarillo-largo"></div>
         </Container>

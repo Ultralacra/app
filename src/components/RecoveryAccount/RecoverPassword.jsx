@@ -111,15 +111,18 @@ const RecoveryAccount = () => {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: "url()",
-            backgroundRepeat: "cover",
-
-            backgroundSize: "cover",
+            backgroundImage: "url(http://valinkgroup.com/wp-content/uploads/2022/12/Paso-1-1.webp)",
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "content",
             backgroundPosition: "center",
           }}
         />
 
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square
+        
+        bgcolor="#EBEBEB"
+        >
+          
           <Box
             sx={{
               my: 8,
@@ -127,8 +130,14 @@ const RecoveryAccount = () => {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
+              
             }}
           >
+              <img
+              width="45%"
+              src="http://valinkgroup.com/wp-content/uploads/2022/05/Gris.png"
+              alt="logo"
+            />
             <Typography
               component="p"
               mt={4}

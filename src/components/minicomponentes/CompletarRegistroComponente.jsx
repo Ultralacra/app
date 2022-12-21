@@ -13,6 +13,8 @@ import Stack from "@mui/material/Stack";
 import { LoadingButton } from "@mui/lab";
 import SendIcon from "@mui/icons-material/Send";
 import { useForm } from "react-hook-form";
+import { Input } from "antd";
+import ImageUploader from "./ImageUploader";
 
 const CompletarRegistroComponente = () => {
   //Datos del usuario
@@ -240,12 +242,13 @@ const CompletarRegistroComponente = () => {
                           <Item elevation={0}>
                             <TextField
                               {...register("sCedula")}
+                              placeholder="Cedula"
                               name="sCedula"
-                              required
                               size="small"
                               fullWidth
                               label="Cedula o Rif"
                               type="text"
+
                             />
                           </Item>
                         </Grid>
@@ -320,8 +323,7 @@ const CompletarRegistroComponente = () => {
                               type="text"
                               label="Dirección"
                               placeholder="Ejem: Av. Principal, Edificio 1, Piso 1, Oficina 1"
-                              variant="outlined"
-                              size="small"
+                              size="default size"
                             />
                           </Item>
                         </Grid>
@@ -506,7 +508,9 @@ const CompletarRegistroComponente = () => {
                         columnSpacing={{ xs: 0.5, sm: 4, md: 1 }}
                       >
                         <Stack item xs={6}>
-                          <Item elevation={0}>logo</Item>
+                          <Item elevation={0}>
+
+                          </Item>
                         </Stack>
                       </Stack>
                       <Stack
@@ -520,7 +524,7 @@ const CompletarRegistroComponente = () => {
                         <Item elevation={0}>banco</Item>
                         <Item elevation={0}>tipo de cuenta</Item>
                         <Item elevation={0}>
-                          <TextField
+                          <Input
                           {...register("sRazonSocialCuenta")}
                             name="sRazonSocialCuenta"
                             required

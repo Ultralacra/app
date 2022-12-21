@@ -125,15 +125,17 @@ const RecoveryAccount = () => {
       {modal && <ModalRecoveryPassword />}
       <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />
+
+        
         <Grid
           item
           xs={false}
           sm={4}
           md={7}
           sx={{
-            backgroundImage: "url()",
-            backgroundRepeat: "cover",
-            backgroundSize: "cover",
+            backgroundImage: "url(http://valinkgroup.com/wp-content/uploads/2022/12/Paso-1-1.webp)",
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "countain",
             backgroundPosition: "center",
           }}
         />
@@ -148,6 +150,7 @@ const RecoveryAccount = () => {
           elevation={0}
           square
         >
+       
           <Box
             borderColor="#fafafa"
             padding="10px"
@@ -159,6 +162,11 @@ const RecoveryAccount = () => {
               alignItems: "center",
             }}
           >
+                    <img
+              width="45%"
+              src="http://valinkgroup.com/wp-content/uploads/2022/05/Gris.png"
+              alt="logo"
+            />
             <Typography
               component="p"
               mt={4}

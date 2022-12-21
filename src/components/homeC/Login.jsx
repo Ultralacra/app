@@ -23,8 +23,6 @@ export default function SignInSide() {
   const [username, setUsername] = useState(""); //para asignar el valor al estado y poder acceder
   const [password, setPassword] = useState(""); //para asignar el valor al estado y poder acceder
 
-  // Muestra/oculta la contraseña cada vez que se haga clic en el botón
-
   //funcion para ver el campo esta vacio o no
   const isFormComplete = () => username.length > 0 && password.length > 0;
 
@@ -81,7 +79,6 @@ export default function SignInSide() {
   return (
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: "100vh" }}>
-
         <Grid
           item
           xs={false}
@@ -89,21 +86,21 @@ export default function SignInSide() {
           md={7}
           sx={{
             backgroundImage:
-              "url(http://valinkgroup.com/wp-content/uploads/2022/06/Valinkgroup.png)",
+              "url(http://valinkgroup.com/wp-content/uploads/2022/12/6134225.jpg)",
             backgroundRepeat: "no-repeat",
-            backgroundSize: "50%",
+            backgroundSize: "contain",
             backgroundPosition: "center",
-            backgroundColor: "Grey",
           }}
         />
         <Grid
           item
           xs={12}
-          sm={10}
+          sm={8}
           md={5}
           component={Paper}
           elevation={6}
           square
+          bgcolor="#EBEBEB"
         >
           <Box
             sx={{
@@ -115,13 +112,12 @@ export default function SignInSide() {
             }}
           >
             <img
-              width="45%"
+              width="60%"
               src="http://valinkgroup.com/wp-content/uploads/2022/05/Gris.png"
               alt="logo"
             />
 
             <Box component="form" noValidate onSubmit={handleSubmit}>
-              
               <Stack spacing={2} className>
                 <Item>
                   <Typography
@@ -134,8 +130,8 @@ export default function SignInSide() {
                     fontWeight="500"
                     color="#006D8E"
                   >
-                    Bienvenido al Portal de Clientes de ValinkPay <br></br>
-                    Inicia sesión en tu cuenta
+                    Bienvenido al Portal de Clientes de ValinkPay Inicia sesión
+                    en tu cuenta
                   </Typography>
                   <Input
                     placeholder="nombre de usuario"
@@ -195,6 +191,7 @@ export default function SignInSide() {
           </Box>
         </Grid>
       </Grid>
+
       <Stack></Stack>
     </ThemeProvider>
   );
