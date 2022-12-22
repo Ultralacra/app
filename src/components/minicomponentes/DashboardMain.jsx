@@ -26,8 +26,6 @@ const DashboardMain = () => {
           headers: {
             "Content-Type": "application/json",
             Authorization: JSON.parse(localStorage.getItem("token")),
-
-
           },
         }
       );
