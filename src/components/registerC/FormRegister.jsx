@@ -13,8 +13,6 @@ import Item from "@mui/material/Stack";
 import SendIcon from "@mui/icons-material/Send";
 import { LoadingButton } from "@mui/lab";
 import ModalRegistroExitoso from "../modals/ModalRegistroExitoso";
-import ModalEmptyFields from "../modals/ModalEmptyFields";
-import validator from "validator";
 import swal from "sweetalert2";
 import axios from "axios";
 import { Input } from "antd";
@@ -22,102 +20,36 @@ import { UserOutlined } from "@ant-design/icons";
 import { PhoneOutlined } from "@ant-design/icons";
 import { MailOutlined } from "@ant-design/icons";
 import { LockOutlined } from "@ant-design/icons";
+import {Formik} from "formik";
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
+
+
+
 
 const theme = createTheme();
 
 function Registro() {
-  const [sFirstName, setsFirstname] = useState("");
-  const [sLastName, setsLastname] = useState("");
-  const [sEmail, setsEmail] = useState("");
-  const [sPhone, setsPhone] = useState("");
-  const [sPassword, setsPassword] = useState("");
-  const [sLogin, setsLogin] = useState("");
-  const [iProfileID] = useState("0");
-  const [isEmpty, setIsEmpty] = useState([]);
+
   const [modal, setModal] = useState(false);
-  const [modalEmpty, setModalEmpty] = useState(false);
+  const [open, setOpen] = useState(false);
 
-
-  // Limpia los campos del formulario
-
-  async function registrar() {
-    setModalEmpty(false);
-    setModal(false);
-
-    let items = {
-      sFirstName,
-      sEmail,
-      sLastName,
-      sPhone,
-      sLogin,
-      sPassword,
-      iProfileID,
-    };
-
-    // Alert de campos vacios
-    setIsEmpty(Object.values(items).map((x) => x === ""));
-
-    if (Object.values(items).filter((x) => x === "").length > 0) {
-      setModalEmpty(true);
-      return;
-    }
-
-    if (!validator.isEmail(sEmail)) {
-      swal.fire({
-        toast: true,
-        position: "top-end",
-        icon: "error",
-        text: "Por favor ingrese un correo válido",
-        showConfirmButton: false,
-        timer: 1500,
-        timerProgressBar: true,
-      });
-      return;
-    }
-
-    axios
-      .post("https://valink-pay-api.vercel.app/users", {
-        sFirstName: sFirstName,
-        sEmail: sEmail,
-        sLastName: sLastName,
-        sPhone: sPhone,
-        sLogin: sLogin,
-        sPassword: sPassword,
-        iProfileID: iProfileID,
-      })
-      .then((response) => {
-        console.warn(response.data.error);
-        if (response.data.status === "fail") {
-          swal.fire({
-            toast: true,
-            position: "top-end",
-            icon: "error",
-            text: "Correo electrónico o usuario ya registrado",
-            showConfirmButton: false,
-            timer: 1500,
-            timerProgressBar: true,
-          });
-        } else {
-          setModal(true);
-        }
-      });
-  }
-
-  const changeEvent = (e, field) => {
-    if (field === 1) setsFirstname(e.target.value);
-    if (field === 2) setsLastname(e.target.value);
-    if (field === 3) setsPhone(e.target.value);
-    if (field === 4) setsEmail(e.target.value);
-    if (field === 5) setsPassword(e.target.value);
-    if (field === 6) setsLogin(e.target.value);
-    if (modalEmpty) setModalEmpty(false);
-    if (modal) setModal(false);
-  };
 
   return (
+
+      
     <ThemeProvider theme={theme}>
       {modal && <ModalRegistroExitoso />}
-      {modalEmpty && <ModalEmptyFields />}
+      <Backdrop
+        sx={{
+          color: "#DFFEFF",
+          zIndex: (theme) => theme.zIndex.drawer + 1,
+        }}
+        open={open}
+      >
+        Verificando Por favor Espere...
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <Box sx={{ display: "flex" }}>
         <Grid container component="main" sx={{ height: "100vh" }}>
           <CssBaseline />
@@ -171,136 +103,329 @@ function Registro() {
               </Typography>
               <br></br>
               <Box>
-                <Stack direction="row" spacing={2}>
-                  <Item>
-                    <Input
-                      className="register-input inputClass"
-                      size="large"
-                      required
-                      onChange={(e) => changeEvent(e, 1)}
-                      name="sFirstName"
-                      label="Nombre"
-                      type="text"
-                      placeholder="Nombre"
-                      prefix={<UserOutlined />}
+                <Formik
+                  initialValues={{
+                    sFirstName: "",
+                    sLastName: "",
+                    sEmail: "",
+                    sPhone: "",
+                    sPassword: "",
+                    sLogin: "",
+                    iProfileID: 0,
+                  }}
+                  
+                     validate=  {valores => {
+                      let errores = {};
+                      //validacion de nombre
+                      if (!valores.sFirstName)
+                      {errores.sFirstName = "Campo obligatorio";}
+                      else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valores.sFirstName)){
+                        errores.sFirstName = "Solo letras y espacios";
+                      }
+                      //validacion de apellido
+                      if (!valores.sLastName)
+                      {errores.sLastName = "Campo obligatorio";}
+                      else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valores.sLastName)){
+                        errores.sLastName = "Solo letras y espacios";
+                      }
+                      //validacion de email
+                      if (!valores.sEmail)
+                      {errores.sEmail = "Campo obligatorio";}
+                      else if (!/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(valores.sEmail)){
+                        errores.sEmail = "Email no válido";
+                      }
+                      //validacion de telefono
+                       if (!valores.sPhone)
+                      {errores.sPhone = "Campo obligatorio";}
+                      //validacion de contraseña
+                       if (!valores.sPassword)
+                      {errores.sPassword = "Campo obligatorio";}
+                      //validacion de login
+                       if (!valores.sLogin)
+                      {errores.sLogin = "Campo obligatorio";}
+                      // contraseña obligatoria
+                       if (!valores.sPassword)
+                      {errores.sPassword = "Campo obligatorio";}
+                      return errores;
+                    }}
+                    onSubmit={
+                      (values , {resetForm}) => {
+                        setOpen(true);
+                        axios
+                        .post("https://valink-pay-api.vercel.app/users", {
+                          sFirstName: values.sFirstName,
+                          sLastName: values.sLastName,
+                          sEmail: values.sEmail,
+                          sPhone: values.sPhone,
+                          sPassword: values.sPassword,
+                          sLogin: values.sLogin,
+                          iProfileID: 0 ,
+                        })
+                        .then((response) => {
+                          console.warn(response.data.error);
+                          if (response.data.status === "fail") {
+                            swal.fire({
+                              toast: true,
+                              position: "top-end",
+                              icon: "error",
+                              text: "Correo electrónico o usuario ya registrado",
+                              showConfirmButton: false,
+                              timer: 1500,
+                              timerProgressBar: true
+                            });
+                            setOpen(false);
+                          } else {
+                            swal.fire({
+                              toast: true,
+                              position: "top-end",
+                              icon: "success",
+                              text: "Registro exitoso",
+                              showConfirmButton: false,
+                              timer: 1500,
+                              timerProgressBar: true,
 
-                    />
-
-                  </Item>
-                  <Item>
-                    <Input
-                      className="register-input"
-                      size="large"
-                      required
-                      onChange={(e) => changeEvent(e, 2)}
-                      name="sLastName"
-                      label="Apellido"
-                      type="text"
-                      placeholder="Apellido"
-                      prefix={<UserOutlined />}
-                    />
-                  </Item>
-                </Stack>
-                <br></br>
-                <Stack direction="row" spacing={2}>
-                  <Item>
-                    <Input
-                      className="register-input"
-                      size="large"
-                      required
-                      onChange={(e) => changeEvent(e, 3)}
-                      name="sPhone"
-                      label="Teléfono"
-                      type="tel"
-                      placeholder="Teléfono"
-                      prefix={<PhoneOutlined />}
-                    />
-                  </Item>
-                  <Item>
-                    <Input
-                      className="register-input"
-                      size="large"
-                      required
-                      onChange={(e) => changeEvent(e, 4)}
-                      id="userEmail"
-                      type="email"
-                      label="Correo electrónico"
-                      name="sEmail"
-                      placeholder="Correo electrónico"
-                      prefix={<MailOutlined />}
-                    />
-                  </Item>
-                </Stack>
-                <br></br>
-                <Stack direction="row" spacing={2}>
-                  <Item>
-                    <Input
-                      className="register-input"
-                      size="large"
-                      required
-                      onChange={(e) => changeEvent(e, 5)}
-                      name="sPassword"
-                      label="Contraseña"
-                      type="password"
-                      placeholder="Contraseña"
-                      prefix={<LockOutlined />}
-                    />
-                  </Item>
-                  <Item>
-                    <Input
-                      className="register-input"
-                      size="large"
-                      required
-                      onChange={(e) => changeEvent(e, 6)}
-                      name="sLogin"
-                      label="Usuario"
-                      type="text"
-                      placeholder="Nombre de usuario"
-                      prefix={<UserOutlined />}
-                    />
-                  </Item>
-                </Stack>
-                <LoadingButton
-                  endIcon={<SendIcon />}
-                  onClick={registrar}
-                  className="btn-create-account"
-                  fullWidth
-                  variant="contained"
-                  sx={{ mt: 3, mb: 2 }}
-                >
-                  Crear cuenta
-                </LoadingButton>
-
-                <div className>
-                  <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    align="center"
-                    sx={{ mt: 1 }}
-                    mt={1}
-                    mb={1}
+                            });
+                            setOpen(false);
+                            setModal(true);
+                            resetForm();
+                          }
+                        })
+                        .catch((error) => {
+                          console.log(error);
+                        });
+                      }
+                    }
                   >
-                    Al hacer click en Crear cuenta, declaras haber leído y{" "}
-                    <br /> muestras tu conformidad con nuestros{" "}
+
+                 {({touched, errors, values, handleSubmit, handleChange, handleBlur}) => (
+                      <form onSubmit={handleSubmit}>
+                        {console.log(touched)}
+
+                  <Stack direction="row" spacing={1}
+                    sx={{
+                        mb: 2,
+                        mt: 2,
+                        ml: 1,
+                        mr: 1,
+                        }}
+                  >
+                    <Item>
+                      <Input
+                        className="register-input inputClass"
+                        size="large"
+                        required
+                        name="sFirstName"
+                        label="Nombre"
+                        type="text"
+                        placeholder="Nombre"
+                        prefix={<UserOutlined />}
+                        value= {values.sFirstName}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                      />
+                      {errors.sFirstName && <Typography
+                        variant="p"
+                        color="error"
+                        fontSize="0.8rem"
+                        fontWeight="bold"
+                        mt={1}
+                        mb={1}
+                        ml={1}
+                        mr={1}
+                        sx={{ textAlign: "left"}}
+                      >{errors.sFirstName}</Typography>}
+                    </Item>
+                    <Item>
+                      <Input
+                        className="register-input"
+                        size="large"
+                        required
+                        name="sLastName"
+                        label="Apellido"
+                        type="text"
+                        placeholder="Apellido"
+                        prefix={<UserOutlined />}
+                        value= {values.sLastName}
+                        onChange={handleChange}
+                      />
+                       {errors.sLastName && <Typography
+                        variant="p"
+                        color="error"
+                        fontSize="0.8rem"
+                        fontWeight="bold"
+                        mt={1}
+                        mb={1}
+                        ml={1}
+                        mr={1}
+                        sx={{ textAlign: "left"}}
+                      >{errors.sLastName}</Typography>}
+                    </Item>
+                  </Stack>
+                  <Stack direction="row" spacing={1}
+                  sx={{
+                    mb: 2,
+                    mt: 2,
+                    ml: 1,
+                    mr: 1,
+                    }}
+                  >
+                    <Item>
+                      <Input
+                        className="register-input"
+                        size="large"
+                        required
+                        name="sPhone"
+                        label="Teléfono"
+                        type="tel"
+                        placeholder="Teléfono"
+                        prefix={<PhoneOutlined />}
+                        value= {values.sPhone}
+                        onChange={handleChange}
+                      />
+                      {errors.sPhone && <Typography
+                        variant="p"
+                        color="error"
+                        fontSize="0.8rem"
+                        fontWeight="bold"
+                        mt={1}
+                        mb={1}
+                        ml={1}
+                        mr={1}
+                        sx={{ textAlign: "left"}}
+                      >{errors.sPhone}</Typography>}
+                    </Item>
+                    <Item>
+                      <Input
+                        className="register-input"
+                        size="large"
+                        required
+                        id="userEmail"
+                        type="email"
+                        label="Correo electrónico"
+                        name="sEmail"
+                        placeholder="Correo electrónico"
+                        prefix={<MailOutlined />}
+                        value= {values.sEmail}  
+                        onChange={handleChange}
+                      />
+                      {errors.sEmail && <Typography
+                        variant="p"
+                        color="error"
+                        fontSize="0.8rem"
+                        fontWeight="bold"
+                        mt={1}
+                        mb={1}
+                        ml={1}
+                        mr={1}
+                        sx={{ textAlign: "left"}}
+                      >{errors.sEmail}</Typography>}
+                    </Item>
+                  </Stack>
+                  <Stack direction="row" spacing={1}
+                  sx={{
+                    mb: 2,
+                    mt: 2,
+                    ml: 1,
+                    mr: 1,
+                    }}
+                  >
+                    <Item>
+                      <Input
+                        className="register-input"
+                        size="large"
+                        required
+                        name="sPassword"
+                        label="Contraseña"
+                        type="password"
+                        placeholder="Contraseña"
+                        prefix={<LockOutlined />}
+                        value= {values.sPassword}
+                        onChange={handleChange}
+                      />
+                        {errors.sPassword && <Typography
+                        variant="p"
+                        color="error"
+                        fontSize="0.8rem"
+                        fontWeight="bold"
+                        mt={1}
+                        mb={1}
+                        ml={1}
+                        mr={1}
+                        sx={{ textAlign: "left"}}
+                      >{errors.sPassword}</Typography>}
+                    </Item>
+                    <Item>
+                      <Input
+                        className="register-input"
+                        size="large"
+                        required
+                        name="sLogin"
+                        label="Usuario"
+                        type="text"
+                        placeholder="Nombre de usuario"
+                        prefix={<UserOutlined />}
+                        value= {values.sLogin}
+                        onChange={handleChange}
+                      />
+                        {errors.sLogin && <Typography
+                        variant="p"
+                        color="error"
+                        fontSize="0.8rem"
+                        fontWeight="bold"
+                        mt={1}
+                        mb={1}
+                        ml={1}
+                        mr={1}
+                        sx={{ textAlign: "left"}}
+                      >{errors.sLogin}</Typography>}
+                    </Item>
+                  </Stack> 
+                  <LoadingButton
+                    type="submit"
+                    endIcon={<SendIcon />}
+                    className="btn-create-account"
+                    fullWidth
+                    variant="contained"
+                    sx={{ mt: 3, mb: 2 }}
+                  >
+                    Crear cuenta
+                  </LoadingButton>
+  
+                  <div className>
+                    <Typography
+                      variant="body2"
+                      color="textSecondary"
+                      align="center"
+                      sx={{ mt: 1 }}
+                      mt={1}
+                      mb={1}
+                    >
+                      Al hacer click en Crear cuenta, declaras haber leído y{" "}
+                      <br /> muestras tu conformidad con nuestros{" "}
+                      <Link
+                        className="text-lost-password"
+                        href="#"
+                        variant="body2"
+                      >
+                        Términos de Servicio
+                      </Link>
+                    </Typography>
+                    <KeyboardArrowLeftIcon className="icons-back icons-form" />
+  
                     <Link
                       className="text-lost-password"
-                      href="#"
+                      to="/login"
                       variant="body2"
                     >
-                      Términos de Servicio
+                      Atrás para iniciar sesión
                     </Link>
-                  </Typography>
-                  <KeyboardArrowLeftIcon className="icons-back icons-form" />
-
-                  <Link
-                    className="text-lost-password"
-                    to="/login"
-                    variant="body2"
-                  >
-                    Atrás para iniciar sesión
-                  </Link>
-                </div>
+                  </div>
+                  </form>
+                    ) 
+                  }
+                  </Formik>
               </Box>
+              
             </Box>
           </Grid>
         </Grid>
