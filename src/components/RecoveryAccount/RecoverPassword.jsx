@@ -10,8 +10,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import { UserOutlined } from "@ant-design/icons";
 import { MailOutlined } from "@ant-design/icons";
-
-
+import Stack from "@mui/material/Stack";
 import { useState } from "react";
 import { LoadingButton } from "@mui/lab";
 import Swal from "sweetalert2";
@@ -113,7 +112,7 @@ const RecoveryAccount = () => {
           sx={{
             backgroundImage: "url(http://valinkgroup.com/wp-content/uploads/2022/12/Paso-1-1.webp)",
             backgroundRepeat: "no-repeat",
-            backgroundSize: "content",
+            backgroundSize: "500px auto",
             backgroundPosition: "center",
           }}
         />
@@ -165,6 +164,9 @@ const RecoveryAccount = () => {
             </Typography>
 
             <Box component="form" sx={{ mt: 4 }}>
+            <Stack 
+            spacing={2}
+            >
               <Input
                 className="input-recovery-password"
                 size="large"
@@ -174,8 +176,6 @@ const RecoveryAccount = () => {
                 name="login"
                 prefix={<UserOutlined />}
               />
-              <br></br>
-              <br></br>
               <Input
                 className="input-recovery-password"
                 size="large"
@@ -216,6 +216,7 @@ const RecoveryAccount = () => {
                   Crear una cuenta
                 </Link>
               </Typography>
+            </Stack>
             </Box>
           </Box>
         </Grid>

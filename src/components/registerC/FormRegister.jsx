@@ -24,9 +24,6 @@ import {Formik} from "formik";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 
-
-
-
 const theme = createTheme();
 
 function Registro() {
@@ -34,10 +31,8 @@ function Registro() {
   const [modal, setModal] = useState(false);
   const [open, setOpen] = useState(false);
 
-
   return (
 
-      
     <ThemeProvider theme={theme}>
       {modal && <ModalRegistroExitoso />}
       <Backdrop
@@ -47,7 +42,7 @@ function Registro() {
         }}
         open={open}
       >
-        Verificando Por favor Espere...
+        Verificando por favor espere...
         <CircularProgress color="inherit" />
       </Backdrop>
       <Box sx={{ display: "flex" }}>
@@ -146,6 +141,8 @@ function Registro() {
                       // contraseña obligatoria
                        if (!valores.sPassword)
                       {errores.sPassword = "Campo obligatorio";}
+
+
                       return errores;
                     }}
                     onSubmit={
@@ -162,7 +159,6 @@ function Registro() {
                           iProfileID: 0 ,
                         })
                         .then((response) => {
-                          console.warn(response.data.error);
                           if (response.data.status === "fail") {
                             swal.fire({
                               toast: true,
@@ -183,7 +179,6 @@ function Registro() {
                               showConfirmButton: false,
                               timer: 1500,
                               timerProgressBar: true,
-
                             });
                             setOpen(false);
                             setModal(true);
@@ -199,7 +194,6 @@ function Registro() {
 
                  {({touched, errors, values, handleSubmit, handleChange, handleBlur}) => (
                       <form onSubmit={handleSubmit}>
-                        {console.log(touched)}
 
                   <Stack direction="row" spacing={1}
                     sx={{
@@ -222,8 +216,9 @@ function Registro() {
                         value= {values.sFirstName}
                         onChange={handleChange}
                         onBlur={handleBlur}
+                        touched={touched.sFirstName}
                       />
-                      {errors.sFirstName && <Typography
+                      {touched.sFirstName && errors.sFirstName && <Typography
                         variant="p"
                         color="error"
                         fontSize="0.8rem"
@@ -247,8 +242,10 @@ function Registro() {
                         prefix={<UserOutlined />}
                         value= {values.sLastName}
                         onChange={handleChange}
+                        onBlur={handleBlur}
+                        touched={touched.sLastName}
                       />
-                       {errors.sLastName && <Typography
+                       {touched.sLastName && errors.sLastName && <Typography
                         variant="p"
                         color="error"
                         fontSize="0.8rem"
@@ -281,8 +278,10 @@ function Registro() {
                         prefix={<PhoneOutlined />}
                         value= {values.sPhone}
                         onChange={handleChange}
+                        onBlur={handleBlur}
+                        touched={touched.sPhone}
                       />
-                      {errors.sPhone && <Typography
+                      {touched.sPhone && errors.sPhone && <Typography
                         variant="p"
                         color="error"
                         fontSize="0.8rem"
@@ -307,8 +306,10 @@ function Registro() {
                         prefix={<MailOutlined />}
                         value= {values.sEmail}  
                         onChange={handleChange}
+                        onBlur={handleBlur}
+                        touched={touched.sEmail}
                       />
-                      {errors.sEmail && <Typography
+                      {touched.sEmail && errors.sEmail && <Typography
                         variant="p"
                         color="error"
                         fontSize="0.8rem"
@@ -341,8 +342,10 @@ function Registro() {
                         prefix={<LockOutlined />}
                         value= {values.sPassword}
                         onChange={handleChange}
+                        onBlur={handleBlur}
+                        touched={touched.sPassword}
                       />
-                        {errors.sPassword && <Typography
+                        {touched.sPassword && errors.sPassword && <Typography
                         variant="p"
                         color="error"
                         fontSize="0.8rem"
@@ -366,8 +369,10 @@ function Registro() {
                         prefix={<UserOutlined />}
                         value= {values.sLogin}
                         onChange={handleChange}
+                        onBlur={handleBlur}
+                        touched={touched.sLogin}
                       />
-                        {errors.sLogin && <Typography
+                        {touched.sLogin && errors.sLogin && <Typography
                         variant="p"
                         color="error"
                         fontSize="0.8rem"

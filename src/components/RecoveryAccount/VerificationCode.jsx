@@ -135,7 +135,7 @@ const RecoveryAccount = () => {
           sx={{
             backgroundImage: "url(http://valinkgroup.com/wp-content/uploads/2022/12/Paso-1-1.webp)",
             backgroundRepeat: "no-repeat",
-            backgroundSize: "countain",
+            backgroundSize: "500px auto",
             backgroundPosition: "center",
           }}
         />
