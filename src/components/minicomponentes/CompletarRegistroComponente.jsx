@@ -7,14 +7,15 @@ import Container from "react-bootstrap/Container";
 import axios from "axios";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
-import TextField from "@mui/material/TextField";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 import { LoadingButton } from "@mui/lab";
 import SendIcon from "@mui/icons-material/Send";
-import { useForm } from "react-hook-form";
 import { Input } from "antd";
-import ImageUploader from "./ImageUploader";
+import { Formik } from "formik";
+import { Radio } from 'antd';
+import { Checkbox } from 'antd';
+
 
 const CompletarRegistroComponente = () => {
   //Datos del usuario
@@ -23,13 +24,27 @@ const CompletarRegistroComponente = () => {
   const [bancos, setBancos] = useState([]);
   //Datos del formulario
 
-  const { register, handleSubmit } = useForm();
+  const options = [
+    {
+      label: 'Tarjeta de crédito',
+      value: 'TDC',
+    },
+    {
+      label: 'Tarjeta de débito',
+      value: 'TDD',
+    },
+    {
+      label: 'Pago móvil',
+      value: 'PM',
+    },
+    {
+      label: 'Tarjetas prepago',
+      value: 'TP',
+    },
+  ]; 
 
-  const onSubmit = (data) => {
-    console.log(data);
-  };
 
-
+  
   //Llamar info usuario
   useEffect(() => {
     async function fetchData() {
@@ -85,517 +100,610 @@ const CompletarRegistroComponente = () => {
         }}
       >
         <Container>
-          <form onSubmit={handleSubmit(onSubmit)} > 
-          <Typography
-            variant="h4"
-            textAlign="left"
-            color="#262626"
-            fontWeight="bold"
-            fontFamily=""
-            mb={2}
+
+          <Formik
+            initialValues={{
+              sUserId:  JSON.parse(localStorage.getItem("id")),
+              sTipoPersona: "",
+              sCedula: "",
+              sRazonSocial: "",
+              sSitioWeb: "",
+              sTelefonoAsociado: "",
+              sCategoriaRubro: "",
+              sRubro: "",
+              sEstado: "",
+              sCiudad: "",
+              sMunicipio: "",
+              sDireccion: "",
+              sActividadEcon: "",
+              sNombreReprLegal: "",
+              sCedulaReprLegal: "",
+              sTelefonoReprLegal: "",
+              sEmailReprLegal: "",
+              sNombreContacto: "",
+              sTelefonoContacto: "",
+              sEmailContacto: "",
+              sNombrePublico: "",
+              sEmailPublico: usuario.sEmail,
+              sUrlLogo: "",
+              sTipoCuenta: "",
+              sBanco: "",
+              sCedulaRif: "",
+              sNroCuentaBanco: "",
+              sConfirmarCuentaBan: "",
+              sMedioPago: "",
+            }}
+            onSubmit={(values) => {
+              console.log(values);
+            }}
           >
-            TUS DATOS
-          </Typography>
+          
+            {({ values, handleChange, handleBlur, handleSubmit }) => (
+                <form onSubmit={handleSubmit}>
 
-          <div className="espaciador-amarillo-largo"></div>
+            <Typography
+              variant="h4"
+              textAlign="left"
+              color="#262626"
+              fontWeight="bold"
+              fontFamily=""
+              mb={2}
+            >
+              TUS DATOS
+            </Typography>
 
-          <Grid container spacing={1} columns={{ xs: 4, sm: 8, md: 12 }}>
-            <Grid item xs={8} md={4}>
-              <Item className="item-1-registro">
-                <Typography
-                  variant="p"
-                  fontWeight="bold"
-                  color="#006d8e"
-                  fontFamily=""
-                  align="left"
-                  fontSize="1rem"
-                >
-                  Tu información personal
-                </Typography>
-                <div className="espaciador-amarillo"></div>
-                <br></br>
-                <Typography
-                  variant="p"
-                  textAlign="left"
-                  fontWeight="bold"
-                  color="black"
-                  fontSize="1rem"
-                >
-                  Nombre:
-                </Typography>
-                <br></br>
-                <Typography
-                  variant="p"
-                  textAlign="left"
-                  fontWeight="100"
-                  color="black"
-                  fontSize="1rem"
-                >
-                  {usuario.sFirstName}
-                </Typography>
-                <br></br>
-                <Typography
-                  variant="p"
-                  textAlign="left"
-                  fontWeight="bold"
-                  color="black"
-                  fontSize="1rem"
-                >
-                  Apellido:
-                </Typography>
-                <br></br>
-                <Typography
-                  variant="p"
-                  textAlign="left"
-                  fontWeight="100"
-                  color="black"
-                  fontSize="1rem"
-                >
-                  {usuario.sLastName}
-                </Typography>
-                <br></br>
-                <Typography
-                  variant="p"
-                  textAlign="left"
-                  fontWeight="bold"
-                  color="black"
-                  fontSize="1rem"
-                >
-                  Numero de teléfono:
-                </Typography>
-                <br></br>
-                <Typography
-                  variant="p"
-                  textAlign="left"
-                  fontWeight="100"
-                  color="black"
-                  fontSize="1rem"
-                >
-                  {usuario.sPhone}
-                </Typography>
-                <br></br>
-                <Typography
-                  variant="p"
-                  textAlign="left"
-                  fontWeight="bold"
-                  color="black"
-                  fontSize="1rem"
-                >
-                  Email:
-                </Typography>
-                <br></br>
-                <Typography
-                  variant="p"
-                  textAlign="left"
-                  fontWeight="100"
-                  color="black"
-                  fontSize="1rem"
-                >
-                  {usuario.sEmail}
-                </Typography>
-                <br></br>
-                <Typography
-                  variant="p"
-                  textAlign="left"
-                  fontWeight="bold"
-                  color="black"
-                  fontSize="1rem"
-                >
-                  Usuario de acceso:
-                </Typography>
+            <div className="espaciador-amarillo-largo"></div>
 
-                <br></br>
-                <Typography
-                  variant="p"
-                  textAlign="left"
-                  fontWeight="100"
-                  color="black"
-                  fontSize="1rem"
-                >
-                  {usuario.sLogin}
-                </Typography>
-              </Item>
-            </Grid>
-            <Grid item xs={6} md={8}>
-              <Item className="item-1-registro">
-                <Grid
-                  container
-                  spacing={{ xs: 2, md: 3 }}
-                  columns={{ xs: 4, sm: 8, md: 12 }}
-                >
-                  <Grid item xs={6}>
-                    <Item elevation={0}>
-                      <Alert icon={false} severity="info">
-                        ¿Utilizarás ValinkPay como persona natural o como
-                        persona jurídica (empresa)?
-                      </Alert>
-                      <br />
+            <Grid container spacing={1} columns={{ xs: 4, sm: 8, md: 12 }}>
+              <Grid item xs={8} md={4}>
+                <Item className="item-1-registro">
+                  <Typography
+                    variant="p"
+                    fontWeight="bold"
+                    color="#006d8e"
+                    fontFamily=""
+                    align="left"
+                    fontSize="1rem"
+                  >
+                    Tu información personal
+                  </Typography>
+                  <div className="espaciador-amarillo"></div>
+                  <br></br>
+                  <Typography
+                    variant="p"
+                    textAlign="left"
+                    fontWeight="bold"
+                    color="black"
+                    fontSize="1rem"
+                  >
+                    Nombre:
+                  </Typography>
+                  <br></br>
+                  <Typography
+                    variant="p"
+                    textAlign="left"
+                    fontWeight="100"
+                    color="black"
+                    fontSize="1rem"
+                  >
+                    {usuario.sFirstName}
+                  </Typography>
+                  <br></br>
+                  <Typography
+                    variant="p"
+                    textAlign="left"
+                    fontWeight="bold"
+                    color="black"
+                    fontSize="1rem"
+                  >
+                    Apellido:
+                  </Typography>
+                  <br></br>
+                  <Typography
+                    variant="p"
+                    textAlign="left"
+                    fontWeight="100"
+                    color="black"
+                    fontSize="1rem"
+                  >
+                    {usuario.sLastName}
+                  </Typography>
+                  <br></br>
+                  <Typography
+                    variant="p"
+                    textAlign="left"
+                    fontWeight="bold"
+                    color="black"
+                    fontSize="1rem"
+                  >
+                    Numero de teléfono:
+                  </Typography>
+                  <br></br>
+                  <Typography
+                    variant="p"
+                    textAlign="left"
+                    fontWeight="100"
+                    color="black"
+                    fontSize="1rem"
+                  >
+                    {usuario.sPhone}
+                  </Typography>
+                  <br></br>
+                  <Typography
+                    variant="p"
+                    textAlign="left"
+                    fontWeight="bold"
+                    color="black"
+                    fontSize="1rem"
+                  >
+                    Email:
+                  </Typography>
+                  <br></br>
+                  <Typography
+                    variant="p"
+                    textAlign="left"
+                    fontWeight="100"
+                    color="black"
+                    fontSize="1rem"
+                  >
+                    {usuario.sEmail}
+                  </Typography>
+                  <br></br>
+                  <Typography
+                    variant="p"
+                    textAlign="left"
+                    fontWeight="bold"
+                    color="black"
+                    fontSize="1rem"
+                  >
+                    Usuario de acceso:
+                  </Typography>
 
-                      <Alert icon={false} severity="info">
-                        Datos de comercio<br></br>- Debes ingresar el nombre o
-                        razón social tal como aparece en el documento de
-                        identificación.
-                      </Alert>
+                  <br></br>
+                  <Typography
+                    variant="p"
+                    textAlign="left"
+                    fontWeight="100"
+                    color="black"
+                    fontSize="1rem"
+                  >
+                    {usuario.sLogin}
+                  </Typography>
+                </Item>
+              </Grid>
+              <Grid item xs={6} md={8}>
+                <Item className="item-1-registro">
+                  <Grid
+                    container
+                    spacing={{ xs: 2, md: 3 }}
+                    columns={{ xs: 4, sm: 8, md: 12 }}
+                  >
+                    <Grid item xs={6}>
+                      <Item elevation={0}>
+                        <Alert
+                        
+                        severity="info" textAlign="left"
+                        className="alerta"
+                        >
+                          ¿Utilizarás ValinkPay como persona natural o como
+                          persona jurídica (empresa)?
+                        </Alert>
 
-                      <Grid container columnSpacing={{ xs: 0.5, sm: 4, md: 1 }}>
-                        <Grid item xs={6}>
+                        <Radio.Group 
+                          className="radio-group-completar-registro"
+                          onChange={handleChange}
+                          name="sTipoPersona"
+                        >
+      <Radio value="natural">natural</Radio>
+      <Radio value="juridica">juridica</Radio>
+    </Radio.Group>
+
+                        <Alert severity="info" textAlign="left"
+                        className="alerta"
+                        >
+                          Datos de comercio<br></br>- Debes ingresar el nombre o
+                          razón social tal como aparece en el documento de
+                          identificación.
+                        </Alert>
+                        <Grid
+                          container
+                          columnSpacing={{ xs: 0.5, sm: 4, md: 1 }}
+                        >
+                          <Grid item xs={6}>
+                            <Item elevation={0}>
+                              <Input
+                                placeholder="Cedula"
+                                name="sCedula"
+                                fullWidth
+                                label="Cedula o Rif"
+                                type="text"
+                                size="medium"
+                                value={values.sCedula}
+                                onChange={handleChange}
+                              />
+                            </Item>
+                          </Grid>
+                          <Grid item xs={6}>
+                            <Item elevation={0}>
+                              <Input
+                                name="sRazonSocial"
+                                type="text"
+                                label="Razón Social"
+                                placeholder="Ejemplo: ValinkGroup C.A"
+                                variant="outlined"
+                                size="medium"
+                                value={values.sRazonSocial}
+                                onChange={handleChange}
+                              />
+                            </Item>
+                          </Grid>
+                          <Grid item xs={6}>
+                            <Item elevation={0}>
+                              <Input
+                                name="sSitioWeb"
+                                type="text"
+                                label="Sitio web"
+                                placeholder="Ejem: www.valinkgroup.com"
+                                variant="outlined"
+                                size="medium"
+                                value={values.sSitioWeb}
+                                onChange={handleChange}
+                              />
+                            </Item>
+                          </Grid>
+                          <Grid item xs={6}>
+                            <Item elevation={0}>
+                              <Input
+                                name="sTelefonoAsociado"
+                                type="tel"
+                                label="Teléfono Asociado "
+                                placeholder="Ejem: 0414-1234567"
+                                variant="outlined"
+                                size="medium"
+                                value={values.sTelefonoAsociado}
+                                onChange={handleChange}
+                              />
+                            </Item>
+                          </Grid>
+                          <Grid item xs={6}>
+                            <Item elevation={0}>Categoria Rubro</Item>
+                          </Grid>
+                          <Grid item xs={6}>
+                            <Item elevation={0}>Rubro</Item>
+                          </Grid>
+                        </Grid>
+                        <Alert severity="info" textAlign="left"
+                        className="alerta"
+                        >
+                          Indícanos la dirección de tu comercio.
+                        </Alert>
+                        <Grid
+                          container
+                          columnSpacing={{ xs: 0.5, sm: 4, md: 1 }}
+                        >
+                          <Grid item xs={6}>
+                            <Item elevation={0}>Estado</Item>
+                          </Grid>
+                          <Grid item xs={6}>
+                            <Item elevation={0}>Ciudad</Item>
+                          </Grid>
+                          <Grid item xs={6}>
+                            <Item elevation={0}>municipio</Item>
+                          </Grid>
+                          <Grid item xs={6}>
+                            <Item elevation={0}>
+                              <Input
+                                name="sDireccion"
+                                type="text"
+                                label="Dirección"
+                                placeholder="Ejem: Av. Principal, Edificio 1, Piso 1, Oficina 1"
+                                size="default size"
+                                value={values.sDireccion}
+                                onChange={handleChange}
+                              />
+                            </Item>
+                          </Grid>
+                        </Grid>
+                        <Alert severity="info" textAlign="left"
+                        className="alerta"
+                        >
+                          Datos del representante legal
+                        </Alert>
+                        <Grid
+                          container
+                          columnSpacing={{ xs: 0.5, sm: 4, md: 1 }}
+                        >
+                          <Grid item xs={6}>
+                            <Item elevation={0}>
+                              <Input
+                                name="sNombreReprLegal"
+                                type="text"
+                                label="Nombre del Representante Legal"
+                                placeholder="Ejem: Juan Perez"
+                                variant="outlined"
+                                size="medium"
+                                value={values.sNombreReprLegal}
+                                onChange={handleChange}
+                              />
+                            </Item>
+                          </Grid>
+                          <Grid item xs={6}>
+                            <Item elevation={0}>
+                              <Input
+                                name="sCedulaReprLegal"
+                                type="text"
+                                label="Cedula del Represéntate Legal"
+                                placeholder="Ejem: V-12345678"
+                                variant="outlined"
+                                size="medium"
+                                value={values.sCedulaReprLegal}
+                                onChange={handleChange}
+
+                              />
+                            </Item>
+                          </Grid>
+                          <Grid item xs={6}>
+                            <Item elevation={0}>
+                              <Input
+                                name="sTelefonoReprLegal"
+                                type="tel"
+                                label="Teléfono del Representante Legal"
+                                placeholder="Ejem: 0414-1234567"
+                                variant="outlined"
+                                size="medium"
+                                value={values.sTelefonoReprLegal}
+                                onChange={handleChange}
+                              />
+                            </Item>
+                          </Grid>
+                          <Grid item xs={6}>
+                            <Item elevation={0}>
+                              <Input
+                                name="sEmailReprLegal"
+                                type="text"
+                                label="Email del Representante"
+                                placeholder="juanperez@gmail.com"
+                                variant="outlined"
+                                size="medium"
+                                value={values.sEmailReprLegal}
+                                onChange={handleChange}
+                              />
+                            </Item>
+                          </Grid>
+                        </Grid>
+
+                        <Alert severity="info" textAlign="left"
+                        className="alerta"
+                        >
+                          Datos del contacto
+                        </Alert>
+                        <Grid
+                          container
+                          columnSpacing={{ xs: 0.5, sm: 4, md: 1 }}
+                        >
+                          <Grid item xs={6}>
+                            <Item elevation={0}>
+                              <Input
+                                name="sNombreContacto"
+                                type="text"
+                                label="Nombre del Contacto"
+                                placeholder="Ejem: Juan Perez"
+                                variant="outlined"
+                                size="medium"
+                                value={values.sNombreContacto}
+                                onChange={handleChange}
+                              />
+                            </Item>
+                          </Grid>
+                          <Grid item xs={6}>
+                            <Item elevation={0}>
+                              <Input
+                                name="sTelefonoContacto"
+                                type="tel"
+                                label="Teléfono de Contacto"
+                                placeholder="Ejem: 0414-1234567"
+                                variant="outlined"
+                                size="medium"
+                                value={values.sTelefonoContacto}
+                                onChange={handleChange}
+                              />
+                            </Item>
+                          </Grid>
+                          <Grid item xs={6}>
+                            <Item elevation={0}>
+                              <Input
+                                name="sEmailContacto"
+                                type="mail"
+                                label="Email de Contacto"
+                                placeholder="Ejem: contacto@valinkpay.com"
+                                variant="outlined"
+                                size="medium"
+                                value={values.sEmailContacto}
+                                onChange={handleChange}
+                              />
+                            </Item>
+                          </Grid>
+                        </Grid>
+                        <Alert severity="info" textAlign="left"
+                        className="alerta"
+                        >
+                          Quiero recibir pagos en mi sitio web a través de
+                        </Alert>
+                        <Grid
+                          container
+                          columnSpacing={{ xs: 0.5, sm: 4, md: 1 }}
+                        >
+                          <Grid item xs={6}>
+                            <Item elevation={0}>
+                            <Checkbox.Group options={options}
+                            onChange={handleChange}
+                            name="sMedioPago"
+                            />
+                            </Item>
+                          </Grid>
+                        </Grid>
+                      </Item>
+                    </Grid>
+                    <Grid item xs={6}>
+                      <Item elevation={0}>
+                        <Alert severity="info" textAlign="left"
+                        className="alerta"
+                        >
+                          Indícanos el nombre de fantasía. Corresponde al nombre
+                          de tu comercio que verán tus clientes.
+                        </Alert>
+                        <Stack>
+                          <Stack item xs={6}>
+                            <Item elevation={0}>
+                              <Input
+                                name="sNombrePublico"
+                                type="text"
+                                label="Nombre de Fantasía"
+                                placeholder="Ejem: ValinkPay C.A"
+                                variant="outlined"
+                                size="medium"
+                                fullWidth
+                                value={values.sNombrePublico}
+                                onChange={handleChange}
+
+                              />
+                            </Item>
+                          </Stack>
+                        </Stack>
+
+                        <Alert severity="info" textAlign="left"
+                        className="alerta"
+                        >
+                          Indícanos el email de notificación, que es el que
+                          ValinkPay utilizará como:
+                          <br></br>- Email público: Para indicar a tus clientes
+                          donde deben contactarte.
+                          <br></br>- Notificación de pagos: Donde enviaremos los
+                          avisos de pago realizados.
+                          <br></br>- Notificación de seguridad: Donde enviaremos
+                          el link de modificación de datos y el link de cambio
+                          de contraseña.
+                        </Alert>
+                        <Stack
+                          container
+                          columnSpacing={{ xs: 0.5, sm: 4, md: 1 }}
+                        >
+                          <Stack item xs={6}>
+                            <Item elevation={0}>
+                              <Input
+                                disabled
+                                name="sEmailPublico"
+                                type="email"
+                                value={usuario.sEmail}
+                                variant="outlined"
+                                size="medium"
+                                fullWidth
+                              />
+                            </Item>
+                          </Stack>
+                        </Stack>
+                        <Stack
+                          direction={{ xs: "column", sm: "row" }}
+                          spacing={{ xs: 1, sm: 2, md: 4 }}
+                        ></Stack>
+                        <Alert severity="info" textAlign="left"
+                        className="alerta"
+                        >
+                          Publica el logo de tu comercio o una imagen que lo
+                          represente.
+                        </Alert>
+                        <Stack
+                          container
+                          columnSpacing={{ xs: 0.5, sm: 4, md: 1 }}
+                        >
+                          <Stack item xs={6}>
+                            <Item elevation={0}></Item>
+                          </Stack>
+                        </Stack>
+                        <Stack
+                          direction={{ xs: "column", sm: "row" }}
+                          spacing={{ xs: 1, sm: 2, md: 4 }}
+                        ></Stack>
+                        <Alert severity="info" textAlign="left">
+                          Datos Bancarios
+                        </Alert>
+                        <Stack>
+                          <Item elevation={0}>banco</Item>
+                          <Item elevation={0}>tipo de cuenta</Item>
                           <Item elevation={0}>
-                            <TextField
-                              {...register("sCedula")}
-                              placeholder="Cedula"
-                              name="sCedula"
-                              size="small"
+                            <Input
+                              name="sRazonSocialCuenta"
+                              label="Nombre o Razón Social de la Cuenta Bancaria"
+                              placeholder="Ejem: ValinkPay C.A, Juan Perez"
+                              variant="outlined"
+                              size="medium"
                               fullWidth
-                              label="Cedula o Rif"
+                              value={values.sRazonSocialCuenta}
+                              onChange={handleChange}
+                            />
+                          </Item>
+                          <Item elevation={0}>
+                            <Input
+                              name="sCedulaRif"
                               type="text"
-
-                            />
-                          </Item>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <Item elevation={0}>
-                            <TextField
-                            {...register("sRazonSocial")}
-                              name="sRazonSocial"
-                              required
-                              type="text"
-                              label="Razón Social"
-                              placeholder="Ejemplo: ValinkGroup C.A"
+                              label="Cédula o RIF"
+                              placeholder="Ejem: V-12345678"
                               variant="outlined"
-                              size="small"
+                              size="medium"
+                              fullWidth
+                              value={values.sCedulaRif}
+                              onChange={handleChange}
                             />
                           </Item>
-                        </Grid>
-                        <Grid item xs={6}>
                           <Item elevation={0}>
-                            <TextField
-                              {...register("sSitioWeb")}
-                              name="sSitioWeb"
-                              required
-                              type="text"
-                              label="Sitio web"
-                              placeholder="Ejem: www.valinkgroup.com"
+                            <Input
+                              name="sNroCuentaBanco"
+                              helperText="Sin puntos ni guiones"
+                              type="number"
+                              label="Nro. de Cuenta de banco"
+                              placeholder="Ejem: 12345678901234567890"
                               variant="outlined"
-                              size="small"
+                              size="medium"
+                              fullWidth
+                              value={values.sNroCuentaBanco}
+                              onChange={handleChange}
                             />
                           </Item>
-                        </Grid>
-                        <Grid item xs={6}>
                           <Item elevation={0}>
-                            <TextField
-                              {...register("sTelefonoAsociado")}
-                              name="sTelefonoAsociado"
-                              required
-                              type="tel"
-                              label="Teléfono Asociado "
-                              placeholder="Ejem: 0414-1234567"
+                            <Input
+                              name="sConfirmarCuentaBan"
+                              helperText="Sin puntos ni guiones"
+                              type="number"
+                              label="Confirmar Nro. de Cuenta de banco"
+                              placeholder="Ejem: 12345678901234567890"
                               variant="outlined"
-                              size="small"
+                              size="medium"
+                              fullWidth
+                              value={values.sConfirmarCuentaBan}
+                              onChange={handleChange}
                             />
+                            <LoadingButton
+                              type="submit"
+                              endIcon={<SendIcon />}
+                              className="btn-create-account"
+                              fullWidth
+                              variant="contained"
+                              sx={{ mt: 3, mb: 2 }}
+                            >
+                              Finalizar Registro
+                            </LoadingButton>
                           </Item>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <Item elevation={0}>Categoria Rubro</Item>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <Item elevation={0}>Rubro</Item>
-                        </Grid>
-                      </Grid>
-                      <Alert icon={false} severity="info">
-                        Indícanos la dirección de tu comercio.
-                      </Alert>
-                      <Grid container columnSpacing={{ xs: 0.5, sm: 4, md: 1 }}>
-                        <Grid item xs={6}>
-                          <Item elevation={0}>Estado</Item>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <Item elevation={0}>Ciudad</Item>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <Item elevation={0}>municipio</Item>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <Item elevation={0}>
-                            <TextField
-                              {...register("sDireccion")}
-                              name="sDireccion"
-                              required
-                              type="text"
-                              label="Dirección"
-                              placeholder="Ejem: Av. Principal, Edificio 1, Piso 1, Oficina 1"
-                              size="default size"
-                            />
-                          </Item>
-                        </Grid>
-                      </Grid>
-                      <Alert icon={false} severity="info">
-                        Datos del representante legal
-                      </Alert>
-                      <Grid container columnSpacing={{ xs: 0.5, sm: 4, md: 1 }}>
-                        <Grid item xs={6}>
-                          <Item elevation={0}>
-                            <TextField
-                              {...register("sNombreReprLegal")}
-                              name="sNombreReprLegal"
-                              required
-                              type="text"
-                              label="Nombre del Representante Legal"
-                              placeholder="Ejem: Juan Perez"
-                              variant="outlined"
-                              size="small"
-                            />
-                          </Item>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <Item elevation={0}>
-                            <TextField
-                            {...register("sCedulaReprLegal")}
-                              name="sCedulaReprLegal"
-                              required
-                              type="text"
-                              label="Cedula del Represéntate Legal"
-                              placeholder="Ejem: 12345678"
-                              variant="outlined"
-                              size="small"
-                            />
-                          </Item>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <Item elevation={0}>
-                            <TextField
-                            {...register("sTelefonoReprLegal")}
-                              name="sTelefonoReprLegal"
-                              required
-                              type="tel"
-                              label="Teléfono del Representante
-                            Legal
-                            "
-                              placeholder="Ejem: 0414-1234567"
-                              variant="outlined"
-                              size="small"
-                            />
-                          </Item>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <Item elevation={0}>
-                            <TextField
-                            {...register("sEmailReprLegal")}
-                              name="sEmailReprLegal"
-                              required
-                              type="text"
-                              label="Email del Representante"
-                              placeholder="Ejem: juanperez@gmail.com"
-                              variant="outlined"
-                              size="small"
-                            />
-                          </Item>
-                        </Grid>
-                      </Grid>
-
-                      <Alert icon={false} severity="info">
-                        Datos del contacto
-                      </Alert>
-                      <Grid container columnSpacing={{ xs: 0.5, sm: 4, md: 1 }}>
-                        <Grid item xs={6}>
-                          <Item elevation={0}>
-                            <TextField
-                            {...register("sNombreContacto")}
-                              name="sNombreContacto"
-                              required
-                              type="text"
-                              label="Nombre del Contacto"
-                              placeholder="Ejem: Juan Perez"
-                              variant="outlined"
-                              size="small"
-                            />
-                          </Item>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <Item elevation={0}>
-                            <TextField
-                            {...register("sTelefonoContacto")}
-                              name="sTelefonoContacto"
-                              required
-                              type="tel"
-                              label="Teléfono de Contacto"
-                              placeholder="Ejem: 0414-1234567"
-                              variant="outlined"
-                              size="small"
-                            />
-                          </Item>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <Item elevation={0}>
-                            <TextField
-                            {...register("sEmailContacto")}
-                              name="sEmailContacto"
-                              required
-                              type="mail"
-                              label="Email de Contacto"
-                              placeholder="Ejem: contacto@valinkpay.com"
-                              variant="outlined"
-                              size="small"
-                            />
-                          </Item>
-                        </Grid>
-                      </Grid>
-                    </Item>
+                        </Stack>
+                      </Item>
+                    </Grid>
                   </Grid>
-                  <Grid item xs={6}>
-                    <Item elevation={0}>
-                      <Alert icon={false} severity="info">
-                        Indícanos el nombre de fantasía. Corresponde al nombre
-                        de tu comercio que verán tus clientes.
-                      </Alert>
-                      <Stack>
-                        <Stack item xs={6}>
-                          <Item elevation={0}>
-                            <TextField
-                            {...register("sNombrePublico")}
-                              name="sNombrePublico"
-                              required
-                              type="text"
-                              label="Nombre de Fantasía"
-                              placeholder="Ejem: ValinkPay C.A"
-                              variant="outlined"
-                              size="small"
-                              fullWidth
-                            />
-                          </Item>
-                        </Stack>
-                      </Stack>
-
-                      <Alert icon={false} severity="info">
-                        Indícanos el email de notificación, que es el que
-                        ValinkPay utilizará como:
-                        <br></br>- Email público: Para indicar a tus clientes
-                        donde deben contactarte.
-                        <br></br>- Notificación de pagos: Donde enviaremos los
-                        avisos de pago realizados.
-                        <br></br>- Notificación de seguridad: Donde enviaremos
-                        el link de modificación de datos y el link de cambio de
-                        contraseña.
-                      </Alert>
-                      <Stack
-                        container
-                        columnSpacing={{ xs: 0.5, sm: 4, md: 1 }}
-                      >
-                        <Stack item xs={6}>
-                          <Item elevation={0}>
-                            <TextField
-                              {...register("sEmailPublico")}
-                              name="sEmailPublico"
-                              required
-                              type="email"
-                              value={usuario.sEmail}                              
-                              variant="outlined"
-                              size="small"
-                              fullWidth
-                            />
-                          </Item>
-                        </Stack>
-                      </Stack>
-                      <Stack
-                        direction={{ xs: "column", sm: "row" }}
-                        spacing={{ xs: 1, sm: 2, md: 4 }}
-                      ></Stack>
-                      <Alert icon={false} severity="info">
-                        Publica el logo de tu comercio o una imagen que lo
-                        represente.
-                      </Alert>
-                      <Stack
-                        container
-                        columnSpacing={{ xs: 0.5, sm: 4, md: 1 }}
-                      >
-                        <Stack item xs={6}>
-                          <Item elevation={0}>
-
-                          </Item>
-                        </Stack>
-                      </Stack>
-                      <Stack
-                        direction={{ xs: "column", sm: "row" }}
-                        spacing={{ xs: 1, sm: 2, md: 4 }}
-                      ></Stack>
-                      <Alert icon={false} severity="info">
-                        Datos Bancarios
-                      </Alert>
-                      <Stack>
-                        <Item elevation={0}>banco</Item>
-                        <Item elevation={0}>tipo de cuenta</Item>
-                        <Item elevation={0}>
-                          <Input
-                          {...register("sRazonSocialCuenta")}
-                            name="sRazonSocialCuenta"
-                            required
-                            label="Nombre o Razón Social de la
-                          Cuenta Bancaria"
-                            placeholder="Ejem: ValinkPay C.A, Juan Perez"
-                            variant="outlined"
-                            size="small"
-                            fullWidth
-                          />
-                        </Item>
-                        <Item elevation={0}>
-                          <TextField
-                          {...register("sCedulaRif")}
-                            name="sCedulaRif"
-                            required
-                            type="text"
-                            label="Cédula o RIF"
-                            placeholder="Ejem: V-12345678"
-                            variant="outlined"
-                            size="small"
-                            fullWidth
-                          />
-                        </Item>
-                        <Item elevation={0}>
-                          <TextField
-                          {...register("sNroCuentaBanco")}
-                            name="sNroCuentaBanco"
-                            required
-                            helperText="Sin puntos ni guiones"
-                            type="number"
-                            label="Nro. de Cuenta de banco"
-                            placeholder="Ejem: 12345678901234567890"
-                            variant="outlined"
-                            size="small"
-                            fullWidth
-                          />
-                        </Item>
-                        <Item elevation={0}>
-                          <TextField
-                          {...register("sConfirmarCuentaBan")}
-                            name="sConfirmarCuentaBan"
-                            required
-                            helperText="Sin puntos ni guiones"
-                            type="number"
-                            label="Confirmar Nro. de Cuenta de banco"
-                            placeholder="Ej: 12345678901234567890"
-                            variant="outlined"
-                            size="small"
-                            fullWidth
-                          />
-                          <LoadingButton
-                           type="submit"
-                            endIcon={<SendIcon />}
-                            className="btn-create-account"
-                            fullWidth
-                            variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
-                          >
-                            Finalizar Registro
-                          </LoadingButton>
-                        </Item>
-                      </Stack>
-                    </Item>
-                  </Grid>
-                </Grid>
-              </Item>
+                </Item>
+              </Grid>
             </Grid>
-          </Grid>
-          <br></br>
+            <br></br>
           </form>
+        )}  
+          </Formik>
         </Container>
       </Box>
     </div>

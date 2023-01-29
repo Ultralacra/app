@@ -16,12 +16,14 @@ import Item from "@mui/material/Grid";
 import axios from "axios";
 import SendIcon from "@mui/icons-material/Send";
 import ModalRecoveryPassword from "../modals/ModalRecoveryPassword";
-import validator from "validator";
 import { Input } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { SecurityScanOutlined } from "@ant-design/icons";
 import { MailOutlined } from "@ant-design/icons";
 import { LockOutlined } from "@ant-design/icons";
+import { Formik } from "formik";
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const theme = createTheme();
 const RecoveryAccount = () => {
@@ -32,108 +34,25 @@ const RecoveryAccount = () => {
     new_password: "",
   });
   /* const [loading, setLoading] = useState(false); */
-  const [modal, setModal] = useState(false);
+  const [modal, setModal] = useState(false); 
 
-  const handleRecoveryPassword = (e) => {
-    if (e.target.name === "login") {
-    }
-    if (e.target.name === "email") {
-    }
-    if (e.target.name === "code") {
-    }
-    if (e.target.name === "new_password") {
-    }
-    setBody({
-      ...body,
-      [e.target.name]: e.target.value,
-    });
-  };
 
-  async function enviarCorreo() {
-    if (
-      body.login === "" ||
-      body.email === "" ||
-      body.new_password === "" ||
-      body.code === ""
-    ) {
-      Swal.fire({
-        toast: true,
-        position: "top-end",
-        icon: "info",
-        text: "Todos los campos son obligatorios",
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-      });
-      return;
-    }
 
-    // validar correo electronico
 
-    if (!validator.isEmail(body.email)) {
-      Swal.fire({
-        toast: true,
-        position: "top-end",
-        icon: "error",
-        showConfirmButton: false,
-        timer: 1500,
-        text: "Por favor ingrese un correo válido",
-      });
-      return;
-    }
-
-    //Empty fields
-    if (
-      body.login === "" ||
-      body.email === "" ||
-      body.new_password === "" ||
-      body.code === ""
-    )
-      console.warn(body);
-    axios
-      .post("https://valink-pay-api.vercel.app/pwd/verifyCode", {
-        login: body.login,
-        email: body.email,
-        new_password: body.new_password,
-        code: body.code,
-      })
-      .then((response) => {
-        console.log(body);
-        console.log(response);
-
-        let icon = response.data.status === "fail" ? "error" : "success";
-
-        Swal.fire({
-          toast: true,
-          position: "top-end",
-          icon: icon,
-          text: response.data.message,
-          showConfirmButton: false,
-          timer: 3000,
-          timerProgressBar: true,
-        });
-
-        if (response.data.status === "success") return setModal(true);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
 
   return (
     <ThemeProvider theme={theme}>
       {modal && <ModalRecoveryPassword />}
       <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />
-
-        
         <Grid
           item
           xs={false}
           sm={4}
           md={7}
           sx={{
-            backgroundImage: "url(http://valinkgroup.com/wp-content/uploads/2022/12/Paso-1-1.webp)",
+            backgroundImage:
+              "url(http://valinkgroup.com/wp-content/uploads/2022/12/Paso-1-1.webp)",
             backgroundRepeat: "no-repeat",
             backgroundSize: "500px auto",
             backgroundPosition: "center",
@@ -150,7 +69,6 @@ const RecoveryAccount = () => {
           elevation={0}
           square
         >
-       
           <Box
             borderColor="#fafafa"
             padding="10px"
@@ -162,7 +80,7 @@ const RecoveryAccount = () => {
               alignItems: "center",
             }}
           >
-                    <img
+            <img
               width="45%"
               src="http://valinkgroup.com/wp-content/uploads/2022/05/Gris.png"
               alt="logo"
@@ -181,6 +99,7 @@ const RecoveryAccount = () => {
             <Typography
               component="p"
               mt={2}
+              mb={4}
               fontSize="1rem"
               variant="p"
               align="center"
@@ -190,92 +109,155 @@ const RecoveryAccount = () => {
               Para iniciar sesión en tu cuenta, inserta tu nombre de usuario,
               correo electrónico y código de seguridad.
             </Typography>
-            <Box component="form" sx={{ mt: 4 }}>
-              <Stack direction="row" spacing={2}>
-                <Item>
-                  <Input
-                    size="large"
-                    onChange={(event) => {
-                      handleRecoveryPassword(event);
-                    }}
-                    placeholder="Usuario"
-                    label="Usuario"
-                    name="login"
-                    prefix={<UserOutlined />}
-                  />
-                </Item>
-                <Item>
-                  <Input
-                    size="large"
-                    onChange={(event) => {
-                      handleRecoveryPassword(event);
-                    }}
-                    placeholder="Email"
-                    label="Email"
-                    name="email"
-                    prefix={<MailOutlined />}
-                  />
-                </Item>
-              </Stack>
-              <br></br>
-              <Stack direction="row" spacing={2}>
-                <Item>
-                  <Input
-                    size="large"
-                    onChange={(event) => {
-                      handleRecoveryPassword(event);
-                    }}
-                    placeholder="Codigo de seguridad"
-                    label="Codigo de seguridad"
-                    name="code"
-                    prefix={<SecurityScanOutlined />}
-                  />
-                </Item>
-                <Item>
-                  <Input
-                    size="large"
-                    type="password"
-                    onChange={(event) => {
-                      handleRecoveryPassword(event);
-                    }}
-                    placeholder="Nueva contraseña"
-                    label="Contraseña"
-                    name="new_password"
-                    prefix={<LockOutlined />}
-                  />
-                </Item>
-              </Stack>
-              <LoadingButton
-                className="btn-changepassoword"
-                onClick={enviarCorreo}
-                fullWidth
-                endIcon={<SendIcon />}
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-                loadingPosition="end"
-              >
-                Cambiar contraseña
-              </LoadingButton>
-              <Link className="text-lost-password" to="/login" variant="body2">
-                <KeyboardArrowLeftIcon className="icons-back icons-form" />{" "}
-                Atrás para iniciar sesión
-              </Link>
-              <Typography
-                variant="body2"
-                color="textSecondary"
-                align="center"
-                sx={{ mt: 4 }}
-              >
-                ¿Nuevo en nuestra plataforma?{" "}
-                <Link
-                  className="text-lost-password"
-                  to="/register-page"
-                  variant="body2"
-                >
-                  Crear una cuenta
-                </Link>
-              </Typography>
-            </Box>
+            <Formik
+              initialValues={{
+                login: "",
+                email: "",
+                code: "",
+                new_password: "",
+              }}
+              onSubmit={(values, {resetForm}) => {
+                axios
+                  .post("https://valink-pay-api.vercel.app/pwd/verifyCode", {
+                    login: values.login,
+                    email: values.email,
+                    new_password: values.new_password,
+                    code: values.code,
+                  })
+                  .then((response) => {
+                  if (response.data.message === "Usuario y/o email no registrado") {
+                    Swal.fire({
+                      toast: true,
+                      position: "top-end",
+                      icon: "error",
+                      title: "Usuario y/o email no registrado",
+                      showConfirmButton: false,
+                      timer: 3000,
+
+                 });
+                  } else if (response.data.message === "Código de verificación invalido") {
+                    Swal.fire({
+                      toast: true,
+                      position: "top-end",
+                      icon: "error",
+                      title: "Código de verificación invalido",
+                      showConfirmButton: false,
+                      timer: 3000,
+                    });
+
+                  } else if (response.data.message === "Su Contraseña a sido Cambiada con Exito") {
+                 setModal(true);
+                  resetForm();
+
+                  }
+                  })
+                  .catch((error) => {
+                    console.log(error);
+                  }
+                  );
+
+
+                  
+              }}
+
+
+
+            >
+              {({ values, handleChange, handleSubmit }) => (
+                <form onSubmit={handleSubmit}>
+                  <Stack direction="row" spacing={2}>
+                    <Item>
+                      <Input
+                        size="large"
+                        placeholder="Usuario"
+                        label="Usuario"
+                        name="login"
+                        prefix={<UserOutlined />}
+                        onChange={handleChange}
+                        value={values.login}
+                      />
+                    </Item>
+                    <Item>
+                      <Input
+                        size="large"
+                        placeholder="Email"
+                        label="Email"
+                        name="email"
+                        prefix={<MailOutlined />}
+                        onChange={handleChange}
+                        value={values.email}
+                      />
+                    </Item>
+                  </Stack>
+                  <br></br>
+                  <Stack direction="row" spacing={2}>
+                    <Item>
+                      <Input
+                        size="large"
+                        placeholder="Codigo de seguridad"
+                        label="Codigo de seguridad"
+                        name="code"
+                        prefix={<SecurityScanOutlined />}
+                        onChange={handleChange}
+                        value={values.code}
+                      />
+                    </Item>
+                    <Item>
+                      <Input
+                        size="large"
+                        type="password"
+                        placeholder="Nueva contraseña"
+                        label="Contraseña"
+                        name="new_password"
+                        prefix={<LockOutlined />}
+                        onChange={handleChange}
+                        value={values.new_password}
+                      />
+                    </Item>
+                  </Stack>
+                  <LoadingButton
+                      type="submit"
+
+                    disabled={
+                      values.login === "" ||
+                      values.email === "" ||
+                      values.code === "" ||
+                      values.new_password === ""
+                    }
+                    fullWidth
+                    endIcon={<SendIcon />}
+                    variant="contained"
+                    sx={{ mt: 3, mb: 2 }}
+
+                  >
+                    Cambiar contraseña
+                  </LoadingButton>
+                  <Link
+                    className="text-lost-password"
+                    to="/login"
+                    variant="body2"
+                  >
+                    <KeyboardArrowLeftIcon className="icons-back icons-form" />{" "}
+                    Atrás para iniciar sesión
+                  </Link>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    align="center"
+                    sx={{ mt: 4 }}
+                  >
+                    ¿Nuevo en nuestra plataforma?{" "}
+                    <Link
+                      className="text-lost-password"
+                      to="/register-page"
+                      variant="body2"
+                    >
+                      Crear una cuenta
+                    </Link>
+                  </Typography>
+                </form>
+              )}
+            </Formik>
           </Box>
         </Grid>
       </Grid>

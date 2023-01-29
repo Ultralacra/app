@@ -142,7 +142,6 @@ function Registro() {
                        if (!valores.sPassword)
                       {errores.sPassword = "Campo obligatorio";}
 
-
                       return errores;
                     }}
                     onSubmit={

@@ -15,3 +15,8 @@
 .css-dev-only-do-not-override-6foo54{
     border-radius: 5px !important;
 }
+.btn-verification-code {
+    /* Estilos para el botón habilitado */
+    background-color: #006d8e !important;
+    color: white;
+  }

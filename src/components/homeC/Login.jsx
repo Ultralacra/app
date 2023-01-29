@@ -18,34 +18,31 @@ import { Input } from "antd";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 
+
 export default function SignInSide() {
   const theme = createTheme();
-  const [loading, setLoading] = useState(false);
   const [username, setUsername] = useState(""); //para asignar el valor al estado y poder acceder
   const [password, setPassword] = useState(""); //para asignar el valor al estado y poder acceder
   const [open, setOpen] = React.useState(false);
+
+
 
   //Bloquear el boton de login si los campos estan vacios
   const isFormComplete = () => username.length > 0 && password.length > 0;
 
   const handleSubmit = (event) => {
+    setOpen(true);
     
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-
-
     Axios.post("https://valink-pay-api.vercel.app/login", {
-      //campos vacios
-
       login: data.get("username"),
       password: data.get("password"),
       Authorization: "Bearer " + JSON.parse(localStorage.getItem("token")),
     })
       .then(function (response) {
-        console.warn(response);
         if (response.data.status === "fail")
-
-        return  Swal.fire({
+             Swal.fire({
             toast: true,
             position: "top-end",
             showCloseButton: true,
@@ -55,6 +52,7 @@ export default function SignInSide() {
             timer: 1000,
             timerProgressBar: true,
           });
+          
 
         if (response.data.status === "success") {
           setOpen(true);
@@ -63,19 +61,12 @@ export default function SignInSide() {
           localStorage.setItem("token",JSON.stringify(response.data.message.Authorization));
           localStorage.setItem("profile",JSON.stringify(response.data.message.data.profile));
           window.location.href = "/dashboard-users";
-
-        
         }
         setOpen(false);
       })
       .catch(function (error) {
-        console.warn(error);
       });
   };
-
-
-    
-        
   return (
     <ThemeProvider theme={theme}>
       <Backdrop
@@ -83,10 +74,9 @@ export default function SignInSide() {
           color: "#DFFEFF",
           zIndex: (theme) => theme.zIndex.drawer + 1,
         }}
-        open={open}
-      >
-        Verificando datos por favor espere...
-        <CircularProgress color="inherit" />
+        open={open}>
+      Verificando datos por favor espere...
+      <CircularProgress color="inherit" />
       </Backdrop>
       <Grid container component="main" sx={{ height: "100vh" }}>
         <Grid
@@ -199,9 +189,8 @@ export default function SignInSide() {
             </Box>
           </Box>
         </Grid>
-      </Grid>
 
-      <Stack></Stack>
+      </Grid>
     </ThemeProvider>
   );
 }
