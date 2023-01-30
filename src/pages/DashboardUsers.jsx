@@ -7,8 +7,6 @@ export const DashboardUsers = () => {
     <>
       <Content />
       <DashboardMain/>
-      
-
     </>
   )
 }

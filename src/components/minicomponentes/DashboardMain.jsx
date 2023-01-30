@@ -6,8 +6,6 @@ import Container from "react-bootstrap/Container";
 import axios from "axios";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
-import Swal from "sweetalert2";
-import Axios from "axios";
 
 const DashboardMain = () => {
   //Datos del usuario

@@ -63,6 +63,15 @@ function Logout(){
         </ListItemButton>
       </List>
       <div className="espaciador-azul-dashboard"></div>
+      <List className='list-menu-dashboard' >
+        <ListItemButton className="text-list-dashboard"  component={Link} to="/consultar-transacciones">
+          <ListItemIcon className='icon-list-dashboard' >
+            <CreditCardIcon />
+          </ListItemIcon>
+          Consultar Transacciones
+        </ListItemButton>
+      </List>
+      <div className="espaciador-azul-dashboard"></div>
       <List>
           <LoandingButton
             size="small"
