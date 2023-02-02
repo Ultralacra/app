@@ -16,7 +16,6 @@ import Swal from "sweetalert2";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 import Stack from "@mui/material/Stack";
-import Divider from "@mui/material/Divider";
 
 const ConsultarTransacciones = () => {
   const drawerWidth = 240;
@@ -280,5 +279,6 @@ const ConsultarTransacciones = () => {
     </div>
   );
 };
+
 
 export default ConsultarTransacciones;
