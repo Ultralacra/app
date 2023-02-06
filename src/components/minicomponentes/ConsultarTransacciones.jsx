@@ -81,6 +81,19 @@ const ConsultarTransacciones = () => {
   const [info, setInfo] = useState([]);
   const [open, setOpen] = useState(false);
 
+
+  //quitar las comillas del token
+  const token = localStorage.getItem("token").replace(/['"]+/g, "");
+
+  console.log(token);
+  console.log(JSON.parse(localStorage.getItem("profile")));
+
+  
+
+
+  
+
+
   //funcion para agregar / y no - en la fecha
   const addSlash = (date) => {
     let newDate = date.split("-");
@@ -134,46 +147,48 @@ const ConsultarTransacciones = () => {
                     params: {
                       fechaDesde: addSlash(values.fechaDesde),
                       fechaHasta: addSlash(values.fechaHasta),
+                      iProfileId: JSON.parse(localStorage.getItem("profile")),
+                    },
+                    headers: {
+                      Authorization: token,
                     },
                   }
+                  
                 )
                 .then(function (response) {
-                  const arr = response.data.map((x, i, a) => {
-                    a[i]["fechaTransaccion"] = formatearFecha(
-                      x.fechaTransaccion
-                    );
 
-                    if (response.data.length === 0) {
+                    if (response.data.message === "No hay informaci&oacute;n para los parametros seleccionados") {
                       Swal.fire({
                         toast: true,
                         position: "top-end",
-                        icon: "warning",
-                        text: "No se encontraron transacciones en ese rango de fechas",
+                        icon: "error",
+                        title: "No hay información para los parametros seleccionados",
                         showConfirmButton: false,
                         timer: 3000,
                       });
-
                       setOpen(false);
                     } else {
+
                       Swal.fire({
                         toast: true,
                         position: "top-end",
                         icon: "success",
-                        text: "Transacciones consultadas con éxito",
+                        title: "Información cargada correctamente",
                         showConfirmButton: false,
                         timer: 3000,
                       });
+                      setInfo(response.data);
                       setOpen(false);
                     }
-                    return a[i];
-                  });
-                  setInfo(arr);
+
+                  console.log(response.data);
                 })
                 .catch(function (error) {
                   console.log(error);
                 });
             }}
           >
+
             {({ values, handleChange, handleBlur, handleSubmit }) => (
               <form onSubmit={handleSubmit}>
                 <Box sx={{ flexGrow: 1 }}>
