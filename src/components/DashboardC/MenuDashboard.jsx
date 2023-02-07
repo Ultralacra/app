@@ -55,15 +55,6 @@ function Logout(){
       </List>
       <div className="espaciador-azul-dashboard"></div>
       <List className='list-menu-dashboard' >
-        <ListItemButton className="text-list-dashboard" disabled component={Link} to="/transaccion-test">
-          <ListItemIcon className='icon-list-dashboard' >
-            <CreditCardIcon />
-          </ListItemIcon>
-          transaccion con tarjeta de credito
-        </ListItemButton>
-      </List>
-      <div className="espaciador-azul-dashboard"></div>
-      <List className='list-menu-dashboard' >
         <ListItemButton className="text-list-dashboard"  component={Link} to="/consultar-transacciones">
           <ListItemIcon className='icon-list-dashboard' >
             <CreditCardIcon />
@@ -72,6 +63,23 @@ function Logout(){
         </ListItemButton>
       </List>
       <div className="espaciador-azul-dashboard"></div>
+      <List className='list-menu-dashboard' >
+        <ListItemButton className="text-list-dashboard"  component={Link} to="/realizar-transaccion">
+          <ListItemIcon className='icon-list-dashboard' >
+            <CreditCardIcon />
+          </ListItemIcon>
+         Realizar Transaccion con tarjetas
+        </ListItemButton>
+      </List>
+      <div className="espaciador-azul-dashboard"></div>
+      <List className='list-menu-dashboard' >
+        <ListItemButton className="text-list-dashboard"  component={Link} to="/integraciones">
+          <ListItemIcon className='icon-list-dashboard' >
+            <CreditCardIcon />
+          </ListItemIcon>
+         Integraciones
+        </ListItemButton>
+      </List>
       <List>
           <LoandingButton
             size="small"

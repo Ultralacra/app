@@ -89,11 +89,6 @@ const ConsultarTransacciones = () => {
   console.log(JSON.parse(localStorage.getItem("profile")));
 
   
-
-
-  
-
-
   //funcion para agregar / y no - en la fecha
   const addSlash = (date) => {
     let newDate = date.split("-");

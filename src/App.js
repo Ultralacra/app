@@ -11,6 +11,9 @@ import VerificationCodePage from './pages/VerificationCodePage';
 import LandingPage from './pages/LandingPage';
 import CompletarRegistro from './pages/CompletarRegistro';
 import ConsultarTransaccionesPage from './pages/ConsultarTransaccionesPage';
+import RealizarTransaccionPage from './pages/RealizarTransaccionPage';
+import IntegracionesPage from './pages/IntegracionesPage';
+
 
 function App() {
   return (
@@ -34,6 +37,8 @@ function App() {
           
         <BrowserRouter>
         <Routes>
+            <Route exact path="/integraciones" element={<RouteController component={IntegracionesPage}/>}/>
+            <Route exact path="/realizar-transaccion" element={<RouteController component={RealizarTransaccionPage}/>}/>
             <Route exact path="/dashboard-users" element={<RouteController component={DashboardUsers}/>}/>
             <Route exact path="/consultar-transacciones" element={<RouteController component={ConsultarTransaccionesPage}/>}/>
             <Route exact path="/completar-registro" element={<RouteController component={CompletarRegistro}/>}/>
