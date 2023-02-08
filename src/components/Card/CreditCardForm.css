@@ -19,3 +19,27 @@
   .creditCard{
       margin-bottom: 10%;
   }
+  .input-card{
+      margin-bottom: 10%;
+      background-color: #EDEDED !important;
+      border-color: #EDEDED !important;
+      border-radius: 3px !important;
+      font-weight: 600;
+  }
+  .titulos-pago{
+      text-align: left !important;
+      margin-top: 10px !important;
+      margin-bottom: 10px !important;
+      color: black !important;
+  }
+
+  .caja-pago{
+      border-radius: 3px !important;
+      font-weight: 600;
+      border : 1px solid #EDEDED !important;
+      border-radius: 7px !important;
+  }
+
+  .tarjeta-pago{
+      margin-right: 150px;
+  }
