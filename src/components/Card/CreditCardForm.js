@@ -26,6 +26,7 @@ const Item = styled(Paper)(({ theme }) => ({
 const CreditCardForm = () => {
   const [values, setValues] = useState({
     card_name: "",
+    payment_method: "",
     card_number: "",
     card_Expiration: "",
     bank_name: "",
@@ -106,7 +107,7 @@ const CreditCardForm = () => {
   const handleFocus = (e) => {
     setValues({
       ...values,
-      focus: e.target.name === "twofactor_auth" ? "cvc" : e.target.name,
+      focus: e.target.name === "cvv" ? "cvc" : e.target.name,
     });
   };
 
@@ -172,31 +173,134 @@ const CreditCardForm = () => {
 
   return (
     <>
-      <img
-        src="http://valinkgroup.com/wp-content/uploads/2022/05/Negro.png"
-        alt="logo valink"
-        style={{
-          width: "15%",
-          height: "15%",
-          marginRight: "80%",
-          marginTop: "2%",
-          marginBottom: "2%",
-        }}
-      ></img>
-
-      <Stack spacing={2}>
-        <Item className="caja-pago" elevation={0}>
-          <Box sx={{ width: "100%" }}>
-            <Grid
-              container
-              spacing={{ xs: 2, md: 3 }}
-              columns={{ xs: 4, sm: 8, md: 12 }}
+      <div className="caja-pago">
+        <Grid
+          container
+          spacing={{ xs: 2, md: 3 }}
+          columns={{ xs: 4, sm: 8, md: 12 }}
+        >
+          {" "}
+          <Grid item xs={6}>
+            <Item
+            elevation={0}
             >
-              <Grid xs={6}>
-                <Item elevation={0}>
-                <div
-                className="tarjeta-pago"
+              <Grid
+                container
+                spacing={{ xs: 2, md: 3 }}
+              >
+
+         
+                {" "}
+                <Grid item xs={6}
+                
                 >
+                  <Item
+                  elevation={0}
+                  >
+                    <Typography className="titulos-pago">
+                      Estas pagando a:
+                    </Typography>
+                    <img
+                      src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Farmatodo_logo.svg/2560px-Farmatodo_logo.svg.png"
+                      alt="Logo"
+                      width={150}
+                      margin-top=""
+                    />
+                  </Item>
+                </Grid>
+                <Grid item xs={6}>
+                  <Item
+                  elevation={0}
+                  >
+                    <Typography className="titulos-pago">
+                      monto a pagar:
+                    </Typography>
+                    <h3 className="titulos-pago">5.250 VES</h3>
+
+                   
+                  </Item>
+                </Grid>
+                <Grid item xs={6}
+
+                >
+                  <Item
+                  elevation={0}
+                  
+                  >
+    
+                  </Item>
+                </Grid>
+                <Grid
+                
+                >
+                  <Item
+                  elevation={0}
+                  >
+                     <Typography className="titulos-pago">
+                      Selecciona tu método de pago:
+                    </Typography>
+                    <Button 
+                    sx={
+                      {
+                        backgroundColor: "#F5F5F5",
+                        color: "#000000",
+                        borderColor: "#000000",
+                        width: "100%",
+                        height: "50%",
+                        marginTop: "2%",
+                        marginBottom: "2%",
+                        padding: "2%",
+
+                    }
+                    }
+                    variant="outlined">Tarjeta de crédito</Button>
+                    <Button
+                     sx={
+                      {
+                        backgroundColor: "#F5F5F5",
+                        color: "#000000",
+                        borderColor: "#000000",
+                        width: "100%",
+                        height: "50%",
+                        marginTop: "2%",
+                        marginBottom: "2%",
+                        padding: "2%",
+
+                    }
+                    }
+                    variant="outlined">Tarjeta de débito</Button>
+                    <Button
+                    
+                     sx={
+                      {
+                        backgroundColor: "#F5F5F5",
+                        color: "#000000",
+                        borderColor: "#000000",
+                        width: "100%",
+                        height: "50%",
+                        marginTop: "2%",
+                        marginBottom: "2%",
+                        padding: "2%",
+
+                    }
+                    }
+                    disabled
+                    variant="outlined">Pago Movil</Button>
+                    <Button>Anular compra y volver</Button>
+                  </Item>
+                </Grid>
+              </Grid>
+            </Item>
+          </Grid>
+          <Grid container spacing={2}>  
+</Grid>
+
+<Box sx={{ flexGrow: 1 }}>
+<Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+  <Grid xs={6}>
+    <Item>
+    <div className="form-container">
+
                     <Cards
                       cvc={values.cvv}
                       expiry={values.card_Expiration}
@@ -205,33 +309,14 @@ const CreditCardForm = () => {
                       number={values.card_number}
                     />
                   </div>
-                  <Stack
-                    direction="row"
-                    justifyContent="space-evenly"
-                    alignItems="left"
-                    spacing={0}
-                  >
-                    
-                    <Item elevation={0}>
-                      
-                      <Typography className="titulos-pago">
-                        Estas pagando a:
-                      </Typography>
-                      <img
-                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Farmatodo_logo.svg/2560px-Farmatodo_logo.svg.png"
-                        alt="Logo"
-                        width={250}
-                      />
-                    </Item>
-                    <Item elevation={0}>
-                      <Typography className="titulos-pago">
-                        monto a pagar:
-                      </Typography>
-                      <h3 className="titulos-pago">5.250 VES</h3>
-                    </Item>
-                  </Stack>
-                </Item>
-              </Grid>
+                  
+        <Item elevation={0}>
+          <Box >
+            <Grid
+              container
+              spacing={{ xs: 2, md: 3 }}
+              columns={{ xs: 4, sm: 8, md: 12 }}
+            >
               <Grid xs={6}>
                 <Item elevation={0}>
                   
@@ -294,20 +379,6 @@ const CreditCardForm = () => {
                       />
                     </Form.Group>
                     <Row>
-                      {/*  <Select
-                        size="large"
-                        name="bank_name"
-                        onChange={handleChange}
-                        onFocus={handleFocus}
-                        style={{ textAlign: "left" }}
-                        placeholder="Seleccione un Banco"
-                      >
-                        {bancos.map((banco) => (
-                          <options value={banco.sCodigo}>
-                            {banco.sDescripcion}
-                          </options>
-                        ))}
-                      </Select> */}
                       <Col>
                         <Form.Group>
                           <Radio.Group
@@ -318,8 +389,23 @@ const CreditCardForm = () => {
                             value={values.account_type}
                             onFocus={handleFocus}
                           >
-                            <Radio value="DC">Debito</Radio>
-                            <Radio value="CC">Credito</Radio>
+                            <Radio value="TDD">Débito</Radio>
+                            <Radio value="TDC">Crédito</Radio>
+                          </Radio.Group>
+                        </Form.Group>
+                      </Col>
+                      <Col>
+                        <Form.Group>
+                          <Radio.Group
+                            size="large"
+                            className="radio-group-completar-registro"
+                            onChange={handleChange}
+                            name="payment_method"
+                            value={values.payment_method}
+                            onFocus={handleFocus}
+                          >
+                            <Radio value="CA">Ahorro</Radio>
+                            <Radio value="CC">Corriente</Radio>
                           </Radio.Group>
                         </Form.Group>
                       </Col>
@@ -337,6 +423,7 @@ const CreditCardForm = () => {
                             name="card_Expiration"
                             placeholder="fecha de expiracion"
                             value={values.card_Expiration}
+                            maxLength="4"
                             onChange={handleChange}
                             onFocus={handleFocus}
                           />
@@ -358,6 +445,7 @@ const CreditCardForm = () => {
                             name="cvv"
                             placeholder="CVV"
                             value={values.cvv}
+                            maxLength="3"
                             onChange={handleChange}
                             onFocus={handleFocus}
                           />
@@ -409,7 +497,22 @@ const CreditCardForm = () => {
             </Grid>
           </Box>
         </Item>
-      </Stack>
+    </Item>
+  </Grid>
+  <Grid xs={6}>
+    <Item></Item>
+  </Grid>
+  <Grid xs={6}>
+    <Item>3</Item>
+  </Grid>
+  <Grid xs={6}>
+    <Item>4</Item>
+  </Grid>
+</Grid>
+    </Box>
+        </Grid>
+        
+      </div>
     </>
   );
 };

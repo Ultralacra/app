@@ -1,20 +1,5 @@
-.container {
 
-  }
   
-  .formDiv {
-    width: 400px;
-    padding: 30px;
-    border-radius: 10px;
-    -webkit-box-shadow: -1px 8px 15px 0px rgba(0, 0, 0, 0.44);
-    -moz-box-shadow: -1px 8px 15px 0px rgba(0, 0, 0, 0.44);
-    box-shadow: -1px 8px 15px 0px rgba(0, 0, 0, 0.44);
-  }
-  
-  .alert {
-    text-align: center;
-    margin-top: 20px;
-  }
   
   .creditCard{
       margin-bottom: 10%;
@@ -37,7 +22,8 @@
       border-radius: 3px !important;
       font-weight: 600;
       border : 1px solid #EDEDED !important;
-      border-radius: 7px !important;
+      border-radius: 10px !important;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2) !important;
   }
 
   .tarjeta-pago{
