@@ -1,55 +1,37 @@
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import { Checkbox } from "antd";
+import { UploadOutlined } from '@ant-design/icons';
+import { Button, message, Upload } from 'antd';
+const props = {
+  name: 'file',
+  action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+  headers: {
+    authorization: 'authorization-text',
+  },
+  onChange(info) {
+    if (info.file.status !== 'Subiendo') {
+      console.log(info.file, info.fileList);
+    }
+    if (info.file.status === 'done') {
+      message.success(`${info.file.name} exito al subir la imagen.`);
+    } else if (info.file.status === 'error') {
+      message.error(`${info.file.name} error al subir la imagen.`);
+    }
+  },
+  beforeUpload(file) {
+    const isJPGorPNG = file.type === 'image/jpeg' || file.type === 'image/png';
+    if (!isJPGorPNG) {
+      message.error('Solo se pueden subir imágenes en formato JPG o PNG.');
+    }
+    const isLessThan1MB = file.size / 1024 / 1024 < 1;
+    if (!isLessThan1MB) {
+      message.error('La imagen debe ser menor a 1 MB.');
+    }
+    return isJPGorPNG && isLessThan1MB;
+  },
+};
 
-const options = [
-  { label: "Tarjeta de crédito", value: "credit" },
-  { label: "Tarjeta de débito", value: "debit" }
-];
-
-function App() {
-  return (
-    <Formik
-      initialValues={{ paymentMethod: [] }}
-      onSubmit={(values) => console.log(values)}
-    >
-      {({ values, handleSubmit }) => (
-        <form onSubmit={handleSubmit}
-        >
-          <Field name="paymentMethod">
-            {({ field, form }) => (
-              <div>
-                {options.map((option) => (
-                  <Checkbox
-                    key={option.value}
-                    {...field}
-                    value={option.value}
-                    checked={values.paymentMethod.includes(option.value)}
-                    onChange={() => {
-                      if (field.value.includes(option.value)) {
-                        const nextValue = field.value.filter(
-                          (value) => value !== option.value
-                        );
-                        form.setFieldValue("paymentMethod", nextValue);
-                      } else {
-                        form.setFieldValue("paymentMethod", [
-                          ...field.value,
-                          option.value
-                        ]);
-                      }
-                    }}
-                  >
-                    {option.label}
-                  </Checkbox>
-                ))}
-              </div>
-            )}
-          </Field>
-          <ErrorMessage name="paymentMethod" />
-          <button type="submit">Submit</button>
-        </form>
-      )}
-    </Formik>
-  );
-}
-
+const App = () => (
+  <Upload {...props}>
+    <Button icon={<UploadOutlined />}>click para subir</Button>
+  </Upload>
+);
 export default App;

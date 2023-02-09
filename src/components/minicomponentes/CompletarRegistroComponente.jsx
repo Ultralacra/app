@@ -16,6 +16,7 @@ import { Formik } from "formik";
 import { Radio } from "antd";
 import { Checkbox } from "antd";
 import { Select } from "antd";
+import LogoUpload from "./LogoUpload";
 
 const CompletarRegistroComponente = () => {
   //Datos del usuario
@@ -78,6 +79,12 @@ const CompletarRegistroComponente = () => {
     fetchData();
   }, []);
 
+  const [selectedBanco, setSelectedBanco] = useState("");
+
+  const handleSelect  = (value) => {
+    setSelectedBanco(value);
+  };
+
   //Config del tema
   const drawerWidth = 240;
 
@@ -124,7 +131,7 @@ const CompletarRegistroComponente = () => {
               sEmailPublico: usuario.sEmail,
               sUrlLogo: "",
               sTipoCuenta: "",
-              sBanco: "",
+              sBanco: selectedBanco,
               sCedulaRif: "",
               sNroCuentaBanco: "",
               sConfirmarCuentaBan: "",
@@ -619,7 +626,7 @@ const CompletarRegistroComponente = () => {
                               textAlign="left"
                               className="alerta"
                             >
-                              Publica el logo de tu comercio o una imagen que lo
+                              Sube el logo de tu comercio o una imagen que lo
                               represente.
                             </Alert>
                             <Stack
@@ -627,7 +634,9 @@ const CompletarRegistroComponente = () => {
                               columnSpacing={{ xs: 0.5, sm: 4, md: 1 }}
                             >
                               <Stack item xs={6}>
-                                <Item elevation={0}></Item>
+                                <Item elevation={0}>
+                                  <LogoUpload />
+                                </Item>
                               </Stack>
                             </Stack>
                             <Stack
@@ -641,14 +650,15 @@ const CompletarRegistroComponente = () => {
                               <Item elevation={0}>
                                 <Select
                                   name="sBanco"
-                                  onChange={handleChange}
-                                  style={{ width: 350 }}
+                                  defaultValue={selectedBanco}
+  onSelect={handleSelect}
+                                  style={{ width: "100%" }}
                                   placeholder="Seleccione un Banco"
                                 >
                                   {bancos.map((banco) => (
-                                    <options value={banco.sCodigo}>
+                                    <option value={banco.sCodigo}>
                                       {banco.sDescripcion}
-                                    </options>
+                                    </option>
                                   ))}
                                 </Select>
                               </Item>
