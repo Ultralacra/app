@@ -2,7 +2,7 @@ import { UploadOutlined } from '@ant-design/icons';
 import { Button, message, Upload } from 'antd';
 const props = {
   name: 'file',
-  action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+  action: '../src/logosclientes',
   headers: {
     authorization: 'authorization-text',
   },
@@ -29,9 +29,9 @@ const props = {
   },
 };
 
-const App = () => (
+const LogoUpload = () => (
   <Upload {...props}>
     <Button icon={<UploadOutlined />}>click para subir</Button>
   </Upload>
 );
-export default App;
+export default LogoUpload;

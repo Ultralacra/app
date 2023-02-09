@@ -11,12 +11,19 @@ import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 import { LoadingButton } from "@mui/lab";
 import SendIcon from "@mui/icons-material/Send";
-import { Input } from "antd";
+import { Input,  Select, Field, Form  } from "antd";
 import { Formik } from "formik";
 import { Radio } from "antd";
 import { Checkbox } from "antd";
-import { Select } from "antd";
 import LogoUpload from "./LogoUpload";
+import {
+  UserOutlined,
+  MailOutlined,
+  IdcardOutlined,
+  PhoneOutlined,
+  BankOutlined,
+} from "@ant-design/icons";
+import { Col, Row } from "antd";
 
 const CompletarRegistroComponente = () => {
   //Datos del usuario
@@ -24,25 +31,6 @@ const CompletarRegistroComponente = () => {
   //LLamar lista de bancos
   const [bancos, setBancos] = useState([]);
   //Datos del formulario
-
-  const options = [
-    {
-      label: "Tarjeta de crédito",
-      value: "TDC",
-    },
-    {
-      label: "Tarjeta de débito",
-      value: "TDD",
-    },
-    {
-      label: "Pago móvil",
-      value: "PM",
-    },
-    {
-      label: "Tarjetas prepago",
-      value: "TP",
-    },
-  ];
 
   //Llamar info usuario
   useEffect(() => {
@@ -79,14 +67,10 @@ const CompletarRegistroComponente = () => {
     fetchData();
   }, []);
 
-  const [selectedBanco, setSelectedBanco] = useState("");
-
-  const handleSelect  = (value) => {
-    setSelectedBanco(value);
-  };
-
   //Config del tema
   const drawerWidth = 240;
+
+
 
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -131,17 +115,54 @@ const CompletarRegistroComponente = () => {
               sEmailPublico: usuario.sEmail,
               sUrlLogo: "",
               sTipoCuenta: "",
-              sBanco: selectedBanco,
+              sBanco: "",
               sCedulaRif: "",
               sNroCuentaBanco: "",
               sConfirmarCuentaBan: "",
-              sMedioPago: "",
+              sMedioPago: [],
             }}
             onSubmit={(values) => {
               console.log(values);
             }}
+            validate={(values) => {
+              const errors = {};
+              //validar nombre del representante legal
+              if (!values.sNombreReprLegal) {
+                errors.sNombreReprLegal = "Campo requerido";
+              } else if (
+                !/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(values.sNombreReprLegal)
+              ) {
+                errors.sNombreReprLegal =
+                  "El nombre solo puede contener letras y espacios";
+              }
+              //validar nombre de contacto
+
+              if (!values.sNombreContacto) {
+                errors.sNombreContacto = "Campo requerido";
+              } else if (
+                !/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(values.sNombreContacto)
+              ) {
+                errors.sNombreContacto =
+                  "El nombre solo puede contener letras y espacios";
+              }
+
+              return errors;
+            }}
+
+            
+
+
           >
-            {({ values, handleChange, handleBlur, handleSubmit }) => (
+            {({
+              errors,
+              values,
+              touched,
+              handleChange,
+              handleBlur,
+              handleSubmit,
+              onCambio,
+              setFieldValue,
+            }) => (
               <form onSubmit={handleSubmit}>
                 <Typography
                   variant="h4"
@@ -324,8 +345,16 @@ const CompletarRegistroComponente = () => {
                                     size="medium"
                                     value={values.sCedula}
                                     onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    touched={touched.sCedula}
+                                    prefix={<IdcardOutlined />}
                                   />
                                 </Item>
+                                {errors.sCedula && touched.sCedula && (
+                                  <div className="input-feedback">
+                                    {errors.sCedula}
+                                  </div>
+                                )}
                               </Grid>
                               <Grid item xs={6}>
                                 <Item elevation={0}>
@@ -333,7 +362,7 @@ const CompletarRegistroComponente = () => {
                                     name="sRazonSocial"
                                     type="text"
                                     label="Razón Social"
-                                    placeholder="Ejemplo: ValinkGroup C.A"
+                                    placeholder="ValinkGroup C.A"
                                     variant="outlined"
                                     size="medium"
                                     value={values.sRazonSocial}
@@ -347,11 +376,12 @@ const CompletarRegistroComponente = () => {
                                     name="sSitioWeb"
                                     type="text"
                                     label="Sitio web"
-                                    placeholder="Ejem: www.valinkgroup.com"
+                                    placeholder="www.valinkgroup.com"
                                     variant="outlined"
                                     size="medium"
                                     value={values.sSitioWeb}
                                     onChange={handleChange}
+                                    prefix={<MailOutlined />}
                                   />
                                 </Item>
                               </Grid>
@@ -361,11 +391,12 @@ const CompletarRegistroComponente = () => {
                                     name="sTelefonoAsociado"
                                     type="tel"
                                     label="Teléfono Asociado "
-                                    placeholder="Ejem: 0414-1234567"
+                                    placeholder="04141234567"
                                     variant="outlined"
                                     size="medium"
                                     value={values.sTelefonoAsociado}
                                     onChange={handleChange}
+                                    prefix={<PhoneOutlined />}
                                   />
                                 </Item>
                               </Grid>
@@ -402,7 +433,7 @@ const CompletarRegistroComponente = () => {
                                     name="sDireccion"
                                     type="text"
                                     label="Dirección"
-                                    placeholder="Ejem: Av. Principal, Edificio 1, Piso 1, Oficina 1"
+                                    placeholder="Av. Principal, Edificio 1, Piso 1, Oficina 1"
                                     size="default size"
                                     value={values.sDireccion}
                                     onChange={handleChange}
@@ -424,16 +455,39 @@ const CompletarRegistroComponente = () => {
                               <Grid item xs={6}>
                                 <Item elevation={0}>
                                   <Input
+                                    required
                                     name="sNombreReprLegal"
                                     type="text"
                                     label="Nombre del Representante Legal"
-                                    placeholder="Ejem: Juan Perez"
+                                    placeholder="Juan Perez"
                                     variant="outlined"
                                     size="medium"
                                     value={values.sNombreReprLegal}
                                     onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    touched={touched.sNombreReprLegal}
+                                    prefix={
+                                      <UserOutlined className="site-form-item-icon" />
+                                    }
                                   />
                                 </Item>
+
+                                {touched.sNombreReprLegal &&
+                                  errors.sNombreReprLegal && (
+                                    <Typography
+                                      variant="p"
+                                      color="error"
+                                      fontSize="0.8rem"
+                                      fontWeight="bold"
+                                      mt={1}
+                                      mb={1}
+                                      ml={1}
+                                      mr={1}
+                                      sx={{ textAlign: "left" }}
+                                    >
+                                      {errors.sNombreReprLegal}
+                                    </Typography>
+                                  )}
                               </Grid>
                               <Grid item xs={6}>
                                 <Item elevation={0}>
@@ -441,11 +495,12 @@ const CompletarRegistroComponente = () => {
                                     name="sCedulaReprLegal"
                                     type="text"
                                     label="Cedula del Represéntate Legal"
-                                    placeholder="Ejem: V-12345678"
+                                    placeholder="V12345678"
                                     variant="outlined"
                                     size="medium"
                                     value={values.sCedulaReprLegal}
                                     onChange={handleChange}
+                                    prefix={<IdcardOutlined />}
                                   />
                                 </Item>
                               </Grid>
@@ -455,11 +510,12 @@ const CompletarRegistroComponente = () => {
                                     name="sTelefonoReprLegal"
                                     type="tel"
                                     label="Teléfono del Representante Legal"
-                                    placeholder="Ejem: 0414-1234567"
+                                    placeholder="04141234567"
                                     variant="outlined"
                                     size="medium"
                                     value={values.sTelefonoReprLegal}
                                     onChange={handleChange}
+                                    prefix={<PhoneOutlined />}
                                   />
                                 </Item>
                               </Grid>
@@ -474,6 +530,7 @@ const CompletarRegistroComponente = () => {
                                     size="medium"
                                     value={values.sEmailReprLegal}
                                     onChange={handleChange}
+                                    prefix={<MailOutlined />}
                                   />
                                 </Item>
                               </Grid>
@@ -496,13 +553,32 @@ const CompletarRegistroComponente = () => {
                                     name="sNombreContacto"
                                     type="text"
                                     label="Nombre del Contacto"
-                                    placeholder="Ejem: Juan Perez"
+                                    placeholder="Juan Perez"
                                     variant="outlined"
                                     size="medium"
                                     value={values.sNombreContacto}
                                     onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    touched={touched.sNombreContacto}
+                                    prefix={<UserOutlined />}
                                   />
                                 </Item>
+                                {touched.sNombreContacto &&
+                                  errors.sNombreContacto && (
+                                    <Typography
+                                      variant="p"
+                                      color="error"
+                                      fontSize="0.8rem"
+                                      fontWeight="bold"
+                                      mt={1}
+                                      mb={1}
+                                      ml={1}
+                                      mr={1}
+                                      sx={{ textAlign: "left" }}
+                                    >
+                                      {errors.sNombreContacto}
+                                    </Typography>
+                                  )}
                               </Grid>
                               <Grid item xs={6}>
                                 <Item elevation={0}>
@@ -510,11 +586,12 @@ const CompletarRegistroComponente = () => {
                                     name="sTelefonoContacto"
                                     type="tel"
                                     label="Teléfono de Contacto"
-                                    placeholder="Ejem: 0414-1234567"
+                                    placeholder="04141234567"
                                     variant="outlined"
                                     size="medium"
                                     value={values.sTelefonoContacto}
                                     onChange={handleChange}
+                                    prefix={<PhoneOutlined />}
                                   />
                                 </Item>
                               </Grid>
@@ -524,11 +601,12 @@ const CompletarRegistroComponente = () => {
                                     name="sEmailContacto"
                                     type="mail"
                                     label="Email de Contacto"
-                                    placeholder="Ejem: contacto@valinkpay.com"
+                                    placeholder="contacto@valinkpay.com"
                                     variant="outlined"
                                     size="medium"
                                     value={values.sEmailContacto}
                                     onChange={handleChange}
+                                    prefix={<MailOutlined />}
                                   />
                                 </Item>
                               </Grid>
@@ -546,11 +624,29 @@ const CompletarRegistroComponente = () => {
                             >
                               <Grid item xs={6}>
                                 <Item elevation={0}>
-                                  <Checkbox.Group
-                                    options={options}
-                                    onChange={handleChange}
+                                <Checkbox.Group
+                                    type="checkbox"
+                                    style={{ width: "200%" }}
                                     name="sMedioPago"
-                                  />
+                                  >
+                                    <Row>
+                                      <Col span={8}>
+                                        <Checkbox value="TDD">
+                                          Tarjeta de crédito
+                                        </Checkbox>
+                                      </Col>
+                                      <Col span={8}>
+                                        <Checkbox value="TDC">
+                                          Tarjeta de débito
+                                        </Checkbox>
+                                      </Col>
+                                      <Col span={8}>
+                                        <Checkbox value="PM">
+                                          Pago Móvil
+                                        </Checkbox>
+                                      </Col>
+                                    </Row>
+                                  </Checkbox.Group>
                                 </Item>
                               </Grid>
                             </Grid>
@@ -573,7 +669,7 @@ const CompletarRegistroComponente = () => {
                                     name="sNombrePublico"
                                     type="text"
                                     label="Nombre de Fantasía"
-                                    placeholder="Ejem: ValinkPay C.A"
+                                    placeholder="ValinkPay C.A"
                                     variant="outlined"
                                     size="medium"
                                     fullWidth
@@ -650,8 +746,6 @@ const CompletarRegistroComponente = () => {
                               <Item elevation={0}>
                                 <Select
                                   name="sBanco"
-                                  defaultValue={selectedBanco}
-  onSelect={handleSelect}
                                   style={{ width: "100%" }}
                                   placeholder="Seleccione un Banco"
                                 >
@@ -676,7 +770,7 @@ const CompletarRegistroComponente = () => {
                                 <Input
                                   name="sRazonSocialCuenta"
                                   label="Nombre o Razón Social de la Cuenta Bancaria"
-                                  placeholder="Ejem: ValinkPay C.A, Juan Perez"
+                                  placeholder="ValinkPay C.A, Juan Perez"
                                   variant="outlined"
                                   size="medium"
                                   fullWidth
@@ -689,12 +783,13 @@ const CompletarRegistroComponente = () => {
                                   name="sCedulaRif"
                                   type="text"
                                   label="Cédula o RIF"
-                                  placeholder="Ejem: V-12345678"
+                                  placeholder="V12345678"
                                   variant="outlined"
                                   size="medium"
                                   fullWidth
                                   value={values.sCedulaRif}
                                   onChange={handleChange}
+                                  prefix={<IdcardOutlined />}
                                 />
                               </Item>
                               <Item elevation={0}>
@@ -703,12 +798,15 @@ const CompletarRegistroComponente = () => {
                                   helperText="Sin puntos ni guiones"
                                   type="number"
                                   label="Nro. de Cuenta de banco"
-                                  placeholder="Ejem: 12345678901234567890"
+                                  placeholder="12345678901234567890"
                                   variant="outlined"
                                   size="medium"
                                   fullWidth
                                   value={values.sNroCuentaBanco}
                                   onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  touched={touched.sNroCuentaBanco}
+                                  prefix={<BankOutlined />}
                                 />
                               </Item>
                               <Item elevation={0}>
@@ -717,24 +815,27 @@ const CompletarRegistroComponente = () => {
                                   helperText="Sin puntos ni guiones"
                                   type="number"
                                   label="Confirmar Nro. de Cuenta de banco"
-                                  placeholder="Ejem: 12345678901234567890"
+                                  placeholder="12345678901234567890"
                                   variant="outlined"
                                   size="medium"
                                   fullWidth
                                   value={values.sConfirmarCuentaBan}
                                   onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  touched={touched.sConfirmarCuentaBan}
+                                  prefix={<BankOutlined />}
                                 />
-                                <LoadingButton
-                                  type="submit"
-                                  endIcon={<SendIcon />}
-                                  className="btn-create-account"
-                                  fullWidth
-                                  variant="contained"
-                                  sx={{ mt: 3, mb: 2 }}
-                                >
-                                  Finalizar Registro
-                                </LoadingButton>
                               </Item>
+                              <LoadingButton
+                                type="submit"
+                                endIcon={<SendIcon />}
+                                className="btn-create-account"
+                                fullWidth
+                                variant="contained"
+                                sx={{ mt: 3, mb: 2 }}
+                              >
+                                Finalizar Registro
+                              </LoadingButton>
                             </Stack>
                           </Item>
                         </Grid>
