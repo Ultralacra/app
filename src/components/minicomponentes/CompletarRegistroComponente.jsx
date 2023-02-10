@@ -104,6 +104,7 @@ const CompletarRegistroComponente = () => {
         `https://valink-pay-api.vercel.app/formulario/lista/ciudades?estado=${selectedEstado}`,
         {}
       );
+      console.log(response)
       setCiudad(response.data);
     }
     fetchCiudades();
