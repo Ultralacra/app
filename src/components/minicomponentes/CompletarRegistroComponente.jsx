@@ -94,6 +94,7 @@ const CompletarRegistroComponente = () => {
   const [selectedEstado, setSelectedEstado] = useState("");
 
   const handleEstadoChange = (event) => {
+    console.log(event)
     setSelectedEstado(event.target.value);
   };
   console.log(selectedEstado);
@@ -456,10 +457,10 @@ const CompletarRegistroComponente = () => {
                               <Grid item xs={6}>
                                 <Item elevation={0}>
                                   <TextField
-                                    select={handleEstadoChange}
+                                    select
                                     size="small"
                                     value={values.sEstado}
-                                    onChange={handleChange}
+                                    onChange={handleEstadoChange}
                                     // onInput={handleEstadoChange}
                                     name="sEstado"
                                     SelectProps={{
