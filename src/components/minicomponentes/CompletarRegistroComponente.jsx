@@ -193,7 +193,6 @@ const CompletarRegistroComponente = () => {
               values,
               touched,
               handleChange,
-              handleEstadoChange,
               handleBlur,
               handleSubmit,
               onCambio,
@@ -460,7 +459,7 @@ const CompletarRegistroComponente = () => {
                                     select
                                     size="small"
                                     value={values.sEstado}
-                                    onChange={handleEstadoChange}
+                                    onChange={handleChange}
                                     name="sEstado"
                                     SelectProps={{
                                       native: true,
