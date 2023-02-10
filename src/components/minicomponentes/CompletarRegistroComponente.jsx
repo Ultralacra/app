@@ -193,6 +193,7 @@ const CompletarRegistroComponente = () => {
               values,
               touched,
               handleChange,
+              handleEstadoChange,
               handleBlur,
               handleSubmit,
               onCambio,
