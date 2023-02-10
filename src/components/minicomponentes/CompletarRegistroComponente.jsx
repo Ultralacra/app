@@ -94,7 +94,6 @@ const CompletarRegistroComponente = () => {
   const [selectedEstado, setSelectedEstado] = useState("");
 
   const handleEstadoChange = (event) => {
-    console.log(event)
     setSelectedEstado(event.target.value);
   };
   console.log(selectedEstado);
@@ -460,7 +459,7 @@ const CompletarRegistroComponente = () => {
                                     select
                                     size="small"
                                     value={values.sEstado}
-                                    onChange={handleEstadoChange}
+                                    onChange={handleChange handleEstadoChange}
                                     // onInput={handleEstadoChange}
                                     name="sEstado"
                                     SelectProps={{
