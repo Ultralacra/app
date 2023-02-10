@@ -456,11 +456,11 @@ const CompletarRegistroComponente = () => {
                               <Grid item xs={6}>
                                 <Item elevation={0}>
                                   <TextField
-                                    select
+                                    select={handleEstadoChange}
                                     size="small"
                                     value={values.sEstado}
                                     onChange={handleChange}
-                                    onInput={handleEstadoChange}
+                                    // onInput={handleEstadoChange}
                                     name="sEstado"
                                     SelectProps={{
                                       native: true,
