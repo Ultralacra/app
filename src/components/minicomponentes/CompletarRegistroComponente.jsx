@@ -460,7 +460,7 @@ const CompletarRegistroComponente = () => {
                                     select
                                     size="small"
                                     value={values.sEstado}
-                                    onChange={(e) => { handleChange(e); handleEstadoChange(value, setFieldValue ); }}
+                                    onChange={handleEstadoChange(e,set)}
                                     // onInput={handleEstadoChange}
                                     name="sEstado"
                                     SelectProps={{
