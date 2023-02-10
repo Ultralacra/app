@@ -467,7 +467,7 @@ const CompletarRegistroComponente = () => {
                                     }}
                                     variant="outlined"
                                   >
-                                    <option disabled selected value>Selecciona un estado</option>
+                                    <option>&#160;</option>
                                     {estado.map((option) => (
                                       <option
                                         key={option.id_estado}
@@ -493,7 +493,7 @@ const CompletarRegistroComponente = () => {
                                       }}
                                       variant="outlined"
                                     >
-                                      <option disabled selected value>Selecciona una ciudad</option>
+                                      <option>&#160;</option>
                                       {ciudad.map((option) => (
                                         <option
                                           key={option.id_ciudad}
@@ -836,7 +836,7 @@ const CompletarRegistroComponente = () => {
                                     native: true,
                                   }}
                                 >
-                                  <option disabled selected value>Selecciona un banco</option>
+                                  <option>&#160;</option>
                                   {bancos.map((option) => (
                                     <option
                                       key={option.sCodigo}
