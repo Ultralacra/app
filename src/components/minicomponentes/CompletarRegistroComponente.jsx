@@ -94,7 +94,7 @@ const CompletarRegistroComponente = () => {
   const [selectedEstado, setSelectedEstado] = useState("");
 
   const handleEstadoChange = (e,set) => {
-    setFieldValue('sEstado', e.target.value)
+    set('sEstado', e.target.value)
     setSelectedEstado(e.target.value);
   };
   console.log(selectedEstado);
@@ -461,6 +461,7 @@ const CompletarRegistroComponente = () => {
                                     size="small"
                                     value={values.sEstado}
                                     onChange={handleEstadoChange}
+                                    // onInput={handleEstadoChange}
                                     name="sEstado"
                                     SelectProps={{
                                       native: true,
