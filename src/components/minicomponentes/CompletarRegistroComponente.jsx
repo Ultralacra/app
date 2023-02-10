@@ -93,10 +93,9 @@ const CompletarRegistroComponente = () => {
 
   const [selectedEstado, setSelectedEstado] = useState("");
 
-  const handleEstadoChange = (event) => {
-    const formikProps = useFormikContext();
-    formikProps.setFieldValue("sEstado", event.target.value);
-    setSelectedEstado(event.target.value);
+  const handleEstadoChange = (e,set) => {
+    setFieldValue('sEstado', e.target.value)
+    setSelectedEstado(e.target.value);
   };
   console.log(selectedEstado);
 
@@ -461,8 +460,7 @@ const CompletarRegistroComponente = () => {
                                     select
                                     size="small"
                                     value={values.sEstado}
-                                    onChange={handleEstadoChange}
-                                    // onInput={handleEstadoChange}
+                                    onChange={(e) => {handleChange(e); handleEstadoChange(e,set);}}
                                     name="sEstado"
                                     SelectProps={{
                                       native: true,
