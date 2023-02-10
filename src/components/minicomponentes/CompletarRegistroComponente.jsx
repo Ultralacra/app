@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import Box from "@mui/material/Box";
-import { Typography } from "@mui/material";
+import { TextField, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import "./CompletarRegistroComponente.css";
 import Container from "react-bootstrap/Container";
@@ -11,7 +11,7 @@ import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 import { LoadingButton } from "@mui/lab";
 import SendIcon from "@mui/icons-material/Send";
-import { Input,  Select, Field, Form  } from "antd";
+import { Input, Select, Field, Form } from "antd";
 import { Formik } from "formik";
 import { Radio } from "antd";
 import { Checkbox } from "antd";
@@ -26,11 +26,11 @@ import {
 import { Col, Row } from "antd";
 
 const CompletarRegistroComponente = () => {
+  //Config del tema
+  const drawerWidth = 240;
+
   //Datos del usuario
   const [usuario, setUsuario] = useState([]);
-  //LLamar lista de bancos
-  const [bancos, setBancos] = useState([]);
-  //Datos del formulario
 
   //Llamar info usuario
   useEffect(() => {
@@ -51,6 +51,14 @@ const CompletarRegistroComponente = () => {
   }, []);
 
   //LLamar lista de bancos
+  const [bancos, setBancos] = useState([]);
+  const [selectedBanco, setSelectedBanco] = useState("");
+
+  const handleBancoChange = (event) => {
+    setSelectedBanco(event.target.value);
+  };
+
+  //bancos
   useEffect(() => {
     async function fetchData() {
       const response = await axios.get(
@@ -67,10 +75,41 @@ const CompletarRegistroComponente = () => {
     fetchData();
   }, []);
 
-  //Config del tema
-  const drawerWidth = 240;
+  //Estado
+  const [estado, setEstado] = useState([]);
+  useEffect(() => {
+    async function fetchData() {
+      const response = await axios.get(
+        `https://valink-pay-api.vercel.app/formulario/lista/estados`,
+        {}
+      );
+      setEstado(response.data);
+    }
+    fetchData();
+  }, []);
 
+  //ciudad
+  const [ciudad, setCiudad] = useState([]);
 
+  const [selectedEstado, setSelectedEstado] = useState("");
+
+  const handleEstadoChange = (event) => {
+    setSelectedEstado(event.target.value);
+  };
+  console.log(selectedEstado);
+
+  useEffect(() => {
+    async function fetchCiudades() {
+      const response = await axios.get(
+        `https://valink-pay-api.vercel.app/formulario/lista/ciudades?estado=${selectedEstado}`,
+        {}
+      );
+      setCiudad(response.data);
+    }
+    fetchCiudades();
+  }, [selectedEstado]);
+
+  console.log(ciudad);
 
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -148,10 +187,6 @@ const CompletarRegistroComponente = () => {
 
               return errors;
             }}
-
-            
-
-
           >
             {({
               errors,
@@ -419,10 +454,54 @@ const CompletarRegistroComponente = () => {
                               columnSpacing={{ xs: 0.5, sm: 4, md: 1 }}
                             >
                               <Grid item xs={6}>
-                                <Item elevation={0}>Estado</Item>
+                                <Item elevation={0}>
+                                  <TextField
+                                    select
+                                    size="small"
+                                    value={values.sEstado}
+                                    onChange={handleEstadoChange}
+                                    name="sEstado"
+                                    SelectProps={{
+                                      native: true,
+                                    }}
+                                    variant="outlined"
+                                  >
+                                    {estado.map((option) => (
+                                      <option
+                                        key={option.id_estado}
+                                        value={option.id_estado}
+                                      >
+                                        {option.estado}
+                                      </option>
+                                    ))}
+                                  </TextField>
+                                </Item>
                               </Grid>
                               <Grid item xs={6}>
-                                <Item elevation={0}>Ciudad</Item>
+                                <Item elevation={0}>
+                                  {selectedEstado && (
+                                    <TextField
+                                      select
+                                      size="small"
+                                      value={values.sCiudad}
+                                      onChange={handleChange}
+                                      name="sCiudad"
+                                      SelectProps={{
+                                        native: true,
+                                      }}
+                                      variant="outlined"
+                                    >
+                                      {ciudad.map((option) => (
+                                        <option
+                                          key={option.id_ciudad}
+                                          value={option.id_ciudad}
+                                        >
+                                          {option.ciudad}
+                                        </option>
+                                      ))}
+                                    </TextField>
+                                  )}
+                                </Item>
                               </Grid>
                               <Grid item xs={6}>
                                 <Item elevation={0}>municipio</Item>
@@ -624,7 +703,7 @@ const CompletarRegistroComponente = () => {
                             >
                               <Grid item xs={6}>
                                 <Item elevation={0}>
-                                <Checkbox.Group
+                                  <Checkbox.Group
                                     type="checkbox"
                                     style={{ width: "200%" }}
                                     name="sMedioPago"
@@ -744,17 +823,25 @@ const CompletarRegistroComponente = () => {
                             </Alert>
                             <Stack>
                               <Item elevation={0}>
-                                <Select
+                                <TextField
+                                  select
+                                  size="small"
                                   name="sBanco"
-                                  style={{ width: "100%" }}
-                                  placeholder="Seleccione un Banco"
+                                  value={values.sBanco}
+                                  onChange={handleChange}
+                                  SelectProps={{
+                                    native: true,
+                                  }}
                                 >
-                                  {bancos.map((banco) => (
-                                    <option value={banco.sCodigo}>
-                                      {banco.sDescripcion}
+                                  {bancos.map((option) => (
+                                    <option
+                                      key={option.value}
+                                      value={option.sCodigo}
+                                    >
+                                      {option.sDescripcion}
                                     </option>
                                   ))}
-                                </Select>
+                                </TextField>
                               </Item>
                               <Item elevation={0}>
                                 <Radio.Group
