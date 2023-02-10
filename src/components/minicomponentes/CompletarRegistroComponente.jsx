@@ -113,6 +113,7 @@ const CompletarRegistroComponente = () => {
   //ciudad
   const [ciudad, setCiudad] = useState([]);
   const [selectedEstado, setSelectedEstado] = useState("");
+
   const handleEstadoChange = (event) => {
     setSelectedEstado(event.target.value);
   };
@@ -403,8 +404,8 @@ const CompletarRegistroComponente = () => {
                                     fullWidth
                                     size="small"
                                     value={values.sEstado}
-                                    onChange={handleChange}
-                                    onInput={handleEstadoChange}
+                                    onChange={handleEstadoChange}
+                                    // onInput={handleEstadoChange}
                                     name="sEstado"
                                     SelectProps={{
                                       native: true,
