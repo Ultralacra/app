@@ -11,10 +11,9 @@ import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 import { LoadingButton } from "@mui/lab";
 import SendIcon from "@mui/icons-material/Send";
-import { Input, Select, Field, Form } from "antd";
+import { Input, Field, Form, Select, Space, Cascader } from "antd";
 import { Formik } from "formik";
 import { Radio } from "antd";
-import { Checkbox } from "antd";
 import LogoUpload from "./LogoUpload";
 import {
   UserOutlined,
@@ -23,7 +22,9 @@ import {
   PhoneOutlined,
   BankOutlined,
 } from "@ant-design/icons";
-import { Col, Row } from "antd";
+import MenuItem from "@mui/material/MenuItem";
+/* import { Select } from "@mui/material";
+ */ import { FormControlLabel, Checkbox, FormGroup } from "@mui/material";
 
 const CompletarRegistroComponente = () => {
   //Config del tema
@@ -31,6 +32,32 @@ const CompletarRegistroComponente = () => {
 
   //Datos del usuario
   const [usuario, setUsuario] = useState([]);
+
+  //tipo de cuenta bancaria
+  const [tipoCuenta, setTipoCuenta] = useState([]);
+  useEffect(() => {
+    async function fetchData() {
+      const response = await axios.get(
+        `https://valink-pay-api.vercel.app/formulario/lista?tipo=TCB&subTipo=`,
+        {}
+      );
+      setTipoCuenta(response.data);
+    }
+    fetchData();
+  }, []);
+
+  //medio de pago
+  const [medioPago, setMedioPago] = useState([]);
+  useEffect(() => {
+    async function fetchData() {
+      const response = await axios.get(
+        `https://valink-pay-api.vercel.app/formulario/lista?tipo=MDP&subTipo=`,
+        {}
+      );
+      setMedioPago(response.data);
+    }
+    fetchData();
+  }, []);
 
   //Llamar info usuario
   useEffect(() => {
@@ -52,11 +79,6 @@ const CompletarRegistroComponente = () => {
 
   //LLamar lista de bancos
   const [bancos, setBancos] = useState([]);
-  const [selectedBanco, setSelectedBanco] = useState("");
-
-  const handleBancoChange = (event) => {
-    setSelectedBanco(event.target.value);
-  };
 
   //bancos
   useEffect(() => {
@@ -90,13 +112,10 @@ const CompletarRegistroComponente = () => {
 
   //ciudad
   const [ciudad, setCiudad] = useState([]);
-
   const [selectedEstado, setSelectedEstado] = useState("");
-
   const handleEstadoChange = (event) => {
     setSelectedEstado(event.target.value);
   };
-  console.log(selectedEstado);
 
   useEffect(() => {
     async function fetchCiudades() {
@@ -109,7 +128,23 @@ const CompletarRegistroComponente = () => {
     fetchCiudades();
   }, [selectedEstado]);
 
-  console.log(ciudad);
+  //minicipios
+  const [municipio, setMunicipio] = useState([]);
+  const [selectedCiudad, setSelectedCiudad] = useState("");
+  const handleCiudadChange = (event) => {
+    setSelectedCiudad(event.target.value);
+  };
+
+  useEffect(() => {
+    async function fetchMunicipios() {
+      const response = await axios.get(
+        `https://valink-pay-api.vercel.app/formulario/lista/municipios?estado=${selectedEstado}`,
+        {}
+      );
+      setMunicipio(response.data);
+    }
+    fetchMunicipios();
+  }, [selectedEstado]);
 
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -119,6 +154,30 @@ const CompletarRegistroComponente = () => {
     color: theme.palette.text.secondary,
   }));
 
+  
+
+  const { Option } = Select;
+
+  const [selectedValue, setSelectedValue] = useState("");
+
+  const handleSelectChange = value => {
+    setSelectedValue(value);
+  };
+
+  const selectBefore = (
+
+    <Select
+    value={selectedValue}
+    onChange={handleSelectChange}
+  
+    >
+      <Option value="J-">J-</Option>
+      <Option value="V-">V-</Option>
+    </Select>
+
+    
+  );
+ 
   return (
     <div>
       <Box
@@ -159,7 +218,10 @@ const CompletarRegistroComponente = () => {
               sNroCuentaBanco: "",
               sConfirmarCuentaBan: "",
               sMedioPago: [],
+              sTest: "",
+
             }}
+
             onSubmit={(values) => {
               console.log(values);
             }}
@@ -175,7 +237,6 @@ const CompletarRegistroComponente = () => {
                   "El nombre solo puede contener letras y espacios";
               }
               //validar nombre de contacto
-
               if (!values.sNombreContacto) {
                 errors.sNombreContacto = "Campo requerido";
               } else if (
@@ -195,9 +256,9 @@ const CompletarRegistroComponente = () => {
               handleChange,
               handleBlur,
               handleSubmit,
-              onCambio,
-              setFieldValue,
             }) => (
+
+              
               <form onSubmit={handleSubmit}>
                 <Typography
                   variant="h4"
@@ -215,118 +276,7 @@ const CompletarRegistroComponente = () => {
                 <Grid container spacing={1} columns={{ xs: 4, sm: 8, md: 12 }}>
                   <Grid item xs={8} md={4}>
                     <Item className="item-1-registro">
-                      <Typography
-                        variant="p"
-                        fontWeight="bold"
-                        color="#006d8e"
-                        fontFamily=""
-                        align="left"
-                        fontSize="1rem"
-                      >
-                        Tu información personal
-                      </Typography>
-                      <div className="espaciador-amarillo"></div>
-                      <br></br>
-                      <Typography
-                        variant="p"
-                        textAlign="left"
-                        fontWeight="bold"
-                        color="black"
-                        fontSize="1rem"
-                      >
-                        Nombre:
-                      </Typography>
-                      <br></br>
-                      <Typography
-                        variant="p"
-                        textAlign="left"
-                        fontWeight="100"
-                        color="black"
-                        fontSize="1rem"
-                      >
-                        {usuario.sFirstName}
-                      </Typography>
-                      <br></br>
-                      <Typography
-                        variant="p"
-                        textAlign="left"
-                        fontWeight="bold"
-                        color="black"
-                        fontSize="1rem"
-                      >
-                        Apellido:
-                      </Typography>
-                      <br></br>
-                      <Typography
-                        variant="p"
-                        textAlign="left"
-                        fontWeight="100"
-                        color="black"
-                        fontSize="1rem"
-                      >
-                        {usuario.sLastName}
-                      </Typography>
-                      <br></br>
-                      <Typography
-                        variant="p"
-                        textAlign="left"
-                        fontWeight="bold"
-                        color="black"
-                        fontSize="1rem"
-                      >
-                        Numero de teléfono:
-                      </Typography>
-                      <br></br>
-                      <Typography
-                        variant="p"
-                        textAlign="left"
-                        fontWeight="100"
-                        color="black"
-                        fontSize="1rem"
-                      >
-                        {usuario.sPhone}
-                      </Typography>
-                      <br></br>
-                      <Typography
-                        variant="p"
-                        textAlign="left"
-                        fontWeight="bold"
-                        color="black"
-                        fontSize="1rem"
-                      >
-                        Email:
-                      </Typography>
-                      <br></br>
-                      <Typography
-                        variant="p"
-                        textAlign="left"
-                        fontWeight="100"
-                        color="black"
-                        fontSize="1rem"
-                      >
-                        {usuario.sEmail}
-                      </Typography>
-                      <br></br>
-                      <Typography
-                        variant="p"
-                        textAlign="left"
-                        fontWeight="bold"
-                        color="black"
-                        fontSize="1rem"
-                      >
-                        Usuario de acceso:
-                      </Typography>
-
-                      <br></br>
-                      <Typography
-                        variant="p"
-                        textAlign="left"
-                        fontWeight="100"
-                        color="black"
-                        fontSize="1rem"
-                      >
-                        {usuario.sLogin}
-                      </Typography>
+                      aca va el componente de toda la info del usuario
                     </Item>
                   </Grid>
                   <Grid item xs={6} md={8}>
@@ -348,6 +298,8 @@ const CompletarRegistroComponente = () => {
                             </Alert>
 
                             <Radio.Group
+                              
+
                               className="radio-group-completar-registro"
                               onChange={handleChange}
                               name="sTipoPersona"
@@ -371,29 +323,17 @@ const CompletarRegistroComponente = () => {
                             >
                               <Grid item xs={6}>
                                 <Item elevation={0}>
-                                  <Input
-                                    placeholder="Cedula"
-                                    name="sCedula"
-                                    fullWidth
-                                    label="Cedula o Rif"
-                                    type="text"
-                                    size="medium"
-                                    value={values.sCedula}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    touched={touched.sCedula}
-                                    prefix={<IdcardOutlined />}
-                                  />
+                                <Input 
+                                value={values.sTest}
+                                name="sTest"
+                                onChange={handleChange}
+                                addonBefore={selectBefore}/>
                                 </Item>
-                                {errors.sCedula && touched.sCedula && (
-                                  <div className="input-feedback">
-                                    {errors.sCedula}
-                                  </div>
-                                )}
                               </Grid>
                               <Grid item xs={6}>
                                 <Item elevation={0}>
                                   <Input
+                                    
                                     name="sRazonSocial"
                                     type="text"
                                     label="Razón Social"
@@ -408,6 +348,7 @@ const CompletarRegistroComponente = () => {
                               <Grid item xs={6}>
                                 <Item elevation={0}>
                                   <Input
+                                    
                                     name="sSitioWeb"
                                     type="text"
                                     label="Sitio web"
@@ -416,13 +357,14 @@ const CompletarRegistroComponente = () => {
                                     size="medium"
                                     value={values.sSitioWeb}
                                     onChange={handleChange}
-                                    prefix={<MailOutlined />}
                                   />
                                 </Item>
                               </Grid>
                               <Grid item xs={6}>
                                 <Item elevation={0}>
                                   <Input
+                                    
+
                                     name="sTelefonoAsociado"
                                     type="tel"
                                     label="Teléfono Asociado "
@@ -456,7 +398,9 @@ const CompletarRegistroComponente = () => {
                               <Grid item xs={6}>
                                 <Item elevation={0}>
                                   <TextField
+                                    
                                     select
+                                    fullWidth
                                     size="small"
                                     value={values.sEstado}
                                     onChange={handleChange}
@@ -482,10 +426,13 @@ const CompletarRegistroComponente = () => {
                                 <Item elevation={0}>
                                   {selectedEstado && (
                                     <TextField
+                                      
                                       select
+                                      fullWidth
                                       size="small"
                                       value={values.sCiudad}
                                       onChange={handleChange}
+                                      onInput={handleCiudadChange}
                                       name="sCiudad"
                                       SelectProps={{
                                         native: true,
@@ -505,16 +452,42 @@ const CompletarRegistroComponente = () => {
                                 </Item>
                               </Grid>
                               <Grid item xs={6}>
-                                <Item elevation={0}>municipio</Item>
+                                <Item elevation={0}>
+                                  {selectedEstado && (
+                                    <TextField
+                                      
+                                      fullWidth
+                                      select
+                                      size="small"
+                                      value={values.sMunicipio}
+                                      onChange={handleChange}
+                                      name="sMunicipio"
+                                      SelectProps={{
+                                        native: true,
+                                      }}
+                                      variant="outlined"
+                                    >
+                                      {municipio.map((option) => (
+                                        <option
+                                          key={option.id_municipio}
+                                          value={option.id_municipio}
+                                        >
+                                          {option.municipio}
+                                        </option>
+                                      ))}
+                                    </TextField>
+                                  )}
+                                </Item>
                               </Grid>
                               <Grid item xs={6}>
                                 <Item elevation={0}>
                                   <Input
+                                    
                                     name="sDireccion"
                                     type="text"
                                     label="Dirección"
                                     placeholder="Av. Principal, Edificio 1, Piso 1, Oficina 1"
-                                    size="default size"
+                                    size="large"
                                     value={values.sDireccion}
                                     onChange={handleChange}
                                   />
@@ -535,10 +508,10 @@ const CompletarRegistroComponente = () => {
                               <Grid item xs={6}>
                                 <Item elevation={0}>
                                   <Input
-                                    required
+                                    
                                     name="sNombreReprLegal"
                                     type="text"
-                                    label="Nombre del Representante Legal"
+                                    label="Nombre del representante legal"
                                     placeholder="Juan Perez"
                                     variant="outlined"
                                     size="medium"
@@ -572,6 +545,7 @@ const CompletarRegistroComponente = () => {
                               <Grid item xs={6}>
                                 <Item elevation={0}>
                                   <Input
+                                    
                                     name="sCedulaReprLegal"
                                     type="text"
                                     label="Cedula del Represéntate Legal"
@@ -587,6 +561,7 @@ const CompletarRegistroComponente = () => {
                               <Grid item xs={6}>
                                 <Item elevation={0}>
                                   <Input
+                                    
                                     name="sTelefonoReprLegal"
                                     type="tel"
                                     label="Teléfono del Representante Legal"
@@ -602,6 +577,7 @@ const CompletarRegistroComponente = () => {
                               <Grid item xs={6}>
                                 <Item elevation={0}>
                                   <Input
+                                    
                                     name="sEmailReprLegal"
                                     type="text"
                                     label="Email del Representante"
@@ -630,6 +606,7 @@ const CompletarRegistroComponente = () => {
                               <Grid item xs={6}>
                                 <Item elevation={0}>
                                   <Input
+                                    
                                     name="sNombreContacto"
                                     type="text"
                                     label="Nombre del Contacto"
@@ -663,6 +640,7 @@ const CompletarRegistroComponente = () => {
                               <Grid item xs={6}>
                                 <Item elevation={0}>
                                   <Input
+                                    
                                     name="sTelefonoContacto"
                                     type="tel"
                                     label="Teléfono de Contacto"
@@ -678,6 +656,7 @@ const CompletarRegistroComponente = () => {
                               <Grid item xs={6}>
                                 <Item elevation={0}>
                                   <Input
+                                    
                                     name="sEmailContacto"
                                     type="mail"
                                     label="Email de Contacto"
@@ -698,38 +677,23 @@ const CompletarRegistroComponente = () => {
                             >
                               Quiero recibir pagos en mi sitio web a través de
                             </Alert>
-                            <Grid
-                              container
-                              columnSpacing={{ xs: 0.5, sm: 4, md: 1 }}
-                            >
-                              <Grid item xs={6}>
-                                <Item elevation={0}>
-                                  <Checkbox.Group
-                                    type="checkbox"
-                                    style={{ width: "200%" }}
-                                    name="sMedioPago"
-                                  >
-                                    <Row>
-                                      <Col span={8}>
-                                        <Checkbox value="TDD">
-                                          Tarjeta de crédito
-                                        </Checkbox>
-                                      </Col>
-                                      <Col span={8}>
-                                        <Checkbox value="TDC">
-                                          Tarjeta de débito
-                                        </Checkbox>
-                                      </Col>
-                                      <Col span={8}>
-                                        <Checkbox value="PM">
-                                          Pago Móvil
-                                        </Checkbox>
-                                      </Col>
-                                    </Row>
-                                  </Checkbox.Group>
-                                </Item>
-                              </Grid>
-                            </Grid>
+
+                            <Item elevation={0}>
+                              <FormGroup>
+                                {medioPago.map((medio) => (
+                                  <FormControlLabel
+                                    control={
+                                      <Checkbox
+                                        name="sMedioPago"
+                                        value={medio.Codigo}
+                                        onChange={handleChange}
+                                      />
+                                    }
+                                    label={medio.Descripcion}
+                                  />
+                                ))}
+                              </FormGroup>
+                            </Item>
                           </Item>
                         </Grid>
                         <Grid item xs={6}>
@@ -746,6 +710,7 @@ const CompletarRegistroComponente = () => {
                               <Stack item xs={6}>
                                 <Item elevation={0}>
                                   <Input
+                                    
                                     name="sNombrePublico"
                                     type="text"
                                     label="Nombre de Fantasía"
@@ -825,6 +790,8 @@ const CompletarRegistroComponente = () => {
                             <Stack>
                               <Item elevation={0}>
                                 <TextField
+                                  fullWidth
+                                  
                                   select
                                   size="small"
                                   name="sBanco"
@@ -845,17 +812,31 @@ const CompletarRegistroComponente = () => {
                                 </TextField>
                               </Item>
                               <Item elevation={0}>
-                                <Radio.Group
-                                  className="radio-group-completar-registro"
+                                <TextField
+                                  
+                                  fullWidth
+                                  select
+                                  size="small"
+                                  name="sTipoCuenta"
+                                  value={values.sTipoCuenta}
                                   onChange={handleChange}
-                                  name="sTipoPersona"
+                                  SelectProps={{
+                                    native: true,
+                                  }}
                                 >
-                                  <Radio value="ahorro">Ahorro</Radio>
-                                  <Radio value="corriente">Corriente</Radio>
-                                </Radio.Group>
+                                  {tipoCuenta.map((option) => (
+                                    <option
+                                      key={option.sTipoCuenta}
+                                      value={option.Codigo}
+                                    >
+                                      {option.Descripcion}
+                                    </option>
+                                  ))}
+                                </TextField>
                               </Item>
                               <Item elevation={0}>
                                 <Input
+                                  
                                   name="sRazonSocialCuenta"
                                   label="Nombre o Razón Social de la Cuenta Bancaria"
                                   placeholder="ValinkPay C.A, Juan Perez"
@@ -868,6 +849,7 @@ const CompletarRegistroComponente = () => {
                               </Item>
                               <Item elevation={0}>
                                 <Input
+                                  
                                   name="sCedulaRif"
                                   type="text"
                                   label="Cédula o RIF"
@@ -882,6 +864,7 @@ const CompletarRegistroComponente = () => {
                               </Item>
                               <Item elevation={0}>
                                 <Input
+                                  
                                   name="sNroCuentaBanco"
                                   helperText="Sin puntos ni guiones"
                                   type="number"
@@ -899,6 +882,7 @@ const CompletarRegistroComponente = () => {
                               </Item>
                               <Item elevation={0}>
                                 <Input
+                                  
                                   name="sConfirmarCuentaBan"
                                   helperText="Sin puntos ni guiones"
                                   type="number"
