@@ -467,7 +467,6 @@ const CompletarRegistroComponente = () => {
                                     }}
                                     variant="outlined"
                                   >
-                                    <option>&#160;</option>
                                     {estado.map((option) => (
                                       <option
                                         key={option.id_estado}
@@ -493,7 +492,6 @@ const CompletarRegistroComponente = () => {
                                       }}
                                       variant="outlined"
                                     >
-                                      <option>&#160;</option>
                                       {ciudad.map((option) => (
                                         <option
                                           key={option.id_ciudad}
@@ -836,7 +834,6 @@ const CompletarRegistroComponente = () => {
                                     native: true,
                                   }}
                                 >
-                                  <option>&#160;</option>
                                   {bancos.map((option) => (
                                     <option
                                       key={option.sCodigo}
