@@ -88,9 +88,10 @@ const CompletarRegistroComponente = () => {
     }
     fetchData();
   }, []);
+  console.log(usuario);
+
   //LLamar lista de bancos
   const [bancos, setBancos] = useState([]);
-
   //bancos
   useEffect(() => {
     async function fetchData() {
@@ -370,7 +371,7 @@ const CompletarRegistroComponente = () => {
                 .post(
                   "https://valink-pay-api.vercel.app/clientes/completarregistro",
                   {
-                    sUserId: JSON.parse(localStorage.getItem("id")), 
+                   sUserId: JSON.parse(localStorage.getItem("id")),
                     sTipoPersona: lols.sTipoPersona,
                     sCedula: lols.sCedula,
                     sRazonSocial: lols.sRazonSocial,
@@ -408,17 +409,57 @@ const CompletarRegistroComponente = () => {
                   }
                 )
                 .then((res) => {
-                  console.log(res);
+                  if (res.data.message === "El usuario no existe") {
+                    Swal
+                      .fire({
+                        toast: true,
+                        position: "top-end",
+                        icon: "error",
+                        title: "El usuario no existe",
+                        showConfirmButton: false,
+                        timer: 3000,
+                      })
+                      .then(() => {
+                      }
+                      );
+                  } else if (res.data.message === "Este usuario ya tiene un perfil creado") {
+
+                    Swal  
+                      .fire({
+                        toast: true,
+                        position: "top-end",
+                        icon: "error",
+                        title: "Este usuario ya tiene un perfil creado",
+                        showConfirmButton: false,
+                        timer: 3000,
+                      })
+                      .then(() => {
+                      }
+
+                      );
+                  } else
+                    Swal
+                      .fire({
+                        toast: true,
+                        position: "top-end",
+                        icon: "success",
+                        title: "Registro completado con exito",
+                        showConfirmButton: false,
+                        timer: 3000,
+                      })
+                      .then(() => {
+                      });
+
                   console.log(res.data);
-                  if (res.data === "Registro completado") {
-                    setOpen(true);
-                    setTimeout(() => {
-                      setOpen(false);
-                    }, 3000);
-                  }
+                })
+                .catch((err) => {
+                  console.log(err);
                 });
             }}
           >
+
+
+
             {({
               errors,
               values,
