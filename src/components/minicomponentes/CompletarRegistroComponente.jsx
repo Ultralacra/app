@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import { TextField, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
@@ -11,7 +11,7 @@ import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 import { LoadingButton } from "@mui/lab";
 import SendIcon from "@mui/icons-material/Send";
-import { Input, Field, Form, Select, Space, Cascader } from "antd";
+import { Input, Field, Form, Space, Cascader, Tooltip } from "antd";
 import { Formik } from "formik";
 import { Radio } from "antd";
 import LogoUpload from "./LogoUpload";
@@ -21,10 +21,15 @@ import {
   IdcardOutlined,
   PhoneOutlined,
   BankOutlined,
+  InfoCircleOutlined,
 } from "@ant-design/icons";
-import MenuItem from "@mui/material/MenuItem";
 /* import { Select } from "@mui/material";
  */ import { FormControlLabel, Checkbox, FormGroup } from "@mui/material";
+import { AlertCompleteForm } from "../usercompletecomponentes/AlertCompleteForm";
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
 
 const CompletarRegistroComponente = () => {
   //Config del tema
@@ -155,30 +160,6 @@ const CompletarRegistroComponente = () => {
     color: theme.palette.text.secondary,
   }));
 
-  
-
-  const { Option } = Select;
-
-  const [selectedValue, setSelectedValue] = useState("");
-
-  const handleSelectChange = value => {
-    setSelectedValue(value);
-  };
-
-  const selectBefore = (
-
-    <Select
-    value={selectedValue}
-    onChange={handleSelectChange}
-  
-    >
-      <Option value="J-">J-</Option>
-      <Option value="V-">V-</Option>
-    </Select>
-
-    
-  );
- 
   return (
     <div>
       <Box
@@ -219,10 +200,7 @@ const CompletarRegistroComponente = () => {
               sNroCuentaBanco: "",
               sConfirmarCuentaBan: "",
               sMedioPago: [],
-              sTest: "",
-
             }}
-
             onSubmit={(values) => {
               console.log(values);
             }}
@@ -247,6 +225,8 @@ const CompletarRegistroComponente = () => {
                   "El nombre solo puede contener letras y espacios";
               }
 
+           
+
               return errors;
             }}
           >
@@ -258,8 +238,6 @@ const CompletarRegistroComponente = () => {
               handleBlur,
               handleSubmit,
             }) => (
-
-              
               <form onSubmit={handleSubmit}>
                 <Typography
                   variant="h4"
@@ -269,17 +247,12 @@ const CompletarRegistroComponente = () => {
                   fontFamily=""
                   mb={2}
                 >
-                  TUS DATOS
+                  COMPLETAR REGISTRO
                 </Typography>
-
+                <AlertCompleteForm />
                 <div className="espaciador-amarillo-largo"></div>
 
                 <Grid container spacing={1} columns={{ xs: 4, sm: 8, md: 12 }}>
-                  <Grid item xs={8} md={4}>
-                    <Item className="item-1-registro">
-                      aca va el componente de toda la info del usuario
-                    </Item>
-                  </Grid>
                   <Grid item xs={6} md={8}>
                     <Item className="item-1-registro">
                       <Grid
@@ -299,8 +272,6 @@ const CompletarRegistroComponente = () => {
                             </Alert>
 
                             <Radio.Group
-                              
-
                               className="radio-group-completar-registro"
                               onChange={handleChange}
                               name="sTipoPersona"
@@ -324,17 +295,29 @@ const CompletarRegistroComponente = () => {
                             >
                               <Grid item xs={6}>
                                 <Item elevation={0}>
-                                <Input 
-                                value={values.sTest}
-                                name="sTest"
-                                onChange={handleChange}
-                                addonBefore={selectBefore}/>
+                                  <Input
+                                    placeholder="cédula o rif"
+                                    value={values.sTest}
+                                    name="sCedula"
+                                    onChange={handleChange}
+                                    prefix={
+                                      <IdcardOutlined/>
+                                    }
+                                    suffix={
+                                      <Tooltip title="Debe agregar J- para rif o V- cédula de identidad">
+                                        <InfoCircleOutlined
+                                          style={{
+                                            color: "rgba(0,0,0,.45)",
+                                          }}
+                                        />
+                                      </Tooltip>
+                                    }
+                                  />
                                 </Item>
                               </Grid>
                               <Grid item xs={6}>
                                 <Item elevation={0}>
                                   <Input
-                                    
                                     name="sRazonSocial"
                                     type="text"
                                     label="Razón Social"
@@ -349,7 +332,6 @@ const CompletarRegistroComponente = () => {
                               <Grid item xs={6}>
                                 <Item elevation={0}>
                                   <Input
-                                    
                                     name="sSitioWeb"
                                     type="text"
                                     label="Sitio web"
@@ -364,8 +346,6 @@ const CompletarRegistroComponente = () => {
                               <Grid item xs={6}>
                                 <Item elevation={0}>
                                   <Input
-                                    
-
                                     name="sTelefonoAsociado"
                                     type="tel"
                                     label="Teléfono Asociado "
@@ -399,13 +379,12 @@ const CompletarRegistroComponente = () => {
                               <Grid item xs={6}>
                                 <Item elevation={0}>
                                   <TextField
-                                    
                                     select
                                     fullWidth
                                     size="small"
                                     value={values.sEstado}
                                     onChange={handleEstadoChange}
-                                    // onInput={handleEstadoChange}
+                                    onInput={handleChange}
                                     name="sEstado"
                                     SelectProps={{
                                       native: true,
@@ -427,7 +406,6 @@ const CompletarRegistroComponente = () => {
                                 <Item elevation={0}>
                                   {selectedEstado && (
                                     <TextField
-                                      
                                       select
                                       fullWidth
                                       size="small"
@@ -456,7 +434,6 @@ const CompletarRegistroComponente = () => {
                                 <Item elevation={0}>
                                   {selectedEstado && (
                                     <TextField
-                                      
                                       fullWidth
                                       select
                                       size="small"
@@ -483,7 +460,6 @@ const CompletarRegistroComponente = () => {
                               <Grid item xs={6}>
                                 <Item elevation={0}>
                                   <Input
-                                    
                                     name="sDireccion"
                                     type="text"
                                     label="Dirección"
@@ -509,7 +485,6 @@ const CompletarRegistroComponente = () => {
                               <Grid item xs={6}>
                                 <Item elevation={0}>
                                   <Input
-                                    
                                     name="sNombreReprLegal"
                                     type="text"
                                     label="Nombre del representante legal"
@@ -546,7 +521,6 @@ const CompletarRegistroComponente = () => {
                               <Grid item xs={6}>
                                 <Item elevation={0}>
                                   <Input
-                                    
                                     name="sCedulaReprLegal"
                                     type="text"
                                     label="Cedula del Represéntate Legal"
@@ -562,7 +536,6 @@ const CompletarRegistroComponente = () => {
                               <Grid item xs={6}>
                                 <Item elevation={0}>
                                   <Input
-                                    
                                     name="sTelefonoReprLegal"
                                     type="tel"
                                     label="Teléfono del Representante Legal"
@@ -578,7 +551,6 @@ const CompletarRegistroComponente = () => {
                               <Grid item xs={6}>
                                 <Item elevation={0}>
                                   <Input
-                                    
                                     name="sEmailReprLegal"
                                     type="text"
                                     label="Email del Representante"
@@ -607,7 +579,6 @@ const CompletarRegistroComponente = () => {
                               <Grid item xs={6}>
                                 <Item elevation={0}>
                                   <Input
-                                    
                                     name="sNombreContacto"
                                     type="text"
                                     label="Nombre del Contacto"
@@ -641,7 +612,6 @@ const CompletarRegistroComponente = () => {
                               <Grid item xs={6}>
                                 <Item elevation={0}>
                                   <Input
-                                    
                                     name="sTelefonoContacto"
                                     type="tel"
                                     label="Teléfono de Contacto"
@@ -657,7 +627,6 @@ const CompletarRegistroComponente = () => {
                               <Grid item xs={6}>
                                 <Item elevation={0}>
                                   <Input
-                                    
                                     name="sEmailContacto"
                                     type="mail"
                                     label="Email de Contacto"
@@ -711,7 +680,6 @@ const CompletarRegistroComponente = () => {
                               <Stack item xs={6}>
                                 <Item elevation={0}>
                                   <Input
-                                    
                                     name="sNombrePublico"
                                     type="text"
                                     label="Nombre de Fantasía"
@@ -792,7 +760,6 @@ const CompletarRegistroComponente = () => {
                               <Item elevation={0}>
                                 <TextField
                                   fullWidth
-                                  
                                   select
                                   size="small"
                                   name="sBanco"
@@ -813,11 +780,12 @@ const CompletarRegistroComponente = () => {
                                 </TextField>
                               </Item>
                               <Item elevation={0}>
-                                <TextField
-                                  
-                                  fullWidth
-                                  select
-                                  size="small"
+                              <FormControl fullWidth>
+        <InputLabel>Tipo de cuenta</InputLabel>
+                                <Select
+                                fullWidth
+                                  label="Tipo de Cuenta"
+                                  size="medium"
                                   name="sTipoCuenta"
                                   value={values.sTipoCuenta}
                                   onChange={handleChange}
@@ -826,18 +794,18 @@ const CompletarRegistroComponente = () => {
                                   }}
                                 >
                                   {tipoCuenta.map((option) => (
-                                    <option
+                                    <MenuItem 
                                       key={option.sTipoCuenta}
                                       value={option.Codigo}
                                     >
                                       {option.Descripcion}
-                                    </option>
+                                    </MenuItem>
                                   ))}
-                                </TextField>
+                                </Select>
+                                </FormControl>
                               </Item>
                               <Item elevation={0}>
                                 <Input
-                                  
                                   name="sRazonSocialCuenta"
                                   label="Nombre o Razón Social de la Cuenta Bancaria"
                                   placeholder="ValinkPay C.A, Juan Perez"
@@ -850,7 +818,6 @@ const CompletarRegistroComponente = () => {
                               </Item>
                               <Item elevation={0}>
                                 <Input
-                                  
                                   name="sCedulaRif"
                                   type="text"
                                   label="Cédula o RIF"
@@ -865,7 +832,6 @@ const CompletarRegistroComponente = () => {
                               </Item>
                               <Item elevation={0}>
                                 <Input
-                                  
                                   name="sNroCuentaBanco"
                                   helperText="Sin puntos ni guiones"
                                   type="number"
@@ -883,7 +849,6 @@ const CompletarRegistroComponente = () => {
                               </Item>
                               <Item elevation={0}>
                                 <Input
-                                  
                                   name="sConfirmarCuentaBan"
                                   helperText="Sin puntos ni guiones"
                                   type="number"
@@ -913,6 +878,11 @@ const CompletarRegistroComponente = () => {
                           </Item>
                         </Grid>
                       </Grid>
+                    </Item>
+                  </Grid>
+                  <Grid item xs={8} md={4}>
+                    <Item className="item-1-registro">
+                      aca va el componente de toda la info del usuario
                     </Item>
                   </Grid>
                 </Grid>

@@ -85,10 +85,6 @@ const ConsultarTransacciones = () => {
   //quitar las comillas del token
   const token = localStorage.getItem("token").replace(/['"]+/g, "");
 
-  console.log(token);
-  console.log(JSON.parse(localStorage.getItem("profile")));
-
-  
   //funcion para agregar / y no - en la fecha
   const addSlash = (date) => {
     let newDate = date.split("-");
@@ -179,7 +175,6 @@ const ConsultarTransacciones = () => {
                   console.log(response.data);
                 })
                 .catch(function (error) {
-                  console.log(error);
                 });
             }}
           >
