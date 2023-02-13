@@ -26,14 +26,18 @@ export const AlertCompleteForm = () => {
   return (
     <div>
       {infoUser.iProfileId === 0 ? (
-        <Alert severity="warning"
+        <Alert
+        variant="filled"
+        severity="warning"
         sx={{ width: "100%", textAlign: "left" }}
         >
           Estimado usuario, para poder utilizar todas las funcionalidades de la plataforma, debe completar su perfil. Para 
             ello, debe dirigirse a la sección "Completar Registro" y completar los campos que se le solicitan.
         </Alert>
       ) : (
-        <Alert severity="success">Perfil completo</Alert>
+        <Alert 
+        variant="filled"
+        severity="success">Perfil completo</Alert>
       )}
     </div>
   );

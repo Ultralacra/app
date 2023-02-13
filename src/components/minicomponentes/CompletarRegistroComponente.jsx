@@ -11,7 +11,7 @@ import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 import { LoadingButton } from "@mui/lab";
 import SendIcon from "@mui/icons-material/Send";
-import { Input, Field, Form, Space, Cascader, Tooltip } from "antd";
+import { Input, Tooltip } from "antd";
 import { Formik } from "formik";
 import { Radio } from "antd";
 import LogoUpload from "./LogoUpload";
@@ -23,20 +23,27 @@ import {
   BankOutlined,
   InfoCircleOutlined,
 } from "@ant-design/icons";
-/* import { Select } from "@mui/material";
- */ import { FormControlLabel, Checkbox, FormGroup } from "@mui/material";
+import { FormControlLabel, Checkbox, FormGroup } from "@mui/material";
 import { AlertCompleteForm } from "../usercompletecomponentes/AlertCompleteForm";
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import InputLabel from '@mui/material/InputLabel';
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import InputLabel from "@mui/material/InputLabel";
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
+import Swal from "sweetalert2";
 
 const CompletarRegistroComponente = () => {
   //Config del tema
   const drawerWidth = 240;
 
+  //open loading
+  const [open, setOpen] = useState(false);
   //Datos del usuario
   const [usuario, setUsuario] = useState([]);
+
+  //quitar las comillas del token
+  const token = localStorage.getItem("token").replace(/['"]+/g, "");
 
   //tipo de cuenta bancaria
   const [tipoCuenta, setTipoCuenta] = useState([]);
@@ -81,7 +88,6 @@ const CompletarRegistroComponente = () => {
     }
     fetchData();
   }, []);
-
   //LLamar lista de bancos
   const [bancos, setBancos] = useState([]);
 
@@ -171,7 +177,7 @@ const CompletarRegistroComponente = () => {
         <Container>
           <Formik
             initialValues={{
-              sUserId: JSON.parse(localStorage.getItem("id")),
+              sUserId: JSON.parse(localStorage.getItem("id")), 
               sTipoPersona: "",
               sCedula: "",
               sRazonSocial: "",
@@ -201,9 +207,6 @@ const CompletarRegistroComponente = () => {
               sConfirmarCuentaBan: "",
               sMedioPago: [],
             }}
-            onSubmit={(values) => {
-              console.log(values);
-            }}
             validate={(values) => {
               const errors = {};
               //validar nombre del representante legal
@@ -224,10 +227,196 @@ const CompletarRegistroComponente = () => {
                 errors.sNombreContacto =
                   "El nombre solo puede contener letras y espacios";
               }
+              //validar si es persona natural o juridica
+              if (!values.sTipoPersona) {
+                errors.sTipoPersona = "Campo requerido";
+              }
+              //validar numero de cedula o rif sin espacios ni caracteres especiales
+              if (!values.sCedulaRif) {
+                errors.sCedulaRif = "Campo requerido";
+              } else if (!/^[0-9]{1,10}$/.test(values.sCedulaRif)) {
+                errors.sCedulaRif =
+                  "El numero de cedula o rif solo puede contener numeros";
+              }
+              //cedula o rif
+              if (!values.sCedula) {
+                errors.sCedula = "Campo requerido";
+              } else if (!/^[0-9]{1,10}$/.test(values.sCedula)) {
+                errors.sCedula =
+                  "El numero de cedula o rif solo puede contener numeros";
+              }
+              //cedula o rif representante legal
+              if (!values.sCedulaReprLegal) {
+                errors.sCedulaReprLegal = "Campo requerido";
+              } else if (!/^[0-9]{1,10}$/.test(values.sCedulaReprLegal)) {
+                errors.sCedulaReprLegal =
+                  "El numero de cedula o rif solo puede contener numeros";
+              }
+              //validar razon social o nombre de la empresa solo permitir el caracter & y espacios
+              if (!values.sRazonSocialCuenta) {
+                errors.sRazonSocialCuenta = "Campo requerido";
+              } else if (
+                !/^[a-zA-ZÀ-ÿ0-9\s&]{1,40}$/.test(values.sRazonSocialCuenta)
+              ) {
+                errors.sRazonSocialCuenta =
+                  "La razon social solo puede contener letras, numeros, espacios y el caracter &";
+              }
+              // validar razon social o nombre de la empresa solo permitir el caracter & y espacios
+              if (!values.sRazonSocial) {
+                errors.sRazonSocial = "Campo requerido";
+              } else if (
+                !/^[a-zA-ZÀ-ÿ0-9\s&]{1,40}$/.test(values.sRazonSocial)
+              ) {
+                errors.sRazonSocial =
+                  "La razon social solo puede contener letras, numeros, espacios y el caracter &";
+              }
+              //validar sitio web
+              if (!values.sSitioWeb) {
+                errors.sSitioWeb = "Campo requerido";
+              } else if (
+                !/^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/.test(
+                  values.sSitioWeb
+                )
+              ) {
+                errors.sSitioWeb = "El sitio web no es valido";
+              }
+              //validar telefono asociado puede tener 20 numeros maximo
+              if (!values.sTelefonoAsociado) {
+                errors.sTelefonoAsociado = "Campo requerido";
+              } else if (!/^[0-9]{1,20}$/.test(values.sTelefonoAsociado)) {
+                errors.sTelefonoAsociado =
+                  "El telefono solo puede contener numeros";
+              }
+              //validar telefono asociado puede tener 20 numeros maximo
+              if (!values.sTelefonoReprLegal) {
+                errors.sTelefonoReprLegal = "Campo requerido";
+              } else if (!/^[0-9]{1,20}$/.test(values.sTelefonoReprLegal)) {
+                errors.sTelefonoReprLegal =
+                  "El telefono solo puede contener numeros";
+              }
 
-           
+              //validar telefono asociado puede tener 20 numeros maximo
+              if (!values.sTelefonoContacto) {
+                errors.sTelefonoContacto = "Campo requerido";
+              } else if (!/^[0-9]{1,20}$/.test(values.sTelefonoContacto)) {
+                errors.sTelefonoContacto =
+                  "El telefono solo puede contener numeros";
+              }
+              //validar direccion sin caracteres especiales
+              if (!values.sDireccion) {
+                errors.sDireccion = "Campo requerido";
+              } else if (!/^[a-zA-ZÀ-ÿ0-9\s&]{1,40}$/.test(values.sDireccion)) {
+                errors.sDireccion =
+                  "La direccion solo puede contener letras, numeros, espacios y el caracter &";
+              }
+
+              //validar correo electronico
+              if (!values.sEmailContacto) {
+                errors.sEmailContacto = "Campo requerido";
+              } else if (
+                !/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(
+                  values.sEmailContacto
+                )
+              ) {
+                errors.sEmailContacto = "Por favor ingrese un email válido";
+              }
+              //validar correo electronico
+              if (!values.sEmailReprLegal) {
+                errors.sEmailReprLegal = "Campo requerido";
+              } else if (
+                !/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(
+                  values.sEmailReprLegal
+                )
+              ) {
+                errors.sEmailReprLegal = "El correo electronico no es valido";
+              }
+              //validar Checkboxes
+              if (!values.sMedioPago) {
+                errors.sMedioPago = "Campo requerido";
+              }
+              // validar que los numeros de cuenta sean solo numeros y coincidan los 2 campos
+
+              if (!values.sNroCuentaBanco) {
+                errors.sNroCuentaBanco = "Campo requerido";
+              } else if (!/^[0-9]{1,24}$/.test(values.sNroCuentaBanco)) {
+                errors.sNroCuentaBanco =
+                  "El numero de cuenta solo puede contener numeros";
+              }
+
+              if (!values.sConfirmarCuentaBan) {
+                errors.sConfirmarCuentaBan = "Campo requerido";
+              } else if (!/^[0-9]{1,24}$/.test(values.sConfirmarCuentaBan)) {
+                errors.sConfirmarCuentaBan =
+                  "El numero de cuenta solo puede contener numeros";
+              }
+              if (values.sNroCuentaBanco !== values.sConfirmarCuentaBan) {
+                errors.sConfirmarCuentaBan =
+                  "Los numeros de cuenta no coinciden";
+              }
+
+              if (!values.sNombrePublico) {
+                errors.sNombrePublico = "Campo requerido";
+              } else if (
+                !/^[a-zA-ZÀ-ÿ0-9\s&]{1,40}$/.test(values.sNombrePublico)
+              ) {
+                errors.sNombrePublico =
+                  "Solo puede contener letras, numeros, espacios y el caracter &";
+              }
 
               return errors;
+            }}
+            onSubmit={async (lols, { setSubmitting }) => {
+              axios
+                .post(
+                  "https://valink-pay-api.vercel.app/clientes/completarregistro",
+                  {
+                    sUserId: JSON.parse(localStorage.getItem("id")), 
+                    sTipoPersona: lols.sTipoPersona,
+                    sCedula: lols.sCedula,
+                    sRazonSocial: lols.sRazonSocial,
+                    sSitioWeb: lols.sSitioWeb,
+                    sTelefonoAsociado: lols.sTelefonoAsociado,
+                    sCategoriaRubro: lols.sCategoriaRubro,
+                    sRubro: lols.sRubro,
+                    sEstado: lols.sEstado,
+                    sCiudad: lols.sCiudad,
+                    sMunicipio: lols.sMunicipio,
+                    sDireccion: lols.sDireccion,
+                    sActividadEcon: lols.sActividadEcon,
+                    sNombreReprLegal: lols.sNombreReprLegal,
+                    sCedulaReprLegal: lols.sCedulaReprLegal,
+                    sTelefonoReprLegal: lols.sTelefonoReprLegal,
+                    sEmailReprLegal: lols.sEmailReprLegal,
+                    sNombreContacto: lols.sNombreContacto,
+                    sTelefonoContacto: lols.sTelefonoContacto,
+                    sEmailContacto: lols.sEmailContacto,
+                    sNombrePublico: lols.sNombrePublico,
+                    sEmailPublico: usuario.sEmail,
+                    sUrlLogo: lols.sUrlLogo,
+                    sTipoCuenta: lols.sTipoCuenta,
+                    sBanco: lols.sBanco,
+                    sCedulaRif: lols.sCedulaRif,
+                    sNroCuentaBanco: lols.sNroCuentaBanco,
+                    sConfirmarCuentaBan: lols.sConfirmarCuentaBan,
+                    sMedioPago: lols.sMedioPago,
+                  },
+                  {
+                    headers: {
+                      "Content-Type": "application/json",
+                      authorization: token,
+                    },
+                  }
+                )
+                .then((res) => {
+                  console.log(res);
+                  console.log(res.data);
+                  if (res.data === "Registro completado") {
+                    setOpen(true);
+                    setTimeout(() => {
+                      setOpen(false);
+                    }, 3000);
+                  }
+                });
             }}
           >
             {({
@@ -239,6 +428,17 @@ const CompletarRegistroComponente = () => {
               handleSubmit,
             }) => (
               <form onSubmit={handleSubmit}>
+                {console.log(values)}
+                <Backdrop
+                  sx={{
+                    color: "#DFFEFF",
+                    zIndex: (theme) => theme.zIndex.drawer + 1,
+                  }}
+                  open={open}
+                >
+                  Verificando por favor espere...
+                  <CircularProgress color="inherit" />
+                </Backdrop>
                 <Typography
                   variant="h4"
                   textAlign="left"
@@ -251,8 +451,7 @@ const CompletarRegistroComponente = () => {
                 </Typography>
                 <AlertCompleteForm />
                 <div className="espaciador-amarillo-largo"></div>
-
-                <Grid container spacing={1} columns={{ xs: 4, sm: 8, md: 12 }}>
+                <Grid>
                   <Grid item xs={6} md={8}>
                     <Item className="item-1-registro">
                       <Grid
@@ -275,11 +474,28 @@ const CompletarRegistroComponente = () => {
                               className="radio-group-completar-registro"
                               onChange={handleChange}
                               name="sTipoPersona"
+                              value={values.sTipoPersona}
+                              onBlur={handleBlur}
+                              touched={touched.sTipoPersona}
                             >
                               <Radio value="natural">natural</Radio>
                               <Radio value="juridica">juridica</Radio>
                             </Radio.Group>
-
+                            {errors.sTipoPersona && touched.sTipoPersona && (
+                              <Typography
+                                variant="p"
+                                color="error"
+                                fontSize="0.8rem"
+                                fontWeight="bold"
+                                mt={1}
+                                mb={1}
+                                ml={1}
+                                mr={1}
+                                sx={{ textAlign: "left" }}
+                              >
+                                {errors.sTipoPersona}
+                              </Typography>
+                            )}
                             <Alert
                               severity="info"
                               textAlign="left"
@@ -300,9 +516,9 @@ const CompletarRegistroComponente = () => {
                                     value={values.sTest}
                                     name="sCedula"
                                     onChange={handleChange}
-                                    prefix={
-                                      <IdcardOutlined/>
-                                    }
+                                    onBlur={handleBlur}
+                                    touched={touched.sCedula}
+                                    prefix={<IdcardOutlined />}
                                     suffix={
                                       <Tooltip title="Debe agregar J- para rif o V- cédula de identidad">
                                         <InfoCircleOutlined
@@ -313,6 +529,21 @@ const CompletarRegistroComponente = () => {
                                       </Tooltip>
                                     }
                                   />
+                                  {touched.sCedula && errors.sCedula && (
+                                    <Typography
+                                      variant="p"
+                                      color="error"
+                                      fontSize="0.8rem"
+                                      fontWeight="bold"
+                                      mt={1}
+                                      mb={1}
+                                      ml={1}
+                                      mr={1}
+                                      sx={{ textAlign: "left" }}
+                                    >
+                                      {errors.sCedula}
+                                    </Typography>
+                                  )}
                                 </Item>
                               </Grid>
                               <Grid item xs={6}>
@@ -326,7 +557,25 @@ const CompletarRegistroComponente = () => {
                                     size="medium"
                                     value={values.sRazonSocial}
                                     onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    touched={touched.sRazonSocial}
                                   />
+                                  {touched.sRazonSocial &&
+                                    errors.sRazonSocial && (
+                                      <Typography
+                                        variant="p"
+                                        color="error"
+                                        fontSize="0.8rem"
+                                        fontWeight="bold"
+                                        mt={1}
+                                        mb={1}
+                                        ml={1}
+                                        mr={1}
+                                        sx={{ textAlign: "left" }}
+                                      >
+                                        {errors.sRazonSocial}
+                                      </Typography>
+                                    )}
                                 </Item>
                               </Grid>
                               <Grid item xs={6}>
@@ -340,7 +589,33 @@ const CompletarRegistroComponente = () => {
                                     size="medium"
                                     value={values.sSitioWeb}
                                     onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    touched={touched.sSitioWeb}
+                                    suffix={
+                                      <Tooltip title="el sitio web debe comenzar con www.">
+                                        <InfoCircleOutlined
+                                          style={{
+                                            color: "rgba(0,0,0,.45)",
+                                          }}
+                                        />
+                                      </Tooltip>
+                                    }
                                   />
+                                  {touched.sSitioWeb && errors.sSitioWeb && (
+                                    <Typography
+                                      variant="p"
+                                      color="error"
+                                      fontSize="0.8rem"
+                                      fontWeight="bold"
+                                      mt={1}
+                                      mb={1}
+                                      ml={1}
+                                      mr={1}
+                                      sx={{ textAlign: "left" }}
+                                    >
+                                      {errors.sSitioWeb}
+                                    </Typography>
+                                  )}
                                 </Item>
                               </Grid>
                               <Grid item xs={6}>
@@ -354,8 +629,26 @@ const CompletarRegistroComponente = () => {
                                     size="medium"
                                     value={values.sTelefonoAsociado}
                                     onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    touched={touched.sTelefonoAsociado}
                                     prefix={<PhoneOutlined />}
                                   />
+                                  {touched.sTelefonoAsociado &&
+                                    errors.sTelefonoAsociado && (
+                                      <Typography
+                                        variant="p"
+                                        color="error"
+                                        fontSize="0.8rem"
+                                        fontWeight="bold"
+                                        mt={1}
+                                        mb={1}
+                                        ml={1}
+                                        mr={1}
+                                        sx={{ textAlign: "left" }}
+                                      >
+                                        {errors.sTelefonoAsociado}
+                                      </Typography>
+                                    )}
                                 </Item>
                               </Grid>
                               <Grid item xs={6}>
@@ -406,6 +699,7 @@ const CompletarRegistroComponente = () => {
                                 <Item elevation={0}>
                                   {selectedEstado && (
                                     <TextField
+                                      required
                                       select
                                       fullWidth
                                       size="small"
@@ -434,6 +728,7 @@ const CompletarRegistroComponente = () => {
                                 <Item elevation={0}>
                                   {selectedEstado && (
                                     <TextField
+                                      required
                                       fullWidth
                                       select
                                       size="small"
@@ -460,6 +755,7 @@ const CompletarRegistroComponente = () => {
                               <Grid item xs={6}>
                                 <Item elevation={0}>
                                   <Input
+                                    required
                                     name="sDireccion"
                                     type="text"
                                     label="Dirección"
@@ -467,7 +763,24 @@ const CompletarRegistroComponente = () => {
                                     size="large"
                                     value={values.sDireccion}
                                     onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    touched={touched.sDireccion}
                                   />
+                                  {touched.sDireccion && errors.sDireccion && (
+                                    <Typography
+                                      variant="p"
+                                      color="error"
+                                      fontSize="0.8rem"
+                                      fontWeight="bold"
+                                      mt={1}
+                                      mb={1}
+                                      ml={1}
+                                      mr={1}
+                                      sx={{ textAlign: "left" }}
+                                    >
+                                      {errors.sDireccion}
+                                    </Typography>
+                                  )}
                                 </Item>
                               </Grid>
                             </Grid>
@@ -528,10 +841,28 @@ const CompletarRegistroComponente = () => {
                                     variant="outlined"
                                     size="medium"
                                     value={values.sCedulaReprLegal}
+                                    touched={touched.sCedulaReprLegal}
+                                    onBlur={handleBlur}
                                     onChange={handleChange}
                                     prefix={<IdcardOutlined />}
                                   />
                                 </Item>
+                                {touched.sCedulaReprLegal &&
+                                  errors.sCedulaReprLegal && (
+                                    <Typography
+                                      variant="p"
+                                      color="error"
+                                      fontSize="0.8rem"
+                                      fontWeight="bold"
+                                      mt={1}
+                                      mb={1}
+                                      ml={1}
+                                      mr={1}
+                                      sx={{ textAlign: "left" }}
+                                    >
+                                      {errors.sCedulaReprLegal}
+                                    </Typography>
+                                  )}
                               </Grid>
                               <Grid item xs={6}>
                                 <Item elevation={0}>
@@ -544,8 +875,26 @@ const CompletarRegistroComponente = () => {
                                     size="medium"
                                     value={values.sTelefonoReprLegal}
                                     onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    touched={touched.sTelefonoReprLegal}
                                     prefix={<PhoneOutlined />}
                                   />
+                                  {touched.sTelefonoReprLegal &&
+                                    errors.sTelefonoReprLegal && (
+                                      <Typography
+                                        variant="p"
+                                        color="error"
+                                        fontSize="0.8rem"
+                                        fontWeight="bold"
+                                        mt={1}
+                                        mb={1}
+                                        ml={1}
+                                        mr={1}
+                                        sx={{ textAlign: "left" }}
+                                      >
+                                        {errors.sTelefonoReprLegal}
+                                      </Typography>
+                                    )}
                                 </Item>
                               </Grid>
                               <Grid item xs={6}>
@@ -559,8 +908,26 @@ const CompletarRegistroComponente = () => {
                                     size="medium"
                                     value={values.sEmailReprLegal}
                                     onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    touched={touched.sEmailReprLegal}
                                     prefix={<MailOutlined />}
                                   />
+                                  {touched.sEmailReprLegal &&
+                                    errors.sEmailReprLegal && (
+                                      <Typography
+                                        variant="p"
+                                        color="error"
+                                        fontSize="0.8rem"
+                                        fontWeight="bold"
+                                        mt={1}
+                                        mb={1}
+                                        ml={1}
+                                        mr={1}
+                                        sx={{ textAlign: "left" }}
+                                      >
+                                        {errors.sEmailReprLegal}
+                                      </Typography>
+                                    )}
                                 </Item>
                               </Grid>
                             </Grid>
@@ -621,7 +988,25 @@ const CompletarRegistroComponente = () => {
                                     value={values.sTelefonoContacto}
                                     onChange={handleChange}
                                     prefix={<PhoneOutlined />}
+                                    onBlur={handleBlur}
+                                    touched={touched.sTelefonoContacto}
                                   />
+                                  {touched.sTelefonoContacto &&
+                                    errors.sTelefonoContacto && (
+                                      <Typography
+                                        variant="p"
+                                        color="error"
+                                        fontSize="0.8rem"
+                                        fontWeight="bold"
+                                        mt={1}
+                                        mb={1}
+                                        ml={1}
+                                        mr={1}
+                                        sx={{ textAlign: "left" }}
+                                      >
+                                        {errors.sTelefonoContacto}
+                                      </Typography>
+                                    )}
                                 </Item>
                               </Grid>
                               <Grid item xs={6}>
@@ -635,8 +1020,26 @@ const CompletarRegistroComponente = () => {
                                     size="medium"
                                     value={values.sEmailContacto}
                                     onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    touched={touched.sEmailContacto}
                                     prefix={<MailOutlined />}
                                   />
+                                  {touched.sEmailContacto &&
+                                    errors.sEmailContacto && (
+                                      <Typography
+                                        variant="p"
+                                        color="error"
+                                        fontSize="0.8rem"
+                                        fontWeight="bold"
+                                        mt={1}
+                                        mb={1}
+                                        ml={1}
+                                        mr={1}
+                                        sx={{ textAlign: "left" }}
+                                      >
+                                        {errors.sEmailContacto}
+                                      </Typography>
+                                    )}
                                 </Item>
                               </Grid>
                             </Grid>
@@ -657,11 +1060,28 @@ const CompletarRegistroComponente = () => {
                                         name="sMedioPago"
                                         value={medio.Codigo}
                                         onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        touched={touched.sMedioPago}
                                       />
                                     }
                                     label={medio.Descripcion}
                                   />
                                 ))}
+                                {touched.sMedioPago && errors.sMedioPago && (
+                                  <Typography
+                                    variant="p"
+                                    color="error"
+                                    fontSize="0.8rem"
+                                    fontWeight="bold"
+                                    mt={1}
+                                    mb={1}
+                                    ml={1}
+                                    mr={1}
+                                    sx={{ textAlign: "left" }}
+                                  >
+                                    {errors.sMedioPago}
+                                  </Typography>
+                                )}
                               </FormGroup>
                             </Item>
                           </Item>
@@ -689,7 +1109,25 @@ const CompletarRegistroComponente = () => {
                                     fullWidth
                                     value={values.sNombrePublico}
                                     onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    touched={touched.sNombrePublico}
                                   />
+                                  {touched.sNombrePublico &&
+                                    errors.sNombrePublico && (
+                                      <Typography
+                                        variant="p"
+                                        color="error"
+                                        fontSize="0.8rem"
+                                        fontWeight="bold"
+                                        mt={1}
+                                        mb={1}
+                                        ml={1}
+                                        mr={1}
+                                        sx={{ textAlign: "left" }}
+                                      >
+                                        {errors.sNombrePublico}
+                                      </Typography>
+                                    )}
                                 </Item>
                               </Stack>
                             </Stack>
@@ -758,50 +1196,56 @@ const CompletarRegistroComponente = () => {
                             </Alert>
                             <Stack>
                               <Item elevation={0}>
-                                <TextField
-                                  fullWidth
-                                  select
-                                  size="small"
-                                  name="sBanco"
-                                  value={values.sBanco}
-                                  onChange={handleChange}
-                                  SelectProps={{
-                                    native: true,
-                                  }}
-                                >
-                                  {bancos.map((option) => (
-                                    <option
-                                      key={option.sCodigo}
-                                      value={option.sCodigo}
-                                    >
-                                      {option.sDescripcion}
-                                    </option>
-                                  ))}
-                                </TextField>
+                                <FormControl fullWidth>
+                                  <InputLabel>Banco</InputLabel>
+                                  <Select
+                                    fullWidth
+                                    required
+                                    select
+                                    label="Banco"
+                                    size="medium"
+                                    name="sBanco"
+                                    value={values.sBanco}
+                                    onChange={handleChange}
+                                    SelectProps={{
+                                      native: true,
+                                    }}
+                                  >
+                                    {bancos.map((option) => (
+                                      <MenuItem
+                                        key={option.sCodigo}
+                                        value={option.sCodigo}
+                                      >
+                                        {option.sDescripcion}
+                                      </MenuItem>
+                                    ))}
+                                  </Select>
+                                </FormControl>
                               </Item>
                               <Item elevation={0}>
-                              <FormControl fullWidth>
-        <InputLabel>Tipo de cuenta</InputLabel>
-                                <Select
-                                fullWidth
-                                  label="Tipo de Cuenta"
-                                  size="medium"
-                                  name="sTipoCuenta"
-                                  value={values.sTipoCuenta}
-                                  onChange={handleChange}
-                                  SelectProps={{
-                                    native: true,
-                                  }}
-                                >
-                                  {tipoCuenta.map((option) => (
-                                    <MenuItem 
-                                      key={option.sTipoCuenta}
-                                      value={option.Codigo}
-                                    >
-                                      {option.Descripcion}
-                                    </MenuItem>
-                                  ))}
-                                </Select>
+                                <FormControl fullWidth>
+                                  <InputLabel>Tipo de cuenta</InputLabel>
+                                  <Select
+                                    fullWidth
+                                    required
+                                    label="Tipo de Cuenta"
+                                    size="medium"
+                                    name="sTipoCuenta"
+                                    value={values.sTipoCuenta}
+                                    onChange={handleChange}
+                                    SelectProps={{
+                                      native: true,
+                                    }}
+                                  >
+                                    {tipoCuenta.map((option) => (
+                                      <MenuItem
+                                        key={option.sTipoCuenta}
+                                        value={option.Codigo}
+                                      >
+                                        {option.Descripcion}
+                                      </MenuItem>
+                                    ))}
+                                  </Select>
                                 </FormControl>
                               </Item>
                               <Item elevation={0}>
@@ -814,7 +1258,25 @@ const CompletarRegistroComponente = () => {
                                   fullWidth
                                   value={values.sRazonSocialCuenta}
                                   onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  touched={touched.sRazonSocialCuenta}
                                 />
+                                {touched.sRazonSocialCuenta &&
+                                  errors.sRazonSocialCuenta && (
+                                    <Typography
+                                      variant="p"
+                                      color="error"
+                                      fontSize="0.8rem"
+                                      fontWeight="bold"
+                                      mt={1}
+                                      mb={1}
+                                      ml={1}
+                                      mr={1}
+                                      sx={{ textAlign: "left" }}
+                                    >
+                                      {errors.sRazonSocialCuenta}
+                                    </Typography>
+                                  )}
                               </Item>
                               <Item elevation={0}>
                                 <Input
@@ -828,8 +1290,25 @@ const CompletarRegistroComponente = () => {
                                   value={values.sCedulaRif}
                                   onChange={handleChange}
                                   prefix={<IdcardOutlined />}
+                                  onBlur={handleBlur}
+                                  touched={touched.sCedulaRif}
                                 />
                               </Item>
+                              {touched.sCedulaRif && errors.sCedulaRif && (
+                                <Typography
+                                  variant="p"
+                                  color="error"
+                                  fontSize="0.8rem"
+                                  fontWeight="bold"
+                                  mt={1}
+                                  mb={1}
+                                  ml={1}
+                                  mr={1}
+                                  sx={{ textAlign: "left" }}
+                                >
+                                  {errors.sCedulaRif}
+                                </Typography>
+                              )}
                               <Item elevation={0}>
                                 <Input
                                   name="sNroCuentaBanco"
@@ -846,6 +1325,22 @@ const CompletarRegistroComponente = () => {
                                   touched={touched.sNroCuentaBanco}
                                   prefix={<BankOutlined />}
                                 />
+                                {touched.sNroCuentaBanco &&
+                                  errors.sNroCuentaBanco && (
+                                    <Typography
+                                      variant="p"
+                                      color="error"
+                                      fontSize="0.8rem"
+                                      fontWeight="bold"
+                                      mt={1}
+                                      mb={1}
+                                      ml={1}
+                                      mr={1}
+                                      sx={{ textAlign: "left" }}
+                                    >
+                                      {errors.sNroCuentaBanco}
+                                    </Typography>
+                                  )}
                               </Item>
                               <Item elevation={0}>
                                 <Input
@@ -863,6 +1358,22 @@ const CompletarRegistroComponente = () => {
                                   touched={touched.sConfirmarCuentaBan}
                                   prefix={<BankOutlined />}
                                 />
+                                {touched.sConfirmarCuentaBan &&
+                                  errors.sConfirmarCuentaBan && (
+                                    <Typography
+                                      variant="p"
+                                      color="error"
+                                      fontSize="0.8rem"
+                                      fontWeight="bold"
+                                      mt={1}
+                                      mb={1}
+                                      ml={1}
+                                      mr={1}
+                                      sx={{ textAlign: "left" }}
+                                    >
+                                      {errors.sConfirmarCuentaBan}
+                                    </Typography>
+                                  )}
                               </Item>
                               <LoadingButton
                                 type="submit"
