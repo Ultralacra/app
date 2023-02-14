@@ -32,12 +32,25 @@ import InputLabel from "@mui/material/InputLabel";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 import Swal from "sweetalert2";
+import ModalFinalizacionRegistro from "../modals/ModalFinalizacionRegistro";
+
+
 
 const CompletarRegistroComponente = () => {
   //Config del tema
   const drawerWidth = 240;
 
-  //open loading
+//open Modal Finalizacion Registro
+  const [openModal, setOpenModal] = useState(false);
+
+  //loading button
+  const [loading, setLoading] = useState(false);
+
+  function handleClick() {
+    setLoading(true);
+  }
+
+  //open loading 
   const [open, setOpen] = useState(false);
   //Datos del usuario
   const [usuario, setUsuario] = useState([]);
@@ -88,7 +101,6 @@ const CompletarRegistroComponente = () => {
     }
     fetchData();
   }, []);
-  console.log(usuario);
 
   //LLamar lista de bancos
   const [bancos, setBancos] = useState([]);
@@ -366,12 +378,14 @@ const CompletarRegistroComponente = () => {
 
               return errors;
             }}
-            onSubmit={async (lols, { setSubmitting }) => {
+            onSubmit={async (lols, { resetForm }) => {
+              setOpen(true);
+              setLoading(true);
               axios
                 .post(
                   "https://valink-pay-api.vercel.app/clientes/completarregistro",
                   {
-                   sUserId: JSON.parse(localStorage.getItem("id")),
+                    sUserId: JSON.parse(localStorage.getItem("id")), 
                     sTipoPersona: lols.sTipoPersona,
                     sCedula: lols.sCedula,
                     sRazonSocial: lols.sRazonSocial,
@@ -409,57 +423,54 @@ const CompletarRegistroComponente = () => {
                   }
                 )
                 .then((res) => {
-                  if (res.data.message === "El usuario no existe") {
-                    Swal
-                      .fire({
-                        toast: true,
-                        position: "top-end",
-                        icon: "error",
-                        title: "El usuario no existe",
-                        showConfirmButton: false,
-                        timer: 3000,
-                      })
-                      .then(() => {
-                      }
-                      );
-                  } else if (res.data.message === "Este usuario ya tiene un perfil creado") {
-
-                    Swal  
-                      .fire({
-                        toast: true,
-                        position: "top-end",
-                        icon: "error",
-                        title: "Este usuario ya tiene un perfil creado",
-                        showConfirmButton: false,
-                        timer: 3000,
-                      })
-                      .then(() => {
-                      }
-
-                      );
-                  } else
-                    Swal
-                      .fire({
-                        toast: true,
-                        position: "top-end",
-                        icon: "success",
-                        title: "Registro completado con exito",
-                        showConfirmButton: false,
-                        timer: 3000,
-                      })
-                      .then(() => {
-                      });
-
-                  console.log(res.data);
+                  if (res.data.message === "Este usuario ya tiene un perfil creado") {
+                    setOpen(false);
+                    Swal.fire({
+                      toast: true,
+                      position: "top-end",
+                      icon: "info",
+                      text: "Este usuario ya tiene un perfil creado",
+                      showConfirmButton: false,
+                      timer: 1500,
+                      showCancelButton: false,
+                    });
+                    resetForm();
+                    setLoading(false);
+                  } else if (res.data.message === "El usuario no existe") {
+                    setOpen(false);
+                    Swal.fire({
+                      toast: true,
+                      position: "top-end",
+                      icon: "error",
+                      text: "El usuario no existe",
+                      showConfirmButton: false,
+                      timer: 1500,
+                      showCancelButton: false,
+                    });
+                    setLoading(false);
+                  } else {
+                    setOpen(false);
+                    setOpenModal(true);
+                    resetForm();
+                    //refresar la pagina
+                    setTimeout(() => {
+                      window.location.reload();
+                    }
+                    , 3000);
+                    setLoading(false);
+                  }
                 })
                 .catch((err) => {
-                  console.log(err);
+                  setOpen(false);
+                  Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Algo salio mal, intentalo de nuevo",
+                  });
+                  setLoading(false);
                 });
             }}
           >
-
-
-
             {({
               errors,
               values,
@@ -469,7 +480,6 @@ const CompletarRegistroComponente = () => {
               handleSubmit,
             }) => (
               <form onSubmit={handleSubmit}>
-                {console.log(values)}
                 <Backdrop
                   sx={{
                     color: "#DFFEFF",
@@ -477,6 +487,7 @@ const CompletarRegistroComponente = () => {
                   }}
                   open={open}
                 >
+                  {openModal && <ModalFinalizacionRegistro />}
                   Verificando por favor espere...
                   <CircularProgress color="inherit" />
                 </Backdrop>
@@ -553,22 +564,14 @@ const CompletarRegistroComponente = () => {
                               <Grid item xs={6}>
                                 <Item elevation={0}>
                                   <Input
+                                    className="input-completar-registro"
+                                    size="large"
                                     placeholder="cédula o rif"
-                                    value={values.sTest}
+                                    value={values.sCedula}
                                     name="sCedula"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     touched={touched.sCedula}
-                                    prefix={<IdcardOutlined />}
-                                    suffix={
-                                      <Tooltip title="Debe agregar J- para rif o V- cédula de identidad">
-                                        <InfoCircleOutlined
-                                          style={{
-                                            color: "rgba(0,0,0,.45)",
-                                          }}
-                                        />
-                                      </Tooltip>
-                                    }
                                   />
                                   {touched.sCedula && errors.sCedula && (
                                     <Typography
@@ -590,12 +593,13 @@ const CompletarRegistroComponente = () => {
                               <Grid item xs={6}>
                                 <Item elevation={0}>
                                   <Input
+                                  className="input-completar-registro"
                                     name="sRazonSocial"
                                     type="text"
                                     label="Razón Social"
                                     placeholder="ValinkGroup C.A"
                                     variant="outlined"
-                                    size="medium"
+                                    size="large"
                                     value={values.sRazonSocial}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
@@ -622,12 +626,13 @@ const CompletarRegistroComponente = () => {
                               <Grid item xs={6}>
                                 <Item elevation={0}>
                                   <Input
+                                  className="input-completar-registro"
                                     name="sSitioWeb"
                                     type="text"
                                     label="Sitio web"
                                     placeholder="www.valinkgroup.com"
                                     variant="outlined"
-                                    size="medium"
+                                    size="large"
                                     value={values.sSitioWeb}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
@@ -662,17 +667,17 @@ const CompletarRegistroComponente = () => {
                               <Grid item xs={6}>
                                 <Item elevation={0}>
                                   <Input
+                                  className="input-completar-registro"
                                     name="sTelefonoAsociado"
                                     type="tel"
                                     label="Teléfono Asociado "
                                     placeholder="04141234567"
                                     variant="outlined"
-                                    size="medium"
+                                    size="large"
                                     value={values.sTelefonoAsociado}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     touched={touched.sTelefonoAsociado}
-                                    prefix={<PhoneOutlined />}
                                   />
                                   {touched.sTelefonoAsociado &&
                                     errors.sTelefonoAsociado && (
@@ -713,6 +718,7 @@ const CompletarRegistroComponente = () => {
                               <Grid item xs={6}>
                                 <Item elevation={0}>
                                   <TextField
+                                  className="input-completar-registro"
                                     select
                                     fullWidth
                                     size="small"
@@ -740,6 +746,7 @@ const CompletarRegistroComponente = () => {
                                 <Item elevation={0}>
                                   {selectedEstado && (
                                     <TextField
+                                    className="input-completar-registro"
                                       required
                                       select
                                       fullWidth
@@ -769,6 +776,7 @@ const CompletarRegistroComponente = () => {
                                 <Item elevation={0}>
                                   {selectedEstado && (
                                     <TextField
+                                    className="input-completar-registro"
                                       required
                                       fullWidth
                                       select
@@ -796,11 +804,12 @@ const CompletarRegistroComponente = () => {
                               <Grid item xs={6}>
                                 <Item elevation={0}>
                                   <Input
+                                  className="input-completar-registro"
                                     required
                                     name="sDireccion"
                                     type="text"
                                     label="Dirección"
-                                    placeholder="Av. Principal, Edificio 1, Piso 1, Oficina 1"
+                                    placeholder="Av Principal Edificio 1 Piso 1 Oficina 1"
                                     size="large"
                                     value={values.sDireccion}
                                     onChange={handleChange}
@@ -839,19 +848,18 @@ const CompletarRegistroComponente = () => {
                               <Grid item xs={6}>
                                 <Item elevation={0}>
                                   <Input
+                                  className="input-completar-registro"
                                     name="sNombreReprLegal"
                                     type="text"
                                     label="Nombre del representante legal"
                                     placeholder="Juan Perez"
                                     variant="outlined"
-                                    size="medium"
+                                    size="large"
                                     value={values.sNombreReprLegal}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     touched={touched.sNombreReprLegal}
-                                    prefix={
-                                      <UserOutlined className="site-form-item-icon" />
-                                    }
+                                    
                                   />
                                 </Item>
 
@@ -875,17 +883,17 @@ const CompletarRegistroComponente = () => {
                               <Grid item xs={6}>
                                 <Item elevation={0}>
                                   <Input
+                                  className="input-completar-registro"
                                     name="sCedulaReprLegal"
                                     type="text"
                                     label="Cedula del Represéntate Legal"
-                                    placeholder="V12345678"
+                                    placeholder="12345678"
                                     variant="outlined"
-                                    size="medium"
+                                    size="large"
                                     value={values.sCedulaReprLegal}
                                     touched={touched.sCedulaReprLegal}
                                     onBlur={handleBlur}
                                     onChange={handleChange}
-                                    prefix={<IdcardOutlined />}
                                   />
                                 </Item>
                                 {touched.sCedulaReprLegal &&
@@ -908,17 +916,17 @@ const CompletarRegistroComponente = () => {
                               <Grid item xs={6}>
                                 <Item elevation={0}>
                                   <Input
+                                  className="input-completar-registro"
                                     name="sTelefonoReprLegal"
                                     type="tel"
                                     label="Teléfono del Representante Legal"
                                     placeholder="04141234567"
                                     variant="outlined"
-                                    size="medium"
+                                    size="large"
                                     value={values.sTelefonoReprLegal}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     touched={touched.sTelefonoReprLegal}
-                                    prefix={<PhoneOutlined />}
                                   />
                                   {touched.sTelefonoReprLegal &&
                                     errors.sTelefonoReprLegal && (
@@ -941,17 +949,17 @@ const CompletarRegistroComponente = () => {
                               <Grid item xs={6}>
                                 <Item elevation={0}>
                                   <Input
+                                  className="input-completar-registro"
                                     name="sEmailReprLegal"
                                     type="text"
                                     label="Email del Representante"
                                     placeholder="juanperez@gmail.com"
                                     variant="outlined"
-                                    size="medium"
+                                    size="large"
                                     value={values.sEmailReprLegal}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     touched={touched.sEmailReprLegal}
-                                    prefix={<MailOutlined />}
                                   />
                                   {touched.sEmailReprLegal &&
                                     errors.sEmailReprLegal && (
@@ -987,17 +995,17 @@ const CompletarRegistroComponente = () => {
                               <Grid item xs={6}>
                                 <Item elevation={0}>
                                   <Input
+                                  className="input-completar-registro"
                                     name="sNombreContacto"
                                     type="text"
                                     label="Nombre del Contacto"
                                     placeholder="Juan Perez"
                                     variant="outlined"
-                                    size="medium"
+                                    size="large"
                                     value={values.sNombreContacto}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     touched={touched.sNombreContacto}
-                                    prefix={<UserOutlined />}
                                   />
                                 </Item>
                                 {touched.sNombreContacto &&
@@ -1020,15 +1028,15 @@ const CompletarRegistroComponente = () => {
                               <Grid item xs={6}>
                                 <Item elevation={0}>
                                   <Input
+                                  className="input-completar-registro"
                                     name="sTelefonoContacto"
                                     type="tel"
                                     label="Teléfono de Contacto"
                                     placeholder="04141234567"
                                     variant="outlined"
-                                    size="medium"
+                                    size="large"
                                     value={values.sTelefonoContacto}
                                     onChange={handleChange}
-                                    prefix={<PhoneOutlined />}
                                     onBlur={handleBlur}
                                     touched={touched.sTelefonoContacto}
                                   />
@@ -1053,17 +1061,17 @@ const CompletarRegistroComponente = () => {
                               <Grid item xs={6}>
                                 <Item elevation={0}>
                                   <Input
+                                  className="input-completar-registro"
                                     name="sEmailContacto"
                                     type="mail"
                                     label="Email de Contacto"
                                     placeholder="contacto@valinkpay.com"
                                     variant="outlined"
-                                    size="medium"
+                                    size="large"
                                     value={values.sEmailContacto}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     touched={touched.sEmailContacto}
-                                    prefix={<MailOutlined />}
                                   />
                                   {touched.sEmailContacto &&
                                     errors.sEmailContacto && (
@@ -1141,12 +1149,13 @@ const CompletarRegistroComponente = () => {
                               <Stack item xs={6}>
                                 <Item elevation={0}>
                                   <Input
+                                  className="input-completar-registro"
                                     name="sNombrePublico"
                                     type="text"
                                     label="Nombre de Fantasía"
-                                    placeholder="ValinkPay C.A"
+                                    placeholder="ValinkPay CA"
                                     variant="outlined"
-                                    size="medium"
+                                    size="large"
                                     fullWidth
                                     value={values.sNombrePublico}
                                     onChange={handleChange}
@@ -1195,12 +1204,13 @@ const CompletarRegistroComponente = () => {
                               <Stack item xs={6}>
                                 <Item elevation={0}>
                                   <Input
+                                  className="input-completar-registro"
                                     disabled
                                     name="sEmailPublico"
                                     type="email"
                                     value={usuario.sEmail}
                                     variant="outlined"
-                                    size="medium"
+                                    size="large"
                                     fullWidth
                                   />
                                 </Item>
@@ -1240,6 +1250,7 @@ const CompletarRegistroComponente = () => {
                                 <FormControl fullWidth>
                                   <InputLabel>Banco</InputLabel>
                                   <Select
+                                  className="input-completar-registro"
                                     fullWidth
                                     required
                                     select
@@ -1267,6 +1278,7 @@ const CompletarRegistroComponente = () => {
                                 <FormControl fullWidth>
                                   <InputLabel>Tipo de cuenta</InputLabel>
                                   <Select
+                                  className="input-completar-registro"
                                     fullWidth
                                     required
                                     label="Tipo de Cuenta"
@@ -1291,11 +1303,12 @@ const CompletarRegistroComponente = () => {
                               </Item>
                               <Item elevation={0}>
                                 <Input
+                                className="input-completar-registro"
                                   name="sRazonSocialCuenta"
                                   label="Nombre o Razón Social de la Cuenta Bancaria"
-                                  placeholder="ValinkPay C.A, Juan Perez"
+                                  placeholder="Nombre o razón social de la cuenta bancaria"
                                   variant="outlined"
-                                  size="medium"
+                                  size="large"
                                   fullWidth
                                   value={values.sRazonSocialCuenta}
                                   onChange={handleChange}
@@ -1321,16 +1334,16 @@ const CompletarRegistroComponente = () => {
                               </Item>
                               <Item elevation={0}>
                                 <Input
+                                className="input-completar-registro"
                                   name="sCedulaRif"
                                   type="text"
                                   label="Cédula o RIF"
-                                  placeholder="V12345678"
+                                  placeholder="cédula o rif"
                                   variant="outlined"
-                                  size="medium"
+                                  size="large"
                                   fullWidth
                                   value={values.sCedulaRif}
                                   onChange={handleChange}
-                                  prefix={<IdcardOutlined />}
                                   onBlur={handleBlur}
                                   touched={touched.sCedulaRif}
                                 />
@@ -1352,19 +1365,18 @@ const CompletarRegistroComponente = () => {
                               )}
                               <Item elevation={0}>
                                 <Input
+                                className="input-completar-registro"
                                   name="sNroCuentaBanco"
                                   helperText="Sin puntos ni guiones"
                                   type="number"
-                                  label="Nro. de Cuenta de banco"
-                                  placeholder="12345678901234567890"
+                                  placeholder="numero de cuenta"
                                   variant="outlined"
-                                  size="medium"
+                                  size="large"
                                   fullWidth
                                   value={values.sNroCuentaBanco}
                                   onChange={handleChange}
                                   onBlur={handleBlur}
                                   touched={touched.sNroCuentaBanco}
-                                  prefix={<BankOutlined />}
                                 />
                                 {touched.sNroCuentaBanco &&
                                   errors.sNroCuentaBanco && (
@@ -1385,19 +1397,19 @@ const CompletarRegistroComponente = () => {
                               </Item>
                               <Item elevation={0}>
                                 <Input
+                                className="input-completar-registro"
                                   name="sConfirmarCuentaBan"
                                   helperText="Sin puntos ni guiones"
                                   type="number"
                                   label="Confirmar Nro. de Cuenta de banco"
-                                  placeholder="12345678901234567890"
+                                  placeholder="Confirmar numero de cuenta"
                                   variant="outlined"
-                                  size="medium"
+                                  size="large"
                                   fullWidth
                                   value={values.sConfirmarCuentaBan}
                                   onChange={handleChange}
                                   onBlur={handleBlur}
                                   touched={touched.sConfirmarCuentaBan}
-                                  prefix={<BankOutlined />}
                                 />
                                 {touched.sConfirmarCuentaBan &&
                                   errors.sConfirmarCuentaBan && (
@@ -1417,12 +1429,24 @@ const CompletarRegistroComponente = () => {
                                   )}
                               </Item>
                               <LoadingButton
+                                disableElevation
+                                loading={loading}
                                 type="submit"
                                 endIcon={<SendIcon />}
                                 className="btn-create-account"
                                 fullWidth
+                                loadingIndicator={
+                                  <CircularProgress 
+                                  className="circular-progress"
+                                  size={24}
+                                  
+                                  />
+                                
+                                
+                                }
+                                
                                 variant="contained"
-                                sx={{ mt: 3, mb: 2 }}
+                                sx={{ mt: 3, mb: 2, width: "70%", mx: "auto" }}
                               >
                                 Finalizar Registro
                               </LoadingButton>
@@ -1433,9 +1457,12 @@ const CompletarRegistroComponente = () => {
                     </Item>
                   </Grid>
                   <Grid item xs={8} md={4}>
-                    <Item className="item-1-registro">
+                   {/*  <Item className="item-1-registro">
                       aca va el componente de toda la info del usuario
-                    </Item>
+                    </Item> */}
+
+                <br></br>
+
                   </Grid>
                 </Grid>
                 <br></br>

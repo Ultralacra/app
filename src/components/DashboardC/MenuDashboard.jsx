@@ -68,7 +68,7 @@ function Logout(){
           <ListItemIcon className='icon-list-dashboard' >
             <CreditCardIcon />
           </ListItemIcon>
-         Realizar Transaccion con tarjetas
+         Realizar Transaccion
         </ListItemButton>
       </List>
       <div className="espaciador-azul-dashboard"></div>

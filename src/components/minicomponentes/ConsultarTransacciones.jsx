@@ -16,15 +16,37 @@ import Swal from "sweetalert2";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 import Stack from "@mui/material/Stack";
+import { AlertCompleteForm } from "../usercompletecomponentes/AlertCompleteForm";
 
 const ConsultarTransacciones = () => {
+
   const drawerWidth = 240;
+
+  const [usuario, setUsuario] = useState({});
+
+  useEffect(() => {
+    async function fetchData() {
+      const id = JSON.parse(localStorage.getItem("id"));
+      const response = await axios.get(
+        `https://valink-pay-api.vercel.app/users/${id}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: JSON.parse(localStorage.getItem("token")),
+          },
+        }
+      );
+      setUsuario(response.data);
+      console.log(response.data);
+    }
+    fetchData();
+  }, []);
+ 
 
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
     ...theme.typography.body2,
     padding: theme.spacing(1),
-    textAlign: "center",
     color: theme.palette.text.secondary,
   }));
 
@@ -91,6 +113,31 @@ const ConsultarTransacciones = () => {
     return newDate[2] + "/" + newDate[1] + "/" + newDate[0];
   };
 
+ //consultar credenciales 
+ const URL_API = "https://valink-pay-api.vercel.app/clientes/consultarregistro?sUserId=" ;
+
+ const [infoUser, setInfoUser] = useState({});
+ 
+ useEffect(() => {
+   async function fetchData() {
+     const id = JSON.parse(localStorage.getItem("id"));
+     const response = await axios.get( 
+       `${URL_API}${id}`,
+       {
+         headers: {
+           "Content-Type": "application/json",
+           Authorization: JSON.parse(localStorage.getItem("token")),
+         },
+       }
+     );
+     setInfoUser(response.data);  
+    }
+
+   fetchData();
+ }, []);  
+
+ console.log(infoUser);
+
   return (
     <div>
       <Backdrop
@@ -112,14 +159,14 @@ const ConsultarTransacciones = () => {
         <Container>
           <Typography
             variant="h4"
-            textAlign="left"
             color="#262626"
             fontWeight="bold"
-            font-size={20}
             mb={2}
+            textAlign="left"
           >
             CONSULTAR TRANSACCIONES
           </Typography>
+          <AlertCompleteForm/>
           <div className="espaciador-amarillo-largo"></div>
 
           <Formik
@@ -128,7 +175,6 @@ const ConsultarTransacciones = () => {
               fechaHasta: "",
             }}
             onSubmit={(values) => {
-              console.log(values);
               setOpen(true);
 
               axios
@@ -138,7 +184,7 @@ const ConsultarTransacciones = () => {
                     params: {
                       fechaDesde: addSlash(values.fechaDesde),
                       fechaHasta: addSlash(values.fechaHasta),
-                      iProfileId: JSON.parse(localStorage.getItem("profile")),
+                      id_comercio: infoUser[0].sIdComercio,
                     },
                     headers: {
                       Authorization: token,
@@ -171,15 +217,14 @@ const ConsultarTransacciones = () => {
                       setInfo(response.data);
                       setOpen(false);
                     }
-
-                  console.log(response.data);
                 })
                 .catch(function (error) {
+                  console.log(error);
                 });
             }}
           >
 
-            {({ values, handleChange, handleBlur, handleSubmit }) => (
+            {({ values, handleChange,  handleSubmit }) => (
               <form onSubmit={handleSubmit}>
                 <Box sx={{ flexGrow: 1 }}>
                   <Grid
@@ -189,10 +234,11 @@ const ConsultarTransacciones = () => {
                   >
                     <Grid item xs={6} md={8}>
                       <Stack spacing={2}>
-                        <Item elevation={4}>
+                        <Item elevation={4}
+                        //deshabilitar la caja si el perfil es 0
+                        >
                           <Alert
                             severity="info"
-                            textAlign="left"
                             sx={{ width: "100%", mb: 4 }}
                           >
                             Selecciona el rango de fechas para consultar las
@@ -204,6 +250,7 @@ const ConsultarTransacciones = () => {
                           >
                             <Item elevation={0}>
                               <TextField
+                                required
                                 fullWidth
                                 size="small"
                                 label="Fecha Desde"
@@ -219,6 +266,7 @@ const ConsultarTransacciones = () => {
                             </Item>
                             <Item elevation={0}>
                               <TextField
+                                required
                                 fullWidth
                                 size="small"
                                 label="Fecha Hasta"
@@ -234,9 +282,25 @@ const ConsultarTransacciones = () => {
                             </Item>
                             <Item elevation={0}>
                               <LoadingButton
+                              disableElevation
                                 fullWidth
                                 type="submit"
                                 variant="contained"
+                                sx={{
+                                  "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+                                    borderColor: "var(--color-azul)",
+                                  },
+                                  "&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+                                    borderColor: "var(--color-azul)",
+                                  },
+                                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                                    borderColor: "var(--color-azul)",
+                                  },
+                                  "& .MuiOutlinedInput-input": {
+                                    color: "var(--color-azul)",
+                                  },
+                                }}
+                                disabled={usuario.iProfileId === 0}
                               >
                                 Consultar
                               </LoadingButton>
@@ -247,7 +311,8 @@ const ConsultarTransacciones = () => {
                     </Grid>
                     <Grid item xs={6} md={4}>
                       <Item elevation={4}>
-                        <Alert severity="info" textAlign="left">
+                        <Alert severity="info"
+                        >
                           En esta sección podrá consultar las transacciones
                           realizadas en el sistema.
                         </Alert>
@@ -265,7 +330,7 @@ const ConsultarTransacciones = () => {
               localeText={esES.components.MuiDataGrid.defaultProps.localeText}
               columns={columns}
               pageSize={20}
-              rowsPerPageOptions={[10]}
+              rowsPerPageOptions={[20]}
               checkboxSelection
               getRowId={(row) =>
                 row.fechaTransaccion +

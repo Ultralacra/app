@@ -50,3 +50,22 @@
 .radio-group-completar-registro{
     margin: 10px 0px 10px 0px !important;
 }
+
+.input-completar-registro{
+    
+      background-color: #EDEDED !important;
+      border-color: #EDEDED !important;
+      border-radius: 3px !important;
+      font-weight: 600 !important;
+}
+
+.ant-input-lg {
+    background-color: #EDEDED !important;
+    font-weight: 600;
+}
+
+.circular-progress  {
+    margin-top: 1rem !important;
+    margin-bottom: 1rem !important;
+    color: white !important;
+}

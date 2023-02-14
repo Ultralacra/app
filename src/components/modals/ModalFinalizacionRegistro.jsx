@@ -19,8 +19,7 @@ const AlertRegister = () => {
         confirmButtonText: 'continuar',
         confirmButtonColor: '#006D8E',
         showCloseButton: true,
-        
-
+    
     })
 }
     return (    

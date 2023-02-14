@@ -41,6 +41,14 @@ const RealizarTransaccion = () => {
     }
     fetchData();
   }, []);
+  console.log(usuario);
+
+  //llamar info de la cuenta
+  const [cuenta, setCuenta] = useState([]);
+
+
+
+
 
 
   //Config del tema
