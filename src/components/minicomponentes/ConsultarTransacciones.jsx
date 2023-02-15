@@ -58,7 +58,7 @@ const ConsultarTransacciones = () => {
   const columns = [
     {
       field: "fechaTransaccion",
-      headerName: "fechaTransaccion",
+      headerName: "Fecha de transacción",
       id: "fechaTransaccion",
       width: 200,
     },
@@ -69,33 +69,45 @@ const ConsultarTransacciones = () => {
       width: 200,
     },
     {
-      field: "card_number",
-      headerName: "card_number",
-      id: "card_number",
-      width: 200,
-    },
-    {
       field: "customer_id",
-      headerName: "customer_id",
+      headerName: "Cedula del cliente",
       id: "customer_id",
       width: 200,
     },
     {
       field: "idTransaccion",
-      headerName: "idTransaccion",
+      headerName: "Id de transacción",
       id: "idTransaccion",
       width: 200,
     },
     {
       field: "account_type",
-      headerName: "account_type",
-      id: "account_type",
+      headerName: "Tipo de cuenta",
+      id: "Descripcion",
       width: 200,
     },
     {
       field: "amount",
-      headerName: "amount",
+      headerName: "cantidad",
       id: "amount",
+      width: 200,
+    },
+    {
+      field: "sComision",
+      headerName: "% de comisión",
+      id: "sComision",
+      width: 200,
+    },
+    {
+      field: "monto_comision",
+      headerName: "Monto de comisión",
+      id: "monto_comision",
+      width: 200,
+    },
+    {
+      field: "monto_final",
+      headerName: "Monto final",
+      id: "monto_final",
       width: 200,
     },
   ];

@@ -36,6 +36,9 @@ function Logout(){
       }}
 
 />
+      <div
+        className='menu-dashboard'
+      >
       <List className='list-menu-dashboard'>
         <ListItemButton className="text-list-dashboard"  component={Link} to="/dashboard-users">
           <ListItemIcon className='icon-list-dashboard' >
@@ -92,7 +95,7 @@ function Logout(){
           </LoandingButton>
       </List>
     </div>
-
+    </div>
 
     </div>
   )
