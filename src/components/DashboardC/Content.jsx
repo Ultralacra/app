@@ -12,10 +12,12 @@ import { MenuDashboard } from "./MenuDashboard";
 import Tooltip from "@mui/material/Tooltip";
 import Avatar from "@mui/material/Avatar";
 import axios from "axios";
+import { Typography } from "@mui/material";
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import LogoutIcon from '@mui/icons-material/ExitToApp';
 
-
+import { LoadingButton } from "@mui/lab";
 const drawerWidth = 240;
-
 function Content(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -39,29 +41,12 @@ function Content(props) {
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
-  //Llamar info usuario
-  useEffect(() => {
-    async function fetchData() {
-      const id = JSON.parse(localStorage.getItem("id"));
-      const response = await axios.get(
-        `https://valink-pay-api.vercel.app/users/${id}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: JSON.parse(localStorage.getItem("token")),
-          },
-        }
-      );
-      setUsuario(response.data);
-    }
-    fetchData();
-  }, []);
-
   return (
     <Box sx={{}}>
       <CssBaseline />
 
-      <AppBar className="appbar"
+      <AppBar
+        className="appbar"
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
@@ -69,6 +54,7 @@ function Content(props) {
       >
         <Toolbar>
           <IconButton
+            className="menu-icon-button"
             color="inherit"
             aria-label="open drawer"
             edge="start"
@@ -77,12 +63,57 @@ function Content(props) {
           >
             <MenuIcon />
           </IconButton>
+          <Typography
+            className="nombre-usuario-appbar"
+            variant="h6"
+            variantMapping={{ h6: "h1" }}
+            sx={{ ml: 2, display: { 
+              xs: "none",
+              sm: "block", 
+              md: "block",  
+              lg: "block",
+              xl: "block",
+              
+              color : "black"
+             } }}
+          >
+            Bienvenido:{}
+            {(
+              JSON.parse(localStorage.getItem("nombre")) +
+              " " +
+              JSON.parse(localStorage.getItem("apellido"))
+            ).toUpperCase()}
+           <Tooltip title="Cerrar Sesión">
+                <LoadingButton
+                  endIcon={<LogoutIcon />}
+                  sx
+                  onClick={""}
+                  variant="contained"
+                  color="error"
 
-          <Tooltip title="Open settings">
-            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-            </IconButton>
+                  
+                >
+                    Cerrar Sesion
+
+                </LoadingButton>
+
+
           </Tooltip>
+
+          </Typography>
+          <Tooltip title="Cerrar Sesión">
+            <ExitToAppIcon
+
+              className="menu-icon-button"
+
+              onClick={handleDrawerToggle}
+
+              sx={{ ml: 1, display: { sm: "none" } }}
+            >
+            </ExitToAppIcon>
+          </Tooltip>
+              
+              
         </Toolbar>
       </AppBar>
 

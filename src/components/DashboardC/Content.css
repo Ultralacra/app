@@ -1,8 +1,27 @@
-.appbar-dashboard{
+.appbar-dashboard {
     color: #fff !important;
     z-index: 50 !important;
+
 }
 
-.appbar{
+.appbar {
     z-index: 50 !important;
+    position: -webkit-sticky;
+    top: 0 !important;
+    -webkit-transition: top 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms !important;
+    transition: top 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms !important;
+    ;
+    -webkit-backdrop-filter: blur(8px) !important;
+    backdrop-filter: blur(8px) !important;
+    box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.1) !important;
+    ;
+    background-color: white !important;
+   
 }
+
+.menu-icon-button {
+    color: black !important;
+}
+
+
+

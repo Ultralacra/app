@@ -59,6 +59,8 @@ export default function SignInSide() {
           localStorage.setItem("auth", JSON.stringify("yes"));
           localStorage.setItem("id",JSON.stringify(response.data.message.userId));
           localStorage.setItem("token",JSON.stringify(response.data.message.Authorization));
+          localStorage.setItem("nombre",JSON.stringify(response.data.message.first_name));
+          localStorage.setItem("apellido",JSON.stringify(response.data.message.last_name));
           localStorage.setItem("profile",JSON.stringify(response.data.message.data.profile));
           window.location.href = "/dashboard-users";
         }

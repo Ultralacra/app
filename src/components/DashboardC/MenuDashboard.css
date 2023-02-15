@@ -2,24 +2,65 @@
     background-color: white !important;
     height: 2px !important;
 }
-
 .list-menu-dashboard {
-color : black !important;
+    color: white !important;
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1.57;
+    font-family: "Public Sans", sans-serif !important;
 }
-.icon-list-dashboard{
-    color : white !important;
+.icon-list-dashboard {
+    color: white !important;
+    font-size: 10px !important;
+    font-weight: 200 !important;
+}
+.text-list-dashboard {
+    color: white !important;
+    font-size: 1em !important;
+    font-family: "Public Sans", sans-serif !important;
+}
+.menu-dashboard {
+    padding: 1px !important;
+    background-color: #202123 !important;
+    overflow: hidden !important;
+}
+.text-list-dashboard:hover {
+    color: white !important;
+    background-color: #2B2C2F !important;
+    border-radius: 5px !important;
+}
+.divider-menu-dashboard {
+    background-color: white !important;
+    height: 34px !important;
+    color: aliceblue !important;
+}
+.css-d9ml5t-MuiDrawer-docked .MuiDrawer-paper {
+    background-color: #202123 !important;
+}
+.options-menu-dashboard {
+    align-items: flex-start !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 0px 10px !important;
 }
 
-.text-list-dashboard{
-    color:white !important;
+.list-icons-dashboard {
+    justify-content: first baseline !important;
+    overflow: hidden;
 }
-.list-menu-dashboard:hover{
-
+.logout-button {
+    padding: 1px !important;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
 }
-.list-menu-dashboard:active{
-
+.divider-list-dashboard {
+    background-color: white !important;
+    height: px !important;
+    color: #4D4D4F !important;
 }
-.menu-dashboard{
-        padding: 1px !important;
-        background-color: aqua!important;
+.css-1r7kz78-MuiModal-root-MuiDrawer-root .MuiDrawer-paper{
+    background-color: #202123 !important;
 }
