@@ -1,23 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
-import Grid from "@mui/material/Grid";
 import "./CompletarRegistroComponente.css";
 import Container from "react-bootstrap/Container";
 import axios from "axios";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
-import Alert from "@mui/material/Alert";
-import Stack from "@mui/material/Stack";
-import { LoadingButton } from "@mui/lab";
-import SendIcon from "@mui/icons-material/Send";
-import { Input } from "antd";
 import { Formik } from "formik";
-import { Radio } from "antd";
-import { Checkbox } from "antd";
-import { Select } from "antd";
+
+
 //traer ComponenteCard de la carpeta Card
-import CreditCardForm from "../Card/CreditCardForm";
 
 
 const RealizarTransaccion = () => {
@@ -119,7 +111,6 @@ const RealizarTransaccion = () => {
               </form>
             )}
           </Formik>
-          <CreditCardForm/>
         </Container>
       </Box>
     </div>
