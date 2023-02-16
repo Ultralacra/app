@@ -10,13 +10,28 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import { MenuDashboard } from "./MenuDashboard";
 import Tooltip from "@mui/material/Tooltip";
-import Avatar from "@mui/material/Avatar";
-import axios from "axios";
 import { Typography } from "@mui/material";
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import LogoutIcon from '@mui/icons-material/ExitToApp';
+import LoginIcon from '@mui/icons-material/Login';
+import {
+LoginOutlined 
+} from "@ant-design/icons";
+
 
 import { LoadingButton } from "@mui/lab";
+
+
+
+
+
+  function Logout() {
+    localStorage.clear();
+    window.location.href = "/login";
+  }
+
+
+
 const drawerWidth = 240;
 function Content(props) {
   const { window } = props;
@@ -50,6 +65,10 @@ function Content(props) {
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
+          backgroundColor: "#fff",
+          color: "black",
+          boxShadow: "none",
+          borderBottom: "1px solid #e0e0e0",
         }}
       >
         <Toolbar>
@@ -77,25 +96,25 @@ function Content(props) {
               color : "black"
              } }}
           >
-            Bienvenido:{}
+            Bienvenido:   { }
             {(
               JSON.parse(localStorage.getItem("nombre")) +
               " " +
               JSON.parse(localStorage.getItem("apellido"))
             ).toUpperCase()}
            <Tooltip title="Cerrar Sesión">
-                <LoadingButton
-                  endIcon={<LogoutIcon />}
-                  sx
-                  onClick={""}
-                  variant="contained"
-                  color="error"
-
-                  
-                >
-                    Cerrar Sesion
-
-                </LoadingButton>
+           <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                color="inherit"
+              >
+                <LoginOutlined 
+                  className="logout-icon-button-appbar"
+                  onClick={Logout}
+                />
+              </IconButton>
 
 
           </Tooltip>

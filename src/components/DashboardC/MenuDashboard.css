@@ -34,9 +34,6 @@
     height: 34px !important;
     color: aliceblue !important;
 }
-.css-d9ml5t-MuiDrawer-docked .MuiDrawer-paper {
-    background-color: #202123 !important;
-}
 .options-menu-dashboard {
     align-items: flex-start !important;
     justify-content: space-between !important;
@@ -55,12 +52,4 @@
     width: 100%;
     text-align: center;
     overflow: hidden;
-}
-.divider-list-dashboard {
-    background-color: white !important;
-    height: px !important;
-    color: #4D4D4F !important;
-}
-.css-1r7kz78-MuiModal-root-MuiDrawer-root .MuiDrawer-paper{
-    background-color: #202123 !important;
 }

@@ -6,16 +6,15 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import Toolbar from "@mui/material/Toolbar";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { Link } from "react-router-dom";
-import LoandingButton from "@mui/lab/LoadingButton";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import "./MenuDashboard.css";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import QueryStatsIcon from "@mui/icons-material/QueryStats";
 import SettingsIcon from "@mui/icons-material/Settings";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import Divider from "@mui/material/Divider";
 import LoadingButton from "@mui/lab/LoadingButton";
+import LoginIcon from '@mui/icons-material/Login';
 
 export const MenuDashboard = () => {
   function Logout() {
@@ -24,17 +23,20 @@ export const MenuDashboard = () => {
   }
 
   return (
-    <>
-      <div className="menu-dashboard">
+    <div>
+      <div className="menu-dashboard"
+        
+      >
         <div
           className="toolbar-dashboard"
         >
         <Toolbar
           sx={{
-            backgroundImage: "url()",
+            backgroundImage: "url(http://valinkgroup.com/wp-content/uploads/2023/02/Valinkgroup.png)",
             backgroundRepeat: "no-repeat",
-            backgroundSize: "center",
             backgroundPosition: "center",
+            width: "100%",
+            height: "100%",
           }}
         />
         </div>
@@ -153,6 +155,6 @@ export const MenuDashboard = () => {
 
           </div>
         </div>
-    </>
+    </div>
   );
 };
