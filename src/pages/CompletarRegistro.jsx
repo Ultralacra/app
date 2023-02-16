@@ -6,7 +6,7 @@ import DisconnectAfkUser from '../components/desconectarusuario/DisconnectAfkUse
 export const CompletarRegistro = () => {
   return (
     <>
-        <DisconnectAfkUser/>
+       {/*  <DisconnectAfkUser/> */}
         <Content/>
         <CompletarRegistroComponente/>
         

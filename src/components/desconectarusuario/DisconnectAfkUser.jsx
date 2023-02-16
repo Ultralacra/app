@@ -2,7 +2,7 @@ import React from 'react'
 
 export const DisconnectAfkUser = () => {
 
-    let timer;
+   /*  let timer;
 
     document.addEventListener('mousemove', function() {
         // Reiniciar el temporizador
@@ -21,7 +21,7 @@ export const DisconnectAfkUser = () => {
         // Cerrar sesión de forma programática
         window.location = "/login";
         console.log('Se ha cerrado su sesión debido a inactividad.');
-      }
+      } */
 
   return (
     <div>
