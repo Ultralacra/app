@@ -26,7 +26,7 @@ function CollapsibleExample() {
           </Nav>
           <Nav className='nav-botones' >
             <Link className='btn' to="/register-page">Registro</Link>
-            <Link  className='btn btn-2'  to="/login">Acceso Clientessssssss</Link>
+            <Link  className='btn btn-2'  to="/login">Acceso</Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
