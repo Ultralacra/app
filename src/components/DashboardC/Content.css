@@ -3,7 +3,6 @@
     z-index: 50 !important;
 
 }
-
 .appbar {
     z-index: 50 !important;
     position: -webkit-sticky;
@@ -16,9 +15,7 @@
     box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.1) !important;
     ;
     background-color: white !important;
-
 }
-
 .menu-icon-button {
     color: black !important;
 }
