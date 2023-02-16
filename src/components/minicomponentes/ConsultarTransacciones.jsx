@@ -38,6 +38,7 @@ const ConsultarTransacciones = () => {
       );
       setUsuario(response.data);
       console.log(response.data);
+      console.log(response.data);
     }
     fetchData();
   }, []);
