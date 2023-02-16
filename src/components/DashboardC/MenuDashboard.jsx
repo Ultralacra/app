@@ -135,18 +135,32 @@ export const MenuDashboard = () => {
             ></div>
           </List>
           </div>
+          <Divider
+          sx={{
+            border: "1px solid #fff",
+          }}
+
+          >
+
+          </Divider>
           <div
           className="list-icons-dashboard logout-button"
           >
+             <Divider
+          sx={{
+            border: "1px solid #fff",
+          }}
+
+          >
+
+          </Divider>
             <List>
                 <LoadingButton
                   endIcon={<LogoutIcon />}
                   sx
                   onClick={Logout}
                   variant="contained"
-                  color="error"
-
-                  
+                  color="error"  
                 >
                     Cerrar Sesion
 

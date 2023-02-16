@@ -53,3 +53,7 @@
     text-align: center;
     overflow: hidden;
 }
+.css-d9ml5t-MuiDrawer-docked .MuiDrawer-paper{
+    background-color: #202123 !important;
+    overflow: hidden !important; 
+}
