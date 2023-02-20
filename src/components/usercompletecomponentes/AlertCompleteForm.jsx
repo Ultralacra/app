@@ -106,6 +106,17 @@ export const AlertCompleteForm = () => {
                 Completar registro
               </LoadingButton>
               </Alert>
+              
+              <Alert
+                sx={
+                  {
+                    mt : 1,
+                    mb : 1,
+
+                }
+              }
+              severity="warning">Al completar tu registro se te generaran las credenciales del ambiete de pruebas donde podras realizar pruebas de pago.
+                </Alert>
             </Item>
           </Stack>
         </Box>

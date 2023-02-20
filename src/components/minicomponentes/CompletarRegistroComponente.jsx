@@ -16,11 +16,7 @@ import { Formik } from "formik";
 import { Radio } from "antd";
 import LogoUpload from "./LogoUpload";
 import {
-  UserOutlined,
-  MailOutlined,
-  IdcardOutlined,
-  PhoneOutlined,
-  BankOutlined,
+
   InfoCircleOutlined,
 } from "@ant-design/icons";
 import { FormControlLabel, Checkbox, FormGroup } from "@mui/material";

@@ -1,18 +1,14 @@
 .appbar{
-    background-color: #fff;
-    color: #000;
+    background-color: rgba(255, 255, 255, 0.85);
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    position: fixed;
-    justify-content: right;
+    z-index: 1 !important;
+    backdrop-filter: blur(12px);
+    opacity: 1 !important;
 
 }
 .logout-icon-button-appbar{
     color: #FFB200;
     font-size: 20px;
-    margin-left: 10px;
-}
-.css-hyum1k-MuiToolbar-root{
-    justify-content: right;
 }
 
 @media screen and (max-width: 600px) {

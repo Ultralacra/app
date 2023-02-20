@@ -12,7 +12,7 @@ import LandingPage from './pages/LandingPage';
 import CompletarRegistro from './pages/CompletarRegistro';
 import ConsultarTransaccionesPage from './pages/ConsultarTransaccionesPage';
 import RealizarTransaccionPage from './pages/RealizarTransaccionPage';
-import IntegracionesPage from './pages/IntegracionesPage';
+import CredencialesPage from './pages/CredencialesPage';
 
 
 function App() {
@@ -37,7 +37,7 @@ function App() {
           
         <BrowserRouter>
         <Routes>
-            <Route exact path="/integraciones" element={<RouteController component={IntegracionesPage}/>}/>
+            <Route exact path="/credenciales" element={<RouteController component={CredencialesPage}/>}/>
             <Route exact path="/realizar-transaccion" element={<RouteController component={RealizarTransaccionPage}/>}/>
             <Route exact path="/dashboard-users" element={<RouteController component={DashboardUsers}/>}/>
             <Route exact path="/consultar-transacciones" element={<RouteController component={ConsultarTransaccionesPage}/>}/>

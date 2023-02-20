@@ -12,10 +12,7 @@ import Grid from "@mui/material/Grid";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import PropTypes from "prop-types";
-import Button from "@mui/material/Button";
-import { Link } from "react-router-dom";
 
-//traer ComponenteCard de la carpeta Card
 
 const RealizarTransaccion = () => {
   const [value, setValue] = React.useState(0);
@@ -144,8 +141,9 @@ const RealizarTransaccion = () => {
                       textAlign="left"
                       color="#262626"
                       fontWeight="bold"
-                    
-                    >Estas pagando en:</Typography>
+                    >
+                      Estas pagando en:
+                    </Typography>
 
                     <img
                       src="https://i.pinimg.com/originals/c2/9a/1b/c29a1b05fb0c81b84ce3342b509289dc.jpg"
@@ -172,9 +170,8 @@ const RealizarTransaccion = () => {
                       5.250 VES
                     </Typography>
                   </Item>
-                  
                 </Stack>
-               
+
                 <Typography
                   variant="h6"
                   textAlign="left"
@@ -190,7 +187,6 @@ const RealizarTransaccion = () => {
                     <Tab label="Pago móvil" {...a11yProps(2)} />
                   </Tabs>
                 </Box>
-              
               </Item>
             </Grid>
             <Grid item xs={6}>

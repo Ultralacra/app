@@ -34,7 +34,7 @@ export default function RowAndColumnSpacing() {
       <Container
         className="box-1"
         sx={{
-          mt: 10,
+          mt: 8,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -59,7 +59,17 @@ export default function RowAndColumnSpacing() {
                 </p>
               </Typography>
               <Button
-                className="btn-home-saber-mas  btn-login"
+                
+                sx={{
+                  bgcolor: "#006D8E",
+                  color: "#fff",
+                  "&:hover": {
+                    bgcolor: "#1A2027",
+                    color: "#fff",
+                  },
+                }}
+                disableElevation
+                className="btn-home-saber-mas"
                 variant="contained"
               >
                 Quiero saber más
@@ -77,8 +87,18 @@ export default function RowAndColumnSpacing() {
           </Grid>
         </Grid>
       </Container>
-      <div id="que-es-valinkpay"></div>
-      <Container className="container-2" maxWidth="lg">
+      <div></div>
+      <Container className="container-2" maxWidth="sx"
+      sx={{
+        mt: 8,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+
+
+                  >
         <Grid className="grid-2">
           <Stack className="container-2">
             <Item elevation={0} className="container-2">
@@ -138,7 +158,7 @@ export default function RowAndColumnSpacing() {
                                   color: "#000",
                                 }}
                               >
-                                Transacciones seguras
+                                Paga solo por lo que vendes.
                               </Typography>
                             }
                             secondary={
@@ -219,6 +239,7 @@ export default function RowAndColumnSpacing() {
                       >
                         <Item elevation={0} className="container-2">
                           <LoadingButton
+                            disableElevation
                             variant="outlined"
                             className="btn-contacten"
                             fullWidth
@@ -229,6 +250,7 @@ export default function RowAndColumnSpacing() {
 
                         <Item elevation={0} className="container-2">
                           <LoadingButton
+                            disableElevation
                             fullWidth
                             className="btn-contratar"
                             variant="contained"
@@ -370,6 +392,7 @@ export default function RowAndColumnSpacing() {
               </div>
 
               <LoadingButton
+                disableElevation
                 mb={2}
                 fullWidth
                 className="btn-llamar"
@@ -380,6 +403,7 @@ export default function RowAndColumnSpacing() {
               </LoadingButton>
               <br />
               <LoadingButton
+                disableElevation
                 fullWidth
                 className="btn-contratar-2"
                 variant="outlined"
@@ -395,15 +419,15 @@ export default function RowAndColumnSpacing() {
       <Container
         maxWidth="false"
         sx={{
-          backgroundColor: "#F9FBFE",
+          backgroundColor: "#EBEBEB",
           color: "#fff",
           padding: "2rem",
           marginTop: "2rem",
         }}
       >
         <Grid columns={{ xs: 4, sm: 8, md: 12 }} justifyContent="space-evenly">
-          <Grid item xs={6} sx={{ bgcolor: "#F9FBFE" }}>
-            <Item elevation={0} sx={{ bgcolor: "#F9FBFE" }}>
+          <Grid item xs={6} sx={{ bgcolor: "#EBEBEB" }}>
+            <Item elevation={0} sx={{ bgcolor: "#EBEBEB" }}>
               <Typography
                 className="titulo-4"
                 textAlign="center"
@@ -427,6 +451,7 @@ export default function RowAndColumnSpacing() {
                 <div className="espaciador-azul-4"></div>
               </Typography>
               <LoadingButton
+                disableElevation
                 className="btn-llamar"
                 variant="contained"
                 endIcon={<PhoneIphoneIcon />}
