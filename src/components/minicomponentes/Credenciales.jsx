@@ -41,6 +41,10 @@ const RealizarTransaccion = () => {
     navigator.clipboard.writeText(cuenta[0].sIdComercio);
   };
 
+  const handleCopyClick2 = () => {
+    navigator.clipboard.writeText(cuenta[0].sApiKey);
+  };
+
   //llamar info de la cuenta
   const [cuenta, setCuenta] = useState([]);
   useEffect(() => {
@@ -63,6 +67,8 @@ const RealizarTransaccion = () => {
     fetchData();
   }, []);
 
+  //guardar codigo de comercio en una variable
+
   //Config del tema
   const drawerWidth = 240;
 
@@ -75,124 +81,132 @@ const RealizarTransaccion = () => {
   }));
 
   return (
-    <div>
-      <Box
-        sx={{
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
-          ml: { sm: `${drawerWidth}px` },
-        }}
-      >
-        <Container>
-          <Formik
-            initialValues={{}}
-            onSubmit={(values) => {
-              console.log(values);
+    <>
+      {cuenta.map((cuenta) => (
+        <div>
+          <Box
+            sx={{
+              width: { sm: `calc(100% - ${drawerWidth}px)` },
+              ml: { sm: `${drawerWidth}px` },
             }}
           >
-            {({ values, handleChange, handleBlur, handleSubmit }) => (
-              <form onSubmit={handleSubmit}>
-                <Typography
-                  variant="h4"
-                  textAlign="left"
-                  color="#262626"
-                  fontWeight="bold"
-                  fontFamily=""
-                  mb={2}
-                >
-                  CREDENCIALES DE PRUEBAS
-                </Typography>
-                <AlertCompleteForm/>
-                <div className="espaciador-amarillo-largo"></div>
-              </form>
-            )}
-          </Formik>
-          <Box sx={{ flexGrow: 1 }}>
-            <Grid
-              container
-              spacing={{ xs: 2, md: 2 }}
-              columns={{ xs: 4, sm: 8, md: 12 }}
-            >
-              <Grid item xs={6} md={8}>
-                <Stack spacing={2}>
-                  <Item
-                    elevation={4}
-                    //deshabilitar la caja si el perfil es 0
-                  >
-                    <Alert severity="info" sx={{ mb: 2,textAlign: "left", }}>
-                      El Codigo de comercio corresponde al identificador único
-                      de seguridad para ser usado en la integración de tu
-                      comercio con valinkPay.
-                    </Alert>
-                    <Input.Group compact>
-                      <Input
-                        value={""}
-                        fullWidth
-                        style={{
-                          width: "80%",
-                          marginBottom: "10px",
-                        }}
-
-                        //value en la posicion 0 del array cuenta
-                      />
-                      <Tooltip title="Copiar">
-                        <Button
-                          icon={<CopyOutlined />}
-                          onClick={handleCopyClick}
-                        />
-                      </Tooltip>
-                    </Input.Group>
-                    <Alert severity="info" sx={{ mb: 2,textAlign: "left", }}>
-                      El Secret Key corresponde a una clave de seguridad para
-                      asegurar que la información que se está trasmitiendo viene
-                      de una fuente confiable.
-                    </Alert>
-                    <Input.Group compact>
-                      <Input
-                        fullWidth
-                        style={{
-                          width: "80%",
-                          marginBottom: "10px",
-                          
-                        }}
-                        disabled
-                        value={"1s"}
-                      />
-                      <Tooltip title="Copiar">
-                        <Button
-                          icon={<CopyOutlined />}
-                          onClick={handleCopyClick}
-                        />
-                      </Tooltip>
-                    </Input.Group>
-                    <Stack
-                      direction={{ xs: "column", sm: "row" }}
-                      spacing={{ xs: 1, sm: 1, md: 1 }}
+            <Container>
+              <Formik
+                initialValues={{}}
+                onSubmit={(values) => {
+                  console.log(values);
+                }}
+              >
+                {({ values, handleChange, handleBlur, handleSubmit }) => (
+                  <form onSubmit={handleSubmit}>
+                    <Typography
+                      variant="h4"
+                      textAlign="left"
+                      color="#262626"
+                      fontWeight="bold"
+                      fontFamily=""
+                      mb={2}
                     >
-                      <Item elevation={0}></Item>
-                      <Item elevation={0}></Item>
-                      <Item elevation={0}></Item>
-                    </Stack>
-                  </Item>
-                </Stack>
-              </Grid>
-              <Grid item xs={6} md={4}>
-                <Item elevation={4}>
-                  <Alert severity="info"
-                    sx={{ mb: 2,
-                      textAlign: "left",
-                    }}
-                  >
-                    Para solicitar sus credenciales de producción, por favor pongase en contacto con el equipo de soporte de ValinkPay.
+                      CREDENCIALES DE PRUEBAS
+                    </Typography>
+                    <AlertCompleteForm />
+                    <div className="espaciador-amarillo-largo"></div>
+                  </form>
+                )}
+              </Formik>
+              <Box sx={{ flexGrow: 1 }}>
+                <Grid
+                  container
+                  spacing={{ xs: 2, md: 2 }}
+                  columns={{ xs: 4, sm: 8, md: 12 }}
+                >
+                  <Grid item xs={6} md={8}>
+                    <Stack spacing={2}>
+                      <Item
+                        elevation={4}
+                        //deshabilitar la caja si el perfil es 0
+                      >
+                        <Alert
+                          severity="info"
+                          sx={{ mb: 2, textAlign: "left" }}
+                        >
+                          El Codigo de comercio corresponde al identificador
+                          único de seguridad para ser usado en la integración de
+                          tu comercio con valinkPay.
+                        </Alert>
+                        <Input.Group compact>
+                          <Input
+                            value={cuenta.sIdComercio}
+                            fullWidth
+                            disabled
+                            style={{
+                              width: "80%",
+                              marginBottom: "10px",
+                            }}
 
-                  </Alert>
-                </Item>
-              </Grid>
-            </Grid>
-            <br></br>
+                            //value en la posicion 0 del array cuenta
+                          />
+                          <Tooltip title="Copiar">
+                            <Button
+                              icon={<CopyOutlined />}
+                              onClick={handleCopyClick}
+                              defaultValue
+                            />
+                          </Tooltip>
+                        </Input.Group>
+                        <Alert
+                          severity="info"
+                          sx={{ mb: 2, textAlign: "left" }}
+                        >
+                          El Secret Key corresponde a una clave de seguridad
+                          para asegurar que la información que se está
+                          trasmitiendo viene de una fuente confiable.
+                        </Alert>
+                        <Input.Group compact>
+                          <Input
+                            disabled
+                            value={cuenta.sSecretApi}
+                            fullWidth
+                            style={{
+                              width: "80%",
+                              marginBottom: "10px",
+                            }}
+                          />
+                          <Tooltip title="Copiar">
+                            <Button
+                              icon={<CopyOutlined />}
+                              onClick={handleCopyClick2}
+                            />
+                          </Tooltip>
+                        </Input.Group>
+                        <Stack
+                          direction={{ xs: "column", sm: "row" }}
+                          spacing={{ xs: 1, sm: 1, md: 1 }}
+                        >
+                          <Item elevation={0}></Item>
+                          <Item elevation={0}></Item>
+                          <Item elevation={0}></Item>
+                        </Stack>
+                      </Item>
+                    </Stack>
+                  </Grid>
+                  <Grid item xs={6} md={4}>
+                    <Item elevation={4}>
+                      <Alert severity="info" sx={{ mb: 2, textAlign: "left" }}>
+                        Para solicitar sus credenciales de producción, por favor
+                        pongase en contacto con el equipo de soporte de
+                        ValinkPay.
+                      </Alert>
+                    </Item>
+                  </Grid>
+                </Grid>
+                <br></br>
+              </Box>
+            </Container>
           </Box>
-        </Container>
-      </Box>
-    </div>
+        </div>
+      ))}
+    </>
   );
 };
 

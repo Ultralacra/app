@@ -82,7 +82,7 @@ const ConsultarTransacciones = () => {
       width: 200,
     },
     {
-      field: "account_type",
+      field: "Descripcion",
       headerName: "Tipo de cuenta",
       id: "Descripcion",
       width: 200,
@@ -300,18 +300,10 @@ const ConsultarTransacciones = () => {
                                 type="submit"
                                 variant="contained"
                                 sx={{
-                                  "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
-                                    borderColor: "var(--color-azul)",
-                                  },
-                                  "&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
-                                    borderColor: "var(--color-azul)",
-                                  },
-                                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                                    borderColor: "var(--color-azul)",
-                                  },
-                                  "& .MuiOutlinedInput-input": {
-                                    color: "var(--color-azul)",
-                                  },
+                                  width: "%",
+                                  bgcolor: "#FFB800",
+                                  color: "#fff",
+                                  "&:hover": { bgcolor: "#031B4E", color: "#fff" },
                                 }}
                                 disabled={usuario.iProfileId === 0}
                               >

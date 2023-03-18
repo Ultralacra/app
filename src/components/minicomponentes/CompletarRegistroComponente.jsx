@@ -30,8 +30,6 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Swal from "sweetalert2";
 import ModalFinalizacionRegistro from "../modals/ModalFinalizacionRegistro";
 
-
-
 const CompletarRegistroComponente = () => {
   //Config del tema
   const drawerWidth = 240;
@@ -593,7 +591,7 @@ const CompletarRegistroComponente = () => {
                                     name="sRazonSocial"
                                     type="text"
                                     label="Razón Social"
-                                    placeholder="ValinkGroup C.A"
+                                    placeholder="razón social"
                                     variant="outlined"
                                     size="large"
                                     value={values.sRazonSocial}
@@ -626,7 +624,7 @@ const CompletarRegistroComponente = () => {
                                     name="sSitioWeb"
                                     type="text"
                                     label="Sitio web"
-                                    placeholder="www.valinkgroup.com"
+                                    placeholder="sitio web"
                                     variant="outlined"
                                     size="large"
                                     value={values.sSitioWeb}
@@ -666,8 +664,8 @@ const CompletarRegistroComponente = () => {
                                   className="input-completar-registro"
                                     name="sTelefonoAsociado"
                                     type="tel"
-                                    label="Teléfono Asociado "
-                                    placeholder="04141234567"
+                                    label="Teléfono Asociado"
+                                    placeholder="teléfono asociado"
                                     variant="outlined"
                                     size="large"
                                     value={values.sTelefonoAsociado}
@@ -805,7 +803,7 @@ const CompletarRegistroComponente = () => {
                                     name="sDireccion"
                                     type="text"
                                     label="Dirección"
-                                    placeholder="Av Principal Edificio 1 Piso 1 Oficina 1"
+                                    placeholder="dirección"
                                     size="large"
                                     value={values.sDireccion}
                                     onChange={handleChange}
@@ -847,8 +845,8 @@ const CompletarRegistroComponente = () => {
                                   className="input-completar-registro"
                                     name="sNombreReprLegal"
                                     type="text"
-                                    label="Nombre del representante legal"
-                                    placeholder="Juan Perez"
+                                    label="Nombre Representante Legal"
+                                    placeholder="nombre representante legal"
                                     variant="outlined"
                                     size="large"
                                     value={values.sNombreReprLegal}
@@ -883,7 +881,7 @@ const CompletarRegistroComponente = () => {
                                     name="sCedulaReprLegal"
                                     type="text"
                                     label="Cedula del Represéntate Legal"
-                                    placeholder="12345678"
+                                    placeholder="cedula representante legal"
                                     variant="outlined"
                                     size="large"
                                     value={values.sCedulaReprLegal}
@@ -916,7 +914,7 @@ const CompletarRegistroComponente = () => {
                                     name="sTelefonoReprLegal"
                                     type="tel"
                                     label="Teléfono del Representante Legal"
-                                    placeholder="04141234567"
+                                    placeholder="telefono representante legal"
                                     variant="outlined"
                                     size="large"
                                     value={values.sTelefonoReprLegal}
@@ -949,7 +947,7 @@ const CompletarRegistroComponente = () => {
                                     name="sEmailReprLegal"
                                     type="text"
                                     label="Email del Representante"
-                                    placeholder="juanperez@gmail.com"
+                                    placeholder="email"
                                     variant="outlined"
                                     size="large"
                                     value={values.sEmailReprLegal}
@@ -995,7 +993,7 @@ const CompletarRegistroComponente = () => {
                                     name="sNombreContacto"
                                     type="text"
                                     label="Nombre del Contacto"
-                                    placeholder="Juan Perez"
+                                    placeholder="nombre contacto"
                                     variant="outlined"
                                     size="large"
                                     value={values.sNombreContacto}
@@ -1028,7 +1026,7 @@ const CompletarRegistroComponente = () => {
                                     name="sTelefonoContacto"
                                     type="tel"
                                     label="Teléfono de Contacto"
-                                    placeholder="04141234567"
+                                    placeholder="telefono contacto"
                                     variant="outlined"
                                     size="large"
                                     value={values.sTelefonoContacto}
@@ -1061,7 +1059,7 @@ const CompletarRegistroComponente = () => {
                                     name="sEmailContacto"
                                     type="mail"
                                     label="Email de Contacto"
-                                    placeholder="contacto@valinkpay.com"
+                                    placeholder="email"
                                     variant="outlined"
                                     size="large"
                                     value={values.sEmailContacto}
