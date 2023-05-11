@@ -17,7 +17,7 @@ import Swal from "sweetalert2";
 import { Input } from "antd";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
-
+import Container from "@mui/material/Container";
 
 export default function SignInSide() {
   const theme = createTheme();
@@ -25,14 +25,12 @@ export default function SignInSide() {
   const [password, setPassword] = useState(""); //para asignar el valor al estado y poder acceder
   const [open, setOpen] = React.useState(false);
 
-
-
   //Bloquear el boton de login si los campos estan vacios
   const isFormComplete = () => username.length > 0 && password.length > 0;
 
   const handleSubmit = (event) => {
     setOpen(true);
-    
+
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     Axios.post("https://valink-pay-api.vercel.app/login", {
@@ -42,7 +40,7 @@ export default function SignInSide() {
     })
       .then(function (response) {
         if (response.data.status === "fail")
-             Swal.fire({
+          Swal.fire({
             toast: true,
             position: "top-end",
             showCloseButton: true,
@@ -52,22 +50,35 @@ export default function SignInSide() {
             timer: 1000,
             timerProgressBar: true,
           });
-          
 
         if (response.data.status === "success") {
           setOpen(true);
           localStorage.setItem("auth", JSON.stringify("yes"));
-          localStorage.setItem("id",JSON.stringify(response.data.message.userId));
-          localStorage.setItem("token",JSON.stringify(response.data.message.Authorization));
-          localStorage.setItem("nombre",JSON.stringify(response.data.message.first_name));
-          localStorage.setItem("apellido",JSON.stringify(response.data.message.last_name));
-          localStorage.setItem("profile",JSON.stringify(response.data.message.data.profile));
+          localStorage.setItem(
+            "id",
+            JSON.stringify(response.data.message.userId)
+          );
+          localStorage.setItem(
+            "token",
+            JSON.stringify(response.data.message.Authorization)
+          );
+          localStorage.setItem(
+            "nombre",
+            JSON.stringify(response.data.message.first_name)
+          );
+          localStorage.setItem(
+            "apellido",
+            JSON.stringify(response.data.message.last_name)
+          );
+          localStorage.setItem(
+            "profile",
+            JSON.stringify(response.data.message.data.profile)
+          );
           window.location.href = "/dashboard-users";
         }
         setOpen(false);
       })
-      .catch(function (error) {
-      });
+      .catch(function (error) {});
   };
   return (
     <ThemeProvider theme={theme}>
@@ -76,9 +87,10 @@ export default function SignInSide() {
           color: "#DFFEFF",
           zIndex: (theme) => theme.zIndex.drawer + 1,
         }}
-        open={open}>
-      Verificando datos por favor espere...
-      <CircularProgress color="inherit" />
+        open={open}
+      >
+        Verificando datos por favor espere...
+        <CircularProgress color="inherit" />
       </Backdrop>
       <Grid container component="main" sx={{ height: "100vh" }}>
         <Grid
@@ -103,13 +115,13 @@ export default function SignInSide() {
           elevation={6}
           square
           bgcolor="#EBEBEB"
+          display="flex"
+          alignItems="center"
         >
           <Box
             sx={{
               my: 8,
               mx: 10,
-              display: "flex",
-              flexDirection: "column",
               alignItems: "center",
             }}
           >
@@ -119,8 +131,17 @@ export default function SignInSide() {
               alt="logo"
             />
 
-            <Box component="form" noValidate onSubmit={handleSubmit}>
-              <Stack spacing={2} className>
+            <Container
+              display="flex"
+              alignItems="center"
+              component="form"
+              noValidate
+              onSubmit={handleSubmit}
+            >
+              <Container
+              maxWidth="sm"
+              >
+                <Stack spacing={2} className>
                 <Item>
                   <Typography
                     component="p"
@@ -172,7 +193,8 @@ export default function SignInSide() {
                     Iniciar Sesión
                   </LoadingButton>
                 </Item>
-              </Stack>
+              </Stack></Container>
+             
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Recordar contraseña"
@@ -188,10 +210,9 @@ export default function SignInSide() {
                   </Link>
                 </Item>
               </Stack>
-            </Box>
+            </Container>
           </Box>
         </Grid>
-
       </Grid>
     </ThemeProvider>
   );
