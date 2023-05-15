@@ -8,13 +8,9 @@ import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import { AlertCompleteForm } from "../usercompletecomponentes/AlertCompleteForm";
 
-
 const DashboardMain = () => {
   //Datos del usuario
   const [usuario, setUsuario] = useState([]);
-
-
-
 
   //Llamar info usuario
   useEffect(() => {
@@ -30,7 +26,7 @@ const DashboardMain = () => {
         }
       );
       setUsuario(response.data);
-      console.log(usuario)
+      console.log(usuario);
     }
     fetchData();
   }, []);
@@ -48,28 +44,30 @@ const DashboardMain = () => {
 
   return (
     <div>
-      <Box
-        sx={{
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
-          ml: { sm: `${drawerWidth}px` },
-        }}
-      >
-        <Container>
-
-        <Typography
-            variant="h4"
-            textAlign="left"
-            color="#262626"
-            fontWeight="bold"
-            fontFamily=""
-            mb={2}
-          >
-            DASHBOARD 
-          </Typography>
-          <AlertCompleteForm/>
-          <div className="espaciador-amarillo-largo"></div>
-        </Container>
-      </Box>
+      <Container>
+        <Box
+          sx={{
+            width: { sm: `calc(100% - ${drawerWidth}px)` },
+            ml: { sm: `${drawerWidth}px` },
+          }}
+        >
+          <Container>
+            <Typography
+              variant="h4"
+              textAlign="left"
+              color="#262626"
+              fontWeight="bold"
+              fontFamily=""
+              fontSize="20px"
+              mb={2}
+            >
+              DASHBOARD
+            </Typography>
+            <AlertCompleteForm />
+            <div className="espaciador-amarillo-largo"></div>
+          </Container>
+        </Box>
+      </Container>
     </div>
   );
 };

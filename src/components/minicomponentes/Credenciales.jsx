@@ -82,15 +82,26 @@ const RealizarTransaccion = () => {
 
   return (
     <>
-      {cuenta.map((cuenta) => (
-        <div>
-          <Box
-            sx={{
-              width: { sm: `calc(100% - ${drawerWidth}px)` },
-              ml: { sm: `${drawerWidth}px` },
-            }}
-          >
-            <Container>
+      <Container>
+        {cuenta.map((cuenta) => (
+          <div>
+            <Box
+              sx={{
+                width: { sm: `calc(100% - ${drawerWidth}px)` },
+                ml: { sm: `${drawerWidth}px` },
+              }}
+            >
+              <Typography
+                variant="h4"
+                textAlign="left"
+                color="#262626"
+                fontWeight="bold"
+                fontFamily=""
+                fontSize="20px"
+                mb={2}
+              >
+                Credenciales
+              </Typography>
               <Formik
                 initialValues={{}}
                 onSubmit={(values) => {
@@ -99,16 +110,6 @@ const RealizarTransaccion = () => {
               >
                 {({ values, handleChange, handleBlur, handleSubmit }) => (
                   <form onSubmit={handleSubmit}>
-                    <Typography
-                      variant="h4"
-                      textAlign="left"
-                      color="#262626"
-                      fontWeight="bold"
-                      fontFamily=""
-                      mb={2}
-                    >
-                      CREDENCIALES DE PRUEBAS
-                    </Typography>
                     <AlertCompleteForm />
                     <div className="espaciador-amarillo-largo"></div>
                   </form>
@@ -202,10 +203,10 @@ const RealizarTransaccion = () => {
                 </Grid>
                 <br></br>
               </Box>
-            </Container>
-          </Box>
-        </div>
-      ))}
+            </Box>
+          </div>
+        ))}
+      </Container>
     </>
   );
 };

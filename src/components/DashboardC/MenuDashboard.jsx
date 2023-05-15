@@ -1,7 +1,4 @@
-import React,{
-  useState,
-  useEffect,
-} from "react";
+import React, { useState, useEffect } from "react";
 import "./MenuDashboard.css";
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -17,7 +14,6 @@ import BarChartIcon from "@mui/icons-material/BarChart";
 import Divider from "@mui/material/Divider";
 import LoadingButton from "@mui/lab/LoadingButton";
 import axios from "axios";
-
 
 export const MenuDashboard = () => {
   function Logout() {
@@ -45,7 +41,6 @@ export const MenuDashboard = () => {
     }
     fetchData();
   }, []);
-
 
   return (
     <div>
@@ -116,11 +111,8 @@ export const MenuDashboard = () => {
               Realizar Transaccion
             </ListItemButton>
           </List>
-          <List 
-            
-          className="list-menu-dashboard">
+          <List className="list-menu-dashboard">
             <ListItemButton
-              
               className="text-list-dashboard"
               component={Link}
               to="/credenciales"
@@ -131,7 +123,6 @@ export const MenuDashboard = () => {
               </ListItemIcon>
               Credenciales
             </ListItemButton>
-            <div className="divider-list-dashboard"></div>
           </List>
         </div>
         <div className="list-icons-dashboard logout-button">

@@ -13,7 +13,6 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import PropTypes from "prop-types";
 
-
 const RealizarTransaccion = () => {
   const [value, setValue] = React.useState(0);
 
@@ -87,130 +86,132 @@ const RealizarTransaccion = () => {
 
   return (
     <div>
-      <Box
-        sx={{
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
-          ml: { sm: `${drawerWidth}px` },
-        }}
-      >
-        <Container>
-          <Formik
-            initialValues={{}}
-            onSubmit={(values) => {
-              console.log(values);
-            }}
-          >
-            {({ values, handleChange, handleBlur, handleSubmit }) => (
-              <form onSubmit={handleSubmit}>
-                <Typography
-                  variant="h4"
-                  textAlign="left"
-                  color="#262626"
-                  fontWeight="bold"
-                  fontFamily=""
-                  mb={2}
-                >
-                  RELIZAR TRANSACCIONES DE PRUEBAS
-                </Typography>
-                <div className="espaciador-amarillo-largo"></div>
-                <br></br>
-              </form>
-            )}
-          </Formik>
+      <Container>
+        <Box
+          sx={{
+            width: { sm: `calc(100% - ${drawerWidth}px)` },
+            ml: { sm: `${drawerWidth}px` },
+          }}
+        >
+          <Container>
+            <Formik
+              initialValues={{}}
+              onSubmit={(values) => {
+                console.log(values);
+              }}
+            >
+              {({ values, handleChange, handleBlur, handleSubmit }) => (
+                <form onSubmit={handleSubmit}>
+                  <Typography
+                    variant="h4"
+                    textAlign="left"
+                    color="#262626"
+                    fontWeight="bold"
+                    fontSize="20px"
+                    mb={2}
+                  >
+                    Transacciones de pruebas
+                  </Typography>
+                  <div className="espaciador-amarillo-largo"></div>
+                  <br></br>
+                </form>
+              )}
+            </Formik>
 
-          <Grid
-            container
-            columns={{ xs: 4, sm: 8, md: 12 }}
-            spacing={0.5}
-            rowSpacing={1}
-          >
-            <Grid item xs={6}>
-              <Item>
-                <Stack
-                  padding={4}
-                  direction={{ xs: "column", sm: "row" }}
-                  spacing={{ xs: 1, sm: 2, md: 4 }}
-                  container
-                  justifyContent="space-between"
-                  alignItems="flex-start"
-                >
-                  <Item sx={{ mt: (mb) => !mb && 2 }} elevation={0}>
-                    <Typography
-                      mb={2}
-                      variant="h6"
-                      textAlign="left"
-                      color="#262626"
-                      fontWeight="bold"
-                    >
-                      Estas pagando en:
-                    </Typography>
+            <Grid
+              container
+              columns={{ xs: 4, sm: 8, md: 12 }}
+              spacing={0.5}
+              rowSpacing={1}
+            >
+              <Grid item xs={6}>
+                <Item>
+                  <Stack
+                    padding={4}
+                    direction={{ xs: "column", sm: "row" }}
+                    spacing={{ xs: 1, sm: 2, md: 4 }}
+                    container
+                    justifyContent="space-between"
+                    alignItems="flex-start"
+                  >
+                    <Item sx={{ mt: (mb) => !mb && 2 }} elevation={0}>
+                      <Typography
+                        mb={2}
+                        variant="h6"
+                        textAlign="left"
+                        color="#262626"
+                        fontWeight="bold"
+                      >
+                        Estas pagando en:
+                      </Typography>
 
-                    <img
-                      src="https://i.pinimg.com/originals/c2/9a/1b/c29a1b05fb0c81b84ce3342b509289dc.jpg"
-                      alt="logo"
-                      width="150"
-                      height=""
-                    />
-                  </Item>
-                  <Item sx={{ mt: (mb) => !mb && 2 }} elevation={0}>
-                    <Typography
-                      variant="h6"
-                      textAlign="left"
-                      color="#262626"
-                      fontWeight="bold"
-                    >
-                      Monto a pagar:
-                    </Typography>
-                    <Typography
-                      variant="h6"
-                      textAlign="roght"
-                      color="#262626"
-                      fontWeight="bold"
-                    >
-                      5.250 VES
-                    </Typography>
-                  </Item>
-                </Stack>
+                      <img
+                        src="https://i.pinimg.com/originals/c2/9a/1b/c29a1b05fb0c81b84ce3342b509289dc.jpg"
+                        alt="logo"
+                        width="150"
+                        height=""
+                      />
+                    </Item>
+                    <Item sx={{ mt: (mb) => !mb && 2 }} elevation={0}>
+                      <Typography
+                        variant="h6"
+                        textAlign="left"
+                        color="#262626"
+                        fontWeight="bold"
+                      >
+                        Monto a pagar:
+                      </Typography>
+                      <Typography
+                        variant="h6"
+                        textAlign="roght"
+                        color="#262626"
+                        fontWeight="bold"
+                      >
+                        5.250 VES
+                      </Typography>
+                    </Item>
+                  </Stack>
 
-                <Typography
-                  variant="h6"
-                  textAlign="left"
-                  color="#262626"
-                  fontWeight="bold"
-                >
-                  Método de pago
-                </Typography>
-                <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-                  <Tabs value={value} onChange={handleChange}>
-                    <Tab label="Tarjeta de débito" {...a11yProps(0)} />
-                    <Tab label="Tarjeta de credito" {...a11yProps(1)} />
-                    <Tab label="Pago móvil" {...a11yProps(2)} />
-                  </Tabs>
-                </Box>
-              </Item>
+                  <Typography
+                    variant="h6"
+                    textAlign="left"
+                    color="#262626"
+                    fontWeight="bold"
+                  >
+                    Método de pago
+                  </Typography>
+                  <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+                    <Tabs value={value} onChange={handleChange}>
+                      <Tab label="Tarjeta de débito" {...a11yProps(0)} />
+                      <Tab label="Tarjeta de credito" {...a11yProps(1)} />
+                      <Tab label="Pago móvil" {...a11yProps(2)} />
+                    </Tabs>
+                  </Box>
+                </Item>
+              </Grid>
+              <Grid item xs={6}>
+                <Item>
+                  <TabPanel value={value} index={0}>
+                    Tarjeta de débito
+                  </TabPanel>
+                  <TabPanel value={value} index={1}>
+                    Item Two
+                  </TabPanel>
+                  <TabPanel value={value} index={2}>
+                    Item Three
+                  </TabPanel>
+                </Item>
+              </Grid>
+              <Grid item xs={6}>
+                <Item>3</Item>
+              </Grid>
+              <Grid item xs={6}>
+                <Item>4</Item>
+              </Grid>
             </Grid>
-            <Grid item xs={6}>
-              <Item>
-                <TabPanel value={value} index={0}>
-                  Tarjeta de débito
-                </TabPanel>
-                <TabPanel value={value} index={1}>
-                  Item Two
-                </TabPanel>
-                <TabPanel value={value} index={2}>
-                  Item Three
-                </TabPanel>
-              </Item>
-            </Grid>
-            <Grid item xs={6}>
-              <Item>3</Item>
-            </Grid>
-            <Grid item xs={6}>
-              <Item>4</Item>
-            </Grid>
-          </Grid>
-        </Container>
-      </Box>
+          </Container>
+        </Box>
+      </Container>
     </div>
   );
 };

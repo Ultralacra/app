@@ -2,7 +2,6 @@ import * as React from "react";
 import "./RecoverPassword.css";
 import CssBaseline from "@mui/material/CssBaseline";
 import { Link } from "react-router-dom";
-import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
@@ -18,6 +17,7 @@ import validator from "validator";
 import axios from "axios";
 import SendIcon from "@mui/icons-material/Send";
 import { Input } from "antd";
+import Container from "@mui/material/Container";
 
 const theme = createTheme();
 const RecoveryAccount = () => {
@@ -33,6 +33,14 @@ const RecoveryAccount = () => {
       ...body,
       [e.target.name]: e.target.value,
     });
+  };
+
+  const linkStyles = {
+    color: "#006D8E",
+    textAlign: "left",
+    fontSize: "13px",
+    margin: "15px",
+    /* Agrega otros estilos según tus necesidades */
   };
 
   async function enviarCorreo() {
@@ -106,119 +114,127 @@ const RecoveryAccount = () => {
         <CssBaseline />
         <Grid
           item
-          xs={false}
-          sm={4}
-          md={7}
+          sm={false}
+          md={5}
           sx={{
-            backgroundImage: "url(http://valinkgroup.com/wp-content/uploads/2022/12/Paso-1-1.webp)",
+            backgroundImage:
+              "url(http://valinkgroup.com/wp-content/uploads/2022/12/Paso-1-1.webp)",
             backgroundRepeat: "no-repeat",
             backgroundSize: "500px auto",
             backgroundPosition: "center",
           }}
         />
 
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square
-        
-        bgcolor="#EBEBEB"
+        <Grid
+          item
+          xs={12}
+          md={7}
+          elevation={6}
+          square
+          bgcolor="#EBEBEB"
+          display="flex"
+          alignItems="center"
         >
-          
-          <Box
-            sx={{
-              my: 8,
-              mx: 4,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              
-            }}
-          >
-              <img
-              width="45%"
-              src="http://valinkgroup.com/wp-content/uploads/2022/05/Gris.png"
-              alt="logo"
-            />
-            <Typography
-              component="p"
-              mt={4}
-              fontSize="1.5rem"
-              variant="p"
-              align="center"
-              fontWeight="bold"
-              color="#006D8E"
-            >
-              Reestablece tu contraseña
-            </Typography>
-
-            <Typography
-                                component="p"
-                                mt={2}
-                                mb={2}
-                                fontSize="1rem"
-                                variant="p"
-                                align="center"
-                                fontWeight="500"
-                                color="#006D8E"
-            >
-              Ingresa tu dirección de correo electrónico y te enviamos un código
-              para reestablecer tu contraseña
-            </Typography>
-
-            <Box component="form" sx={{ mt: 4 }}>
-            <Stack 
-            spacing={2}
-            >
-              <Input
-                className="input-recovery-password"
-                size="large"
-                onChange={handleRecoveryPassword}
-                placeholder="usuario"
-                label="usuario"
-                name="login"
-                prefix={<UserOutlined />}
-              />
-              <Input
-                className="input-recovery-password"
-                size="large"
-                onChange={handleRecoveryPassword}
-                placeholder="email"
-                label="Email"
-                name="email"
-                prefix={<MailOutlined />}
-              />
-              <LoadingButton
-                onClick={enviarCorreo}
-                className="btn-recovery-password"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-                loading={loading}
-                endIcon={<SendIcon />}
-                loadingPosition="end"
+          <Container maxWidth="xs">
+            <Box sx={{ justifyContent: "center" }}>
+              <Container
+                display="flex"
+                alignItems="center"
+                component="form"
+                noValidate
               >
-                Enviar
-              </LoadingButton>
-              <Link className="text-lost-password" to="/login" variant="body2">
-                <KeyboardArrowLeftIcon className="icons-back icons-form" />{" "}
-                Atrás para iniciar sesión
-              </Link>
-              <Typography
-                variant="body2"
-                color="textSecondary"
-                align="center"
-                sx={{ mt: 4 }}
-              >
-                ¿Nuevo en nuestra plataforma?{" "}
-                <Link
-                  className="text-lost-password"
-                  to="/register-page"
-                  variant="body2"
-                >
-                  Crear una cuenta
-                </Link>
-              </Typography>
-            </Stack>
+                <Stack spacing={2} className>
+                  <Typography
+                    fontSize="35px"
+                    variant="p"
+                    fontWeight="bold"
+                    color="#2d3338"
+                    textAlign="left"
+                    lineHeight="initial"
+                  >
+                    Reestablece tu contraseña
+                  </Typography>
+
+                  <Typography
+                    mb={4}
+                    fontSize="16px"
+                    variant="p"
+                    align="center"
+                    fontWeight="500"
+                    textAlign="left"
+                    color="#4f4f4f"
+                  >
+                    Ingresa tu dirección de correo electrónico y te enviamos un
+                    código para reestablecer tu contraseña
+                  </Typography>
+
+                  <Stack spacing={2}>
+                    <Input
+                      className="input-recovery-password"
+                      size="large"
+                      onChange={handleRecoveryPassword}
+                      placeholder="usuario"
+                      label="usuario"
+                      name="login"
+                      prefix={<UserOutlined />}
+                    />
+                    <Input
+                      className="input-recovery-password"
+                      size="large"
+                      onChange={handleRecoveryPassword}
+                      placeholder="email"
+                      label="Email"
+                      name="email"
+                      prefix={<MailOutlined />}
+                    />
+                    <LoadingButton
+                      type="submit"
+                      disableElevation
+                      sx={{
+                        borderRadius: "8px",
+                        backgroundColor: "#006D8E",
+                      }}
+                      onClick={enviarCorreo}
+                      className="btn-recovery-password"
+                      fullWidth
+                      variant="contained"
+                      loading={loading}
+                      endIcon={<SendIcon />}
+                      loadingPosition="end"
+                    >
+                      Enviar
+                    </LoadingButton>
+                    <Link
+                      style={linkStyles}
+                      className="text-lost-password"
+                      to="/login"
+                      variant="body2"
+                    >
+                      <KeyboardArrowLeftIcon className="icons-back icons-form" />
+                      Atrás para iniciar sesión
+                    </Link>
+                    <Typography
+                      variant="body2"
+                      color="textSecondary"
+                      align="center"
+                      sx={{ mt: 4 }}
+                      fontSize={13}
+                    >
+                      ¿Nuevo en nuestra plataforma?
+                      <Link
+                        style={linkStyles}
+                        className="text-lost-password"
+                        to="/register-page"
+                        variant="body2"
+                      >
+                        Crear una cuenta
+                      </Link>
+                    </Typography>
+                  </Stack>
+                </Stack>
+              </Container>
             </Box>
-          </Box>
+          </Container>
         </Grid>
       </Grid>
     </ThemeProvider>

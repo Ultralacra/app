@@ -11,6 +11,10 @@ import "./AlertCompleteForm.css";
 import { Link } from "react-router-dom";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Skeleton from "@mui/material/Skeleton";
+import Collapse from "@mui/material/Collapse";
+import Button from "@mui/material/Button";
+import CloseIcon from "@mui/icons-material/Close";
+import IconButton from "@mui/material/IconButton";
 
 export const AlertCompleteForm = () => {
   const Item = styled(Paper)(({ theme }) => ({
@@ -21,6 +25,7 @@ export const AlertCompleteForm = () => {
     color: theme.palette.text.secondary,
   }));
 
+  const [open, setOpen] = React.useState(true);
   const [infoUser, setInfoUser] = useState({});
   const ID_USER = JSON.parse(localStorage.getItem("id"));
   const [loading, setLoading] = useState(true); // Nuevo estado para el esqueleto
@@ -55,49 +60,32 @@ export const AlertCompleteForm = () => {
         <Stack spacing={2} className="box-complete-form">
           <Item elevation={0} sx={{}}>
             <Alert
-            
-              sx = {{
+              sx={{
                 bgcolor: "#F2F2F2",
                 color: "#ADAEB1",
                 borderRadius: 2,
-                
-
               }}
-                icon = {false}
+              icon={false}
             >
               <Typography>
-                <Skeleton 
-                variant="text"
-                width={200}
-                animation="wave"
-                />
+                <Skeleton variant="text" width={200} animation="wave" />
               </Typography>
               <Typography>
-                <Skeleton
-                  variant="text"
-                  width={200}
-                  animation="wave"
-
-
-                />
+                <Skeleton variant="text" width={200} animation="wave" />
               </Typography>
               <LoadingButton>
-                <Skeleton variant="" 
-                width={200}
-                animation="wave"
-                
-                />
+                <Skeleton variant="" width={200} animation="wave" />
               </LoadingButton>
             </Alert>
 
             <Alert
-        icon={false}
-            sx ={{
-              bgcolor: "#F2F2F2",
-              color: "#ADAEB1",
-              borderRadius: 2,
-              mt: 1,
-            }}
+              icon={false}
+              sx={{
+                bgcolor: "#F2F2F2",
+                color: "#ADAEB1",
+                borderRadius: 2,
+                mt: 1,
+              }}
             >
               <Skeleton variant="text" width={200} />
             </Alert>
@@ -141,7 +129,7 @@ export const AlertCompleteForm = () => {
                   fontFamily={"'Roboto', 'Helvetica', 'Arial', sans-serif"}
                   textAlign="left"
                   fontWeight={700}
-                  fontSize={20}
+                  fontSize={15}
                 >
                   Debes configurar tu cuenta para empezar a aceptar pagos
                 </Typography>
@@ -151,7 +139,7 @@ export const AlertCompleteForm = () => {
                   fontFamily={"'Roboto', 'Helvetica', 'Arial', sans-serif"}
                   textAlign="left"
                   fontWeight={400}
-                  fontSize={18}
+                  fontSize={15}
                   mt={1}
                 >
                   Para empezar a aceptar pagos, debes completar tu perfil de
@@ -160,6 +148,7 @@ export const AlertCompleteForm = () => {
                 </Typography>
                 <br></br>
                 <LoadingButton
+                  size="small"
                   className="btn-complete-form"
                   disableElevation
                   component={Link}
@@ -191,9 +180,27 @@ export const AlertCompleteForm = () => {
           </Stack>
         </Box>
       ) : (
-        <div>                  
-
-        </div>
+        <Box sx={{ width: "100%" }}>
+          <Collapse in={open}>
+            <Alert
+              action={
+                <IconButton
+                  aria-label="close"
+                  color="inherit"
+                  size="small"
+                  onClick={() => {
+                    setOpen(false);
+                  }}
+                >
+                  <CloseIcon fontSize="inherit" />
+                </IconButton>
+              }
+              sx={{ mb: 2 }}
+            >
+              Perfil de usuario completado
+            </Alert>
+          </Collapse>
+        </Box>
       )}
     </div>
   );

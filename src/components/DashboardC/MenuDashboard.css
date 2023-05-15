@@ -1,26 +1,8 @@
-.espaciador-azul-dashboard {
-    background-color: white !important;
-    height: 2px !important;
-}
-.list-menu-dashboard {
-    color: white !important;
-    font-weight: 400;
-    font-size: 1rem;
-    line-height: 1.57;
-    font-family: "Public Sans", sans-serif !important;
-}
 .icon-list-dashboard {
     color: white !important;
-    font-size: 0px !important;
-}
-.text-list-dashboard:hover {
-    color: black !important;
-
 }
 .text-list-dashboard {
     color: white !important;
-    font-size: 1em !important;
-    font-family: "Public Sans", sans-serif !important;
 }
 .menu-dashboard {
     background-color: #031B4E !important;
@@ -40,14 +22,6 @@
     justify-content: space-between !important;
     align-items: center !important;
 }
-.logout-button {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
-    overflow: hidden;
-}
-
 .css-12i7wg6-MuiPaper-root-MuiDrawer-paper{
     background-color: #031B4E !important;
 }
